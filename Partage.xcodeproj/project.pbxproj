@@ -22,8 +22,12 @@
 		2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43540229E638B007BFB93 /* ProfileVC.swift */; };
 		2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43542229E63C6007BFB93 /* SharingVC.swift */; };
 		2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43544229E63F1007BFB93 /* MessageVC.swift */; };
-		2AB43547229E6425007BFB93 /* HistorySavingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43546229E6425007BFB93 /* HistorySavingVC.swift */; };
+		2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */; };
 		2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F422A0869D00416832 /* UIAlert.swift */; };
+		2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F722A1291700416832 /* Profile.storyboard */; };
+		2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F922A1298A00416832 /* Message.storyboard */; };
+		2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FB22A129A900416832 /* Sharing.storyboard */; };
+		2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +48,12 @@
 		2AB43540229E638B007BFB93 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		2AB43542229E63C6007BFB93 /* SharingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingVC.swift; sourceTree = "<group>"; };
 		2AB43544229E63F1007BFB93 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
-		2AB43546229E6425007BFB93 /* HistorySavingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySavingVC.swift; sourceTree = "<group>"; };
+		2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFavoriteVC.swift; sourceTree = "<group>"; };
 		2AC8D0F422A0869D00416832 /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
+		2AC8D0F722A1291700416832 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		2AC8D0F922A1298A00416832 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		2AC8D0FB22A129A900416832 /* Sharing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
+		2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryFavorite.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +119,7 @@
 		2AB4353A229E56C9007BFB93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2AB4352C229E55FE007BFB93 /* Main.storyboard */,
+				2AC8D0F622A128C300416832 /* Storyboards */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,10 +139,10 @@
 		2AB4353C229E5703007BFB93 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2AB43549229E6DA6007BFB93 /* Profile */,
 				2AB4354A229E6DB1007BFB93 /* Sharing */,
 				2AB4354B229E6DC4007BFB93 /* Message */,
-				2AB4354C229E6DCE007BFB93 /* HistorySaving */,
+				2AB4354C229E6DCE007BFB93 /* HistoryFavorite */,
+				2AB43549229E6DA6007BFB93 /* Profile */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,12 +180,24 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
-		2AB4354C229E6DCE007BFB93 /* HistorySaving */ = {
+		2AB4354C229E6DCE007BFB93 /* HistoryFavorite */ = {
 			isa = PBXGroup;
 			children = (
-				2AB43546229E6425007BFB93 /* HistorySavingVC.swift */,
+				2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */,
 			);
-			path = HistorySaving;
+			path = HistoryFavorite;
+			sourceTree = "<group>";
+		};
+		2AC8D0F622A128C300416832 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2AB4352C229E55FE007BFB93 /* Main.storyboard */,
+				2AC8D0FB22A129A900416832 /* Sharing.storyboard */,
+				2AC8D0F922A1298A00416832 /* Message.storyboard */,
+				2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */,
+				2AC8D0F722A1291700416832 /* Profile.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,11 +258,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */,
 				2AB43533229E55FF007BFB93 /* LaunchScreen.storyboard in Resources */,
 				2AB43530229E55FF007BFB93 /* Assets.xcassets in Resources */,
 				2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */,
 				2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */,
+				2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */,
 				2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */,
+				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
+				2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +284,7 @@
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
-				2AB43547229E6425007BFB93 /* HistorySavingVC.swift in Sources */,
+				2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
 				2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */,

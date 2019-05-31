@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistorySavingVC: UIViewController {
+class HistoryFavoriteVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
