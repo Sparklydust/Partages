@@ -3,25 +3,49 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A06727E229E907900FFAECE /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727D229E907900FFAECE /* UIImageView.swift */; };
+		2A067280229EAE4000FFAECE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727F229EAE4000FFAECE /* UIColor.swift */; };
+		2A067282229EB94000FFAECE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067281229EB94000FFAECE /* UIViewController.swift */; };
+		2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067283229ED63E00FFAECE /* EditProfileVC.swift */; };
+		2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3B229F3C30006C246B /* Arial Black.ttf */; };
+		2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */; };
+		2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB3F229FC3DF006C246B /* UIFont.swift */; };
+		2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB4122A05D40006C246B /* CameraHandler.swift */; };
 		2AB43529229E55FE007BFB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43528229E55FE007BFB93 /* AppDelegate.swift */; };
-		2AB4352B229E55FE007BFB93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4352A229E55FE007BFB93 /* ViewController.swift */; };
 		2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB4352C229E55FE007BFB93 /* Main.storyboard */; };
 		2AB43530229E55FF007BFB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AB4352F229E55FF007BFB93 /* Assets.xcassets */; };
 		2AB43533229E55FF007BFB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB43531229E55FF007BFB93 /* LaunchScreen.storyboard */; };
+		2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43540229E638B007BFB93 /* ProfileVC.swift */; };
+		2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43542229E63C6007BFB93 /* SharingVC.swift */; };
+		2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43544229E63F1007BFB93 /* MessageVC.swift */; };
+		2AB43547229E6425007BFB93 /* HistorySavingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43546229E6425007BFB93 /* HistorySavingVC.swift */; };
+		2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F422A0869D00416832 /* UIAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A06727D229E907900FFAECE /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		2A06727F229EAE4000FFAECE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2A067281229EB94000FFAECE /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		2A067283229ED63E00FFAECE /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		2A90FB3B229F3C30006C246B /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
+		2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-rg-bold.ttf"; sourceTree = "<group>"; };
+		2A90FB3F229FC3DF006C246B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		2A90FB4122A05D40006C246B /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		2AB43525229E55FE007BFB93 /* Partage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB43528229E55FE007BFB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2AB4352A229E55FE007BFB93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2AB4352D229E55FE007BFB93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB4352F229E55FF007BFB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AB43532229E55FF007BFB93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AB43534229E55FF007BFB93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AB43540229E638B007BFB93 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		2AB43542229E63C6007BFB93 /* SharingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingVC.swift; sourceTree = "<group>"; };
+		2AB43544229E63F1007BFB93 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		2AB43546229E6425007BFB93 /* HistorySavingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySavingVC.swift; sourceTree = "<group>"; };
+		2AC8D0F422A0869D00416832 /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +59,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A067279229E8B6A00FFAECE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */,
+				2A90FB3B229F3C30006C246B /* Arial Black.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		2A06727C229E905E00FFAECE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2A06727D229E907900FFAECE /* UIImageView.swift */,
+				2A06727F229EAE4000FFAECE /* UIColor.swift */,
+				2A90FB3F229FC3DF006C246B /* UIFont.swift */,
+				2A067281229EB94000FFAECE /* UIViewController.swift */,
+				2AC8D0F422A0869D00416832 /* UIAlert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2AB4351C229E55FE007BFB93 = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +99,85 @@
 		2AB43527229E55FE007BFB93 /* Partage */ = {
 			isa = PBXGroup;
 			children = (
-				2AB43528229E55FE007BFB93 /* AppDelegate.swift */,
-				2AB4352A229E55FE007BFB93 /* ViewController.swift */,
+				2AB4353B229E56F0007BFB93 /* Supporting Files */,
+				2A06727C229E905E00FFAECE /* Extensions */,
+				2AB4353D229E5712007BFB93 /* Model */,
+				2AB4353A229E56C9007BFB93 /* View */,
+				2AB4353C229E5703007BFB93 /* Controller */,
+			);
+			path = Partage;
+			sourceTree = "<group>";
+		};
+		2AB4353A229E56C9007BFB93 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				2AB4352C229E55FE007BFB93 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AB4353B229E56F0007BFB93 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43528229E55FE007BFB93 /* AppDelegate.swift */,
 				2AB4352F229E55FF007BFB93 /* Assets.xcassets */,
 				2AB43531229E55FF007BFB93 /* LaunchScreen.storyboard */,
 				2AB43534229E55FF007BFB93 /* Info.plist */,
+				2A067279229E8B6A00FFAECE /* Fonts */,
 			);
-			path = Partage;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AB4353C229E5703007BFB93 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43549229E6DA6007BFB93 /* Profile */,
+				2AB4354A229E6DB1007BFB93 /* Sharing */,
+				2AB4354B229E6DC4007BFB93 /* Message */,
+				2AB4354C229E6DCE007BFB93 /* HistorySaving */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2AB4353D229E5712007BFB93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AB43549229E6DA6007BFB93 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43540229E638B007BFB93 /* ProfileVC.swift */,
+				2A067283229ED63E00FFAECE /* EditProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		2AB4354A229E6DB1007BFB93 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43542229E63C6007BFB93 /* SharingVC.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
+		2AB4354B229E6DC4007BFB93 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43544229E63F1007BFB93 /* MessageVC.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		2AB4354C229E6DCE007BFB93 /* HistorySaving */ = {
+			isa = PBXGroup;
+			children = (
+				2AB43546229E6425007BFB93 /* HistorySavingVC.swift */,
+			);
+			path = HistorySaving;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,7 +216,7 @@
 				};
 			};
 			buildConfigurationList = 2AB43520229E55FE007BFB93 /* Build configuration list for PBXProject "Partage" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -125,6 +241,8 @@
 				2AB43533229E55FF007BFB93 /* LaunchScreen.storyboard in Resources */,
 				2AB43530229E55FF007BFB93 /* Assets.xcassets in Resources */,
 				2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */,
+				2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */,
+				2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +253,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB4352B229E55FE007BFB93 /* ViewController.swift in Sources */,
+				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
+				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
+				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
+				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
+				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
+				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
+				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
+				2AB43547229E6425007BFB93 /* HistorySavingVC.swift in Sources */,
+				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
+				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
+				2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */,
 				2AB43529229E55FE007BFB93 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +412,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8UNJX8SHV;
-				INFOPLIST_FILE = Partage/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Partage/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,7 +431,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8UNJX8SHV;
-				INFOPLIST_FILE = Partage/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Partage/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

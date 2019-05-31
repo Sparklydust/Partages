@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Partage a besoin d&apos;accéder à votre camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Partage a besoin d&apos; un accès à vos photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Arial Black.ttf</string>
+		<string>superclarendon-rg-bold.ttf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

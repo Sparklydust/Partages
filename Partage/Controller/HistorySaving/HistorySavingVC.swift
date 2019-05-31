@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HistorySavingVC.swift
 //  Partage
 //
 //  Created by Roland Lariotte on 29/05/2019.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class HistorySavingVC: UIViewController {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
   }
-
-
 }
-
