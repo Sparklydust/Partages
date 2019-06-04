@@ -27,7 +27,33 @@ class EditProfileVC: UIViewController {
     super.viewDidLoad()
     setupSpecificCornerRadius()
     setupFonts()
+    
+//    // Listen for keyboard events
+//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
   }
+//
+//  // Stop Listening for keyboard hide/show events
+//  deinit {
+//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+//  }
+//
+//  @objc func keyboardWillChange(notification: Notification) {
+//    guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+//      return
+//    }
+//    if notification.name == UIResponder.keyboardWillShowNotification ||
+//    notification.name == UIResponder.keyboardWillChangeFrameNotification {
+//      view.frame.origin.y = -keyboardRect.height
+//    }
+//    else {
+//      confirmPasswordTextField.resignFirstResponder()
+//      view.frame.origin.y = 0
+//    }
+//  }
 }
 
 //MARK: - Cancel Button action

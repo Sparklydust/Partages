@@ -11,6 +11,15 @@
 		2A067280229EAE4000FFAECE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727F229EAE4000FFAECE /* UIColor.swift */; };
 		2A067282229EB94000FFAECE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067281229EB94000FFAECE /* UIViewController.swift */; };
 		2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067283229ED63E00FFAECE /* EditProfileVC.swift */; };
+		2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289F9D22A53E4200EB076A /* MessageTVC.swift */; };
+		2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A289F9E22A53E4200EB076A /* MessageTVC.xib */; };
+		2A289FA222A5477E00EB076A /* superclarendon-lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A289FA122A5477E00EB076A /* superclarendon-lt.ttf */; };
+		2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FA522A55B4C00EB076A /* UINavigationItem.swift */; };
+		2A289FA822A56B0200EB076A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FA722A56B0200EB076A /* User.swift */; };
+		2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FAD22A5734400EB076A /* ConversationVC.swift */; };
+		2A87EC5E22A6453800EB969D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC5D22A6453800EB969D /* Message.swift */; };
+		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
+		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
 		2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3B229F3C30006C246B /* Arial Black.ttf */; };
 		2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */; };
 		2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB3F229FC3DF006C246B /* UIFont.swift */; };
@@ -28,6 +37,8 @@
 		2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F922A1298A00416832 /* Message.storyboard */; };
 		2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FB22A129A900416832 /* Sharing.storyboard */; };
 		2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */; };
+		2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */; };
+		2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +46,15 @@
 		2A06727F229EAE4000FFAECE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2A067281229EB94000FFAECE /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		2A067283229ED63E00FFAECE /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		2A289F9D22A53E4200EB076A /* MessageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTVC.swift; sourceTree = "<group>"; };
+		2A289F9E22A53E4200EB076A /* MessageTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTVC.xib; sourceTree = "<group>"; };
+		2A289FA122A5477E00EB076A /* superclarendon-lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-lt.ttf"; sourceTree = "<group>"; };
+		2A289FA522A55B4C00EB076A /* UINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationItem.swift; sourceTree = "<group>"; };
+		2A289FA722A56B0200EB076A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2A289FAD22A5734400EB076A /* ConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		2A87EC5D22A6453800EB969D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
+		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
 		2A90FB3B229F3C30006C246B /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
 		2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-rg-bold.ttf"; sourceTree = "<group>"; };
 		2A90FB3F229FC3DF006C246B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -54,6 +74,8 @@
 		2AC8D0F922A1298A00416832 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		2AC8D0FB22A129A900416832 /* Sharing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
 		2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryFavorite.storyboard; sourceTree = "<group>"; };
+		2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTVC.swift; sourceTree = "<group>"; };
+		2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */,
+				2A289FA122A5477E00EB076A /* superclarendon-lt.ttf */,
 				2A90FB3B229F3C30006C246B /* Arial Black.ttf */,
 			);
 			path = Fonts;
@@ -84,8 +107,38 @@
 				2A90FB3F229FC3DF006C246B /* UIFont.swift */,
 				2A067281229EB94000FFAECE /* UIViewController.swift */,
 				2AC8D0F422A0869D00416832 /* UIAlert.swift */,
+				2A289FA522A55B4C00EB076A /* UINavigationItem.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2A289F9C22A53D7200EB076A /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2A87EC6022A65A1500EB969D /* Message */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		2A87EC5F22A659F300EB969D /* Conversation Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */,
+				2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */,
+				2A87EC6122A65A6000EB969D /* SenderTVC.swift */,
+				2A87EC6222A65A6000EB969D /* SenderTVC.xib */,
+			);
+			path = "Conversation Cells";
+			sourceTree = "<group>";
+		};
+		2A87EC6022A65A1500EB969D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				2A289F9D22A53E4200EB076A /* MessageTVC.swift */,
+				2A289F9E22A53E4200EB076A /* MessageTVC.xib */,
+				2A87EC5F22A659F300EB969D /* Conversation Cells */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		2AB4351C229E55FE007BFB93 = {
@@ -120,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				2AC8D0F622A128C300416832 /* Storyboards */,
+				2A289F9C22A53D7200EB076A /* Custom Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,7 +204,9 @@
 		2AB4353D229E5712007BFB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2A289FA722A56B0200EB076A /* User.swift */,
 				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
+				2A87EC5D22A6453800EB969D /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				2AB43544229E63F1007BFB93 /* MessageVC.swift */,
+				2A289FAD22A5734400EB076A /* ConversationVC.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -258,13 +315,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A289FA222A5477E00EB076A /* superclarendon-lt.ttf in Resources */,
 				2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */,
 				2AB43533229E55FF007BFB93 /* LaunchScreen.storyboard in Resources */,
 				2AB43530229E55FF007BFB93 /* Assets.xcassets in Resources */,
+				2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */,
 				2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */,
 				2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */,
 				2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */,
 				2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */,
+				2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */,
+				2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */,
 				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
 				2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */,
 			);
@@ -277,16 +338,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */,
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
+				2A87EC5E22A6453800EB969D /* Message.swift in Sources */,
 				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
+				2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */,
+				2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */,
 				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
 				2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */,
+				2A289FA822A56B0200EB076A /* User.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
+				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
+				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
 				2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */,
 				2AB43529229E55FE007BFB93 /* AppDelegate.swift in Sources */,
 			);

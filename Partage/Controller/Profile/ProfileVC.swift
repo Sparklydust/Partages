@@ -58,7 +58,7 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Set up profile image
+//MARK: - Setup profile image
 extension ProfileVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")

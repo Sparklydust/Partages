@@ -8,6 +8,7 @@
 	<string>Partage a besoin d&apos; un accès à vos photos</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>superclarendon-lt.ttf</string>
 		<string>Arial Black.ttf</string>
 		<string>superclarendon-rg-bold.ttf</string>
 	</array>
