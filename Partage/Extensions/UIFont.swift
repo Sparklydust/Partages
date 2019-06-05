@@ -20,6 +20,7 @@ enum CustomFont: String {
 enum FontSize: CGFloat {
   case shareButtonSize = 22
   case mainSize = 20
+  case signInSignUp = 17
   case nameLabelSize = 16
   case editLabelSize = 15
   case staticLabelSize = 14
@@ -28,6 +29,7 @@ enum FontSize: CGFloat {
   case smallDateLabelSize = 10
 }
 
+//MARK:- Use to set custom font and size
 extension UIFont {
   convenience init?(customFont: CustomFont, withSize size: FontSize) {
     self.init(name: customFont.rawValue, size: size.rawValue)

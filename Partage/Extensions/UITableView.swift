@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Method to scroll UITableView to the bottom of items
 extension UITableView {
   func scrollToBottomRow() {
     DispatchQueue.main.async {

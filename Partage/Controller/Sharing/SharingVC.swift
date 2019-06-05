@@ -8,14 +8,6 @@
 
 import UIKit
 
-enum ShareDisplayButtonName: String {
-  case share = "Je partage"
-  case signInSignUp = "se connecter / s'inscrire"
-  case afterSignedIn = "Bonjour"
-  case donationMade = "Merci pour votre don"
-  case receive = "Je reçois"
-}
-
 class SharingVC: UIViewController {
   
   @IBOutlet weak var shareButton: UIButton!
@@ -31,8 +23,8 @@ class SharingVC: UIViewController {
 //MARK: - Setup all buttons
 extension SharingVC {
   func setupAllButtonsDisplayed() {
-    shareButton.shareReceiveDesign(title: ShareDisplayButtonName.share.rawValue, shadowOffsetHeight: -2)
-    receiveButton.shareReceiveDesign(title: ShareDisplayButtonName.receive.rawValue, shadowOffsetHeight: 2)
-    signInSignUpButton.signInSignUpDesign(title: ShareDisplayButtonName.signInSignUp.rawValue)
+    shareButton.shareReceiveDesign(title: .shareMain, shadowHeight: -2)
+    receiveButton.shareReceiveDesign(title: .receiveMain, shadowHeight: 2)
+    signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
   }
 }

@@ -11,15 +11,18 @@ import UIKit
 class EditProfileVC: UIViewController {
   
   @IBOutlet weak var firstNameView: UIView!
-  @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var confirmPasswordView: UIView!
+  
+  @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var oldPasswordTextField: UITextField!
   @IBOutlet weak var newPasswordTextField: UITextField!
+  
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
+  
   @IBOutlet var staticLabel: [UILabel]!
   
   override func viewDidLoad() {
@@ -61,7 +64,7 @@ extension EditProfileVC {
 extension EditProfileVC {
   func setupFonts() {
     userEntriesFont()
-    buttonsFont()
+    setupButtons()
     staticLabelFont()
   }
   
@@ -73,9 +76,9 @@ extension EditProfileVC {
     newPasswordTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
   }
   
-  func buttonsFont() {
-    cancelButton.titleLabel?.font = UIFont(customFont: .buttonFont, withSize: .mainSize)
-    saveButton.titleLabel?.font = UIFont(customFont: .buttonFont, withSize: .mainSize)
+  func setupButtons() {
+    cancelButton.commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
+    saveButton.commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
   }
   
   func staticLabelFont() {

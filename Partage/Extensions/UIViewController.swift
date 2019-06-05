@@ -8,8 +8,8 @@
 
 import UIKit
 
+//MARK:- Corner Radius of only one side of UI elements
 extension UIViewController {
-  //MARK:- Corner Radius of only one side of UIViews
   func roundCorners(view :UIView, corners: UIRectCorner, radius: CGFloat){
     let path = UIBezierPath(
       roundedRect: view.bounds, byRoundingCorners: corners,

@@ -8,38 +8,45 @@
 
 import UIKit
 
+
+//MARK: - Round up a square image
 extension UIImageView {
-  //MARK: - Round up a square image
   func roundedImage() {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
   }
-  
-  //MARK: - Round up a square image with a main blue border
+}
+//MARK: - Round up a square image with a main blue border
+extension UIImageView {
   func roundedImageWithMainBlueBorder() {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.mainBlue.cgColor
     self.layer.borderWidth = 1.5
   }
-  
-  //MARK: - Round up a square image with a middle blue border
+}
+//MARK: - Round up a square image with a middle blue border
+extension UIImageView {
   func roundedImageWithMiddleBlueBorder() {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.middleBlue.cgColor
     self.layer.borderWidth = 1.5
   }
-  
-  //MARK: - Round up a square image with a light blue border
+}
+
+//MARK: - Round up a square image with a light blue border
+extension UIImageView {
   func roundedImageWithLightBlueBorder() {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.lightBlue.cgColor
     self.layer.borderWidth = 1.5
   }
-  
-  //MARK: - Create a border around any view type
+}
+
+//MARK: - Create a border around any view type
+extension UIImageView {
   func addOutlineBorder(sized width: CGFloat, in color: CGColor) {
     self.layer.borderWidth = width
     self.layer.borderColor = color

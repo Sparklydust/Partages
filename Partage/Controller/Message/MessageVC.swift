@@ -11,6 +11,7 @@ import UIKit
 class MessageVC: UIViewController {
   
   @IBOutlet weak var messageTableView: UITableView!
+  
   @IBOutlet weak var editButton: UIBarButtonItem!
   
   let messageCellIdentifier = "MessageTVC"

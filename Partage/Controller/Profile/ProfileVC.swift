@@ -11,12 +11,15 @@ import UIKit
 class ProfileVC: UIViewController {
   
   @IBOutlet weak var profileImage: UIImageView!
+  
   @IBOutlet weak var firstNameView: UIView!
   @IBOutlet weak var passwordView: UIView!
+  
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var lastNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
   @IBOutlet weak var passwordLabel: UILabel!
+  
   @IBOutlet var staticsLabel: [UILabel]!
   @IBOutlet var editButtonsLabel: [UIButton]!
   @IBOutlet var disconectionButtonsLabel: [UIButton]!
@@ -80,7 +83,7 @@ extension ProfileVC {
     userInfoFont()
     staticLabelFont()
     editButtonFont()
-    disconnectButtonFont()
+    disconnectButtonsDesign()
   }
   
   func userInfoFont() {
@@ -102,7 +105,7 @@ extension ProfileVC {
     }
   }
   
-  func disconnectButtonFont() {
+  func disconnectButtonsDesign() {
     for label in disconectionButtonsLabel {
       label.titleLabel?.font = UIFont(customFont: .disconnectLabelFont, withSize: .disconnectLabelSize)
     }

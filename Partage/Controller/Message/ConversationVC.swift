@@ -11,9 +11,12 @@ import UIKit
 class ConversationVC: UIViewController {
   
   @IBOutlet weak var senderMessageView: UIView!
+  
   @IBOutlet weak var senderMessageTextView: UITextView!
   @IBOutlet weak var conversationTableView: UITableView!
+  
   @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
+  
   @IBOutlet weak var sendMessageButton: UIButton!
   
   let conversationCellIdentifier = "ConversationTVC"

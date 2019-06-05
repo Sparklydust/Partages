@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Custom nav bar to set circle button in middle with profile image
 extension UINavigationItem {
   func setupNavBarProfileImage() {
     let button = UIButton(type: .custom)

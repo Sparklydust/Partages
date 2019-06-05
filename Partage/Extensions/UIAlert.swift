@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Alert with completion handler
 extension UIViewController {
   func showAlert(title: String,
                   message: String,
@@ -26,7 +27,10 @@ extension UIViewController {
       style: .cancel, handler: nil))
     present(deleteAlert, animated: true, completion: nil)
   }
-  
+}
+
+//MARK: - Alert with one action
+extension UIViewController {
   func showAlert(title: String, message: String) {
     let noEntryAlert = UIAlertController(
       title: title,
