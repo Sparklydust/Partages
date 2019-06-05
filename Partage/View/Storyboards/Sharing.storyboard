@@ -17,14 +17,60 @@
                     <view key="view" contentMode="scaleToFill" id="g5G-Kr-6an">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-eS-4A7">
+                                <rect key="frame" x="184" y="433" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="IyE-xf-fKZ" kind="presentation" id="iVf-h9-igZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSw-8p-IM6">
+                                <rect key="frame" x="102" y="263" width="210" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="OfP-TV-0tE"/>
+                                    <constraint firstAttribute="width" constant="210" id="san-kq-M3p"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-aY-XVd">
+                                <rect key="frame" x="102" y="513" width="210" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="Wg1-ly-2eI"/>
+                                    <constraint firstAttribute="height" constant="120" id="j9n-hL-Cyf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cHB-eS-4A7" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="0tK-ty-FVG"/>
+                            <constraint firstItem="cHB-eS-4A7" firstAttribute="centerY" secondItem="oFA-4z-Jn6" secondAttribute="centerY" constant="-2.5" id="6PY-Y0-iut"/>
+                            <constraint firstItem="V3g-aY-XVd" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="9u8-pU-765"/>
+                            <constraint firstItem="wSw-8p-IM6" firstAttribute="centerX" secondItem="g5G-Kr-6an" secondAttribute="centerX" id="vAa-gt-E5W"/>
+                            <constraint firstItem="cHB-eS-4A7" firstAttribute="top" secondItem="wSw-8p-IM6" secondAttribute="bottom" constant="50" id="yEB-k4-Cvg"/>
+                            <constraint firstItem="V3g-aY-XVd" firstAttribute="top" secondItem="cHB-eS-4A7" secondAttribute="bottom" constant="50" id="zk9-rP-oDv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oFA-4z-Jn6"/>
                     </view>
                     <navigationItem key="navigationItem" id="bWp-3k-6r6"/>
+                    <connections>
+                        <outlet property="receiveButton" destination="V3g-aY-XVd" id="WP0-bY-BWs"/>
+                        <outlet property="shareButton" destination="wSw-8p-IM6" id="Swv-uV-A9i"/>
+                        <outlet property="signInSignUpButton" destination="cHB-eS-4A7" id="DeQ-ls-8Tz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYJ-pa-YOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2501.5999999999999" y="-1136.4532019704434"/>
+        </scene>
+        <!--SignInSignUp-->
+        <scene sceneID="bO6-wf-d8N">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="IyE-xf-fKZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jgd-ny-f8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3108" y="-1137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0HZ-fI-STk">

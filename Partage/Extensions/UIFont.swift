@@ -18,6 +18,7 @@ enum CustomFont: String {
 }
 
 enum FontSize: CGFloat {
+  case shareButtonSize = 22
   case mainSize = 20
   case nameLabelSize = 16
   case editLabelSize = 15

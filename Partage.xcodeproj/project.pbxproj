@@ -33,6 +33,9 @@
 		2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43542229E63C6007BFB93 /* SharingVC.swift */; };
 		2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43544229E63F1007BFB93 /* MessageVC.swift */; };
 		2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */; };
+		2AC159FB22A7BBEA00CE935B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC159FA22A7BBEA00CE935B /* UIButton.swift */; };
+		2AC159FE22A7C40E00CE935B /* SignInSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC159FD22A7C40E00CE935B /* SignInSignUp.storyboard */; };
+		2AC15A0122A7C4D200CE935B /* SignInSignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */; };
 		2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F422A0869D00416832 /* UIAlert.swift */; };
 		2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F722A1291700416832 /* Profile.storyboard */; };
 		2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F922A1298A00416832 /* Message.storyboard */; };
@@ -71,6 +74,9 @@
 		2AB43542229E63C6007BFB93 /* SharingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingVC.swift; sourceTree = "<group>"; };
 		2AB43544229E63F1007BFB93 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFavoriteVC.swift; sourceTree = "<group>"; };
+		2AC159FA22A7BBEA00CE935B /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		2AC159FD22A7C40E00CE935B /* SignInSignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInSignUp.storyboard; sourceTree = "<group>"; };
+		2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpVC.swift; sourceTree = "<group>"; };
 		2AC8D0F422A0869D00416832 /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 		2AC8D0F722A1291700416832 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		2AC8D0F922A1298A00416832 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 				2AC8D0F422A0869D00416832 /* UIAlert.swift */,
 				2A289FA522A55B4C00EB076A /* UINavigationItem.swift */,
 				2A87EC6522A69AE000EB969D /* UITableView.swift */,
+				2AC159FA22A7BBEA00CE935B /* UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -200,6 +207,7 @@
 				2AB4354B229E6DC4007BFB93 /* Message */,
 				2AB4354C229E6DCE007BFB93 /* HistoryFavorite */,
 				2AB43549229E6DA6007BFB93 /* Profile */,
+				2AC159FF22A7C49D00CE935B /* SignInSignUp */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -248,6 +256,22 @@
 			path = HistoryFavorite;
 			sourceTree = "<group>";
 		};
+		2AC159FC22A7C3D500CE935B /* SignInSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				2AC159FD22A7C40E00CE935B /* SignInSignUp.storyboard */,
+			);
+			path = SignInSignUp;
+			sourceTree = "<group>";
+		};
+		2AC159FF22A7C49D00CE935B /* SignInSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */,
+			);
+			path = SignInSignUp;
+			sourceTree = "<group>";
+		};
 		2AC8D0F622A128C300416832 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +280,7 @@
 				2AC8D0F922A1298A00416832 /* Message.storyboard */,
 				2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */,
 				2AC8D0F722A1291700416832 /* Profile.storyboard */,
+				2AC159FC22A7C3D500CE935B /* SignInSignUp */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -322,6 +347,7 @@
 				2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */,
 				2AB43533229E55FF007BFB93 /* LaunchScreen.storyboard in Resources */,
 				2AB43530229E55FF007BFB93 /* Assets.xcassets in Resources */,
+				2AC159FE22A7C40E00CE935B /* SignInSignUp.storyboard in Resources */,
 				2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */,
 				2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */,
 				2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */,
@@ -352,10 +378,12 @@
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
+				2AC159FB22A7BBEA00CE935B /* UIButton.swift in Sources */,
 				2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */,
 				2A289FA822A56B0200EB076A /* User.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
+				2AC15A0122A7C4D200CE935B /* SignInSignUpVC.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
 				2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */,
