@@ -22,38 +22,16 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet var staticLabel: [UILabel]!
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupSpecificCornerRadius()
     setupFonts()
-    
-//    // Listen for keyboard events
-//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    observeKeyboardNotification()
   }
-//
-//  // Stop Listening for keyboard hide/show events
-//  deinit {
-//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-//  }
-//
-//  @objc func keyboardWillChange(notification: Notification) {
-//    guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-//      return
-//    }
-//    if notification.name == UIResponder.keyboardWillShowNotification ||
-//    notification.name == UIResponder.keyboardWillChangeFrameNotification {
-//      view.frame.origin.y = -keyboardRect.height
-//    }
-//    else {
-//      confirmPasswordTextField.resignFirstResponder()
-//      view.frame.origin.y = 0
-//    }
-//  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
 }
 
 //MARK: - Cancel Button action
@@ -79,7 +57,7 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup all fonts in View Controller
+//MARK: - Setup all fonts in VC
 extension EditProfileVC {
   func setupFonts() {
     userEntriesFont()
@@ -103,6 +81,60 @@ extension EditProfileVC {
   func staticLabelFont() {
     for label in staticLabel {
       label.font = UIFont(customFont: .editLabelFont, withSize: .staticLabelSize)
+    }
+  }
+}
+
+//MARK: - Tap gesture acton to dismiss keyboard
+extension EditProfileVC {
+  @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    resignTextFieldResponders()
+  }
+}
+
+//MARK: - Dismiss keyboard when done button is clicked
+extension EditProfileVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    resignTextFieldResponders()
+    return true
+  }
+  
+  func resignTextFieldResponders() {
+    firstNameTextField.resignFirstResponder()
+    lastNameTextField.resignFirstResponder()
+    emailTextField.resignFirstResponder()
+    oldPasswordTextField.resignFirstResponder()
+    newPasswordTextField.resignFirstResponder()
+    confirmPasswordTextField.resignFirstResponder()
+  }
+}
+
+//MARK: - Handle hidden text field on iPhone SE
+extension EditProfileVC {
+  func observeKeyboardNotification() {
+    let center: NotificationCenter = NotificationCenter.default
+    center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+  
+  @objc func keyboardWillShow(notification: NSNotification) {
+    guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+    let keyboardFrame = keyboardSize.cgRectValue
+    guard UIDevice.current.name == "iPhone SE" else { return }
+    if confirmPasswordTextField.isEditing || newPasswordTextField.isEditing {
+      if view.frame.origin.y == 0 {
+        UIView.animate(withDuration: 0.4) {
+          self.view.frame.origin.y -= (keyboardFrame.height / 3)
+        }
+      }
+    }
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    if view.frame.origin.y != 0 {
+      UIView.animate(withDuration: 0.4) {
+        self.view.frame.origin.y = 0
+      }
     }
   }
 }

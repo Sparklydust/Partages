@@ -51,6 +51,9 @@
                                                         <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="given-name"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="hxz-tZ-FBZ" id="SWU-qF-9cI"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,6 +100,9 @@
                                                         <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="family-name"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="hxz-tZ-FBZ" id="XjE-SX-XbU"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -143,6 +149,9 @@
                                                         <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="email"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="hxz-tZ-FBZ" id="gJN-qL-uB3"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,6 +201,9 @@
                                                                 <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="hxz-tZ-FBZ" id="Yrt-th-ttS"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,6 +227,9 @@
                                                                 <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="new-password"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="hxz-tZ-FBZ" id="HqD-j9-miB"/>
+                                                                </connections>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZe-MQ-CSe">
                                                                 <rect key="frame" x="1" y="1" width="10" height="38"/>
@@ -252,6 +267,9 @@
                                                                 <color key="textColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="20"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="new-password"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="hxz-tZ-FBZ" id="CUb-xj-gKG"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -333,6 +351,9 @@
                             <constraint firstItem="01A-pP-1qa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xAg-Tt-wx4" secondAttribute="bottom" constant="20" id="wa6-l3-KI3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9bf-tn-nya"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="FE0-Kh-DFW" appends="YES" id="6Tt-KV-EML"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="Tdh-MK-fok" id="lxl-dH-FqK"/>
@@ -352,6 +373,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbi-g6-3nU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="FE0-Kh-DFW">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="hxz-tZ-FBZ" id="5ff-Kw-z03"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-199" y="-163"/>
         </scene>

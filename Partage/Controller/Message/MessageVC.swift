@@ -55,10 +55,13 @@ extension MessageVC {
 //MARK: - Delete message cell with Edit button or by swaping left on it
 extension MessageVC {
   @IBAction func editButton(_ sender: UIBarButtonItem) {
-    messageTableView.isEditing = !messageTableView.isEditing
-    sender.title = (messageTableView.isEditing) ? "Done" : "Edit"
+    view.backgroundColor = UIColor.iceBackground
+    UIView.animate(withDuration: 0.3) {
+      self.messageTableView.isEditing = !self.messageTableView.isEditing
+      sender.title = (self.messageTableView.isEditing) ? "Done" : "Edit"
+    }
   }
-
+  
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       tableView.deleteRows(at: [indexPath], with: .automatic)

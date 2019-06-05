@@ -19,6 +19,8 @@ class ConversationVC: UIViewController {
   let conversationCellIdentifier = "ConversationTVC"
   let senderCellIdentifier = "SenderTVC"
   
+  var keyboardHeight = CGFloat(0)
+  
   let messageArray = ["first message", "second message", "Lorem ipsum dolor"]
   
   override func viewDidLoad() {
@@ -33,7 +35,10 @@ class ConversationVC: UIViewController {
     configureTableViewConversationSize()
     setupSenderMessageView()
     setupSenderMessageViewText()
-    setTapGestureRecognizer()
+    tapGestureDismissKeyboard()
+    
+    observeKeyboardNotification()
+    conversationTableView.scrollToBottomRow()
   }
 }
 
@@ -51,7 +56,6 @@ extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
     let cell = tableView.dequeueReusableCell(withIdentifier: senderCellIdentifier, for: indexPath) as! SenderTVC
     
     cell.senderConversationLabel.text = messageArray[indexPath.row]
@@ -84,11 +88,26 @@ extension ConversationVC {
   }
 }
 
-//MARK: Move View to handle keyboard when text view is being edited
+//MARK: Move View to handle keyboard when message is being edited
 extension ConversationVC: UITextViewDelegate {
+  func observeKeyboardNotification() {
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+  }
+  
+  @objc func keyboardWillShow(_ notification: Notification) {
+    guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+    let keyboardRectangle = keyboardFrame.cgRectValue
+    keyboardHeight = keyboardRectangle.height
+  }
+  
   func textViewDidBeginEditing(_ textView: UITextView) {
     UIView.animate(withDuration: 0.4) {
-      self.stackViewBottomConstraint.constant = 268
+      self.stackViewBottomConstraint.constant = self.keyboardHeight - (self.tabBarController?.tabBar.frame.size.height)! + 10
       self.view.layoutIfNeeded()
     }
   }
@@ -103,7 +122,7 @@ extension ConversationVC: UITextViewDelegate {
 
 //MARK: - Tap gesture recognizer declaration
 extension ConversationVC {
-  func setTapGestureRecognizer() {
+  func tapGestureDismissKeyboard() {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     conversationTableView.addGestureRecognizer(tapGesture)
   }

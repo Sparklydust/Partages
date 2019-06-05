@@ -58,24 +58,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vvM-Lz-o11">
+                                <rect key="frame" x="0.0" y="88" width="414" height="578.5"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0v-hu-DDs">
-                                <rect key="frame" x="10" y="693" width="394" height="110"/>
+                                <rect key="frame" x="10" y="676.5" width="394" height="126.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMc-rU-qiH">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="110"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="126.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v53-ub-6IF">
-                                                <rect key="frame" x="5" y="5" width="359" height="100"/>
+                                                <rect key="frame" x="5" y="5" width="354" height="116.5"/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis </string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjg-sC-OXA">
-                                                <rect key="frame" x="369" y="85" width="20" height="20"/>
+                                                <rect key="frame" x="364" y="96.5" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="HaT-mA-Sdd"/>
-                                                    <constraint firstAttribute="width" constant="20" id="i4G-Mw-JGo"/>
+                                                    <constraint firstAttribute="height" constant="25" id="HaT-mA-Sdd"/>
+                                                    <constraint firstAttribute="width" constant="25" id="i4G-Mw-JGo"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="sendMessage"/>
                                                 <connections>
@@ -96,20 +99,16 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="UMc-rU-qiH" firstAttribute="top" secondItem="M0v-hu-DDs" secondAttribute="top" id="0Nm-oi-4oC"/>
                                     <constraint firstAttribute="bottom" secondItem="UMc-rU-qiH" secondAttribute="bottom" id="Naa-Qn-f4A"/>
                                     <constraint firstAttribute="trailing" secondItem="UMc-rU-qiH" secondAttribute="trailing" id="Wge-Bc-IgW"/>
                                     <constraint firstItem="UMc-rU-qiH" firstAttribute="leading" secondItem="M0v-hu-DDs" secondAttribute="leading" id="iDQ-pA-lVl"/>
-                                    <constraint firstItem="UMc-rU-qiH" firstAttribute="top" secondItem="M0v-hu-DDs" secondAttribute="top" id="zVg-rg-1vE"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vvM-Lz-o11">
-                                <rect key="frame" x="0.0" y="88" width="414" height="595"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="M0v-hu-DDs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XHX-Hc-e2W" secondAttribute="top" priority="750" constant="10" id="2XG-YH-A3Q"/>
+                            <constraint firstItem="M0v-hu-DDs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XHX-Hc-e2W" secondAttribute="top" constant="20" id="2XG-YH-A3Q"/>
                             <constraint firstItem="vvM-Lz-o11" firstAttribute="leading" secondItem="XHX-Hc-e2W" secondAttribute="leading" id="CqZ-EZ-ceZ"/>
                             <constraint firstItem="M0v-hu-DDs" firstAttribute="top" secondItem="vvM-Lz-o11" secondAttribute="bottom" constant="10" id="KzP-tv-tge"/>
                             <constraint firstItem="XHX-Hc-e2W" firstAttribute="trailing" secondItem="M0v-hu-DDs" secondAttribute="trailing" constant="10" id="PzN-Ug-jP6"/>
