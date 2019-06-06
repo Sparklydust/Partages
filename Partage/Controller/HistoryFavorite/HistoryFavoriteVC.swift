@@ -18,17 +18,25 @@ class HistoryFavoriteVC: UIViewController {
   
   let historyCellIdentifier = "HistoryTVC"
   let favoriteCellIdentifier = "FavoriteTVC"
+  var isHistoryButtonClicked = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    HistoryFavoriteTableView.delegate = self
-    HistoryFavoriteTableView.dataSource = self
-    HistoryFavoriteTableView.register(UINib(nibName: historyCellIdentifier, bundle: nil), forCellReuseIdentifier: historyCellIdentifier)
-    HistoryFavoriteTableView.register(UINib(nibName: favoriteCellIdentifier, bundle: nil), forCellReuseIdentifier: favoriteCellIdentifier)
-    
+    setupAllDelegates()
     setupEditButton()
-    setupHistoryButtonIsSelected()
+    setupAllCustomCells()
+    
     navigationItem.setupNavBarProfileImage()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    setupLastUserHistoryOrFavoriteChoice()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(true)
+    setupLastUserHistoryOrFavoriteChoice()
   }
 }
 
@@ -36,6 +44,7 @@ class HistoryFavoriteVC: UIViewController {
 extension HistoryFavoriteVC {
   @IBAction func historyButton(_ sender: Any) {
     setupHistoryButtonIsSelected()
+    showHistoryCustomCell(true)
   }
 }
 
@@ -43,6 +52,7 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   @IBAction func favoriteButton(_ sender: Any) {
     setupFavoriteButtonIsSelected()
+    showHistoryCustomCell(false)
   }
 }
 
@@ -60,6 +70,10 @@ extension HistoryFavoriteVC {
       tableView.deleteRows(at: [indexPath], with: .automatic)
     }
   }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cell.backgroundColor = UIColor.iceBackground
+  }
 }
 
 //MARK: - Setup Table View
@@ -69,9 +83,16 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if isHistoryButtonClicked {
     let cell = tableView.dequeueReusableCell(withIdentifier: historyCellIdentifier, for: indexPath) as! HistoryTVC
-    
+      
     return cell
+    }
+    else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCellIdentifier, for: indexPath) as! FavoriteTVC
+      
+      return cell
+    }
   }
 }
 
@@ -99,5 +120,43 @@ extension HistoryFavoriteVC {
       self.favoriteButton.historyFavoriteSelectedDesign(title: .favorite, shadowWidth: 0, shadowHeight: 0)
       self.historyButton.historyFavoriteUnselectedDesign(title: .history, shadowWidth: 3, shadowHeight: 3)
     }
+  }
+}
+
+//MARK: - Setup all delegates
+extension HistoryFavoriteVC {
+  func setupAllDelegates() {
+    HistoryFavoriteTableView.delegate = self
+    HistoryFavoriteTableView.dataSource = self
+  }
+}
+
+//MARK: - Setup all custom cells
+extension HistoryFavoriteVC {
+  func setupAllCustomCells() {
+    HistoryFavoriteTableView.register(
+      UINib(nibName: historyCellIdentifier, bundle: nil), forCellReuseIdentifier: historyCellIdentifier)
+    HistoryFavoriteTableView.register(
+      UINib(nibName: favoriteCellIdentifier, bundle: nil), forCellReuseIdentifier: favoriteCellIdentifier)
+  }
+}
+
+//MARK: - Setup last user choice when view Controller is left
+extension HistoryFavoriteVC {
+  func setupLastUserHistoryOrFavoriteChoice() {
+    if favoriteButton.isEnabled {
+      setupHistoryButtonIsSelected()
+    }
+    else {
+      setupFavoriteButtonIsSelected()
+    }
+  }
+}
+
+//MARK: - Track the user choice of cell between history and favorite
+extension HistoryFavoriteVC {
+  func showHistoryCustomCell(_ bool: Bool) {
+    isHistoryButtonClicked = bool
+    HistoryFavoriteTableView.reloadData()
   }
 }

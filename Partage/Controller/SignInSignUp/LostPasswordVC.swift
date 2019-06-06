@@ -9,11 +9,11 @@
 import UIKit
 
 class LostPasswordVC: UIViewController {
-
-  @IBOutlet var cancelAndSendButtons: [UIButton]!
   
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var emailView: UIView!
+  
+  @IBOutlet var cancelAndSendButtons: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,7 +46,7 @@ extension LostPasswordVC {
 //MARK: - Set email text design
 extension LostPasswordVC {
   func setEmailTextField() {
-    emailTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
+    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     emailTextField.textColor = UIColor.iceBackground
     emailTextField.layer.cornerRadius = 10
   }

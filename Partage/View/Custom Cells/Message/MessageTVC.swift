@@ -24,9 +24,9 @@ class MessageTVC: UITableViewCell {
 //MARK: - Setup all fonts
 extension MessageTVC {
   func setupFonts() {
-    nameLabel.font = UIFont(customFont: .mainAppFont, withSize: .nameLabelSize )
-    dateLabel.font = UIFont(customFont: .mainAppFontLight, withSize: .dateLabelSize)
-    conversationLabel.font = UIFont(customFont: .messageLabelFont, withSize: .editLabelSize)
+    nameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .sixteen )
+    dateLabel.font = UIFont(customFont: .superclarendonLight, withSize: .twelve)
+    conversationLabel.font = UIFont(customFont: .arial, withSize: .fifteen)
   }
   
   func setupFontsColor() {

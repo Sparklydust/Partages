@@ -10,17 +10,17 @@ import UIKit
 
 class SignInSignUpVC: UIViewController {
   
-  @IBOutlet var signInSignUpButtons: [UIButton]!
-  @IBOutlet var dotLabels: [UILabel]!
-  @IBOutlet var cancelAndRegisterButtons: [UIButton]!
-  @IBOutlet var backgroundTextView: [UIView]!
-  
-  @IBOutlet weak var lostPasswordButton: UIButton!
-  
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
+  
+  @IBOutlet weak var lostPasswordButton: UIButton!
+  
+  @IBOutlet var signInSignUpButtons: [UIButton]!
+  @IBOutlet var dotLabels: [UILabel]!
+  @IBOutlet var cancelAndRegisterButtons: [UIButton]!
+  @IBOutlet var backgroundTextView: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,6 +42,7 @@ extension SignInSignUpVC {
       self.setRegisterButtonWhenSignInIsSelected()
       self.hideTextFieldWhenSignInIsClicked()
       self.resignAllResponser()
+      self.lostPasswordButton.isHidden = false
     }
   }
   
@@ -51,6 +52,7 @@ extension SignInSignUpVC {
       self.setRegisterbuttonWhenSignUpIsSelected()
       self.showTextFieldWhenSignUpIsClicked()
       self.resignAllResponser()
+      self.lostPasswordButton.isHidden = true
     }
   }
 }
@@ -122,10 +124,10 @@ extension SignInSignUpVC {
 //MARK: - Set text field design
 extension SignInSignUpVC {
   func setAllTextFieldsDesign() {
-    firstNameTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    emailTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    passwordTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    confirmPasswordTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
+    firstNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    passwordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    confirmPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     firstNameTextField.textColor = UIColor.iceBackground
     emailTextField.textColor = UIColor.iceBackground
     passwordTextField.textColor = UIColor.iceBackground

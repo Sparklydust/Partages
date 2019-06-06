@@ -19,12 +19,30 @@ class MessageVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    messageTableView.delegate = self
-    messageTableView.dataSource = self
-    messageTableView.register(UINib(nibName: messageCellIdentifier, bundle: nil), forCellReuseIdentifier: messageCellIdentifier)
-    
+    setupAllDelegates()
+    setupCustomCell()
     setupEditButton()
     navigationItem.setupNavBarProfileImage()
+  }
+}
+
+//MARK: - Delete message cell with Edit button or by swaping left on it
+extension MessageVC {
+  @IBAction func editButton(_ sender: UIBarButtonItem) {
+    UIView.animate(withDuration: 0.3) {
+      self.messageTableView.isEditing = !self.messageTableView.isEditing
+      sender.title = (self.messageTableView.isEditing) ? "Done" : "Edit"
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cell.backgroundColor = UIColor.iceBackground
   }
 }
 
@@ -47,25 +65,24 @@ extension MessageVC {
     editButton.title = ButtonName.edit.rawValue
     editButton.setTitleTextAttributes(
       [NSAttributedString.Key.font: UIFont(
-        customFont: .editLabelFont, withSize: .editLabelSize)!,
+        customFont: .arialBold, withSize: .fifteen)!,
        NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
       for: .normal)
   }
 }
 
-//MARK: - Delete message cell with Edit button or by swaping left on it
+//MARK: - Setup all delegates
 extension MessageVC {
-  @IBAction func editButton(_ sender: UIBarButtonItem) {
-    UIView.animate(withDuration: 0.3) {
-      self.messageTableView.isEditing = !self.messageTableView.isEditing
-      sender.title = (self.messageTableView.isEditing) ? "Done" : "Edit"
-    }
+  func setupAllDelegates() {
+    messageTableView.delegate = self
+    messageTableView.dataSource = self
   }
-  
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
+}
+
+//MARK: - Setup all custom cells
+extension MessageVC {
+  func setupCustomCell() {
+        messageTableView.register(UINib(nibName: messageCellIdentifier, bundle: nil), forCellReuseIdentifier: messageCellIdentifier)
   }
 }
 

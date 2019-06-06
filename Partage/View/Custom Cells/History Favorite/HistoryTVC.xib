@@ -52,18 +52,29 @@
                             <constraint firstAttribute="height" constant="80" id="4IF-yS-V8c"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPW-WZ-Tb3">
+                        <rect key="frame" x="0.0" y="98" width="310" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="gHI-G5-yNY"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="3AT-Kr-a9e" firstAttribute="leading" secondItem="UQq-LP-cdS" secondAttribute="trailing" constant="10" id="2Pp-ev-qCj"/>
                     <constraint firstItem="UQq-LP-cdS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4WF-Mo-ryI"/>
+                    <constraint firstItem="WPW-WZ-Tb3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="9h5-h1-x4O"/>
                     <constraint firstItem="3AT-Kr-a9e" firstAttribute="centerY" secondItem="UQq-LP-cdS" secondAttribute="centerY" id="YS3-xG-2Vn"/>
                     <constraint firstAttribute="trailing" secondItem="3AT-Kr-a9e" secondAttribute="trailing" constant="10" id="aMT-mv-09Y"/>
+                    <constraint firstAttribute="trailing" secondItem="WPW-WZ-Tb3" secondAttribute="trailing" constant="10" id="iXx-0K-duA"/>
                     <constraint firstItem="UQq-LP-cdS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uOc-dC-2JP"/>
+                    <constraint firstItem="WPW-WZ-Tb3" firstAttribute="top" secondItem="UQq-LP-cdS" secondAttribute="bottom" constant="5" id="wOF-Ub-cdb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="barDesignView" destination="WPW-WZ-Tb3" id="9Ax-Ue-I3E"/>
                 <outlet property="bottomLabel" destination="HcC-cc-SVJ" id="hIQ-4d-zrb"/>
                 <outlet property="itemImage" destination="UQq-LP-cdS" id="WHs-CO-yfs"/>
                 <outlet property="middleLabel" destination="VIy-U0-w4P" id="uS1-kU-n7x"/>

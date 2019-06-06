@@ -81,7 +81,6 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="given-name"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="9LO-Rh-AK7" secondAttribute="trailing" constant="10" id="eTo-n8-gUc"/>
                                     <constraint firstItem="9LO-Rh-AK7" firstAttribute="top" secondItem="qqd-aX-PSH" secondAttribute="top" id="g0Y-N6-R4y"/>
@@ -100,7 +99,6 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Ua1-PX-Zjk" firstAttribute="top" secondItem="BpR-td-oUz" secondAttribute="top" id="RIp-Je-C8w"/>
                                     <constraint firstAttribute="trailing" secondItem="Ua1-PX-Zjk" secondAttribute="trailing" constant="10" id="Rbp-R0-r0R"/>
@@ -119,7 +117,6 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="38I-MF-Ec9"/>
                                     <constraint firstItem="oaX-wG-voV" firstAttribute="top" secondItem="E5t-uR-uHT" secondAttribute="top" id="Hfz-Jr-cJh"/>
@@ -138,7 +135,6 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="BrH-9h-flD"/>
                                     <constraint firstItem="CcP-3g-Wc4" firstAttribute="leading" secondItem="FCd-OT-1eh" secondAttribute="leading" constant="10" id="TCr-kY-OmP"/>

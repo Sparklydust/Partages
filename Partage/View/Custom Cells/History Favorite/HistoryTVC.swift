@@ -16,6 +16,8 @@ class HistoryTVC: UITableViewCell {
   @IBOutlet weak var middleLabel: UILabel!
   @IBOutlet weak var bottomLabel: UILabel!
   
+  @IBOutlet weak var barDesignView: UIView!
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     setupMainDesign()
@@ -25,7 +27,7 @@ class HistoryTVC: UITableViewCell {
 //MARK: Setup top label design
 extension HistoryTVC {
   func setupTopLabel() {
-    topLabel.font = UIFont(customFont: .mainAppFont, withSize: .editLabelSize)
+    topLabel.font = UIFont(customFont: .superclarendonBold, withSize: .fifteen)
     topLabel.textColor = UIColor.typoBlue
   }
 }
@@ -33,7 +35,7 @@ extension HistoryTVC {
 //MARK: Setup middle label design
 extension HistoryTVC {
   func setupMiddleLabel() {
-    middleLabel.font = UIFont(customFont: .mainAppFont, withSize: .editLabelSize)
+    middleLabel.font = UIFont(customFont: .superclarendonBold, withSize: .fifteen)
     middleLabel.textColor = UIColor.typoBlue
   }
 }
@@ -41,8 +43,15 @@ extension HistoryTVC {
 //MARK: Setup bottom label design
 extension HistoryTVC {
   func setupBottomLabel() {
-    bottomLabel.font = UIFont(customFont: .buttonFont, withSize: .editLabelSize)
+    bottomLabel.font = UIFont(customFont: .arialBlack, withSize: .fifteen)
     bottomLabel.textColor = UIColor.typoBlue
+  }
+}
+
+//MARK: - Setup bar design view
+extension HistoryTVC {
+  func setupBarDesignView() {
+    barDesignView.backgroundColor = UIColor.mainBlue
   }
 }
 
@@ -52,5 +61,6 @@ extension HistoryTVC {
     setupTopLabel()
     setupMiddleLabel()
     setupBottomLabel()
+    setupBarDesignView()
   }
 }

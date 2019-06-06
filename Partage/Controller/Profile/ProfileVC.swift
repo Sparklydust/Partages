@@ -12,23 +12,20 @@ class ProfileVC: UIViewController {
   
   @IBOutlet weak var profileImage: UIImageView!
   
-  @IBOutlet weak var firstNameView: UIView!
-  @IBOutlet weak var passwordView: UIView!
-  
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var lastNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
   @IBOutlet weak var passwordLabel: UILabel!
   
+  @IBOutlet var backgroundViews: [UIView]!
   @IBOutlet var staticsLabel: [UILabel]!
   @IBOutlet var editButtonsLabel: [UIButton]!
   @IBOutlet var disconectionButtonsLabel: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupMainDesign()
     setupProfileImage()
-    setupSpecificCornerRadius()
-    setupFonts()
   }
 }
 
@@ -69,45 +66,87 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Add specific corner radius on two corners
+//MARK: - Setup all background views design
 extension ProfileVC {
-  func setupSpecificCornerRadius() {
-    roundCorners(view: firstNameView, corners: .topRight, radius: 20)
-    roundCorners(view: passwordView, corners: .bottomRight, radius: 20)
+  func setupBackgroundViews() {
+    for view in backgroundViews {
+      view.backgroundColor = UIColor.mainBlue
+      view.layer.cornerRadius = 10
+    }
   }
 }
 
-//MARK: - Setup all fonts in View Controller
+//MARK: - Setup all user info design
 extension ProfileVC {
-  func setupFonts() {
-    userInfoFont()
-    staticLabelFont()
-    editButtonFont()
-    disconnectButtonsDesign()
+  func setupUserInfo() {
+    setupUserInfoFont()
+    setupUserInfoTextColor()
   }
   
-  func userInfoFont() {
-    firstNameLabel.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    lastNameLabel.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    emailLabel.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    passwordLabel.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
+  func setupUserInfoFont() {
+    firstNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    lastNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    emailLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    passwordLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
   }
   
+  func setupUserInfoTextColor() {
+    firstNameLabel.textColor = UIColor.iceBackground
+    lastNameLabel.textColor = UIColor.iceBackground
+    emailLabel.textColor = UIColor.iceBackground
+    passwordLabel.textColor = UIColor.iceBackground
+  }
+}
+
+//MARK: - Setup all static labels design
+extension ProfileVC {
   func staticLabelFont() {
     for label in staticsLabel {
-      label.font = UIFont(customFont: .editLabelFont, withSize: .staticLabelSize)
+      label.font = UIFont(customFont: .arialBold, withSize: .fourteen)
+      label.textColor = UIColor.typoBlue
     }
   }
   
-  func editButtonFont() {
+  func setupStaticLabelName() {
+    staticsLabel[0].text = StaticLabel.firsName.rawValue
+    staticsLabel[1].text = StaticLabel.lastName.rawValue
+    staticsLabel[2].text = StaticLabel.email.rawValue
+    staticsLabel[3].text = StaticLabel.password.rawValue
+    staticLabelFont()
+  }
+}
+
+//MARK: - Setup edit button design
+extension ProfileVC {
+  func setupEditButtons() {
     for label in editButtonsLabel {
-      label.titleLabel?.font = UIFont(customFont: .editLabelFont, withSize: .editLabelSize)
+      label.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
+      label.tintColor = UIColor.typoBlue
+      label.setTitle(ButtonName.edit.rawValue, for: .normal)
     }
   }
-  
-  func disconnectButtonsDesign() {
+}
+
+//MARK: - Setup disconnect and delete accound button
+extension ProfileVC {
+  func setupDisconnectButtons() {
     for label in disconectionButtonsLabel {
-      label.titleLabel?.font = UIFont(customFont: .disconnectLabelFont, withSize: .disconnectLabelSize)
+      label.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
     }
+    disconectionButtonsLabel[0].setTitle(ButtonName.lowSignOut.rawValue, for: .normal)
+    disconectionButtonsLabel[0].tintColor = UIColor.typoBlue
+    disconectionButtonsLabel[1].setTitle(ButtonName.lowEraseAccount.rawValue, for: .normal)
+    disconectionButtonsLabel[1].tintColor = UIColor.mainRed
+  }
+}
+
+//MARK: - Setup main developer design
+extension ProfileVC {
+  func setupMainDesign() {
+    setupUserInfo()
+    setupEditButtons()
+    setupDisconnectButtons()
+    setupStaticLabelName()
+    setupBackgroundViews()
   }
 }

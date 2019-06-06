@@ -28,12 +28,8 @@ class ConversationVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    conversationTableView.delegate = self
-    conversationTableView.dataSource = self
-    conversationTableView.register(UINib(nibName: conversationCellIdentifier, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
-    conversationTableView.register(UINib(nibName: senderCellIdentifier, bundle: nil), forCellReuseIdentifier: senderCellIdentifier)
-    
-    senderMessageTextView.delegate = self
+    setupAllDelegates()
+    setupAllCustomCells()
     
     configureTableViewConversationSize()
     setupSenderMessageView()
@@ -76,10 +72,28 @@ extension ConversationVC {
   }
 }
 
+//MARK: - Setup sender message view text field
 extension ConversationVC {
   func setupSenderMessageViewText() {
-    senderMessageTextView.font = UIFont(customFont: .messageLabelFont, withSize: .editLabelSize)
+    senderMessageTextView.font = UIFont(customFont: .arial, withSize: .fifteen)
     senderMessageTextView.textColor = UIColor.typoBlue
+  }
+}
+
+//MARK: - Setup all delegates
+extension ConversationVC {
+  func setupAllDelegates() {
+    conversationTableView.delegate = self
+    conversationTableView.dataSource = self
+    senderMessageTextView.delegate = self
+  }
+}
+
+//MARK: - Setup all custom cells
+extension ConversationVC {
+  func setupAllCustomCells() {
+    conversationTableView.register(UINib(nibName: conversationCellIdentifier, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
+    conversationTableView.register(UINib(nibName: senderCellIdentifier, bundle: nil), forCellReuseIdentifier: senderCellIdentifier)
   }
 }
 

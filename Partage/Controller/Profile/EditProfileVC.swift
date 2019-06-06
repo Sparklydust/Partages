@@ -10,9 +10,6 @@ import UIKit
 
 class EditProfileVC: UIViewController {
   
-  @IBOutlet weak var firstNameView: UIView!
-  @IBOutlet weak var confirmPasswordView: UIView!
-  
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
@@ -20,15 +17,13 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var oldPasswordTextField: UITextField!
   @IBOutlet weak var newPasswordTextField: UITextField!
   
-  @IBOutlet weak var cancelButton: UIButton!
-  @IBOutlet weak var saveButton: UIButton!
-  
-  @IBOutlet var staticLabel: [UILabel]!
+  @IBOutlet var cancelAndSaveButtons: [UIButton]!
+  @IBOutlet var backgroundViews: [UIView]!
+  @IBOutlet var staticLabels: [UILabel]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupSpecificCornerRadius()
-    setupFonts()
+    setupMainDesign()
     observeKeyboardNotification()
   }
   
@@ -50,41 +45,78 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup corner radius at top right and bottom right
+//MARK: - Setup all views background text field views design
 extension EditProfileVC {
-  func setupSpecificCornerRadius() {
-    roundCorners(view: firstNameView, corners: .topRight, radius: 20)
-    roundCorners(view: firstNameTextField, corners: .topRight, radius: 20)
-    roundCorners(view: confirmPasswordView, corners: .bottomRight, radius: 20)
-    roundCorners(view: confirmPasswordTextField, corners: .bottomRight, radius: 20)
+  func setupBackgroundViews() {
+    for view in backgroundViews {
+      view.layer.cornerRadius = 10
+      view.layer.borderWidth = 1
+      view.layer.borderColor = UIColor.mainBlue.cgColor
+    }
   }
 }
 
-//MARK: - Setup all fonts in VC
+//MARK: - Setup user entry text field design
+extension EditProfileVC{
+  func setupUserTextFields() {
+    setupUserTextFieldsFont()
+    setupUserTextFieldColor()
+  }
+  
+  func setupUserTextFieldsFont() {
+    firstNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    lastNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    oldPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    newPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+    confirmPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
+  }
+  
+  func setupUserTextFieldColor() {
+    firstNameTextField.textColor = UIColor.mainBlue
+    lastNameTextField.textColor = UIColor.mainBlue
+    emailTextField.textColor = UIColor.mainBlue
+    oldPasswordTextField.textColor = UIColor.mainBlue
+    newPasswordTextField.textColor = UIColor.mainBlue
+    confirmPasswordTextField.textColor = UIColor.mainBlue
+  }
+}
+
+//MARK: - Setup cancel and save buttons design
 extension EditProfileVC {
-  func setupFonts() {
-    userEntriesFont()
-    setupButtons()
-    staticLabelFont()
-  }
-  
-  func userEntriesFont() {
-    firstNameTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    lastNameTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    emailTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    oldPasswordTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-    newPasswordTextField.font = UIFont(customFont: .mainAppFont, withSize: .mainSize)
-  }
-  
   func setupButtons() {
-    cancelButton.commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
-    saveButton.commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
-  }
-  
-  func staticLabelFont() {
-    for label in staticLabel {
-      label.font = UIFont(customFont: .editLabelFont, withSize: .staticLabelSize)
+    for button in cancelAndSaveButtons {
+      button.backgroundColor = UIColor.mainBlue
+      button.setTitleColor(UIColor.lightBlue, for: .normal)
     }
+    cancelAndSaveButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
+    cancelAndSaveButtons[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
+    cancelAndSaveButtons[0].setTitle(ButtonName.cancel.rawValue, for: .normal)
+    cancelAndSaveButtons[1].setTitle(ButtonName.save.rawValue, for: .normal)
+  }
+}
+
+//MARK: - Setup all static labels design
+extension EditProfileVC {
+  func setupStaticLabels() {
+    for label in staticLabels {
+      label.font = UIFont(customFont: .arialBold, withSize: .fourteen)
+      label.textColor = UIColor.typoBlue
+    }
+    staticLabels[0].text = StaticLabel.firsName.rawValue
+    staticLabels[1].text = StaticLabel.lastName.rawValue
+    staticLabels[2].text = StaticLabel.email.rawValue
+    staticLabels[3].text = StaticLabel.password.rawValue
+  }
+}
+
+//MARK: - Setup main developer design
+extension EditProfileVC {
+  func setupMainDesign() {
+    setupBackgroundViews()
+    setupUserTextFields()
+    setupButtons()
+    setupStaticLabels()
   }
 }
 
@@ -101,7 +133,10 @@ extension EditProfileVC: UITextFieldDelegate {
     resignTextFieldResponders()
     return true
   }
-  
+}
+
+//MARK: - All text field resign first responder method
+extension EditProfileVC {
   func resignTextFieldResponders() {
     firstNameTextField.resignFirstResponder()
     lastNameTextField.resignFirstResponder()
@@ -112,7 +147,7 @@ extension EditProfileVC: UITextFieldDelegate {
   }
 }
 
-//MARK: - Handle hidden text field on iPhone SE
+//MARK: - Handle to show hidden text field on iPhone SE
 extension EditProfileVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default

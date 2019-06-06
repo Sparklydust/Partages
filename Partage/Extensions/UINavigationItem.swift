@@ -21,6 +21,5 @@ extension UINavigationItem {
   }
   
   // Action if button is enable and clicked on
-  @objc func clickedOnProfileImage() {
-  }
+  @objc func clickedOnProfileImage() { }
 }

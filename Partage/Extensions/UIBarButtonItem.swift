@@ -14,7 +14,7 @@ extension UIBarButtonItem {
     self.title = ButtonName.edit.rawValue
     self.setTitleTextAttributes(
       [NSAttributedString.Key.font: UIFont(
-        customFont: .editLabelFont, withSize: .editLabelSize)!,
+        customFont: .arialBold, withSize: .fifteen)!,
        NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
       for: .normal)
   }

@@ -44,12 +44,15 @@
 		2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */; };
 		2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */; };
 		2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */; };
-		2AFA4EBC22A8FC030039803E /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EBB22A8FC030039803E /* FavoriteVC.swift */; };
 		2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EBE22A8FC9E0039803E /* HistoryTVC.swift */; };
 		2AFA4EC122A8FC9E0039803E /* HistoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AFA4EBF22A8FC9E0039803E /* HistoryTVC.xib */; };
 		2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EC222A8FCBB0039803E /* FavoriteTVC.swift */; };
 		2AFA4EC522A8FCBB0039803E /* FavoriteTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AFA4EC322A8FCBB0039803E /* FavoriteTVC.xib */; };
 		2AFA4EC722A914A00039803E /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EC622A914A00039803E /* UIBarButtonItem.swift */; };
+		2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EC922A9AA290039803E /* StaticLabel.swift */; };
+		2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4ECB22A9AAF30039803E /* ButtonName.swift */; };
+		2AFA4ECE22A9AB320039803E /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4ECD22A9AB320039803E /* CustomFont.swift */; };
+		2AFA4ED022A9AB540039803E /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4ECF22A9AB540039803E /* FontSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,12 +95,15 @@
 		2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryFavorite.storyboard; sourceTree = "<group>"; };
 		2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTVC.swift; sourceTree = "<group>"; };
 		2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTVC.xib; sourceTree = "<group>"; };
-		2AFA4EBB22A8FC030039803E /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
 		2AFA4EBE22A8FC9E0039803E /* HistoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTVC.swift; sourceTree = "<group>"; };
 		2AFA4EBF22A8FC9E0039803E /* HistoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTVC.xib; sourceTree = "<group>"; };
 		2AFA4EC222A8FCBB0039803E /* FavoriteTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTVC.swift; sourceTree = "<group>"; };
 		2AFA4EC322A8FCBB0039803E /* FavoriteTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTVC.xib; sourceTree = "<group>"; };
 		2AFA4EC622A914A00039803E /* UIBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
+		2AFA4EC922A9AA290039803E /* StaticLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticLabel.swift; sourceTree = "<group>"; };
+		2AFA4ECB22A9AAF30039803E /* ButtonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonName.swift; sourceTree = "<group>"; };
+		2AFA4ECD22A9AB320039803E /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		2AFA4ECF22A9AB540039803E /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +135,10 @@
 				2A90FB3F229FC3DF006C246B /* UIFont.swift */,
 				2A067281229EB94000FFAECE /* UIViewController.swift */,
 				2AC8D0F422A0869D00416832 /* UIAlert.swift */,
-				2A289FA522A55B4C00EB076A /* UINavigationItem.swift */,
 				2A87EC6522A69AE000EB969D /* UITableView.swift */,
 				2AC159FA22A7BBEA00CE935B /* UIButton.swift */,
 				2AFA4EC622A914A00039803E /* UIBarButtonItem.swift */,
+				2A289FA522A55B4C00EB076A /* UINavigationItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -187,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				2AB4353B229E56F0007BFB93 /* Supporting Files */,
+				2AFA4EC822A9A9EE0039803E /* Enums */,
 				2A06727C229E905E00FFAECE /* Extensions */,
 				2AB4353D229E5712007BFB93 /* Model */,
 				2AB4353A229E56C9007BFB93 /* View */,
@@ -268,7 +275,6 @@
 			isa = PBXGroup;
 			children = (
 				2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */,
-				2AFA4EBB22A8FC030039803E /* FavoriteVC.swift */,
 			);
 			path = HistoryFavorite;
 			sourceTree = "<group>";
@@ -309,6 +315,17 @@
 				2AFA4EC322A8FCBB0039803E /* FavoriteTVC.xib */,
 			);
 			path = "History Favorite";
+			sourceTree = "<group>";
+		};
+		2AFA4EC822A9A9EE0039803E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2AFA4EC922A9AA290039803E /* StaticLabel.swift */,
+				2AFA4ECB22A9AAF30039803E /* ButtonName.swift */,
+				2AFA4ECD22A9AB320039803E /* CustomFont.swift */,
+				2AFA4ECF22A9AB540039803E /* FontSize.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		2AFEF39F22A869ED00BBDFD1 /* Tab Bar Icons */ = {
@@ -406,12 +423,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AFA4ECE22A9AB320039803E /* CustomFont.swift in Sources */,
+				2AFA4ED022A9AB540039803E /* FontSize.swift in Sources */,
 				2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */,
 				2AFA4EC722A914A00039803E /* UIBarButtonItem.swift in Sources */,
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
 				2A87EC5E22A6453800EB969D /* Message.swift in Sources */,
-				2AFA4EBC22A8FC030039803E /* FavoriteVC.swift in Sources */,
 				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
 				2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */,
 				2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */,
@@ -427,6 +445,8 @@
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
 				2AC15A0122A7C4D200CE935B /* SignInSignUpVC.swift in Sources */,
+				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
+				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
 				2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */,
