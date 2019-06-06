@@ -28,10 +28,11 @@ enum ButtonName: String {
   case modify = "Modifier"
   case addToCalendar = "Ajouter au calendrier"
   case history = "Historique"
-  case saved = "Sauvegardé"
+  case favorite = "Sauvegardé"
   case signInSignUp = "se connecter / s'inscrire"
   case afterSignedIn = "Bonjour"
   case donationMade = "Merci pour votre don"
+  case edit = "Edit"
 }
 
 //MARK: - Opening display share/receive button design
@@ -92,5 +93,35 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(color, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .disconnectLabelFont, withSize: .disconnectLabelSize)
+  }
+}
+
+//MARK: - History and Favorite selected design
+extension UIButton {
+  func historyFavoriteSelectedDesign(title: ButtonName, shadowWidth width: Int, shadowHeight height: Int) {
+    self.setTitle(title.rawValue, for: .normal)
+    self.setTitleColor(UIColor.typoBlue, for: .normal)
+    self.backgroundColor = UIColor.iceBackground
+    self.layer.borderColor = UIColor.mainBlue.cgColor
+    self.layer.borderWidth = 1
+    self.titleLabel?.font = UIFont(customFont: .buttonFont, withSize: .mainSize)
+    self.layer.shadowOffset = CGSize(width: width, height: height)
+    self.layer.shadowColor = UIColor.gray.cgColor
+    self.layer.shadowOpacity = 2
+    self.isEnabled = false
+  }
+}
+
+//MARK: - History and Favorite unselected design
+extension UIButton {
+  func historyFavoriteUnselectedDesign(title: ButtonName, shadowWidth width: Int, shadowHeight height: Int) {
+    self.setTitle(title.rawValue, for: .normal)
+    self.setTitleColor(UIColor.lightBlue, for: .normal)
+    self.backgroundColor = UIColor.mainBlue
+    self.titleLabel?.font = UIFont(customFont: .buttonFont, withSize: .mainSize)
+    self.layer.shadowOffset = CGSize(width: width, height: height)
+    self.layer.shadowColor = UIColor.gray.cgColor
+    self.layer.shadowOpacity = 2
+    self.isEnabled = true
   }
 }

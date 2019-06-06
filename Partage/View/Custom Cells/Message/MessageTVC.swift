@@ -15,12 +15,9 @@ class MessageTVC: UITableViewCell {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var conversationLabel: UILabel!
   
-  
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupProfileImage()
-    setupFonts()
-    setupFontsColor()
+    setupMainDesign()
   }
 }
 
@@ -44,5 +41,14 @@ extension MessageTVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
     profileImage.roundedImageWithMainBlueBorder()
+  }
+}
+
+//MARK: - Setup main developer design
+extension MessageTVC {
+  func setupMainDesign() {
+    setupProfileImage()
+    setupFonts()
+    setupFontsColor()
   }
 }

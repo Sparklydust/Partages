@@ -17,10 +17,7 @@ class ConversationTVC: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupProfileImage()
-    setupDateLabel()
-    setupConversationLabel()
-    setupConversationView()
+    setupMainDesign()
   }
 }
 
@@ -53,5 +50,15 @@ extension ConversationTVC {
   func setupDateLabel() {
     dateLabel.font = UIFont(customFont: .mainAppFont, withSize: .smallDateLabelSize)
     dateLabel.textColor = UIColor.typoBlue
+  }
+}
+
+//MARK: - Setup main developer design
+extension ConversationTVC {
+  func setupMainDesign() {
+    setupProfileImage()
+    setupDateLabel()
+    setupConversationLabel()
+    setupConversationView()
   }
 }

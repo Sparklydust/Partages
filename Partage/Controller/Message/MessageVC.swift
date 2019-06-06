@@ -44,7 +44,7 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: - Setup Edit button in navigation bar
 extension MessageVC {
   func setupEditButton() {
-    editButton.title = "Edit"
+    editButton.title = ButtonName.edit.rawValue
     editButton.setTitleTextAttributes(
       [NSAttributedString.Key.font: UIFont(
         customFont: .editLabelFont, withSize: .editLabelSize)!,
@@ -56,7 +56,6 @@ extension MessageVC {
 //MARK: - Delete message cell with Edit button or by swaping left on it
 extension MessageVC {
   @IBAction func editButton(_ sender: UIBarButtonItem) {
-    view.backgroundColor = UIColor.iceBackground
     UIView.animate(withDuration: 0.3) {
       self.messageTableView.isEditing = !self.messageTableView.isEditing
       sender.title = (self.messageTableView.isEditing) ? "Done" : "Edit"

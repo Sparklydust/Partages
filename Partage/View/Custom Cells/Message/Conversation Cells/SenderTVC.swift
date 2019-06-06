@@ -17,10 +17,7 @@ class SenderTVC: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupProfileImage()
-    setupDateLabel()
-    setupConversationLabel()
-    setupConversationView()
+    setupMainDesign()
   }
 }
 
@@ -53,5 +50,15 @@ extension SenderTVC {
   func setupDateLabel() {
     senderDateLabel.font = UIFont(customFont: .mainAppFont, withSize: .smallDateLabelSize)
     senderDateLabel.textColor = UIColor.typoBlue
+  }
+}
+
+//MARK: - Setup main developer design
+extension SenderTVC {
+  func setupMainDesign() {
+    setupProfileImage()
+    setupDateLabel()
+    setupConversationLabel()
+    setupConversationView()
   }
 }

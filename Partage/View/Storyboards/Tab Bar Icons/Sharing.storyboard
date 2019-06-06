@@ -70,7 +70,7 @@
                 <viewControllerPlaceholder storyboardName="SignInSignUp" id="IyE-xf-fKZ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgd-ny-f8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108" y="-1137"/>
+            <point key="canvasLocation" x="3216" y="-1137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0HZ-fI-STk">

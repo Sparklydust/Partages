@@ -16,9 +16,11 @@ extension UINavigationItem {
     button.setImage(#imageLiteral(resourceName: "noPicture"), for: .normal)
     button.imageView?.roundedImage()
     button.addTarget(self, action: #selector(clickedOnProfileImage), for: .touchUpInside)
+    button.isEnabled = false
     self.titleView = button
   }
   
+  // Action if button is enable and clicked on
   @objc func clickedOnProfileImage() {
   }
 }
