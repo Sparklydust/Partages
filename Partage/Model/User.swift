@@ -16,6 +16,5 @@ struct User {
   var email: String
   var password: String
   
-  var message: [String]
-  var date: NSDate
+  var message: [Message]
 }

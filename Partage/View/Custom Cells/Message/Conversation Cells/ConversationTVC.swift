@@ -24,7 +24,7 @@ class ConversationTVC: UITableViewCell {
 //MARK: - Setup profile image
 extension ConversationTVC {
   func setupProfileImage() {
-    profileImage.roundedImageWithLightBlueBorder()
+    profileImage.roundedWithLightBlueBorder()
     profileImage.image = #imageLiteral(resourceName: "noPicture")
   }
 }

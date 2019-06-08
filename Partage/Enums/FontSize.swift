@@ -12,6 +12,7 @@ import UIKit
 enum FontSize: CGFloat {
   case twentyTwo = 22
   case twenty = 20
+  case heighteen = 18
   case seventeen = 17
   case sixteen = 16
   case fifteen = 15

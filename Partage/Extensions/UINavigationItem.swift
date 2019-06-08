@@ -14,7 +14,7 @@ extension UINavigationItem {
     let button = UIButton(type: .custom)
     button.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
     button.setImage(#imageLiteral(resourceName: "noPicture"), for: .normal)
-    button.imageView?.roundedImage()
+    button.imageView?.rounded()
     button.addTarget(self, action: #selector(clickedOnProfileImage), for: .touchUpInside)
     button.isEnabled = false
     self.titleView = button

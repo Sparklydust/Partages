@@ -28,15 +28,11 @@ class ConversationVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupMainDesign()
     setupAllDelegates()
-    setupAllCustomCells()
-    
-    configureTableViewConversationSize()
-    setupSenderMessageView()
-    setupSenderMessageViewText()
     tapGestureDismissKeyboard()
-    
     observeKeyboardNotification()
+    manageTableViewConversationCellSize()
     conversationTableView.scrollToBottomRow()
   }
 }
@@ -45,6 +41,15 @@ class ConversationVC: UIViewController {
 extension ConversationVC {
   @IBAction func sendMessageButton(_ sender: Any) {
     senderMessageTextView.endEditing(true)
+  }
+}
+
+//MARK: - Setup developer main design
+extension ConversationVC {
+  func setupMainDesign() {
+    setupAllCustomCells()
+    setupSenderMessageView()
+    setupSenderMessageViewText()
   }
 }
 
@@ -99,7 +104,7 @@ extension ConversationVC {
 
 //MARK: - Manage cell height depending of its message size
 extension ConversationVC {
-  func configureTableViewConversationSize() {
+  func manageTableViewConversationCellSize() {
     conversationTableView.rowHeight = UITableView.automaticDimension
     conversationTableView.estimatedRowHeight = 120.0
   }

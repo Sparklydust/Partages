@@ -19,10 +19,8 @@ class MessageVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupMainDesign()
     setupAllDelegates()
-    setupCustomCell()
-    setupEditButton()
-    navigationItem.setupNavBarProfileImage()
   }
 }
 
@@ -43,6 +41,15 @@ extension MessageVC {
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     cell.backgroundColor = UIColor.iceBackground
+  }
+}
+
+//MARK: Setup developer main design
+extension MessageVC {
+  func setupMainDesign() {
+    navigationItem.setupNavBarProfileImage()
+    setupCustomCell()
+    setupEditButton()
   }
 }
 

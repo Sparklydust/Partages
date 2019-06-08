@@ -77,7 +77,7 @@ extension UIButton {
     self.backgroundColor = UIColor.iceBackground
     self.layer.borderColor = UIColor.mainBlue.cgColor
     self.layer.borderWidth = 1
-    self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .twenty)
+    self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
     self.layer.shadowOffset = CGSize(width: width, height: height)
     self.layer.shadowColor = UIColor.gray.cgColor
     self.layer.shadowOpacity = 2
@@ -91,7 +91,7 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(UIColor.lightBlue, for: .normal)
     self.backgroundColor = UIColor.mainBlue
-    self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .twenty)
+    self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
     self.layer.shadowOffset = CGSize(width: width, height: height)
     self.layer.shadowColor = UIColor.gray.cgColor
     self.layer.shadowOpacity = 2

@@ -45,6 +45,17 @@ extension EditProfileVC {
   }
 }
 
+//MARK: - Setup main developer design
+extension EditProfileVC {
+  func setupMainDesign() {
+    setupBackgroundViews()
+    setupUserTextFields()
+    setupButtons()
+    setupStaticLabels()
+    setupAllPlaceholders()
+  }
+}
+
 //MARK: - Setup all views background text field views design
 extension EditProfileVC {
   func setupBackgroundViews() {
@@ -91,8 +102,6 @@ extension EditProfileVC {
     }
     cancelAndSaveButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
     cancelAndSaveButtons[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
-    cancelAndSaveButtons[0].setTitle(ButtonName.cancel.rawValue, for: .normal)
-    cancelAndSaveButtons[1].setTitle(ButtonName.save.rawValue, for: .normal)
   }
 }
 
@@ -110,13 +119,12 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Setup placeholders design
 extension EditProfileVC {
-  func setupMainDesign() {
-    setupBackgroundViews()
-    setupUserTextFields()
-    setupButtons()
-    setupStaticLabels()
+  func setupAllPlaceholders() {
+    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: UIColor.typoBlue)
+    newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: UIColor.typoBlue)
+    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: UIColor.typoBlue)
   }
 }
 

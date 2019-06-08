@@ -8,10 +8,14 @@
 
 import UIKit
 
-//MARK: - All static label name
+//MARK: - All static label or placeholder name
 enum StaticLabel: String {
   case firsName = "prénom"
   case lastName = "nom"
   case email = "email"
   case password = "mot de passe"
+  case oldPassword = "ancien"
+  case newPassword = "nouveau"
+  case confirmPassword = "confirmer"
+  case fullConfirmPassword = "confirmer mot de passe"
 }

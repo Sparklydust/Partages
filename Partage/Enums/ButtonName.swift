@@ -20,7 +20,7 @@ enum ButtonName: String {
   case lowSignIn = "se connecter"
   case lowSignOut = "se déconnecter"
   case lowEraseAccount = "effacer mon compte"
-  case lowLostPassword = "mot de passe perdu"
+  case lowLostPassword = "mot de passe oublié"
   case send = "Envoyer"
   case message = "Message"
   case receive = "Recevoir"

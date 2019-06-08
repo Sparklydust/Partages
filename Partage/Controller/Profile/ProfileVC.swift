@@ -58,11 +58,22 @@ extension ProfileVC {
   }
 }
 
+//MARK: - Setup main developer design
+extension ProfileVC {
+  func setupMainDesign() {
+    setupUserInfo()
+    setupEditButtons()
+    setupDisconnectButtons()
+    setupStaticLabelName()
+    setupBackgroundViews()
+  }
+}
+
 //MARK: - Setup profile image
 extension ProfileVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
-    profileImage.roundedImage()
+    profileImage.rounded()
   }
 }
 
@@ -130,23 +141,12 @@ extension ProfileVC {
 //MARK: - Setup disconnect and delete accound button
 extension ProfileVC {
   func setupDisconnectButtons() {
-    for label in disconectionButtonsLabel {
-      label.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
-    }
     disconectionButtonsLabel[0].setTitle(ButtonName.lowSignOut.rawValue, for: .normal)
     disconectionButtonsLabel[0].tintColor = UIColor.typoBlue
     disconectionButtonsLabel[1].setTitle(ButtonName.lowEraseAccount.rawValue, for: .normal)
     disconectionButtonsLabel[1].tintColor = UIColor.mainRed
-  }
-}
-
-//MARK: - Setup main developer design
-extension ProfileVC {
-  func setupMainDesign() {
-    setupUserInfo()
-    setupEditButtons()
-    setupDisconnectButtons()
-    setupStaticLabelName()
-    setupBackgroundViews()
+    for label in disconectionButtonsLabel {
+      label.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
+    }
   }
 }

@@ -20,13 +20,12 @@ class HistoryFavoriteVC: UIViewController {
   let favoriteCellIdentifier = "FavoriteTVC"
   var isHistoryButtonClicked = true
   
+  let goToItemDetailsVC = "goToItemDetailsVC"
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupMainDesign()
     setupAllDelegates()
-    setupEditButton()
-    setupAllCustomCells()
-    
-    navigationItem.setupNavBarProfileImage()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +75,15 @@ extension HistoryFavoriteVC {
   }
 }
 
+//MARK: - Setup developer main design
+extension HistoryFavoriteVC {
+  func setupMainDesign() {
+    navigationItem.setupNavBarProfileImage()
+    setupEditButton()
+    setupAllCustomCells()
+  }
+}
+
 //MARK: - Setup Table View
 extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +111,7 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: Setup history button is selected design
+//MARK: - Setup history button is selected design
 extension HistoryFavoriteVC {
   func setupHistoryButtonIsSelected() {
     UIView.animate(withDuration: 0.3) {
@@ -158,5 +166,18 @@ extension HistoryFavoriteVC {
   func showHistoryCustomCell(_ bool: Bool) {
     isHistoryButtonClicked = bool
     HistoryFavoriteTableView.reloadData()
+  }
+}
+
+//MARK: - Perform history or favorite segue when row is selected
+extension HistoryFavoriteVC {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    performSegue(withIdentifier: goToItemDetailsVC, sender: self)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == goToItemDetailsVC {
+      
+    }
   }
 }

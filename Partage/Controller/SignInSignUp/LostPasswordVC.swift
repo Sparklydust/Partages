@@ -35,9 +35,19 @@ extension LostPasswordVC {
   }
 }
 
+//MARK: - Setup developer main design
+extension LostPasswordVC {
+  func setupMainDesign() {
+    setupCancelAndSendButtons()
+    setupEmailTextField()
+    setupEmailView()
+    setupEmailPlaceholder()
+  }
+}
+
 //MARK: - Set cancel and send buttons design
 extension LostPasswordVC {
-  func setCancelAndSendButtonsDesign() {
+  func setupCancelAndSendButtons() {
     cancelAndSendButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
     cancelAndSendButtons[1].commonDesign(title: .send, shadowWidth: 0, shadowHeight: 2)
   }
@@ -45,15 +55,22 @@ extension LostPasswordVC {
 
 //MARK: - Set email text design
 extension LostPasswordVC {
-  func setEmailTextField() {
+  func setupEmailTextField() {
     emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     emailTextField.textColor = UIColor.iceBackground
     emailTextField.layer.cornerRadius = 10
   }
   
-  func setEmailView() {
+  func setupEmailView() {
     emailView.backgroundColor = UIColor.mainBlue
     emailView.layer.cornerRadius = 10
+  }
+}
+
+//MARK: - Setup email placeholder design
+extension LostPasswordVC {
+  func setupEmailPlaceholder() {
+    emailTextField.setupPlaceholderDesign(title: .email, color: UIColor.iceBackground)
   }
 }
 
@@ -69,14 +86,5 @@ extension LostPasswordVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     emailTextField.resignFirstResponder()
     return true
-  }
-}
-
-//MARK: - Setup developer main design
-extension LostPasswordVC {
-  func setupMainDesign() {
-    setCancelAndSendButtonsDesign()
-    setEmailTextField()
-    setEmailView()
   }
 }

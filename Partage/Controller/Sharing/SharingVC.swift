@@ -16,13 +16,13 @@ class SharingVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupAllButtonsDisplayed()
+    setupAllButtons()
   }
 }
 
 //MARK: - Setup all buttons
 extension SharingVC {
-  func setupAllButtonsDisplayed() {
+  func setupAllButtons() {
     shareButton.shareReceiveDesign(title: .shareMain, shadowHeight: -2)
     receiveButton.shareReceiveDesign(title: .receiveMain, shadowHeight: 2)
     signInSignUpButton.signInSignUpDesign(title: .signInSignUp)

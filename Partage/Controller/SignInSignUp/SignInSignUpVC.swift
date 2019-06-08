@@ -38,8 +38,8 @@ class SignInSignUpVC: UIViewController {
 extension SignInSignUpVC {
   @IBAction func signInButtonAction(_ sender: Any) {
     UIView.animate(withDuration: 0.3) {
-      self.setSignInIsSelectedButtons()
-      self.setRegisterButtonWhenSignInIsSelected()
+      self.setupSignInIsSelectedButtons()
+      self.setupRegisterButtonWhenSignInIsSelected()
       self.hideTextFieldWhenSignInIsClicked()
       self.resignAllResponser()
       self.lostPasswordButton.isHidden = false
@@ -48,8 +48,8 @@ extension SignInSignUpVC {
   
   @IBAction func signUpButtonAction(_ sender: Any) {
     UIView.animate(withDuration: 0.3) {
-      self.setSignUpIsSelectedButtons()
-      self.setRegisterbuttonWhenSignUpIsSelected()
+      self.setupSignUpIsSelectedButtons()
+      self.setupRegisterButtonWhenSignUpIsSelected()
       self.showTextFieldWhenSignUpIsClicked()
       self.resignAllResponser()
       self.lostPasswordButton.isHidden = true
@@ -68,9 +68,23 @@ extension SignInSignUpVC {
   }
 }
 
+//MARK: - Setup main VC design
+extension SignInSignUpVC {
+  func setupMainDesign() {
+    setupSignInIsSelectedButtons()
+    setupRegisterButtonWhenSignInIsSelected()
+    setupCancelButton()
+    setupLostPasswordButton()
+    setupBackgroundTextView()
+    setupAllTextFields()
+    setupAllPlaceholders()
+    hideTextFieldWhenSignInIsClicked()
+  }
+}
+
 //MARK: Set sign in / sign up buttons design
 extension SignInSignUpVC {
-  func setSignInIsSelectedButtons() {
+  func setupSignInIsSelectedButtons() {
     signInSignUpButtons[0].signInSignUpSelectedDesign(title: .lowSignIn)
     signInSignUpButtons[1].signInSignUpUnselectedDesign(title: .lowSignUp)
     signInSignUpButtons[0].isEnabled = false
@@ -79,7 +93,7 @@ extension SignInSignUpVC {
     dotLabels[1].textColor = UIColor.typoBlue
   }
   
-  func setSignUpIsSelectedButtons() {
+  func setupSignUpIsSelectedButtons() {
     signInSignUpButtons[0].signInSignUpUnselectedDesign(title: .lowSignIn)
     signInSignUpButtons[1].signInSignUpSelectedDesign(title: .lowSignUp)
     signInSignUpButtons[0].isEnabled = true
@@ -91,29 +105,29 @@ extension SignInSignUpVC {
 
 ///MARK: - Set cancel and register buttons design
 extension SignInSignUpVC {
-  func setCancelButton() {
+  func setupCancelButton() {
     cancelAndRegisterButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
   }
   
-  func setRegisterButtonWhenSignInIsSelected() {
+  func setupRegisterButtonWhenSignInIsSelected() {
     cancelAndRegisterButtons[1].commonDesign(title: .signIn, shadowWidth: 0, shadowHeight: 2)
   }
   
-  func setRegisterbuttonWhenSignUpIsSelected() {
+  func setupRegisterButtonWhenSignUpIsSelected() {
     cancelAndRegisterButtons[1].commonDesign(title: .signUp, shadowWidth: 0, shadowHeight: 2)
   }
 }
 
 //MARK: - Set lost password design
 extension SignInSignUpVC {
-  func setLostPasswordButton() {
+  func setupLostPasswordButton() {
     lostPasswordButton.littleDesign(title: .lowLostPassword, color: .typoBlue)
   }
 }
 
 //MARK: - Set background text view design
 extension SignInSignUpVC {
-  func setBackgroundTextViewDesign() {
+  func setupBackgroundTextView() {
     for view in backgroundTextView {
       view.backgroundColor = UIColor.mainBlue
       view.layer.cornerRadius = 10
@@ -123,7 +137,7 @@ extension SignInSignUpVC {
 
 //MARK: - Set text field design
 extension SignInSignUpVC {
-  func setAllTextFieldsDesign() {
+  func setupAllTextFields() {
     firstNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     passwordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
@@ -152,16 +166,13 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: - Setup main VC design
+//MARK: - Setup placeholder design
 extension SignInSignUpVC {
-  func setupMainDesign() {
-    setSignInIsSelectedButtons()
-    setRegisterButtonWhenSignInIsSelected()
-    setCancelButton()
-    setLostPasswordButton()
-    setBackgroundTextViewDesign()
-    setAllTextFieldsDesign()
-    hideTextFieldWhenSignInIsClicked()
+  func setupAllPlaceholders() {
+    firstNameTextField.setupPlaceholderDesign(title: .firsName, color: UIColor.iceBackground)
+    emailTextField.setupPlaceholderDesign(title: .email, color: UIColor.iceBackground)
+    passwordTextField.setupPlaceholderDesign(title: .password, color: UIColor.iceBackground)
+    confirmPasswordTextField.setupPlaceholderDesign(title: .fullConfirmPassword, color: UIColor.iceBackground)
   }
 }
 

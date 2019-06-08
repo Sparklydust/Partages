@@ -40,7 +40,7 @@ extension MessageTVC {
 extension MessageTVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
-    profileImage.roundedImageWithMainBlueBorder()
+    profileImage.roundedWithMainBlueBorder()
   }
 }
 

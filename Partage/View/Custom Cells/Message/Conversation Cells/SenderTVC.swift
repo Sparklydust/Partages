@@ -24,7 +24,7 @@ class SenderTVC: UITableViewCell {
 //MARK: - Setup profile image
 extension SenderTVC {
   func setupProfileImage() {
-    senderProfileImage.roundedImageWithMainBlueBorder()
+    senderProfileImage.roundedWithMainBlueBorder()
     senderProfileImage.image = #imageLiteral(resourceName: "noPicture")
   }
 }

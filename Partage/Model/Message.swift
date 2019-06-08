@@ -8,6 +8,7 @@
 
 import Foundation
 
-class Message {
-  var conversationBody = ""
+struct Message {
+  var conversationBody: String
+  var date: NSDate
 }
