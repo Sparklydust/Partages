@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum CameraChoice: String {
-  case camera = "Camera"
-  case photoLibrary = "Album"
-  case cancel = "Annuler"
-}
-
 class CameraHandler: NSObject {
   static let shared = CameraHandler()
   
@@ -46,15 +40,15 @@ class CameraHandler: NSObject {
     currentVC = vc
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    actionSheet.addAction(UIAlertAction(title: CameraChoice.camera.rawValue, style: .default, handler: {
+    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.camera.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
       self.camera()
     }))
-    actionSheet.addAction(UIAlertAction(title: CameraChoice.photoLibrary.rawValue, style: .default, handler: {
+    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.photoLibrary.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
       self.photoLibrary()
     }))
-    actionSheet.addAction(UIAlertAction(title: CameraChoice.cancel.rawValue, style: .cancel, handler: nil))
+    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
     vc.present(actionSheet, animated: true, completion: nil)
   }
 }

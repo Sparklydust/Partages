@@ -34,4 +34,6 @@ enum ButtonName: String {
   case afterSignedIn = "Bonjour"
   case donationMade = "Merci pour votre don"
   case edit = "Edit"
+  case ok = "OK"
+  case settings = "Paramètre"
 }

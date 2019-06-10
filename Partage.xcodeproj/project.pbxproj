@@ -46,7 +46,11 @@
 		2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */; };
 		2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */; };
 		2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */; };
+		2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B222ADC5B600CF627C /* AlertTitle.swift */; };
+		2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B422ADC69400CF627C /* AlertMessage.swift */; };
 		2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */; };
+		2AF66B2922AC0AA8005BAE31 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */; };
+		2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */; };
 		2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EBE22A8FC9E0039803E /* HistoryTVC.swift */; };
 		2AFA4EC122A8FC9E0039803E /* HistoryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AFA4EBF22A8FC9E0039803E /* HistoryTVC.xib */; };
 		2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4EC222A8FCBB0039803E /* FavoriteTVC.swift */; };
@@ -100,7 +104,11 @@
 		2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryFavorite.storyboard; sourceTree = "<group>"; };
 		2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTVC.swift; sourceTree = "<group>"; };
 		2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTVC.xib; sourceTree = "<group>"; };
+		2AE322B222ADC5B600CF627C /* AlertTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitle.swift; sourceTree = "<group>"; };
+		2AE322B422ADC69400CF627C /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItemDetail.swift; sourceTree = "<group>"; };
+		2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
+		2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetLabel.swift; sourceTree = "<group>"; };
 		2AFA4EBE22A8FC9E0039803E /* HistoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTVC.swift; sourceTree = "<group>"; };
 		2AFA4EBF22A8FC9E0039803E /* HistoryTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTVC.xib; sourceTree = "<group>"; };
 		2AFA4EC222A8FCBB0039803E /* FavoriteTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTVC.swift; sourceTree = "<group>"; };
@@ -245,9 +253,9 @@
 		2AB4353D229E5712007BFB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AF66B2C22AC0DEF005BAE31 /* Handlers */,
 				2A289FA722A56B0200EB076A /* User.swift */,
 				2A87EC5D22A6453800EB969D /* Message.swift */,
-				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -314,6 +322,15 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		2AF66B2C22AC0DEF005BAE31 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
+				2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
 		2AFA4EBD22A8FC5B0039803E /* History Favorite */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +350,9 @@
 				2AFA4ECD22A9AB320039803E /* CustomFont.swift */,
 				2AFA4ECF22A9AB540039803E /* FontSize.swift */,
 				2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */,
+				2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */,
+				2AE322B222ADC5B600CF627C /* AlertTitle.swift */,
+				2AE322B422ADC69400CF627C /* AlertMessage.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -446,12 +466,14 @@
 				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
 				2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */,
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
+				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
 				2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
 				2AC159FB22A7BBEA00CE935B /* UIButton.swift in Sources */,
 				2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */,
 				2A289FA822A56B0200EB076A /* User.swift in Sources */,
+				2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */,
 				2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
@@ -459,8 +481,10 @@
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
+				2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */,
 				2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */,
 				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
+				2AF66B2922AC0AA8005BAE31 /* EventHandler.swift in Sources */,
 				2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */,
 				2AC15A0322A7FC2C00CE935B /* LostPasswordVC.swift in Sources */,
 				2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */,

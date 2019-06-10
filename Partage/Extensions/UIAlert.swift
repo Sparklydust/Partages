@@ -12,18 +12,19 @@ import UIKit
 extension UIViewController {
   func showAlert(title: String,
                   message: String,
+                  buttonTitle: String,
                   completion: @escaping (_ result: Bool) -> Void) {
     let deleteAlert = UIAlertController(
       title: title,
       message: message,
       preferredStyle: .alert)
     deleteAlert.addAction(UIAlertAction(
-      title: "OK",
+      title: buttonTitle,
       style: .default, handler: { (action) in
         completion(true)
     }))
     deleteAlert.addAction(UIAlertAction(
-      title: "Cancel",
+      title: ButtonName.cancel.rawValue,
       style: .cancel, handler: nil))
     present(deleteAlert, animated: true, completion: nil)
   }
@@ -37,7 +38,7 @@ extension UIViewController {
       message: message,
       preferredStyle: .alert)
     noEntryAlert.addAction(UIAlertAction(
-      title: "OK", style: .cancel, handler: nil))
+      title: ButtonName.ok.rawValue, style: .cancel, handler: nil))
     present(noEntryAlert, animated: true, completion: nil)
   }
 }

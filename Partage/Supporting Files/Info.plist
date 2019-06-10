@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Partage a besoin d&apos; accéder à votre calendrier</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Partage a besoin d&apos;accéder à votre camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Partage a besoin d&apos; un accès à vos photos</string>
+	<string>Partage a besoin d&apos;accéder à vos photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>superclarendon-lt.ttf</string>
