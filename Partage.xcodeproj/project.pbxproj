@@ -24,6 +24,9 @@
 		2A901E9F22AFA05900D3DD2A /* ItemImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */; };
 		2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EA122AFA0B100D3DD2A /* ItemImagesVC.swift */; };
 		2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EA322AFA19200D3DD2A /* Segue.swift */; };
+		2A901EAB22AFF9C000D3DD2A /* ReceiverTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EA922AFF9C000D3DD2A /* ReceiverTVC.swift */; };
+		2A901EAC22AFF9C000D3DD2A /* ReceiverTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A901EAA22AFF9C000D3DD2A /* ReceiverTVC.xib */; };
+		2A901EAE22AFFDDB00D3DD2A /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */; };
 		2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3B229F3C30006C246B /* Arial Black.ttf */; };
 		2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */; };
 		2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB3F229FC3DF006C246B /* UIFont.swift */; };
@@ -90,6 +93,9 @@
 		2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemImages.storyboard; sourceTree = "<group>"; };
 		2A901EA122AFA0B100D3DD2A /* ItemImagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImagesVC.swift; sourceTree = "<group>"; };
 		2A901EA322AFA19200D3DD2A /* Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
+		2A901EA922AFF9C000D3DD2A /* ReceiverTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTVC.swift; sourceTree = "<group>"; };
+		2A901EAA22AFF9C000D3DD2A /* ReceiverTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverTVC.xib; sourceTree = "<group>"; };
+		2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		2A90FB3B229F3C30006C246B /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
 		2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-rg-bold.ttf"; sourceTree = "<group>"; };
 		2A90FB3F229FC3DF006C246B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 		2A289F9C22A53D7200EB076A /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2A901EA822AFF98200D3DD2A /* Receiver */,
 				2A87EC6022A65A1500EB969D /* Message */,
 				2AFA4EBD22A8FC5B0039803E /* History Favorite */,
 			);
@@ -223,6 +230,15 @@
 				2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */,
 			);
 			path = "Item Images";
+			sourceTree = "<group>";
+		};
+		2A901EA822AFF98200D3DD2A /* Receiver */ = {
+			isa = PBXGroup;
+			children = (
+				2A901EA922AFF9C000D3DD2A /* ReceiverTVC.swift */,
+				2A901EAA22AFF9C000D3DD2A /* ReceiverTVC.xib */,
+			);
+			path = Receiver;
 			sourceTree = "<group>";
 		};
 		2A98DF4022AE8E7500F6F2AE /* Sharing */ = {
@@ -407,6 +423,7 @@
 				2AE322B422ADC69400CF627C /* AlertMessage.swift */,
 				2A98DF4B22AEBD6400F6F2AE /* DonatorItemType.swift */,
 				2A901EA322AFA19200D3DD2A /* Segue.swift */,
+				2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -498,6 +515,7 @@
 				2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */,
 				2AFA4EC522A8FCBB0039803E /* FavoriteTVC.xib in Resources */,
 				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
+				2A901EAC22AFF9C000D3DD2A /* ReceiverTVC.xib in Resources */,
 				2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A901EAE22AFFDDB00D3DD2A /* CustomCell.swift in Sources */,
 				2A98DF4A22AEBC9800F6F2AE /* DonatorItem.swift in Sources */,
 				2AFA4ECE22A9AB320039803E /* CustomFont.swift in Sources */,
 				2AFA4ED022A9AB540039803E /* FontSize.swift in Sources */,
@@ -523,6 +542,7 @@
 				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
 				2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */,
 				2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */,
+				2A901EAB22AFF9C000D3DD2A /* ReceiverTVC.swift in Sources */,
 				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
 				2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */,
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,

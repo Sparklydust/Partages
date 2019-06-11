@@ -29,7 +29,7 @@ enum ButtonName: String {
   case modify = "Modifier"
   case addToCalendar = "Ajouter au calendrier"
   case history = "Historique"
-  case favorite = "Sauvegardé"
+  case favorite = "Favoris"
   case signInSignUp = "se connecter / s'inscrire"
   case afterSignedIn = "Bonjour"
   case donationMade = "Merci pour votre don"

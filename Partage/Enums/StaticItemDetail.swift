@@ -15,4 +15,5 @@ enum StaticItemDetail: String {
   case the = "le"
   case at = "à"
   case address = "adresse:"
+  case type = "type:"
 }

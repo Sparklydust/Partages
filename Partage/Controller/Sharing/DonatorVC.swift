@@ -85,6 +85,7 @@ extension DonatorVC {
     itemTypePickerView.delegate = self
     itemTypePickerView.dataSource = self
     itemDescriptionTextView.delegate = self
+    itemNameTextField.delegate = self
   }
 }
 
@@ -165,7 +166,7 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup description item text view design with a placeholder
+//MARK: - Setup item description text view design with a placeholder
 extension DonatorVC: UITextViewDelegate {
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
@@ -180,9 +181,8 @@ extension DonatorVC: UITextViewDelegate {
       itemDescriptionTextView.font = UIFont(customFont: .arialBold, withSize: .seventeen)
     }
     // To avoid buttons action on tap gesture to dismiss keyboard
-    resetAndDonateButton[0].isEnabled = false
-    mapKitButton.isEnabled = false
-    itemDatePicker.isEnabled = false
+    actionsAreEnable(false)
+    observeKeyboardNotification()
   }
   
   // Placeholder comes back when text view is empty
@@ -191,9 +191,19 @@ extension DonatorVC: UITextViewDelegate {
       itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
     }
     // Put button back to normal after tap gesture dismiss keyboard
-    resetAndDonateButton[0].isEnabled = true
-    mapKitButton.isEnabled = true
-    itemDatePicker.isEnabled = true
+    actionsAreEnable(true)
+  }
+}
+
+//MARK: - Setup item name text field design
+extension DonatorVC: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    actionsAreEnable(false)
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    actionsAreEnable(true)
+    view.endEditing(true)
   }
 }
 
@@ -232,5 +242,14 @@ extension DonatorVC {
     UIView.animate(withDuration: 0.4) {
       self.view.frame.origin.y = 0
     }
+  }
+}
+
+//MARK: - Enable or disable actions when tap gesture enable
+extension DonatorVC {
+  func actionsAreEnable(_ action: Bool) {
+    resetAndDonateButton[0].isEnabled = action
+    mapKitButton.isEnabled = action
+    itemDatePicker.isEnabled = action
   }
 }

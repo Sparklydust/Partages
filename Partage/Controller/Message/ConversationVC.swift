@@ -19,9 +19,6 @@ class ConversationVC: UIViewController {
   
   @IBOutlet weak var sendMessageButton: UIButton!
   
-  let conversationCellIdentifier = "ConversationTVC"
-  let senderCellIdentifier = "SenderTVC"
-  
   var keyboardHeight = CGFloat(0)
   
   let messageArray = ["first message", "second message", "Lorem ipsum dolor"]
@@ -60,7 +57,7 @@ extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: senderCellIdentifier, for: indexPath) as! SenderTVC
+    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.senderCellIdentifier.rawValue, for: indexPath) as! SenderTVC
     
     cell.senderConversationLabel.text = messageArray[indexPath.row]
     
@@ -97,8 +94,8 @@ extension ConversationVC {
 //MARK: - Setup all custom cells
 extension ConversationVC {
   func setupAllCustomCells() {
-    conversationTableView.register(UINib(nibName: conversationCellIdentifier, bundle: nil), forCellReuseIdentifier: conversationCellIdentifier)
-    conversationTableView.register(UINib(nibName: senderCellIdentifier, bundle: nil), forCellReuseIdentifier: senderCellIdentifier)
+    conversationTableView.setupCustomCell(nibName: .conversationCellIdentifier, identifier: .conversationCellIdentifier)
+    conversationTableView.setupCustomCell(nibName: .senderCellIdentifier, identifier: .senderCellIdentifier)
   }
 }
 

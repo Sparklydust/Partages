@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class CameraHandler: NSObject {
   static let shared = CameraHandler()
@@ -48,7 +49,7 @@ extension CameraHandler {
   func showActionSheet(vc: UIViewController) {
     currentVC = vc
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
+
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.camera.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
       self.camera()

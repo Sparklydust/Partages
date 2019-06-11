@@ -8,6 +8,13 @@
 
 import UIKit
 
+//MARK: - Method to setup a custom cell
+extension UITableView {
+  func setupCustomCell(nibName: CustomCell, identifier: CustomCell) {
+    self.register(UINib(nibName: nibName.rawValue, bundle: nil), forCellReuseIdentifier: identifier.rawValue)
+  }
+}
+
 //MARK: - Method to scroll UITableView to the bottom of items
 extension UITableView {
   func scrollToBottomRow() {

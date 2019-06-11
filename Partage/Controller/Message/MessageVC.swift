@@ -14,9 +14,6 @@ class MessageVC: UIViewController {
   
   @IBOutlet weak var editButton: UIBarButtonItem!
   
-  let messageCellIdentifier = "MessageTVC"
-  var customCell = MessageTVC()
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -53,6 +50,14 @@ extension MessageVC {
   }
 }
 
+//MARK: - Setup all delegates
+extension MessageVC {
+  func setupAllDelegates() {
+    messageTableView.delegate = self
+    messageTableView.dataSource = self
+  }
+}
+
 //MARK: Setup Table view cells to display messages
 extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,7 +65,7 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: messageCellIdentifier, for: indexPath) as! MessageTVC
+    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.messageCellIdentifier.rawValue, for: indexPath) as! MessageTVC
     
     return cell
   }
@@ -78,18 +83,10 @@ extension MessageVC {
   }
 }
 
-//MARK: - Setup all delegates
-extension MessageVC {
-  func setupAllDelegates() {
-    messageTableView.delegate = self
-    messageTableView.dataSource = self
-  }
-}
-
 //MARK: - Setup all custom cells
 extension MessageVC {
   func setupCustomCell() {
-        messageTableView.register(UINib(nibName: messageCellIdentifier, bundle: nil), forCellReuseIdentifier: messageCellIdentifier)
+    messageTableView.setupCustomCell(nibName: .messageCellIdentifier, identifier: .messageCellIdentifier)
   }
 }
 
