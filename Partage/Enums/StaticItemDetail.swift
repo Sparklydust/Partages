@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - All application static label name
 enum StaticItemDetail: String {
   case giveDonation = "vous remettra son don:"
   case receiveDonation = "recevra votre don:"

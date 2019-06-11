@@ -20,8 +20,6 @@ class HistoryFavoriteVC: UIViewController {
   let favoriteCellIdentifier = "FavoriteTVC"
   var isHistoryButtonClicked = true
   
-  let goToItemDetailsVC = "goToItemDetailsVC"
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -172,11 +170,11 @@ extension HistoryFavoriteVC {
 //MARK: - Perform history or favorite segue when row is selected
 extension HistoryFavoriteVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: goToItemDetailsVC, sender: self)
+    performSegue(withIdentifier: Segue.goToItemDetailsVC.rawValue, sender: self)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == goToItemDetailsVC {
+    if segue.identifier == Segue.goToItemDetailsVC.rawValue {
       
     }
   }

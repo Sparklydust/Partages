@@ -8,7 +8,9 @@
 
 import UIKit
 
+//MARK: - Alert message to be displayed after an UIAlert
 enum AlertMessage: String {
   case needAccessToCalendar = "L'accès au calendrier n'a pas été autorisé. Vous pouvez changer vos réglages dans les paramètres et accéder à cette fonctionnalité."
   case addedToCalendar = "L'évènement a été ajouté avec succès à votre calendrier"
+  case resetImage = "Voulez-vous supprimer ses images?"
 }

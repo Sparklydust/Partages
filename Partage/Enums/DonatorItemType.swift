@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Donator item type to be chosen on DonationItem
 enum DonatorItemType: String {
   case selectItem = "- sélectionner -"
   case food = "Nourriture"

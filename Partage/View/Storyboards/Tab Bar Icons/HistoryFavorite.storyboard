@@ -119,6 +119,7 @@
                                                                         <state key="normal" title="Button" image="noImage"/>
                                                                         <connections>
                                                                             <action selector="itemPictureButtonAction:" destination="9Jz-Qm-H6A" eventType="touchUpInside" id="j9g-Cv-14C"/>
+                                                                            <segue destination="feA-tQ-uke" kind="show" identifier="goToItemImages" id="WdC-xw-GLB"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -330,6 +331,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyh-31-vuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="306" y="-796"/>
+        </scene>
+        <!--ItemImages-->
+        <scene sceneID="NZN-0Z-hVj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ItemImages" id="feA-tQ-uke" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pql-pv-ZKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="879" y="-1006"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FBb-ah-5D1">

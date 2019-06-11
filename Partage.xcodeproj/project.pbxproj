@@ -21,6 +21,9 @@
 		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
 		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
 		2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6522A69AE000EB969D /* UITableView.swift */; };
+		2A901E9F22AFA05900D3DD2A /* ItemImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */; };
+		2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EA122AFA0B100D3DD2A /* ItemImagesVC.swift */; };
+		2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A901EA322AFA19200D3DD2A /* Segue.swift */; };
 		2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3B229F3C30006C246B /* Arial Black.ttf */; };
 		2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */; };
 		2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB3F229FC3DF006C246B /* UIFont.swift */; };
@@ -84,6 +87,9 @@
 		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
 		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
 		2A87EC6522A69AE000EB969D /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemImages.storyboard; sourceTree = "<group>"; };
+		2A901EA122AFA0B100D3DD2A /* ItemImagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImagesVC.swift; sourceTree = "<group>"; };
+		2A901EA322AFA19200D3DD2A /* Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		2A90FB3B229F3C30006C246B /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
 		2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-rg-bold.ttf"; sourceTree = "<group>"; };
 		2A90FB3F229FC3DF006C246B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -203,6 +209,22 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		2A901EA022AFA08700D3DD2A /* ItemImages */ = {
+			isa = PBXGroup;
+			children = (
+				2A901EA122AFA0B100D3DD2A /* ItemImagesVC.swift */,
+			);
+			path = ItemImages;
+			sourceTree = "<group>";
+		};
+		2A901EA722AFA9DB00D3DD2A /* Item Images */ = {
+			isa = PBXGroup;
+			children = (
+				2A901E9E22AFA05900D3DD2A /* ItemImages.storyboard */,
+			);
+			path = "Item Images";
+			sourceTree = "<group>";
+		};
 		2A98DF4022AE8E7500F6F2AE /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +293,7 @@
 				2AB4354C229E6DCE007BFB93 /* HistoryFavorite */,
 				2AB43549229E6DA6007BFB93 /* Profile */,
 				2AC159FF22A7C49D00CE935B /* SignInSignUp */,
+				2A901EA022AFA08700D3DD2A /* ItemImages */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -346,6 +369,7 @@
 				2AB4352C229E55FE007BFB93 /* Main.storyboard */,
 				2AFEF39F22A869ED00BBDFD1 /* Tab Bar Icons */,
 				2AC159FC22A7C3D500CE935B /* SignIn SignUp */,
+				2A901EA722AFA9DB00D3DD2A /* Item Images */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -382,6 +406,7 @@
 				2AE322B222ADC5B600CF627C /* AlertTitle.swift */,
 				2AE322B422ADC69400CF627C /* AlertMessage.swift */,
 				2A98DF4B22AEBD6400F6F2AE /* DonatorItemType.swift */,
+				2A901EA322AFA19200D3DD2A /* Segue.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -465,6 +490,7 @@
 				2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */,
 				2AB4352E229E55FE007BFB93 /* Main.storyboard in Resources */,
 				2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */,
+				2A901E9F22AFA05900D3DD2A /* ItemImages.storyboard in Resources */,
 				2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */,
 				2A98DF4422AE8EAA00F6F2AE /* Receiver.storyboard in Resources */,
 				2A90FB3C229F3C30006C246B /* Arial Black.ttf in Resources */,
@@ -491,6 +517,7 @@
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
 				2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */,
+				2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */,
 				2AAA794322AAB8E000529F2B /* ItemDetailsVC.swift in Sources */,
 				2A87EC5E22A6453800EB969D /* Message.swift in Sources */,
 				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
@@ -501,6 +528,7 @@
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
 				2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */,
+				2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,
 				2AC159FB22A7BBEA00CE935B /* UIButton.swift in Sources */,

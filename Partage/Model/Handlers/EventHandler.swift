@@ -36,18 +36,14 @@ extension EventHandler {
           
           do {
             try self.eventStore.save(event, span: .thisEvent, commit: true)
-            viewController.showAlert(title: AlertTitle.addToCalendar.rawValue, message: AlertMessage.addedToCalendar.rawValue)
+            viewController.showAlert(title: .addToCalendar, message: .addedToCalendar)
           }
           catch let error as NSError {
             print(error.localizedDescription)
           }
         }
         else if !granted {
-          viewController.showAlert(
-            title: AlertTitle.addToCalendar.rawValue,
-            message: AlertMessage.needAccessToCalendar.rawValue,
-            buttonTitle: ButtonName.settings.rawValue,
-            completion: {
+          viewController.showAlert(title: .addToCalendar, message: .needAccessToCalendar, buttonName: .settings, completion: {
               (true) in
             DispatchQueue.main.async {
               if let settingsURL = URL(string: UIApplication.openSettingsURLString) {

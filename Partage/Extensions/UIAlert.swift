@@ -10,16 +10,16 @@ import UIKit
 
 //MARK: - Alert with completion handler
 extension UIViewController {
-  func showAlert(title: String,
-                  message: String,
-                  buttonTitle: String,
+  func showAlert(title: AlertTitle,
+                  message: AlertMessage,
+                  buttonName: ButtonName,
                   completion: @escaping (_ result: Bool) -> Void) {
     let deleteAlert = UIAlertController(
-      title: title,
-      message: message,
+      title: title.rawValue,
+      message: message.rawValue,
       preferredStyle: .alert)
     deleteAlert.addAction(UIAlertAction(
-      title: buttonTitle,
+      title: buttonName.rawValue,
       style: .default, handler: { (action) in
         completion(true)
     }))
@@ -32,10 +32,10 @@ extension UIViewController {
 
 //MARK: - Alert with one action
 extension UIViewController {
-  func showAlert(title: String, message: String) {
+  func showAlert(title: AlertTitle, message: AlertMessage) {
     let noEntryAlert = UIAlertController(
-      title: title,
-      message: message,
+      title: title.rawValue,
+      message: message.rawValue,
       preferredStyle: .alert)
     noEntryAlert.addAction(UIAlertAction(
       title: ButtonName.ok.rawValue, style: .cancel, handler: nil))

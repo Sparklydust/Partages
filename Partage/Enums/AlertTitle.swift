@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MARK: - UIAlert title
 enum AlertTitle: String {
   case addToCalendar = "Ajouté au calendrier"
+  case resetImage = "Réinitialiser"
 }

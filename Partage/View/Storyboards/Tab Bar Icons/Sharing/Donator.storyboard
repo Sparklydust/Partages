@@ -48,6 +48,7 @@
                                                                 <state key="normal" image="addCross"/>
                                                                 <connections>
                                                                     <action selector="addItemImageButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="jpE-NB-qog"/>
+                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesManager" id="yUK-Wu-umg"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -211,6 +212,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubd-ul-m7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="224.63768115942031" y="41.517857142857139"/>
+        </scene>
+        <!--ItemImages-->
+        <scene sceneID="WVG-70-dza">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ItemImages" id="vRE-mI-7an" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HPX-8g-8Al" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="838" y="-124"/>
         </scene>
     </scenes>
     <resources>
