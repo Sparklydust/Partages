@@ -36,6 +36,7 @@ extension EventHandler {
           
           do {
             try self.eventStore.save(event, span: .thisEvent, commit: true)
+            viewController.showAlert(title: AlertTitle.addToCalendar.rawValue, message: AlertMessage.addedToCalendar.rawValue)
           }
           catch let error as NSError {
             print(error.localizedDescription)
@@ -44,7 +45,7 @@ extension EventHandler {
         else if !granted {
           viewController.showAlert(
             title: AlertTitle.addToCalendar.rawValue,
-            message: AlertMessage.addToCalendar.rawValue,
+            message: AlertMessage.needAccessToCalendar.rawValue,
             buttonTitle: ButtonName.settings.rawValue,
             completion: {
               (true) in

@@ -28,7 +28,7 @@ class ItemDetailsVC: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   
   @IBOutlet var staticItemDetailsLabels: [UILabel]!
-  @IBOutlet var addModifyMessageButton: [UIButton]!
+  @IBOutlet var addToCalendarAndMessageButton: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,7 +51,7 @@ extension ItemDetailsVC {
 
 //MARK: - Add to calendar or modify button action
 extension ItemDetailsVC {
-  @IBAction func addOrModifyButtonAction(_ sender: Any) {
+  @IBAction func addToCalendarButtonAction(_ sender: Any) {
   }
 }
 
@@ -67,9 +67,10 @@ extension ItemDetailsVC {
     setupMainLabels()
     setupStaticItemDetailsLabels()
     setupLittleBarViewBackgroundColor()
-    setupAddModifyMessageButton()
+    setupAddToCalendarAndMessageButton()
     setupItemDescriptionTextView()
     donatorReceiverProfileImage.roundedWithMainBlueBorder()
+    setupMapView()
   }
 }
 
@@ -133,11 +134,19 @@ extension ItemDetailsVC {
   }
 }
 
-//MARK: - Setup add or modify and message button design
+//MARK: - Setup map kit view view design
 extension ItemDetailsVC {
-  func setupAddModifyMessageButton() {
+  func setupMapView() {
+    mapView.layer.cornerRadius = 10
+  }
+}
+
+//MARK: - Setup add to Calendar and message button design
+extension ItemDetailsVC {
+  func setupAddToCalendarAndMessageButton() {
     buttonsNameReceiverOrDonator()
-    for button in addModifyMessageButton {
+    addToCalendarAndMessageButton[0].commonDesign(title: .addToCalendar, shadowWidth: 0, shadowHeight: -2)
+    for button in addToCalendarAndMessageButton {
       button.backgroundColor = UIColor.mainBlue
       button.setTitleColor(UIColor.lightBlue, for: .normal)
     }
@@ -147,8 +156,7 @@ extension ItemDetailsVC {
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
   func buttonsNameReceiverOrDonator() {
-    addModifyMessageButton[0].commonDesign(title: .addToCalendar, shadowWidth: 0, shadowHeight: -2)
-    addModifyMessageButton[1].commonDesign(title: .messageToDonator, shadowWidth: 0, shadowHeight: 2)
+    addToCalendarAndMessageButton[1].commonDesign(title: .messageToDonator, shadowWidth: 0, shadowHeight: 2)
   }
   
   func staticLabelReceiverOrDonator() {

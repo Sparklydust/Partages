@@ -162,25 +162,22 @@ extension EditProfileVC {
     center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-  
+
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
     guard UIDevice.current.name == "iPhone SE" else { return }
-    if confirmPasswordTextField.isEditing || newPasswordTextField.isEditing {
-      if view.frame.origin.y == 0 {
-        UIView.animate(withDuration: 0.4) {
-          self.view.frame.origin.y -= (keyboardFrame.height / 3)
-        }
-      }
+    guard confirmPasswordTextField.isEditing || newPasswordTextField.isEditing else { return }
+    guard view.frame.origin.y == 0 else { return }
+    UIView.animate(withDuration: 0.4) {
+      self.view.frame.origin.y -= (keyboardFrame.height / 3)
     }
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
-    if view.frame.origin.y != 0 {
-      UIView.animate(withDuration: 0.4) {
-        self.view.frame.origin.y = 0
-      }
+    guard view.frame.origin.y != 0 else { return }
+    UIView.animate(withDuration: 0.4) {
+      self.view.frame.origin.y = 0
     }
   }
 }

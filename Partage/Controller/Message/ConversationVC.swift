@@ -110,7 +110,7 @@ extension ConversationVC {
   }
 }
 
-//MARK: Move View to handle keyboard when message is being edited
+//MARK: - Move View to handle keyboard when message is being edited
 extension ConversationVC: UITextViewDelegate {
   func observeKeyboardNotification() {
     NotificationCenter.default.addObserver(

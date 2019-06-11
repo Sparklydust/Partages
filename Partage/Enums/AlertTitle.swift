@@ -9,5 +9,5 @@
 import UIKit
 
 enum AlertTitle: String {
-  case addToCalendar = "Ajouter au calendrier"
+  case addToCalendar = "Ajouté au calendrier"
 }

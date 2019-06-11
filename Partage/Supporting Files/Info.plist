@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Partage a besoin d&apos; accéder à votre calendrier</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Partage a besoin d&apos;accéder à votre camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Partage a besoin d&apos;accéder à vos photos</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>superclarendon-lt.ttf</string>
-		<string>Arial Black.ttf</string>
-		<string>superclarendon-rg-bold.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -32,6 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Partage a besoin d' accéder à votre calendrier</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Partage a besoin d'accéder à votre camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Partage a besoin d'accéder à vos photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>superclarendon-lt.ttf</string>
+		<string>Arial Black.ttf</string>
+		<string>superclarendon-rg-bold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -43,8 +43,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

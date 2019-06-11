@@ -51,7 +51,7 @@ extension HistoryTVC {
 //MARK: - Setup bar design view
 extension HistoryTVC {
   func setupBarDesignView() {
-    barDesignView.backgroundColor = UIColor.mainBlue
+    barDesignView.backgroundColor = UIColor.middleBlue
   }
 }
 

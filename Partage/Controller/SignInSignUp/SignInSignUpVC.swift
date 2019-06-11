@@ -82,7 +82,7 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: Set sign in / sign up buttons design
+//MARK: - Set sign in / sign up buttons design
 extension SignInSignUpVC {
   func setupSignInIsSelectedButtons() {
     signInSignUpButtons[0].signInSignUpSelectedDesign(title: .lowSignIn)

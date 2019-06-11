@@ -32,6 +32,9 @@
                                     <constraint firstAttribute="width" constant="210" id="san-kq-M3p"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="3PW-gF-k9g" kind="show" id="x4q-8I-g1N"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-aY-XVd">
                                 <rect key="frame" x="102" y="513" width="210" height="120"/>
@@ -40,6 +43,9 @@
                                     <constraint firstAttribute="height" constant="120" id="j9n-hL-Cyf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="vlQ-o0-aRd" kind="show" id="TbR-z8-8HW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,6 +70,14 @@
             </objects>
             <point key="canvasLocation" x="2501.5999999999999" y="-1136.4532019704434"/>
         </scene>
+        <!--Donator-->
+        <scene sceneID="5yP-H8-bTi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Donator" id="3PW-gF-k9g" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6c8-n4-LVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3215" y="-1223"/>
+        </scene>
         <!--SignInSignUp-->
         <scene sceneID="bO6-wf-d8N">
             <objects>
@@ -71,6 +85,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgd-ny-f8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3216" y="-1137"/>
+        </scene>
+        <!--Receiver-->
+        <scene sceneID="eBD-Qf-Ojo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Receiver" id="vlQ-o0-aRd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7y-ak-8uq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3215" y="-1048"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0HZ-fI-STk">
@@ -84,6 +106,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cGu-j9-VcL">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.066666666669999999" green="0.25098039220000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

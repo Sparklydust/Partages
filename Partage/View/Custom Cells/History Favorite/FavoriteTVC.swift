@@ -48,9 +48,10 @@ extension FavoriteTVC {
   }
 }
 
+//MARK: - Setup bar view design
 extension FavoriteTVC {
   func setupBarDesignView() {
-    barDesignView.backgroundColor = UIColor.mainBlue
+    barDesignView.backgroundColor = UIColor.middleBlue
   }
 }
 

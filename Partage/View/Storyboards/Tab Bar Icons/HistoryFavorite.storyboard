@@ -288,7 +288,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="addOrModifyButtonAction:" destination="9Jz-Qm-H6A" eventType="touchUpInside" id="hK7-6y-Mv0"/>
+                                    <action selector="addToCalendarButtonAction:" destination="9Jz-Qm-H6A" eventType="touchUpInside" id="hK7-6y-Mv0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -323,8 +323,8 @@
                         <outletCollection property="staticItemDetailsLabels" destination="ScH-OX-u9H" collectionClass="NSMutableArray" id="P6f-oh-O6R"/>
                         <outletCollection property="staticItemDetailsLabels" destination="F8s-hY-w8j" collectionClass="NSMutableArray" id="3fW-OP-Ltz"/>
                         <outletCollection property="staticItemDetailsLabels" destination="H5F-XG-rTO" collectionClass="NSMutableArray" id="2f5-gM-3eD"/>
-                        <outletCollection property="addModifyMessageButton" destination="cHl-rP-eeo" collectionClass="NSMutableArray" id="tci-Sd-Ceq"/>
-                        <outletCollection property="addModifyMessageButton" destination="yyD-0o-p5d" collectionClass="NSMutableArray" id="ZtD-ut-yej"/>
+                        <outletCollection property="addToCalendarAndMessageButton" destination="cHl-rP-eeo" collectionClass="NSMutableArray" id="tci-Sd-Ceq"/>
+                        <outletCollection property="addToCalendarAndMessageButton" destination="yyD-0o-p5d" collectionClass="NSMutableArray" id="ZtD-ut-yej"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyh-31-vuj" userLabel="First Responder" sceneMemberID="firstResponder"/>

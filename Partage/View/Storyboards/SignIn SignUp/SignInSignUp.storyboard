@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUt-kE-o3c">
-                                <rect key="frame" x="60" y="697" width="294" height="40"/>
+                                <rect key="frame" x="40" y="697" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eZQ-r6-gJa"/>
                                 </constraints>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-5W-f88">
-                                <rect key="frame" x="60" y="757" width="294" height="40"/>
+                                <rect key="frame" x="40" y="757" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5Wq-eH-xmc"/>
                                 </constraints>
@@ -150,18 +150,18 @@
                             <constraint firstItem="qqd-aX-PSH" firstAttribute="top" secondItem="3Qa-BK-Css" secondAttribute="bottom" constant="30" id="2EL-Rx-pPj"/>
                             <constraint firstItem="o1g-qm-5eS" firstAttribute="bottom" secondItem="sNF-5W-f88" secondAttribute="bottom" constant="65" id="4RU-il-w0i"/>
                             <constraint firstItem="qqd-aX-PSH" firstAttribute="leading" secondItem="o1g-qm-5eS" secondAttribute="leading" constant="40" id="4Vr-up-28G"/>
-                            <constraint firstItem="sNF-5W-f88" firstAttribute="leading" secondItem="fsI-zj-POg" secondAttribute="leading" constant="60" id="5hD-eg-cv1"/>
+                            <constraint firstItem="sNF-5W-f88" firstAttribute="leading" secondItem="fsI-zj-POg" secondAttribute="leading" constant="40" id="5hD-eg-cv1"/>
                             <constraint firstItem="b1K-aN-WH6" firstAttribute="top" secondItem="o1g-qm-5eS" secondAttribute="top" constant="30" id="84W-kq-bjH"/>
                             <constraint firstItem="3Qa-BK-Css" firstAttribute="centerX" secondItem="b1K-aN-WH6" secondAttribute="centerX" id="89Z-UO-Y0R"/>
-                            <constraint firstItem="o1g-qm-5eS" firstAttribute="trailing" secondItem="gUt-kE-o3c" secondAttribute="trailing" constant="60" id="A1s-zr-XSU"/>
+                            <constraint firstItem="o1g-qm-5eS" firstAttribute="trailing" secondItem="gUt-kE-o3c" secondAttribute="trailing" constant="40" id="A1s-zr-XSU"/>
                             <constraint firstItem="b1K-aN-WH6" firstAttribute="centerX" secondItem="fsI-zj-POg" secondAttribute="centerX" multiplier="0.5" id="DZr-NL-X5m"/>
                             <constraint firstItem="E5t-uR-uHT" firstAttribute="top" secondItem="BpR-td-oUz" secondAttribute="bottom" constant="30" id="Gy5-v1-TDN"/>
                             <constraint firstItem="1Lu-PE-S7i" firstAttribute="top" secondItem="sNF-5W-f88" secondAttribute="bottom" constant="20" id="HnV-1T-Yr1"/>
                             <constraint firstItem="FCd-OT-1eh" firstAttribute="top" secondItem="E5t-uR-uHT" secondAttribute="bottom" constant="30" id="LBT-y5-SYm"/>
-                            <constraint firstItem="gUt-kE-o3c" firstAttribute="leading" secondItem="o1g-qm-5eS" secondAttribute="leading" constant="60" id="PAs-KO-dAq"/>
+                            <constraint firstItem="gUt-kE-o3c" firstAttribute="leading" secondItem="o1g-qm-5eS" secondAttribute="leading" constant="40" id="PAs-KO-dAq"/>
                             <constraint firstItem="91i-Ip-w3w" firstAttribute="centerX" secondItem="fsI-zj-POg" secondAttribute="centerX" multiplier="1.5" id="PZD-4x-2EA"/>
                             <constraint firstItem="o1g-qm-5eS" firstAttribute="trailing" secondItem="E5t-uR-uHT" secondAttribute="trailing" constant="40" id="QAM-jN-aLt"/>
-                            <constraint firstAttribute="trailing" secondItem="sNF-5W-f88" secondAttribute="trailing" constant="60" id="TZe-TK-WzY"/>
+                            <constraint firstAttribute="trailing" secondItem="sNF-5W-f88" secondAttribute="trailing" constant="40" id="TZe-TK-WzY"/>
                             <constraint firstItem="rlh-KN-pCg" firstAttribute="centerX" secondItem="91i-Ip-w3w" secondAttribute="centerX" id="Vdj-7H-6rn"/>
                             <constraint firstItem="o1g-qm-5eS" firstAttribute="trailing" secondItem="qqd-aX-PSH" secondAttribute="trailing" constant="40" id="X3I-0f-uM3"/>
                             <constraint firstItem="91i-Ip-w3w" firstAttribute="top" secondItem="o1g-qm-5eS" secondAttribute="top" constant="30" id="acV-hF-7xi"/>
@@ -220,7 +220,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-W0-SiM">
-                                <rect key="frame" x="60" y="697" width="294" height="40"/>
+                                <rect key="frame" x="40" y="697" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xxf-ds-03b"/>
                                 </constraints>
@@ -230,7 +230,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3O-TD-9c0">
-                                <rect key="frame" x="60" y="757" width="294" height="40"/>
+                                <rect key="frame" x="40" y="757" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="JnD-Uh-M6j"/>
                                 </constraints>
@@ -265,11 +265,11 @@
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="40" id="6oK-MJ-0f7"/>
                             <constraint firstItem="bvs-Uf-xZx" firstAttribute="bottom" secondItem="P3O-TD-9c0" secondAttribute="bottom" constant="65" id="BZv-yo-pXk"/>
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="top" secondItem="bvs-Uf-xZx" secondAttribute="top" constant="178" id="Ljz-ew-sov"/>
-                            <constraint firstItem="bvs-Uf-xZx" firstAttribute="trailing" secondItem="rEu-W0-SiM" secondAttribute="trailing" constant="60" id="iCK-km-MSs"/>
+                            <constraint firstItem="bvs-Uf-xZx" firstAttribute="trailing" secondItem="rEu-W0-SiM" secondAttribute="trailing" constant="40" id="iCK-km-MSs"/>
                             <constraint firstItem="P3O-TD-9c0" firstAttribute="top" secondItem="rEu-W0-SiM" secondAttribute="bottom" constant="20" id="j96-1f-3A7"/>
-                            <constraint firstItem="P3O-TD-9c0" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="60" id="r0e-5m-RAj"/>
-                            <constraint firstItem="rEu-W0-SiM" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="60" id="uIw-er-J8f"/>
-                            <constraint firstItem="bvs-Uf-xZx" firstAttribute="trailing" secondItem="P3O-TD-9c0" secondAttribute="trailing" constant="60" id="x0U-fj-sQq"/>
+                            <constraint firstItem="P3O-TD-9c0" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="40" id="r0e-5m-RAj"/>
+                            <constraint firstItem="rEu-W0-SiM" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="40" id="uIw-er-J8f"/>
+                            <constraint firstItem="bvs-Uf-xZx" firstAttribute="trailing" secondItem="P3O-TD-9c0" secondAttribute="trailing" constant="40" id="x0U-fj-sQq"/>
                             <constraint firstItem="bvs-Uf-xZx" firstAttribute="trailing" secondItem="WDw-TS-GgZ" secondAttribute="trailing" constant="40" id="yFe-jn-vPu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bvs-Uf-xZx"/>

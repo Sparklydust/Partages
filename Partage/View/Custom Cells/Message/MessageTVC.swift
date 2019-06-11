@@ -31,7 +31,7 @@ extension MessageTVC {
   
   func setupFontsColor() {
     nameLabel.textColor = UIColor.typoBlue
-    dateLabel.textColor = UIColor.lightBlue
+    dateLabel.textColor = UIColor.middleBlue
     conversationLabel.textColor = UIColor.typoBlue
   }
 }

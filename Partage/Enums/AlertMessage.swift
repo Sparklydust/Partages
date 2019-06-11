@@ -9,5 +9,6 @@
 import UIKit
 
 enum AlertMessage: String {
-  case addToCalendar = "L'accès au calendrier n'a pas été autorisé. Vous pouvez changer vos réglages dans les paramètres et accéder à cette fonctionnalité."
+  case needAccessToCalendar = "L'accès au calendrier n'a pas été autorisé. Vous pouvez changer vos réglages dans les paramètres et accéder à cette fonctionnalité."
+  case addedToCalendar = "L'évènement a été ajouté avec succès à votre calendrier"
 }

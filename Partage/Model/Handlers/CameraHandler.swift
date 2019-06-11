@@ -15,7 +15,10 @@ class CameraHandler: NSObject {
   
   //MARK: Internal Properties
   var imagePickedBlock: ((UIImage) -> Void)?
-  
+}
+
+//MARK: - Go to camera
+extension CameraHandler {
   func camera() {
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let myPickerController = UIImagePickerController()
@@ -25,7 +28,10 @@ class CameraHandler: NSObject {
       currentVC.present(myPickerController, animated: true, completion: nil)
     }
   }
-  
+}
+
+//MARK: - Go to photo library
+extension CameraHandler {
   func photoLibrary() {
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
       let myPickerController = UIImagePickerController()
@@ -35,7 +41,10 @@ class CameraHandler: NSObject {
       currentVC.present(myPickerController, animated: true, completion: nil)
     }
   }
-  
+}
+
+//MARK: - Show action sheet to present choice between camera and photo library
+extension CameraHandler {
   func showActionSheet(vc: UIViewController) {
     currentVC = vc
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
