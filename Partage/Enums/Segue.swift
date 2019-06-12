@@ -10,8 +10,9 @@ import UIKit
 
 //MARK: - All segue identifiers
 enum Segue: String {
-  case goToConversationVC = "goToConversationVC"
-  case goToItemDetailsVC = "goToItemDetailsVC"
-  case goToItemImagesManager = "goToItemImagesManager"
-  case goToItemImages = "goToItemImages"
+  case goesToConversationVC = "goToConversationVC"
+  case goesToItemDetailsVC = "goToItemDetailsVC"
+  case goesToItemImagesManager = "goToItemImagesManagerVC"
+  case goesToItemImages = "goToItemImagesVC"
+  case goesToItemSelectedVC = "goToItemSelectedVC"
 }

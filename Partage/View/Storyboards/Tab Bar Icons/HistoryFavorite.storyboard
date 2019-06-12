@@ -119,7 +119,7 @@
                                                                         <state key="normal" title="Button" image="noImage"/>
                                                                         <connections>
                                                                             <action selector="itemPictureButtonAction:" destination="9Jz-Qm-H6A" eventType="touchUpInside" id="j9g-Cv-14C"/>
-                                                                            <segue destination="feA-tQ-uke" kind="show" identifier="goToItemImages" id="WdC-xw-GLB"/>
+                                                                            <segue destination="feA-tQ-uke" kind="show" identifier="goToItemImagesVC" id="WdC-xw-GLB"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>

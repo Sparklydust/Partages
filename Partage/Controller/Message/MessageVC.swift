@@ -93,6 +93,6 @@ extension MessageVC {
 //MARK: - Segue action
 extension MessageVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: Segue.goToConversationVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goesToConversationVC.rawValue, sender: self)
   }
 }

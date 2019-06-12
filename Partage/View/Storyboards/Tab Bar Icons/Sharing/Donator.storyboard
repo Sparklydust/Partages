@@ -48,7 +48,7 @@
                                                                 <state key="normal" image="addCross"/>
                                                                 <connections>
                                                                     <action selector="addItemImageButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="jpE-NB-qog"/>
-                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesManager" id="yUK-Wu-umg"/>
+                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesManagerVC" id="yUK-Wu-umg"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -103,7 +103,6 @@
                                                     </mapView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBT-I8-Wus">
                                                         <rect key="frame" x="10" y="10" width="354" height="76.5"/>
-                                                        <state key="normal" title="Button"/>
                                                         <connections>
                                                             <action selector="mapKitButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="eOc-js-BMl"/>
                                                         </connections>

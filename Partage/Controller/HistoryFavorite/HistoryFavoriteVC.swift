@@ -15,9 +15,7 @@ class HistoryFavoriteVC: UIViewController {
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var historyButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
-  
-  let historyCellIdentifier = "HistoryTVC"
-  let favoriteCellIdentifier = "FavoriteTVC"
+
   var isHistoryButtonClicked = true
   
   override func viewDidLoad() {
@@ -90,12 +88,12 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if isHistoryButtonClicked {
-    let cell = tableView.dequeueReusableCell(withIdentifier: historyCellIdentifier, for: indexPath) as! HistoryTVC
+    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.historyCellIdentifier.rawValue, for: indexPath) as! HistoryTVC
       
     return cell
     }
     else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCellIdentifier, for: indexPath) as! FavoriteTVC
+      let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.favoriteCellIdentifier.rawValue, for: indexPath) as! FavoriteTVC
       
       return cell
     }
@@ -140,10 +138,9 @@ extension HistoryFavoriteVC {
 //MARK: - Setup all custom cells
 extension HistoryFavoriteVC {
   func setupAllCustomCells() {
-    HistoryFavoriteTableView.register(
-      UINib(nibName: historyCellIdentifier, bundle: nil), forCellReuseIdentifier: historyCellIdentifier)
-    HistoryFavoriteTableView.register(
-      UINib(nibName: favoriteCellIdentifier, bundle: nil), forCellReuseIdentifier: favoriteCellIdentifier)
+    HistoryFavoriteTableView.setupCustomCell(nibName: .historyCellIdentifier, identifier: .historyCellIdentifier)
+    
+    HistoryFavoriteTableView.setupCustomCell(nibName: .favoriteCellIdentifier, identifier: .favoriteCellIdentifier)
   }
 }
 
@@ -170,11 +167,11 @@ extension HistoryFavoriteVC {
 //MARK: - Perform history or favorite segue when row is selected
 extension HistoryFavoriteVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: Segue.goToItemDetailsVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goesToItemDetailsVC.rawValue, sender: self)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToItemDetailsVC.rawValue {
+    if segue.identifier == Segue.goesToItemDetailsVC.rawValue {
       
     }
   }

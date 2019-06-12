@@ -57,6 +57,7 @@
 		2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F922A1298A00416832 /* Message.storyboard */; };
 		2AC8D0FC22A129A900416832 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FB22A129A900416832 /* Sharing.storyboard */; };
 		2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */; };
+		2AD516A122B05B280032F28F /* ItemSelectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD516A022B05B280032F28F /* ItemSelectedVC.swift */; };
 		2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */; };
 		2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */; };
 		2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B222ADC5B600CF627C /* AlertTitle.swift */; };
@@ -128,6 +129,7 @@
 		2AC8D0F922A1298A00416832 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		2AC8D0FB22A129A900416832 /* Sharing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
 		2AC8D0FD22A12A5000416832 /* HistoryFavorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryFavorite.storyboard; sourceTree = "<group>"; };
+		2AD516A022B05B280032F28F /* ItemSelectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSelectedVC.swift; sourceTree = "<group>"; };
 		2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTVC.swift; sourceTree = "<group>"; };
 		2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTVC.xib; sourceTree = "<group>"; };
 		2AE322B222ADC5B600CF627C /* AlertTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitle.swift; sourceTree = "<group>"; };
@@ -338,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				2AB43542229E63C6007BFB93 /* SharingVC.swift */,
-				2A98DF4522AE8F6800F6F2AE /* DonatorVC.swift */,
-				2A98DF4722AE8F9200F6F2AE /* ReceiverVC.swift */,
+				2AD5169E22B05AB60032F28F /* Donator */,
+				2AD5169F22B05AD00032F28F /* Receiver */,
 			);
 			path = Sharing;
 			sourceTree = "<group>";
@@ -388,6 +390,23 @@
 				2A901EA722AFA9DB00D3DD2A /* Item Images */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2AD5169E22B05AB60032F28F /* Donator */ = {
+			isa = PBXGroup;
+			children = (
+				2A98DF4522AE8F6800F6F2AE /* DonatorVC.swift */,
+			);
+			path = Donator;
+			sourceTree = "<group>";
+		};
+		2AD5169F22B05AD00032F28F /* Receiver */ = {
+			isa = PBXGroup;
+			children = (
+				2A98DF4722AE8F9200F6F2AE /* ReceiverVC.swift */,
+				2AD516A022B05B280032F28F /* ItemSelectedVC.swift */,
+			);
+			path = Receiver;
 			sourceTree = "<group>";
 		};
 		2AF66B2C22AC0DEF005BAE31 /* Handlers */ = {
@@ -548,6 +567,7 @@
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
 				2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */,
+				2AD516A122B05B280032F28F /* ItemSelectedVC.swift in Sources */,
 				2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
 				2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */,

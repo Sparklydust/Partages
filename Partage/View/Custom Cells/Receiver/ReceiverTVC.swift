@@ -43,6 +43,7 @@ extension ReceiverTVC {
     setupItemNameLabel()
     setupDateLabel()
     setupTimeLabel()
+    setupMapView()
   }
 }
 
@@ -95,6 +96,13 @@ extension ReceiverTVC {
   func setupTimeLabel() {
     timeLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
     timeLabel.textColor = UIColor.typoBlue
+  }
+}
+
+//MARK: - Setup map view design
+extension ReceiverTVC {
+  func setupMapView() {
+    mapView.layer.cornerRadius = 10
   }
 }
 

@@ -13,4 +13,6 @@ enum CustomCell: String {
   case messageCellIdentifier = "MessageTVC"
   case conversationCellIdentifier = "ConversationTVC"
   case senderCellIdentifier = "SenderTVC"
+  case historyCellIdentifier = "HistoryTVC"
+  case favoriteCellIdentifier = "FavoriteTVC"
 }

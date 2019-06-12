@@ -57,6 +57,6 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
 //MARK: - Action when a cell is selected
 extension ReceiverVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: self)
   }
 }
