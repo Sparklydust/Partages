@@ -12,4 +12,7 @@ import UIKit
 enum AlertTitle: String {
   case addToCalendar = "Ajouté au calendrier"
   case resetImage = "Réinitialiser"
+  case locationOff = "Localisation désactivée"
+  case error = "Erreur"
+  case cameraUse = "Accès à votre caméra et album"
 }

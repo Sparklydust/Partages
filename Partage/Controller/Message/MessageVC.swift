@@ -74,12 +74,7 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: - Setup Edit button in navigation bar
 extension MessageVC {
   func setupEditButton() {
-    editButton.title = ButtonName.edit.rawValue
-    editButton.setTitleTextAttributes(
-      [NSAttributedString.Key.font: UIFont(
-        customFont: .arialBold, withSize: .fifteen)!,
-       NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
-      for: .normal)
+    editButton.editButtonDesign()
   }
 }
 

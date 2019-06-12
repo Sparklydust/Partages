@@ -37,6 +37,7 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(UIColor.lightBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .twenty)
+    self.titleLabel?.adjustsFontSizeToFitWidth = true
     self.backgroundColor = UIColor.mainBlue
     self.layer.cornerRadius = 20
     self.layer.shadowOffset = CGSize(width: width, height: height)

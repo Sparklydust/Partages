@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7j2-Iy-d0c">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map ViewVC-->
+        <scene sceneID="QhF-T8-Ot8">
+            <objects>
+                <viewController id="7j2-Iy-d0c" customClass="MapViewVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SpO-yj-8y3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uth-aH-OL9">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-Ps-DUV">
+                                <rect key="frame" x="40" y="802" width="334" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UEY-Ml-u0c"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="saveLocationButtonAction:" destination="7j2-Iy-d0c" eventType="touchUpInside" id="dCA-9I-m0V"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="trailing" secondItem="uth-aH-OL9" secondAttribute="trailing" id="6VS-xJ-qo1"/>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="trailing" secondItem="Nue-Ps-DUV" secondAttribute="trailing" constant="40" id="GEs-i6-wW9"/>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="bottom" secondItem="Nue-Ps-DUV" secondAttribute="bottom" constant="20" id="Tun-wZ-cYY"/>
+                            <constraint firstItem="uth-aH-OL9" firstAttribute="leading" secondItem="JdK-Av-pVs" secondAttribute="leading" id="arc-tn-Ty1"/>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="bottom" secondItem="uth-aH-OL9" secondAttribute="bottom" id="gXd-qZ-dQU"/>
+                            <constraint firstItem="Nue-Ps-DUV" firstAttribute="leading" secondItem="JdK-Av-pVs" secondAttribute="leading" constant="40" id="tM2-8O-Xrj"/>
+                            <constraint firstItem="uth-aH-OL9" firstAttribute="top" secondItem="JdK-Av-pVs" secondAttribute="top" id="vE8-6n-y7t"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JdK-Av-pVs"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="uth-aH-OL9" id="g9d-dC-9TT"/>
+                        <outlet property="saveLocationButton" destination="Nue-Ps-DUV" id="rFp-yX-QmX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERc-Vi-7Zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="149" y="139"/>
+        </scene>
+    </scenes>
+</document>

@@ -48,7 +48,7 @@
                                                                 <state key="normal" image="addCross"/>
                                                                 <connections>
                                                                     <action selector="addItemImageButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="jpE-NB-qog"/>
-                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesManagerVC" id="yUK-Wu-umg"/>
+                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesVC" id="yUK-Wu-umg"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -105,6 +105,7 @@
                                                         <rect key="frame" x="10" y="10" width="354" height="76.5"/>
                                                         <connections>
                                                             <action selector="mapKitButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="eOc-js-BMl"/>
+                                                            <segue destination="eEj-oc-8me" kind="show" identifier="goToMapViewVC" id="oKt-4q-3hn"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -219,6 +220,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPX-8g-8Al" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="838" y="-124"/>
+        </scene>
+        <!--MapView-->
+        <scene sceneID="852-54-Upk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MapView" id="eEj-oc-8me" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kTz-te-pyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="825" y="13"/>
         </scene>
     </scenes>
     <resources>

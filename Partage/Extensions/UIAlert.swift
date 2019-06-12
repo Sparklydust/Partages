@@ -42,3 +42,17 @@ extension UIViewController {
     present(noEntryAlert, animated: true, completion: nil)
   }
 }
+
+//MARK: - Alert that create a path to the user settings
+extension UIViewController {
+  func goToUserSettings(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
+    vc.showAlert(title: title, message: message, buttonName: buttonName, completion: {
+      (true) in
+      DispatchQueue.main.async {
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+          UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        }
+      }
+    })
+  }
+}

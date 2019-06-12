@@ -18,7 +18,7 @@ class EventHandler {
 
 //MARK: - Save event in the user calendar
 extension EventHandler {
-  func addEventToCalendar(viewController: UIViewController ,title: String, location: String, startDate: Date, notes: String) {
+  func addEventToCalendar(vc: UIViewController ,title: String, location: String, startDate: Date, notes: String) {
     eventStore.requestAccess(to: EKEntityType.event, completion: {
       (granted, error) in
       DispatchQueue.main.async {
@@ -36,23 +36,23 @@ extension EventHandler {
           
           do {
             try self.eventStore.save(event, span: .thisEvent, commit: true)
-            viewController.showAlert(title: .addToCalendar, message: .addedToCalendar)
+            vc.showAlert(title: .addToCalendar, message: .addedToCalendar)
           }
           catch let error as NSError {
             print(error.localizedDescription)
           }
         }
         else if !granted {
-          viewController.showAlert(title: .addToCalendar, message: .needAccessToCalendar, buttonName: .settings, completion: {
-              (true) in
-            DispatchQueue.main.async {
-              if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-              }
-            }
-          })
+          self.showAlert(vc: vc, title: .addToCalendar, message: .needAccessToCalendar, buttonName: .settings)
         }
       }
     })
+  }
+}
+
+// Method to use UIAlerts in EventHandler
+extension EventHandler {
+  func showAlert(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
+    vc.goToUserSettings(vc: vc, title: title, message: message, buttonName: buttonName)
   }
 }

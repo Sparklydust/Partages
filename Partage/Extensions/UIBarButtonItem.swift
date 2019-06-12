@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - Edit button design
+//MARK: - Edit button design in navigation bar
 extension UIBarButtonItem {
   func editButtonDesign() {
     self.title = ButtonName.edit.rawValue

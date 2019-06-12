@@ -24,6 +24,7 @@ class ItemDetailsVC: UIViewController {
   @IBOutlet weak var donatorReceiverProfileImage: UIImageView!
   
   @IBOutlet weak var itemPictureButton: UIButton!
+  @IBOutlet weak var editButton: UIBarButtonItem!
   
   @IBOutlet weak var mapView: MKMapView!
   
@@ -61,6 +62,12 @@ extension ItemDetailsVC {
   }
 }
 
+//MARK: - Edit donation button action
+extension ItemDetailsVC {
+  @IBAction func editButtonAction(_ sender: Any) {
+  }
+}
+
 //MARK: - Setup main developer design
 extension ItemDetailsVC {
   func setupMainDesign() {
@@ -71,6 +78,7 @@ extension ItemDetailsVC {
     setupItemDescriptionTextView()
     donatorReceiverProfileImage.roundedWithMainBlueBorder()
     setupMapView()
+    setupEditButton()
   }
 }
 
@@ -141,6 +149,13 @@ extension ItemDetailsVC {
   }
 }
 
+//MARK: - Setup edit button design
+extension ItemDetailsVC {
+  func setupEditButton() {
+    editButton.editButtonDesign()
+  }
+}
+
 //MARK: - Setup add to Calendar and message button design
 extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
@@ -156,11 +171,11 @@ extension ItemDetailsVC {
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
   func buttonsNameReceiverOrDonator() {
-    addToCalendarAndMessageButton[1].commonDesign(title: .messageToDonator, shadowWidth: 0, shadowHeight: 2)
+    addToCalendarAndMessageButton[1].commonDesign(title: .messageToReceiver, shadowWidth: 0, shadowHeight: 2)
   }
   
   func staticLabelReceiverOrDonator() {
-    staticItemDetailsLabels[0].text = StaticItemDetail.giveDonation.rawValue
+    staticItemDetailsLabels[0].text = StaticItemDetail.receiveDonation.rawValue
   }
   
   func mapKitReceiverOrDonator() {

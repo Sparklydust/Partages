@@ -235,6 +235,7 @@
                                                         <rect key="frame" x="20" y="20" width="294" height="96.5"/>
                                                         <connections>
                                                             <action selector="mapKitButtonAction:" destination="9Jz-Qm-H6A" eventType="touchUpInside" id="YT5-Ky-vgu"/>
+                                                            <segue destination="49U-bg-lyr" kind="show" id="9DM-qu-CEU"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -308,11 +309,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iT3-Ms-dvO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TeM-bs-5Is"/>
+                    <navigationItem key="navigationItem" id="TeM-bs-5Is">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="k5o-Fp-MXB">
+                            <connections>
+                                <action selector="editButtonAction:" destination="9Jz-Qm-H6A" id="adm-Gv-id7"/>
+                                <segue destination="DXn-1t-jOw" kind="show" identifier="goToModifyDonationVC" id="4ma-xy-clA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="6FY-Y2-gZa" id="RrA-4i-pDp"/>
                         <outlet property="donatorReceiverNameLabel" destination="21D-p1-lcz" id="Zc5-sd-uPH"/>
                         <outlet property="donatorReceiverProfileImage" destination="bsv-Ul-dIc" id="qEp-XA-5Td"/>
+                        <outlet property="editButton" destination="k5o-Fp-MXB" id="Teb-Np-cie"/>
                         <outlet property="itemDescriptionBackgroudView" destination="hdV-AE-B3d" id="0q9-nj-2xJ"/>
                         <outlet property="itemDescriptionTextView" destination="Dke-Un-nut" id="Ngy-Z8-t7v"/>
                         <outlet property="itemNameLabel" destination="xx2-AY-QfU" id="kSg-gj-46Y"/>
@@ -332,13 +341,29 @@
             </objects>
             <point key="canvasLocation" x="306" y="-796"/>
         </scene>
+        <!--Donator-->
+        <scene sceneID="VoR-0e-U5C">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Donator" id="DXn-1t-jOw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="URb-yr-Xvh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="766" y="-1051"/>
+        </scene>
         <!--ItemImages-->
         <scene sceneID="NZN-0Z-hVj">
             <objects>
                 <viewControllerPlaceholder storyboardName="ItemImages" id="feA-tQ-uke" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pql-pv-ZKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879" y="-1006"/>
+            <point key="canvasLocation" x="936" y="-1008"/>
+        </scene>
+        <!--MapView-->
+        <scene sceneID="qQw-Qh-EcM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MapView" id="49U-bg-lyr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQa-qU-la4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="-763"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FBb-ah-5D1">

@@ -47,9 +47,10 @@ extension CameraHandler {
 //MARK: - Show action sheet to present choice between camera and photo library
 extension CameraHandler {
   func showActionSheet(vc: UIViewController) {
+    
     currentVC = vc
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+    
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.camera.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
       self.camera()
@@ -75,6 +76,7 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
     }
     else {
       print("Something went wrong when loading an image into the profile picture")
+      currentVC.showAlert(title: .error, message: .noPictureloaded)
     }
     currentVC.dismiss(animated: true, completion: nil)
   }

@@ -12,7 +12,9 @@ import UIKit
 enum Segue: String {
   case goesToConversationVC = "goToConversationVC"
   case goesToItemDetailsVC = "goToItemDetailsVC"
-  case goesToItemImagesManager = "goToItemImagesManagerVC"
-  case goesToItemImages = "goToItemImagesVC"
+  case goesToItemImagesVC = "goToItemImagesVC"
   case goesToItemSelectedVC = "goToItemSelectedVC"
+  case goesToModifyDonationVC = "goToModifyDonationVC"
+  case goesToDonatorMapViewVC = "goToDonatorMapViewVC"
+  case goesToMapViewVC = "goToMapViewVC"
 }
