@@ -31,7 +31,7 @@ extension LocationHandler {
   }
 }
 
-//MARK: - Use this method to setup user location on map view
+//MARK: - Use this method to setup user location on any Partage map view
 extension LocationHandler {
   func setupUserLocationAtBest(onto mapView: MKMapView, byMeters: CLLocationDistance, vc: UIViewController) {
     setupLocationServices(on: mapView, vc: vc)

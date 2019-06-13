@@ -38,7 +38,7 @@ extension ProfileVC {
 //MARK: - Edit profile picture button action
 extension ProfileVC {
   @IBAction func editProfilePictureButton(_ sender: Any) {
-    CameraHandler.shared.showActionSheet(vc: self)
+    CameraHandler.shared.goesToUserLibraryOrCamera(vc: self)
     CameraHandler.shared.imagePickedBlock = {
       (image) in
       self.profileImage.image = image

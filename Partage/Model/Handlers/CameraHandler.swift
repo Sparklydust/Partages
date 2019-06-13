@@ -14,13 +14,12 @@ class CameraHandler: NSObject {
   
   fileprivate var currentVC: UIViewController!
   
-  //MARK: Internal Properties
   var imagePickedBlock: ((UIImage) -> Void)?
 }
 
-//MARK: - Go to camera
+//MARK: - Method to open camera
 extension CameraHandler {
-  func camera() {
+  func openCamera() {
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let myPickerController = UIImagePickerController()
       myPickerController.delegate = self
@@ -31,9 +30,9 @@ extension CameraHandler {
   }
 }
 
-//MARK: - Go to photo library
+//MARK: - Method to open photo library
 extension CameraHandler {
-  func photoLibrary() {
+  func openPhotoLibrary() {
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
       let myPickerController = UIImagePickerController()
       myPickerController.delegate = self
@@ -44,27 +43,82 @@ extension CameraHandler {
   }
 }
 
-//MARK: - Show action sheet to present choice between camera and photo library
+//MARK: - Alert action sheet that present choices between camera and photo library
 extension CameraHandler {
-  func showActionSheet(vc: UIViewController) {
-    
+  func showCameraActionSheet(vc: UIViewController) {
     currentVC = vc
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.camera.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
-      self.camera()
+      self.openCamera()
     }))
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.photoLibrary.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
-      self.photoLibrary()
+      self.openPhotoLibrary()
     }))
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
     vc.present(actionSheet, animated: true, completion: nil)
   }
 }
 
-//MARK: - Actions when the image comes back
+//MARK: - Check for user access authorizations before opening camera or photo library
+extension CameraHandler {
+  func goesToUserLibraryOrCamera(vc: UIViewController){
+    currentVC = vc
+    
+    let libraryStatus = PHPhotoLibrary.authorizationStatus()
+    let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
+
+    switch libraryStatus {
+    case .denied, .notDetermined, .restricted:
+      PHPhotoLibrary.requestAuthorization { (access) in
+        guard access == .authorized else {
+          DispatchQueue.main.async {
+            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+          }
+          return
+        }
+        switch cameraStatus {
+        case .denied, .notDetermined, .restricted:
+          AVCaptureDevice.requestAccess(for: .video, completionHandler: {
+            (access) in
+            guard access else {
+              vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              return
+            }
+            self.showCameraActionSheet(vc: vc)
+          })
+        case .authorized:
+          guard libraryStatus == .authorized else {
+            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            return
+          }
+          self.showCameraActionSheet(vc: vc)
+        @unknown default:
+          fatalError()
+        }
+      }
+    case .authorized:
+      guard cameraStatus == .authorized else {
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: {
+          (access) in
+          guard access else {
+            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            return
+          }
+          self.showCameraActionSheet(vc: vc)
+        })
+        return
+      }
+      self.showCameraActionSheet(vc: vc)
+    @unknown default:
+      fatalError()
+    }
+  }
+}
+
+//MARK: - Actions for when an image comes back
 extension CameraHandler: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     currentVC.dismiss(animated: true, completion: nil)
@@ -75,7 +129,6 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
       self.imagePickedBlock?(image)
     }
     else {
-      print("Something went wrong when loading an image into the profile picture")
       currentVC.showAlert(title: .error, message: .noPictureloaded)
     }
     currentVC.dismiss(animated: true, completion: nil)

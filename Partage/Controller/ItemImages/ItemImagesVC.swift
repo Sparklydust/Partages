@@ -196,7 +196,7 @@ extension ItemImagesVC {
 //MARK: - Method to load images from camera or photo library
 extension ItemImagesVC {
   func loadImage(to imageView: UIImageView) {
-    CameraHandler.shared.showActionSheet(vc: self)
+    CameraHandler.shared.goesToUserLibraryOrCamera(vc: self)
     CameraHandler.shared.imagePickedBlock = {
       (image) in
       imageView.image = image
