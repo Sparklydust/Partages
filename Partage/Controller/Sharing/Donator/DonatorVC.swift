@@ -118,8 +118,7 @@ extension DonatorVC {
 //MARK: - Setup item name text field design
 extension DonatorVC {
   func setupItemNameTextField() {
-    itemNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    itemNameTextField.textColor = UIColor.typoBlue
+    itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
   }
 }
 
@@ -159,10 +158,6 @@ extension DonatorVC {
   func setupResetAndDonateButton() {
     resetAndDonateButton[0].commonDesign(title: .reset, shadowWidth: 0, shadowHeight: -2)
     resetAndDonateButton[1].commonDesign(title: .makeADonation, shadowWidth: 0, shadowHeight: 2)
-    for button in resetAndDonateButton {
-      button.backgroundColor = UIColor.mainBlue
-      button.setTitleColor(UIColor.lightBlue, for: .normal)
-    }
   }
 }
 
@@ -177,8 +172,7 @@ extension DonatorVC: UITextViewDelegate {
     if itemDescriptionTextView.textColor == UIColor.middleBlue {
       itemDescriptionTextView.text = ""
       itemDescriptionTextView.backgroundColor = UIColor.iceBackground
-      itemDescriptionTextView.textColor = UIColor.typoBlue
-      itemDescriptionTextView.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
     }
     // To avoid buttons action on tap gesture to dismiss keyboard
     actionsAreEnable(false)

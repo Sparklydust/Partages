@@ -8,6 +8,14 @@
 
 import UIKit
 
+//MARK: - Setup  text view font type, font size and font color
+extension UITextView {
+  func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
+    self.font = UIFont(customFont: font, withSize: size)
+    self.textColor = color
+  }
+}
+
 //MARK: - Setup placeholder color font style
 extension UITextView {
   func setupPlaceholderDesign(placeholderText: StaticLabel) {

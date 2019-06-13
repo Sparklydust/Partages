@@ -8,6 +8,14 @@
 
 import UIKit
 
+//MARK: - Setup  text field font type, font size and font color
+extension UITextField {
+  func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
+    self.font = UIFont(customFont: font, withSize: size)
+    self.textColor = color
+  }
+}
+
 //MARK: - Setup placeholder color and font style
 extension UITextField {
   func setupPlaceholderDesign(title: StaticLabel, color: UIColor) {

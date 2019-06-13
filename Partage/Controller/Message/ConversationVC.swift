@@ -77,8 +77,7 @@ extension ConversationVC {
 //MARK: - Setup sender message view text field
 extension ConversationVC {
   func setupSenderMessageViewText() {
-    senderMessageTextView.font = UIFont(customFont: .arial, withSize: .fifteen)
-    senderMessageTextView.textColor = UIColor.typoBlue
+    senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
   }
 }
 

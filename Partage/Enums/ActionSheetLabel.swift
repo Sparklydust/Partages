@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - UIAlert action sheet title
 enum ActionSheetLabel: String {
-  case camera = "Camera"
+  case camera = "Caméra"
   case photoLibrary = "Album"
   case cancel = "Annuler"
 }

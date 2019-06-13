@@ -43,10 +43,10 @@ extension UIViewController {
   }
 }
 
-//MARK: - Alert that create a path to the user settings
+//MARK: - Alert that creates a path to the user settings
 extension UIViewController {
-  func goToUserSettings(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
-    vc.showAlert(title: title, message: message, buttonName: buttonName, completion: {
+  func goToUserSettings(title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
+    self.showAlert(title: title, message: message, buttonName: buttonName, completion: {
       (true) in
       DispatchQueue.main.async {
         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
@@ -54,5 +54,24 @@ extension UIViewController {
         }
       }
     })
+  }
+}
+
+//MARK: - Alert that shows an action sheet with cancel 
+extension UIViewController {
+  func mmshowActionSheetWithCancel(vc: UIViewController, title: [ActionSheetLabel] /*Make a function parameter here to match title*/) {
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    for value in title {
+      actionSheet.addAction(UIAlertAction(title: value.rawValue, style: .default, handler: {
+      (alert: UIAlertAction!) -> Void in
+      
+        //Use the parameter function here to match title
+      
+    }))
+    }
+    
+    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
+    vc.present(actionSheet, animated: true, completion: nil)
   }
 }

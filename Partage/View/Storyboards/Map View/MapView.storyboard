@@ -18,8 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uth-aH-OL9">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uth-aH-OL9">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="dLg-2w-tR6" appends="YES" id="4aW-IO-5x0"/>
+                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-Ps-DUV">
                                 <rect key="frame" x="40" y="802" width="334" height="40"/>
@@ -50,6 +53,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERc-Vi-7Zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.29999999999999999" id="dLg-2w-tR6">
+                    <connections>
+                        <action selector="addPinLongPressGesture:" destination="7j2-Iy-d0c" id="26o-Gd-37Z"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="149" y="139"/>
         </scene>

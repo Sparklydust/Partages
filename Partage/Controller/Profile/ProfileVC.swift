@@ -61,7 +61,7 @@ extension ProfileVC {
 //MARK: - Setup main developer design
 extension ProfileVC {
   func setupMainDesign() {
-    setupUserInfo()
+    setupMainLabels()
     setupEditButtons()
     setupDisconnectButtons()
     setupStaticLabelName()
@@ -87,25 +87,13 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Setup all user info design
+//MARK: - Setup main labels design
 extension ProfileVC {
-  func setupUserInfo() {
-    setupUserInfoFont()
-    setupUserInfoTextColor()
-  }
-  
-  func setupUserInfoFont() {
-    firstNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    lastNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    emailLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    passwordLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-  }
-  
-  func setupUserInfoTextColor() {
-    firstNameLabel.textColor = UIColor.iceBackground
-    lastNameLabel.textColor = UIColor.iceBackground
-    emailLabel.textColor = UIColor.iceBackground
-    passwordLabel.textColor = UIColor.iceBackground
+  func setupMainLabels() {
+    firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    lastNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    passwordLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
   }
 }
 
@@ -113,8 +101,7 @@ extension ProfileVC {
 extension ProfileVC {
   func staticLabelFont() {
     for label in staticsLabel {
-      label.font = UIFont(customFont: .arialBold, withSize: .fourteen)
-      label.textColor = UIColor.typoBlue
+      label.setupFont(as: .arialBold, sized: .fourteen, in: .typoBlue)
     }
   }
   
@@ -131,9 +118,7 @@ extension ProfileVC {
 extension ProfileVC {
   func setupEditButtons() {
     for label in editButtonsLabel {
-      label.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
-      label.tintColor = UIColor.typoBlue
-      label.setTitle(ButtonName.edit.rawValue, for: .normal)
+      label.signInSignUpDesign(title: .edit)
     }
   }
 }

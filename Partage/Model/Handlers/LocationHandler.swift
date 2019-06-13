@@ -9,17 +9,11 @@
 import CoreLocation
 import MapKit
 
-protocol LocationHandlerProtocol {
-  func userChangeLocationAuthorization(for mapView: MKMapView, vc: UIViewController)
-  func setupLocationServices(on mapView: MKMapView, vc: UIViewController)
-  func centerViewOnUserLocation(onto mapView: MKMapView, byMeters distance: CLLocationDistance)
-  func checkLocationAuthorization(for mapView: MKMapView, vc: UIViewController)
-  func userDidUpdateLocation(on mapView: MKMapView)
-}
-
-class LocationHandler: CLLocationManager, LocationHandlerProtocol {
+class LocationHandler: CLLocationManager {
+  static let shared = LocationHandler()
   
   let locationManager = CLLocationManager()
+  let annotation = MKPointAnnotation()
   
   let metersAroundUser: CLLocationDistance = 500
 }
@@ -31,13 +25,28 @@ extension LocationHandler {
   }
 }
 
-//MARK: - Use this method to setup user location on any Partage map view
+//MARK: - #1 Use this method to setup user location on any Partage map view
 extension LocationHandler {
   func setupUserLocationAtBest(onto mapView: MKMapView, byMeters: CLLocationDistance, vc: UIViewController) {
     setupLocationServices(on: mapView, vc: vc)
     centerViewOnUserLocation(onto: mapView, byMeters: byMeters)
     checkLocationAuthorization(for: mapView, vc: vc)
     userChangeLocationAuthorization(for: mapView, vc: vc)
+  }
+}
+
+//MARK - #2 Use this in tap gesture to add a pin on map view and get that point coordinates
+extension LocationHandler {
+  func userPinAndGetCoordinates(of meetingPoint: StaticLabel ,on mapView: MKMapView, sender: UILongPressGestureRecognizer) {
+    let location = sender.location(in: mapView)
+    let locationCoordinates = mapView.convert(location, toCoordinateFrom: mapView)
+    
+    //let annotation = MKPointAnnotation()
+    annotation.coordinate = locationCoordinates
+    annotation.title = meetingPoint.rawValue
+    
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.addAnnotation(annotation)
   }
 }
 
@@ -82,9 +91,7 @@ extension LocationHandler {
     
     switch CLLocationManager.authorizationStatus() {
     case .authorizedWhenInUse:
-      mapView.showsUserLocation = true
-      centerViewOnUserLocation(onto: mapView, byMeters: metersAroundUser)
-      locationManager.startUpdatingLocation()
+      startTrackingUserLocation(on: mapView)
     case .denied, .restricted:
       showAlert(vc: vc, title: .locationOff, message: .locationOff, buttonName: .settings)
     case .notDetermined:
@@ -94,6 +101,12 @@ extension LocationHandler {
     @unknown default:
       fatalError()
     }
+  }
+  
+  func startTrackingUserLocation(on mapView: MKMapView) {
+    mapView.showsUserLocation = true
+    centerViewOnUserLocation(onto: mapView, byMeters: metersAroundUser)
+    locationManager.startUpdatingLocation()
   }
 }
 
@@ -109,7 +122,6 @@ extension LocationHandler {
 // Method to use UIAlerts in Location Handler
 extension LocationHandler {
   func showAlert(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
-    vc.goToUserSettings(vc: vc, title: title, message: message, buttonName: buttonName)
+    vc.goToUserSettings(title: title, message: message, buttonName: buttonName)
   }
 }
-

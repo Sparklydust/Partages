@@ -85,22 +85,10 @@ extension ItemDetailsVC {
 //MARK: - Setup main labels design
 extension ItemDetailsVC {
   func setupMainLabels() {
-    setupMainLabelsFont()
-    setupMainLabelsTextColor()
-  }
-  
-  func setupMainLabelsFont() {
-    itemNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .seventeen)
-    donatorReceiverNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .seventeen)
-    dateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .seventeen)
-    timeLabel.font = UIFont(customFont: .superclarendonBold, withSize: .seventeen)
-  }
-  
-  func setupMainLabelsTextColor() {
-    itemNameLabel.textColor = UIColor.typoBlue
-    donatorReceiverNameLabel.textColor = UIColor.typoBlue
-    dateLabel.textColor = UIColor.typoBlue
-    timeLabel.textColor = UIColor.typoBlue
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    donatorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
   }
 }
 
@@ -112,8 +100,7 @@ extension ItemDetailsVC {
     staticItemDetailsLabels[2].text = StaticItemDetail.at.rawValue
     staticItemDetailsLabels[3].text = StaticItemDetail.address.rawValue
     for label in staticItemDetailsLabels {
-      label.font = UIFont(customFont: .arial, withSize: .seventeen)
-      label.textColor = UIColor.typoBlue
+      label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
     }
   }
 }
@@ -129,8 +116,7 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.isEditable = false
-    itemDescriptionTextView.font = UIFont(customFont: .arialBold, withSize: .seventeen)
-    itemDescriptionTextView.textColor = UIColor.typoBlue
+    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
     setupItemDescriptionBackgroundView()
   }
   
@@ -161,10 +147,6 @@ extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
     buttonsNameReceiverOrDonator()
     addToCalendarAndMessageButton[0].commonDesign(title: .addToCalendar, shadowWidth: 0, shadowHeight: -2)
-    for button in addToCalendarAndMessageButton {
-      button.backgroundColor = UIColor.mainBlue
-      button.setTitleColor(UIColor.lightBlue, for: .normal)
-    }
   }
 }
 

@@ -53,6 +53,6 @@ extension EventHandler {
 // Method to use UIAlerts in EventHandler
 extension EventHandler {
   func showAlert(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
-    vc.goToUserSettings(vc: vc, title: title, message: message, buttonName: buttonName)
+    vc.goToUserSettings(title: title, message: message, buttonName: buttonName)
   }
 }

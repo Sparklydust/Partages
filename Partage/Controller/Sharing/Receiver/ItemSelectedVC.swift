@@ -71,10 +71,7 @@ extension ItemSelectedVC {
     view.backgroundColor = UIColor.iceBackground
     navigationItem.setupNavBarProfileImage()
     setupMessageAndReceiveButtons()
-    setupItemTypeLabel()
-    setupItemNameLabel()
-    setupDateLabel()
-    setupTimeLabel()
+    setupAllLabels()
     setupMapView()
     setupStaticLabels()
     setupItemDescriptionBackgroundView()
@@ -82,36 +79,21 @@ extension ItemSelectedVC {
   }
 }
 
+//MARK: - Setup all labels design
+extension ItemSelectedVC {
+  func setupAllLabels() {
+    setupItemTypeLabel()
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+    dateLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+    timeLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+  }
+}
+
 //MARK: - Setup item type label design
 extension ItemSelectedVC {
   func setupItemTypeLabel() {
-    itemTypeLabel.font = UIFont(customFont: .arialBold, withSize: .twenty)
-    itemTypeLabel.textColor = UIColor.typoBlue
+    itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, in: .typoBlue)
     itemTypeLabel.textAlignment = .center
-  }
-}
-
-//MARK: - Setup item name label design
-extension ItemSelectedVC {
-  func setupItemNameLabel() {
-    itemNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    itemNameLabel.textColor = UIColor.typoBlue
-  }
-}
-
-//MARK: - Setup date label design
-extension ItemSelectedVC {
-  func setupDateLabel() {
-    dateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    dateLabel.textColor = UIColor.typoBlue
-  }
-}
-
-//MARK: - Setup time label design
-extension ItemSelectedVC {
-  func setupTimeLabel() {
-    timeLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    timeLabel.textColor = UIColor.typoBlue
   }
 }
 
@@ -136,8 +118,7 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.backgroundColor = UIColor.iceBackground
-    itemDescriptionTextView.textColor = UIColor.typoBlue
-    itemDescriptionTextView.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
   }
 }
 
@@ -148,8 +129,7 @@ extension ItemSelectedVC {
     staticLabels[1].text = StaticItemDetail.the.rawValue
     staticLabels[2].text = StaticItemDetail.at.rawValue
     for label in staticLabels {
-      label.font = UIFont(customFont: .arialBold, withSize: .heighteen)
-      label.textColor = UIColor.typoBlue
+      label.setupFont(as: .arialBold, sized: .heighteen, in: .typoBlue)
     }
   }
 }
@@ -157,10 +137,6 @@ extension ItemSelectedVC {
 //MARK: - Setup cancel and save buttons design
 extension ItemSelectedVC {
   func setupMessageAndReceiveButtons() {
-    for button in messageAndReceiveButtons {
-      button.backgroundColor = UIColor.mainBlue
-      button.setTitleColor(UIColor.lightBlue, for: .normal)
-    }
     messageAndReceiveButtons[0].commonDesign(title: .messageToDonator, shadowWidth: 0, shadowHeight: -2)
     messageAndReceiveButtons[1].commonDesign(title: .receiveThisDonation, shadowWidth: 0, shadowHeight: 2)
   }

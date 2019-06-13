@@ -124,18 +124,13 @@ extension ItemImagesVC {
   func setupResetAndSaveButton() {
     resetAndSaveButton[0].commonDesign(title: .reset, shadowWidth: 0, shadowHeight: -2)
     resetAndSaveButton[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
-    for button in resetAndSaveButton {
-      button.backgroundColor = UIColor.mainBlue
-      button.setTitleColor(UIColor.lightBlue, for: .normal)
-    }
   }
 }
 
 //MARK: - Setup user guide label design
 extension ItemImagesVC {
   func setupUserGuideLabel() {
-    userGuideLabel.font = UIFont(customFont: .superclarendonBold, withSize: .sixteen)
-    userGuideLabel.textColor = UIColor.middleBlue
+    userGuideLabel.setupFont(as: .superclarendonBold, sized: .sixteen, in: .middleBlue)
     userGuideLabel.text = StaticLabel.imageLoaderGuide.rawValue
     userGuideLabel.textAlignment = .center
   }

@@ -17,8 +17,8 @@ class MapViewVC: UIViewController {
   @IBOutlet weak var saveLocationButton: UIButton!
   
   let locationManager = CLLocationManager()
-  let locationHandler = LocationHandler()
   
+  let generator = UIImpactFeedbackGenerator(style: .light)
   let aroundUserLocation: CLLocationDistance = 500
   
   override func viewDidLoad() {
@@ -29,13 +29,22 @@ class MapViewVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    locationHandler.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
+    LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
+    
   }
 }
 
 //MARK: - Save location button action
 extension MapViewVC {
   @IBAction func saveLocationButtonAction(_ sender: Any) {
+  }
+}
+
+//MARK: - Long press gesture recognizer add pin with a vibration
+extension MapViewVC {
+  @IBAction func addPinLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+    LocationHandler.shared.userPinAndGetCoordinates(of: .meetingPoint, on: mapView, sender: sender)
+    generator.impactOccurred()
   }
 }
 

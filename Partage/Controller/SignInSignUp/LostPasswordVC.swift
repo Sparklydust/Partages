@@ -56,8 +56,7 @@ extension LostPasswordVC {
 //MARK: - Set email text design
 extension LostPasswordVC {
   func setupEmailTextField() {
-    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    emailTextField.textColor = UIColor.iceBackground
+    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
     emailTextField.layer.cornerRadius = 10
   }
   
@@ -70,7 +69,7 @@ extension LostPasswordVC {
 //MARK: - Setup email placeholder design
 extension LostPasswordVC {
   func setupEmailPlaceholder() {
-    emailTextField.setupPlaceholderDesign(title: .email, color: UIColor.iceBackground)
+    emailTextField.setupPlaceholderDesign(title: .email, color: .iceBackground)
   }
 }
 

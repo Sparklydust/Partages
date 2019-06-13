@@ -135,17 +135,13 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: - Set text field design
+//MARK: - Setup all text fields design
 extension SignInSignUpVC {
   func setupAllTextFields() {
-    firstNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    passwordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    confirmPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    firstNameTextField.textColor = UIColor.iceBackground
-    emailTextField.textColor = UIColor.iceBackground
-    passwordTextField.textColor = UIColor.iceBackground
-    confirmPasswordTextField.textColor = UIColor.iceBackground
+    firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
   }
 }
 
@@ -166,7 +162,7 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: - Setup placeholder design
+//MARK: - Setup all placeholders design
 extension SignInSignUpVC {
   func setupAllPlaceholders() {
     firstNameTextField.setupPlaceholderDesign(title: .firsName, color: UIColor.iceBackground)

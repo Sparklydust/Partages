@@ -72,10 +72,11 @@ extension CameraHandler {
 
     switch libraryStatus {
     case .denied, .notDetermined, .restricted:
-      PHPhotoLibrary.requestAuthorization { (access) in
+      PHPhotoLibrary.requestAuthorization {
+        (access) in
         guard access == .authorized else {
           DispatchQueue.main.async {
-            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
           }
           return
         }
@@ -84,14 +85,14 @@ extension CameraHandler {
           AVCaptureDevice.requestAccess(for: .video, completionHandler: {
             (access) in
             guard access else {
-              vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
               return
             }
             self.showCameraActionSheet(vc: vc)
           })
         case .authorized:
           guard libraryStatus == .authorized else {
-            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
             return
           }
           self.showCameraActionSheet(vc: vc)
@@ -104,7 +105,7 @@ extension CameraHandler {
         AVCaptureDevice.requestAccess(for: .video, completionHandler: {
           (access) in
           guard access else {
-            vc.goToUserSettings(vc: vc, title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
             return
           }
           self.showCameraActionSheet(vc: vc)

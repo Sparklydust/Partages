@@ -49,7 +49,7 @@ extension EditProfileVC {
 extension EditProfileVC {
   func setupMainDesign() {
     setupBackgroundViews()
-    setupUserTextFields()
+    setupAllUserTextFields()
     setupButtons()
     setupStaticLabels()
     setupAllPlaceholders()
@@ -67,39 +67,21 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup user entry text field design
+//MARK: - Setup all user entry text fields design
 extension EditProfileVC{
-  func setupUserTextFields() {
-    setupUserTextFieldsFont()
-    setupUserTextFieldColor()
-  }
-  
-  func setupUserTextFieldsFont() {
-    firstNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    lastNameTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    emailTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    oldPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    newPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    confirmPasswordTextField.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-  }
-  
-  func setupUserTextFieldColor() {
-    firstNameTextField.textColor = UIColor.mainBlue
-    lastNameTextField.textColor = UIColor.mainBlue
-    emailTextField.textColor = UIColor.mainBlue
-    oldPasswordTextField.textColor = UIColor.mainBlue
-    newPasswordTextField.textColor = UIColor.mainBlue
-    confirmPasswordTextField.textColor = UIColor.mainBlue
+  func setupAllUserTextFields() {
+    firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    lastNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    oldPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    newPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
 }
 
 //MARK: - Setup cancel and save buttons design
 extension EditProfileVC {
   func setupButtons() {
-    for button in cancelAndSaveButtons {
-      button.backgroundColor = UIColor.mainBlue
-      button.setTitleColor(UIColor.lightBlue, for: .normal)
-    }
     cancelAndSaveButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
     cancelAndSaveButtons[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
   }
@@ -108,23 +90,22 @@ extension EditProfileVC {
 //MARK: - Setup all static labels design
 extension EditProfileVC {
   func setupStaticLabels() {
-    for label in staticLabels {
-      label.font = UIFont(customFont: .arialBold, withSize: .fourteen)
-      label.textColor = UIColor.typoBlue
-    }
     staticLabels[0].text = StaticLabel.firsName.rawValue
     staticLabels[1].text = StaticLabel.lastName.rawValue
     staticLabels[2].text = StaticLabel.email.rawValue
     staticLabels[3].text = StaticLabel.password.rawValue
+    for label in staticLabels {
+      label.setupFont(as: .arialBold, sized: .fourteen, in: .typoBlue)
+    }
   }
 }
 
 //MARK: - Setup placeholders design
 extension EditProfileVC {
   func setupAllPlaceholders() {
-    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: UIColor.typoBlue)
-    newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: UIColor.typoBlue)
-    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: UIColor.typoBlue)
+    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: .typoBlue)
+    newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: .typoBlue)
+    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .typoBlue)
   }
 }
 
