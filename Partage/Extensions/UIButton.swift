@@ -48,13 +48,13 @@ extension UIButton {
 
 //MARK: - Sign in Sign up -> selected and unselected design
 extension UIButton {
-  func signInSignUpSelectedDesign(title: ButtonName) {
+  func signInOrSignUpSelectedDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(UIColor.mainBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
   }
   
-  func signInSignUpUnselectedDesign(title: ButtonName) {
+  func signInOrSignUpUnselectedDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(UIColor.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
@@ -63,7 +63,7 @@ extension UIButton {
 
 //MARK: - Little button design
 extension UIButton {
-  func littleDesign(title: ButtonName, color: UIColor) {
+  func littleButtonDesign(title: ButtonName, color: UIColor) {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(color, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)

@@ -41,7 +41,7 @@ extension MessageVC {
   }
 }
 
-//MARK: Setup developer main design
+//MARK: - Setup developer main design
 extension MessageVC {
   func setupMainDesign() {
     navigationItem.setupNavBarProfileImage()

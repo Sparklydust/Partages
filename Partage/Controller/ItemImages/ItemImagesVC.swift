@@ -26,7 +26,7 @@ class ItemImagesVC: UIViewController {
   }
 }
 
-//MARK: Load top left image button action
+//MARK: - Load top left image button action
 extension ItemImagesVC {
   @IBAction func topLeftImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[0])

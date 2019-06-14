@@ -69,7 +69,7 @@ extension CameraHandler {
     
     let libraryStatus = PHPhotoLibrary.authorizationStatus()
     let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
-
+    
     switch libraryStatus {
     case .denied, .notDetermined, .restricted:
       PHPhotoLibrary.requestAuthorization {
@@ -88,7 +88,9 @@ extension CameraHandler {
               vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
               return
             }
-            self.showCameraActionSheet(vc: vc)
+            DispatchQueue.main.async {
+              self.showCameraActionSheet(vc: vc)
+            }
           })
         case .authorized:
           guard libraryStatus == .authorized else {

@@ -35,31 +35,31 @@ class ItemSelectedVC: UIViewController {
   }
 }
 
-//MARK: -
+//MARK: - Favorite button action
 extension ItemSelectedVC {
   @IBAction func favoriteButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: -
+//MARK: - Item image button action
 extension ItemSelectedVC {
   @IBAction func itemImageButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: -
+//MARK: - Map view button action
 extension ItemSelectedVC {
   @IBAction func mapViewButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: -
+//MARK: - Messagge to donator button action
 extension ItemSelectedVC {
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: -
+//MARK: - Receive this donation button action
 extension ItemSelectedVC {
   @IBAction func ReceiveThisDonationButtonAction(_ sender: Any) {
   }

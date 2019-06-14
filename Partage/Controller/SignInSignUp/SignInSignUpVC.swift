@@ -18,14 +18,16 @@ class SignInSignUpVC: UIViewController {
   @IBOutlet weak var lostPasswordButton: UIButton!
   
   @IBOutlet var signInSignUpButtons: [UIButton]!
-  @IBOutlet var dotLabels: [UILabel]!
+  
+  @IBOutlet var dotStylebuttons: [UIButton]!
   @IBOutlet var cancelAndRegisterButtons: [UIButton]!
+  
   @IBOutlet var backgroundTextView: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupTextFieldDelegate()
     setupMainDesign()
+    setupAllDelegates()
     observeKeyboardNotification()
   }
   
@@ -34,25 +36,39 @@ class SignInSignUpVC: UIViewController {
   }
 }
 
-//MARK: - Change screen when sign in or sign up is selected
+//MARK: - Register Button Action
+extension SignInSignUpVC {
+  @IBAction func RegisterButtonAction(_ sender: Any) {
+    
+  }
+}
+
+//MARK: - Change screen when sign in or sign up button action is selected
 extension SignInSignUpVC {
   @IBAction func signInButtonAction(_ sender: Any) {
     UIView.animate(withDuration: 0.3) {
-      self.setupSignInIsSelectedButtons()
-      self.setupRegisterButtonWhenSignInIsSelected()
-      self.hideTextFieldWhenSignInIsClicked()
-      self.resignAllResponser()
-      self.lostPasswordButton.isHidden = false
+      self.signInIsSelectedStyle()
     }
   }
   
   @IBAction func signUpButtonAction(_ sender: Any) {
     UIView.animate(withDuration: 0.3) {
-      self.setupSignUpIsSelectedButtons()
-      self.setupRegisterButtonWhenSignUpIsSelected()
-      self.showTextFieldWhenSignUpIsClicked()
-      self.resignAllResponser()
-      self.lostPasswordButton.isHidden = true
+      self.signUpIsSelectedStyle()
+    }
+  }
+}
+
+//MARK: - Change screen when dot sign in or sign up button action is selected
+extension SignInSignUpVC {
+  @IBAction func dotSignInButtonAction(_ sender: Any) {
+    UIView.animate(withDuration: 0.3) {
+      self.signInIsSelectedStyle()
+    }
+  }
+  
+  @IBAction func dotSignUpButtonAction(_ sender: Any) {
+    UIView.animate(withDuration: 0.3) {
+      self.signUpIsSelectedStyle()
     }
   }
 }
@@ -61,10 +77,6 @@ extension SignInSignUpVC {
 extension SignInSignUpVC {
   @IBAction func cancelButtonAction(_ sender: Any) {
     dismiss(animated: true, completion: nil)
-  }
-  
-  @IBAction func RegisterButtonAction(_ sender: Any) {
-    
   }
 }
 
@@ -78,37 +90,54 @@ extension SignInSignUpVC {
     setupBackgroundTextView()
     setupAllTextFields()
     setupAllPlaceholders()
-    hideTextFieldWhenSignInIsClicked()
+    hideTextFieldsWhenSignInIsClicked()
   }
 }
 
-//MARK: - Set sign in / sign up buttons design
+//MARK: - Setup all delegates
+extension SignInSignUpVC {
+  func setupAllDelegates() {
+    firstNameTextField.delegate = self
+    emailTextField.delegate = self
+    passwordTextField.delegate = self
+    confirmPasswordTextField.delegate = self
+  }
+}
+
+//MARK: - Setup sign in / sign up buttons design
 extension SignInSignUpVC {
   func setupSignInIsSelectedButtons() {
-    signInSignUpButtons[0].signInSignUpSelectedDesign(title: .lowSignIn)
-    signInSignUpButtons[1].signInSignUpUnselectedDesign(title: .lowSignUp)
+    signInSignUpButtons[0].signInOrSignUpSelectedDesign(title: .lowSignIn)
+    signInSignUpButtons[1].signInOrSignUpUnselectedDesign(title: .lowSignUp)
     signInSignUpButtons[0].isEnabled = false
     signInSignUpButtons[1].isEnabled = true
-    dotLabels[0].textColor = UIColor.mainBlue
-    dotLabels[1].textColor = UIColor.typoBlue
+    dotStylebuttons[0].setTitleColor(.mainBlue, for: .normal)
+    dotStylebuttons[1].setTitleColor(.typoBlue, for: .normal)
+    dotStylebuttons[0].isEnabled = false
+    dotStylebuttons[1].isEnabled = true
   }
   
   func setupSignUpIsSelectedButtons() {
-    signInSignUpButtons[0].signInSignUpUnselectedDesign(title: .lowSignIn)
-    signInSignUpButtons[1].signInSignUpSelectedDesign(title: .lowSignUp)
+    signInSignUpButtons[0].signInOrSignUpUnselectedDesign(title: .lowSignIn)
+    signInSignUpButtons[1].signInOrSignUpSelectedDesign(title: .lowSignUp)
     signInSignUpButtons[0].isEnabled = true
     signInSignUpButtons[1].isEnabled = false
-    dotLabels[0].textColor = UIColor.typoBlue
-    dotLabels[1].textColor = UIColor.mainBlue
+    dotStylebuttons[0].setTitleColor(.typoBlue, for: .normal)
+    dotStylebuttons[1].setTitleColor(.mainBlue, for: .normal)
+    dotStylebuttons[0].isEnabled = true
+    dotStylebuttons[1].isEnabled = false
   }
 }
 
-///MARK: - Set cancel and register buttons design
+///MARK: - Setup cancel button design
 extension SignInSignUpVC {
   func setupCancelButton() {
     cancelAndRegisterButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
   }
-  
+}
+
+//MARK: - Setup sign in or sign up button design
+extension SignInSignUpVC {
   func setupRegisterButtonWhenSignInIsSelected() {
     cancelAndRegisterButtons[1].commonDesign(title: .signIn, shadowWidth: 0, shadowHeight: 2)
   }
@@ -118,14 +147,14 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: - Set lost password design
+//MARK: - Setup lost password design
 extension SignInSignUpVC {
   func setupLostPasswordButton() {
-    lostPasswordButton.littleDesign(title: .lowLostPassword, color: .typoBlue)
+    lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: .typoBlue)
   }
 }
 
-//MARK: - Set background text view design
+//MARK: - Setup background text view design
 extension SignInSignUpVC {
   func setupBackgroundTextView() {
     for view in backgroundTextView {
@@ -145,23 +174,6 @@ extension SignInSignUpVC {
   }
 }
 
-//MARK: - Hide / Show proper text field when sign in is clicked
-extension SignInSignUpVC {
-  func hideTextFieldWhenSignInIsClicked() {
-    firstNameTextField.isHidden = true
-    confirmPasswordTextField.isHidden = true
-    backgroundTextView[0].isHidden = true
-    backgroundTextView[3].isHidden = true
-  }
-  
-  func showTextFieldWhenSignUpIsClicked() {
-    firstNameTextField.isHidden = false
-    confirmPasswordTextField.isHidden = false
-    backgroundTextView[0].isHidden = false
-    backgroundTextView[3].isHidden = false
-  }
-}
-
 //MARK: - Setup all placeholders design
 extension SignInSignUpVC {
   func setupAllPlaceholders() {
@@ -172,31 +184,67 @@ extension SignInSignUpVC {
   }
 }
 
+//MARK: - Hide / Show proper text field when sign in is clicked
+extension SignInSignUpVC {
+  func hideTextFieldsWhenSignInIsClicked() {
+    firstNameTextField.isHidden = true
+    confirmPasswordTextField.isHidden = true
+    backgroundTextView[0].isHidden = true
+    backgroundTextView[3].isHidden = true
+  }
+  
+  func showTextFieldsWhenSignUpIsClicked() {
+    firstNameTextField.isHidden = false
+    confirmPasswordTextField.isHidden = false
+    backgroundTextView[0].isHidden = false
+    backgroundTextView[3].isHidden = false
+  }
+}
+
+//MARK: - Setup sign in Selected style
+extension SignInSignUpVC {
+  func signInIsSelectedStyle() {
+    setupSignInIsSelectedButtons()
+    setupRegisterButtonWhenSignInIsSelected()
+    hideTextFieldsWhenSignInIsClicked()
+    resignAllResponser()
+    lostPasswordButton.isHidden = false
+  }
+}
+
+//MARK: - Setup sign up Selected style
+extension SignInSignUpVC {
+  func signUpIsSelectedStyle() {
+    setupSignUpIsSelectedButtons()
+    setupRegisterButtonWhenSignUpIsSelected()
+    showTextFieldsWhenSignUpIsClicked()
+    resignAllResponser()
+    lostPasswordButton.isHidden = true
+  }
+}
+
 //MARK: - Tap gesture dismiss keyboard
 extension SignInSignUpVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     resignAllResponser()
   }
-  
-  func resignAllResponser() {
-    firstNameTextField.resignFirstResponder()
-    emailTextField.resignFirstResponder()
-    passwordTextField.resignFirstResponder()
-    confirmPasswordTextField.resignFirstResponder()
-  }
 }
 
+//MARK: - Dismiss keyboard when done keyboard button is clicked
 extension SignInSignUpVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     resignAllResponser()
     return true
   }
-  
-  func setupTextFieldDelegate() {
-    firstNameTextField.delegate = self
-    emailTextField.delegate = self
-    passwordTextField.delegate = self
-    confirmPasswordTextField.delegate = self
+}
+
+//MARK: - Method to resign all responders
+extension SignInSignUpVC {
+  func resignAllResponser() {
+    firstNameTextField.resignFirstResponder()
+    emailTextField.resignFirstResponder()
+    passwordTextField.resignFirstResponder()
+    confirmPasswordTextField.resignFirstResponder()
   }
 }
 

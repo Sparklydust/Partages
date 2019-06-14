@@ -35,13 +35,12 @@ extension LocationHandler {
   }
 }
 
-//MARK - #2 Use this in tap gesture to add a pin on map view and get that point coordinates
+//MARK - #2 Use this method in tap gesture to add a pin on map view and get that point coordinates
 extension LocationHandler {
   func userPinAndGetCoordinates(of meetingPoint: StaticLabel ,on mapView: MKMapView, sender: UILongPressGestureRecognizer) {
     let location = sender.location(in: mapView)
     let locationCoordinates = mapView.convert(location, toCoordinateFrom: mapView)
     
-    //let annotation = MKPointAnnotation()
     annotation.coordinate = locationCoordinates
     annotation.title = meetingPoint.rawValue
     
@@ -50,7 +49,52 @@ extension LocationHandler {
   }
 }
 
-// Center map view around the user location
+//MARK: - #3 Use this method to convert pin latitude and longitude to a physical address
+extension LocationHandler {
+  func convertLatLonToAnAdress(vc: UIViewController) {
+    var latitude = annotation.coordinate.latitude
+    var longitude = annotation.coordinate.longitude
+    
+    let meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
+    
+    let geocoder = CLGeocoder()
+    geocoder.reverseGeocodeLocation(meetingPoint) { [weak self]
+      (placemarks, error) in
+      guard self != nil else { return }
+      if let _ =  error {
+        vc.showAlert(title: .error, message: .locationIssue)
+        return
+      }
+      guard let placemark = placemarks?.first else {
+        vc.showAlert(title: .error, message: .locationIssue)
+        return
+      }
+      if let location = placemark.location {
+        latitude = location.coordinate.latitude
+        longitude = location.coordinate.longitude
+      }
+      let streetName = placemark.thoroughfare ?? ""
+      let streetNumber = placemark.subThoroughfare ?? ""
+      let postalCode = placemark.postalCode ?? ""
+      let cityName = placemark.locality ?? ""
+      let countryName = placemark.country ?? ""
+      DispatchQueue.main.async {
+        print("""
+          
+          Latitude is: \(latitude)
+          Longitute is: \(longitude)
+          
+          \(streetNumber) \(streetName)
+          \(postalCode) \(cityName)
+          \(countryName)
+          
+          """)
+      }
+    }
+  }
+}
+
+//MARK - Method to enter map view around the user location
 extension LocationHandler {
   func centerViewOnUserLocation(onto mapView: MKMapView, byMeters distance: CLLocationDistance) {
     if let location = locationManager.location?.coordinate {
@@ -68,7 +112,7 @@ extension LocationHandler {
       checkLocationAuthorization(for: mapView, vc: vc)
     }
     else {
-      showAlert(vc: vc, title: .locationOff, message: .locationOff, buttonName: .settings)
+      vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
     }
   }
 }
@@ -88,12 +132,11 @@ extension LocationHandler {
 //MARK: - Check location authorization status and act depending on the result
 extension LocationHandler {
   func checkLocationAuthorization(for mapView: MKMapView, vc: UIViewController) {
-    
     switch CLLocationManager.authorizationStatus() {
     case .authorizedWhenInUse:
       startTrackingUserLocation(on: mapView)
     case .denied, .restricted:
-      showAlert(vc: vc, title: .locationOff, message: .locationOff, buttonName: .settings)
+      vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
     case .notDetermined:
       locationManager.requestWhenInUseAuthorization()
     case .authorizedAlways:
@@ -102,7 +145,10 @@ extension LocationHandler {
       fatalError()
     }
   }
-  
+}
+
+//MARK: - Method to start tracking user location
+extension LocationHandler {
   func startTrackingUserLocation(on mapView: MKMapView) {
     mapView.showsUserLocation = true
     centerViewOnUserLocation(onto: mapView, byMeters: metersAroundUser)
@@ -116,12 +162,5 @@ extension LocationHandler {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
       checkLocationAuthorization(for: mapView, vc: vc)
     }
-  }
-}
-
-// Method to use UIAlerts in Location Handler
-extension LocationHandler {
-  func showAlert(vc: UIViewController, title: AlertTitle, message: AlertMessage, buttonName: ButtonName) {
-    vc.goToUserSettings(title: title, message: message, buttonName: buttonName)
   }
 }

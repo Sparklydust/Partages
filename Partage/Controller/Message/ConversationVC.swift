@@ -50,7 +50,7 @@ extension ConversationVC {
   }
 }
 
-//MARK: Setup Table view cells to display messages
+//MARK: - Setup Table view cells to display messages
 extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return messageArray.count

@@ -37,6 +37,7 @@ class MapViewVC: UIViewController {
 //MARK: - Save location button action
 extension MapViewVC {
   @IBAction func saveLocationButtonAction(_ sender: Any) {
+    LocationHandler.shared.convertLatLonToAnAdress(vc: self)
   }
 }
 
