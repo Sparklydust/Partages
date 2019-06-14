@@ -59,7 +59,7 @@ extension UIViewController {
 
 //MARK: - Alert that shows an action sheet with cancel 
 extension UIViewController {
-  func mmshowActionSheetWithCancel(vc: UIViewController, title: [ActionSheetLabel] /*Make a function parameter here to match title*/) {
+  func showActionSheetWithCancel(vc: UIViewController, title: [ActionSheetLabel] /*Make a function parameter here to match title*/) {
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
     for value in title {

@@ -14,8 +14,10 @@ class LocationHandler: CLLocationManager {
   
   let locationManager = CLLocationManager()
   let annotation = MKPointAnnotation()
+  var meetingPoint = CLLocation()
   
   let metersAroundUser: CLLocationDistance = 500
+  var distanceInMetersToItem: Double = 0
 }
 
 //MARK: - Get user location accuracy to best
@@ -55,7 +57,7 @@ extension LocationHandler {
     var latitude = annotation.coordinate.latitude
     var longitude = annotation.coordinate.longitude
     
-    let meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
+    meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
     
     let geocoder = CLGeocoder()
     geocoder.reverseGeocodeLocation(meetingPoint) { [weak self]
@@ -91,6 +93,39 @@ extension LocationHandler {
           """)
       }
     }
+  }
+}
+
+//MARK: - #4.1 Get user direction from user location to pinned location
+extension LocationHandler {
+  func getDirectionFromUserToPinnedLocation(on mapView: MKMapView ,vc: UIViewController) {
+    guard let location = locationManager.location?.coordinate else {
+      vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+      return
+    }
+    let request = createDirectionRequest(from: location, to: meetingPoint.coordinate.latitude, and: meetingPoint.coordinate.longitude)
+    let directions = MKDirections(request: request)
+    
+    directions.calculate {
+      (response, error) in
+      guard let response = response else {
+        vc.showAlert(title: .error, message: .noDirectionsCalculated)
+        return
+      }
+      for route in response.routes {
+        mapView.addOverlay(route.polyline)
+        mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+        
+        self.distanceInMetersToItem = route.distance
+      }
+    }
+  }
+  
+  //MARK: - #4.2 Method to use on the proper vc to display the directions in a blue line
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+    renderer.strokeColor = .mainBlue
+    return renderer
   }
 }
 
@@ -162,5 +197,20 @@ extension LocationHandler {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
       checkLocationAuthorization(for: mapView, vc: vc)
     }
+  }
+}
+
+//MARK: - Method to create direction request
+extension LocationHandler {
+  func createDirectionRequest(from coordinate: CLLocationCoordinate2D, to meetingPointLat: CLLocationDegrees, and meetingPointLon: CLLocationDegrees) -> MKDirections.Request {
+    let startingLocation = MKPlacemark(coordinate: coordinate)
+    let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: meetingPointLat, longitude: meetingPointLon))
+
+    let request = MKDirections.Request()
+    request.source = MKMapItem(placemark: startingLocation)
+    request.destination = MKMapItem(placemark: destination)
+    request.transportType = .any
+    request.requestsAlternateRoutes = true
+    return request
   }
 }

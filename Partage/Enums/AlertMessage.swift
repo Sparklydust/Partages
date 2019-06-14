@@ -17,4 +17,6 @@ enum AlertMessage: String {
   case noPictureloaded = "Partage n'a pas pu télécharger votre image. Merci de vérifier vos paramètres"
   case cameraUse = "L'accès à votre caméra et album n' est pas autorisé. Vous pouvez changer vos réglages dans les paramètres et accéder à cette fonctionnalité"
   case locationIssue = "Il y a un problème de connection à la localisation du lieu de rendez-vous. Merci de réessayer ultérieurement"
+  case getDirectionIssue = "Il y a un problème pour obtenir la direction au lieu de rendez-vous. Merci de vérifier vos réglages dans les paramètres ou de réessayer ultérieurement"
+  case noDirectionsCalculated = "Nous n'avons pu calculer le temps de trajet. Veuillez vérifier votre connection"
 }

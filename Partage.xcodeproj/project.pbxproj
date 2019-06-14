@@ -284,6 +284,7 @@
 				2AB4353B229E56F0007BFB93 /* Supporting Files */,
 				2AFA4EC822A9A9EE0039803E /* Enums */,
 				2A06727C229E905E00FFAECE /* Extensions */,
+				2AF66B2C22AC0DEF005BAE31 /* Tools */,
 				2AB4353D229E5712007BFB93 /* Model */,
 				2AB4353A229E56C9007BFB93 /* View */,
 				2AB4353C229E5703007BFB93 /* Controller */,
@@ -329,7 +330,6 @@
 		2AB4353D229E5712007BFB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2AF66B2C22AC0DEF005BAE31 /* Handlers */,
 				2A289FA722A56B0200EB076A /* User.swift */,
 				2A87EC5D22A6453800EB969D /* Message.swift */,
 				2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */,
@@ -436,14 +436,14 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
-		2AF66B2C22AC0DEF005BAE31 /* Handlers */ = {
+		2AF66B2C22AC0DEF005BAE31 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
 				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
 				2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */,
 				2AD516AA22B13A5B0032F28F /* LocationHandler.swift */,
 			);
-			path = Handlers;
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		2AFA4EBD22A8FC5B0039803E /* History Favorite */ = {
