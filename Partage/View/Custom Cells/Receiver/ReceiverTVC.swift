@@ -44,6 +44,8 @@ extension ReceiverTVC {
     setupDateLabel()
     setupTimeLabel()
     setupMapView()
+    setupItemImage()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -106,6 +108,13 @@ extension ReceiverTVC {
   }
 }
 
+//MARK: - Setup item image design
+extension ReceiverTVC {
+  func setupItemImage() {
+    itemImage.layer.cornerRadius = 2
+  }
+}
+
 //MARK: - Setup static labels
 extension ReceiverTVC {
   func setupStaticLabels() {
@@ -116,5 +125,12 @@ extension ReceiverTVC {
       label.font = UIFont(customFont: .arialBold, withSize: .heighteen)
       label.textColor = UIColor.typoBlue
     }
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ReceiverTVC {
+  func setupOutletsCollectionsOrder() {
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
   }
 }

@@ -18,8 +18,8 @@ enum StaticLabel: String {
   case newPassword = "nouveau"
   case confirmPassword = "confirmer"
   case fullConfirmPassword = "confirmer mot de passe"
-  case enterYourDonationName = "Entrez le nom de votre don"
-  case enterItemDescription = "Entrez ici la description de votre donation"
+  case enterYourDonationName = "nom de votre don"
+  case enterItemDescription = "description de votre donation"
   case imageLoaderGuide = "Ajoutez de une à quatre images"
   case meetingPoint = "Lieu de rendez-vous"
 }

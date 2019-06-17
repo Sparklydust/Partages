@@ -13,6 +13,7 @@ extension UITextView {
   func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
+    self.tintColor = color
   }
 }
 

@@ -17,6 +17,7 @@
 		2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FA522A55B4C00EB076A /* UINavigationItem.swift */; };
 		2A289FA822A56B0200EB076A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FA722A56B0200EB076A /* User.swift */; };
 		2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FAD22A5734400EB076A /* ConversationVC.swift */; };
+		2A29525522B683E500AE757D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29525422B683E500AE757D /* SignInVC.swift */; };
 		2A87EC5E22A6453800EB969D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC5D22A6453800EB969D /* Message.swift */; };
 		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
 		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
@@ -31,6 +32,7 @@
 		2A90FB3E229FB54C006C246B /* superclarendon-rg-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */; };
 		2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB3F229FC3DF006C246B /* UIFont.swift */; };
 		2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90FB4122A05D40006C246B /* CameraHandler.swift */; };
+		2A966BA222B4439E00418CFF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A966BA122B4439E00418CFF /* UIView.swift */; };
 		2A98DF4222AE8E9F00F6F2AE /* Donator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A98DF4122AE8E9F00F6F2AE /* Donator.storyboard */; };
 		2A98DF4422AE8EAA00F6F2AE /* Receiver.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A98DF4322AE8EAA00F6F2AE /* Receiver.storyboard */; };
 		2A98DF4622AE8F6800F6F2AE /* DonatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4522AE8F6800F6F2AE /* DonatorVC.swift */; };
@@ -50,7 +52,7 @@
 		2AB43547229E6425007BFB93 /* HistoryFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */; };
 		2AC159FB22A7BBEA00CE935B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC159FA22A7BBEA00CE935B /* UIButton.swift */; };
 		2AC159FE22A7C40E00CE935B /* SignInSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC159FD22A7C40E00CE935B /* SignInSignUp.storyboard */; };
-		2AC15A0122A7C4D200CE935B /* SignInSignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */; };
+		2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC15A0022A7C4D200CE935B /* SignUpVC.swift */; };
 		2AC15A0322A7FC2C00CE935B /* LostPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC15A0222A7FC2C00CE935B /* LostPasswordVC.swift */; };
 		2AC8D0F522A0869D00416832 /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F422A0869D00416832 /* UIAlert.swift */; };
 		2AC8D0F822A1291700416832 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8D0F722A1291700416832 /* Profile.storyboard */; };
@@ -91,6 +93,8 @@
 		2A289FA522A55B4C00EB076A /* UINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationItem.swift; sourceTree = "<group>"; };
 		2A289FA722A56B0200EB076A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2A289FAD22A5734400EB076A /* ConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		2A29525422B683E500AE757D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		2A65C71822B780DB00BA4814 /* Partage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Partage.entitlements; sourceTree = "<group>"; };
 		2A87EC5D22A6453800EB969D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
 		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		2A90FB3D229FB54C006C246B /* superclarendon-rg-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-rg-bold.ttf"; sourceTree = "<group>"; };
 		2A90FB3F229FC3DF006C246B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		2A90FB4122A05D40006C246B /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
+		2A966BA122B4439E00418CFF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		2A98DF4122AE8E9F00F6F2AE /* Donator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Donator.storyboard; sourceTree = "<group>"; };
 		2A98DF4322AE8EAA00F6F2AE /* Receiver.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receiver.storyboard; sourceTree = "<group>"; };
 		2A98DF4522AE8F6800F6F2AE /* DonatorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatorVC.swift; sourceTree = "<group>"; };
@@ -126,7 +131,7 @@
 		2AB43546229E6425007BFB93 /* HistoryFavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFavoriteVC.swift; sourceTree = "<group>"; };
 		2AC159FA22A7BBEA00CE935B /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		2AC159FD22A7C40E00CE935B /* SignInSignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInSignUp.storyboard; sourceTree = "<group>"; };
-		2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpVC.swift; sourceTree = "<group>"; };
+		2AC15A0022A7C4D200CE935B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		2AC15A0222A7FC2C00CE935B /* LostPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordVC.swift; sourceTree = "<group>"; };
 		2AC8D0F422A0869D00416832 /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 		2AC8D0F722A1291700416832 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -192,6 +197,7 @@
 				2AAA793C22AA47E800529F2B /* UITextField.swift */,
 				2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */,
 				2AD516AC22B2B79C0032F28F /* UILabel.swift */,
+				2A966BA122B4439E00418CFF /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -204,6 +210,13 @@
 				2AFA4EBD22A8FC5B0039803E /* History Favorite */,
 			);
 			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		2A29525122B675B000AE757D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2A87EC5F22A659F300EB969D /* Conversation Cells */ = {
@@ -267,6 +280,7 @@
 			children = (
 				2AB43527229E55FE007BFB93 /* Partage */,
 				2AB43526229E55FE007BFB93 /* Products */,
+				2A29525122B675B000AE757D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,6 +295,7 @@
 		2AB43527229E55FE007BFB93 /* Partage */ = {
 			isa = PBXGroup;
 			children = (
+				2A65C71822B780DB00BA4814 /* Partage.entitlements */,
 				2AB4353B229E56F0007BFB93 /* Supporting Files */,
 				2AFA4EC822A9A9EE0039803E /* Enums */,
 				2A06727C229E905E00FFAECE /* Extensions */,
@@ -385,7 +400,8 @@
 		2AC159FF22A7C49D00CE935B /* SignInSignUp */ = {
 			isa = PBXGroup;
 			children = (
-				2AC15A0022A7C4D200CE935B /* SignInSignUpVC.swift */,
+				2A29525422B683E500AE757D /* SignInVC.swift */,
+				2AC15A0022A7C4D200CE935B /* SignUpVC.swift */,
 				2AC15A0222A7FC2C00CE935B /* LostPasswordVC.swift */,
 			);
 			path = SignInSignUp;
@@ -518,6 +534,14 @@
 				TargetAttributes = {
 					2AB43524229E55FE007BFB93 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.AutoFillCredentialProvider = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -584,6 +608,7 @@
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
 				2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */,
+				2A966BA222B4439E00418CFF /* UIView.swift in Sources */,
 				2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */,
 				2AAA794322AAB8E000529F2B /* ItemDetailsVC.swift in Sources */,
 				2A87EC5E22A6453800EB969D /* Message.swift in Sources */,
@@ -592,6 +617,7 @@
 				2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */,
 				2A901EAB22AFF9C000D3DD2A /* ReceiverTVC.swift in Sources */,
 				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
+				2A29525522B683E500AE757D /* SignInVC.swift in Sources */,
 				2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */,
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
@@ -612,7 +638,7 @@
 				2AD516AB22B13A5B0032F28F /* LocationHandler.swift in Sources */,
 				2A98DF4C22AEBD6400F6F2AE /* DonatorItemType.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
-				2AC15A0122A7C4D200CE935B /* SignInSignUpVC.swift in Sources */,
+				2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */,
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
@@ -770,10 +796,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Partage/Partage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8UNJX8SHV;
 				INFOPLIST_FILE = "$(SRCROOT)/Partage/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -789,10 +816,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Partage/Partage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8UNJX8SHV;
 				INFOPLIST_FILE = "$(SRCROOT)/Partage/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

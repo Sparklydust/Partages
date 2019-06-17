@@ -22,7 +22,7 @@ extension UIImageView {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.mainBlue.cgColor
-    self.layer.borderWidth = 1.5
+    self.layer.borderWidth = 1
   }
 }
 //MARK: - Round up a square image with a middle blue border
@@ -31,7 +31,7 @@ extension UIImageView {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.middleBlue.cgColor
-    self.layer.borderWidth = 1.5
+    self.layer.borderWidth = 1
   }
 }
 
@@ -41,7 +41,7 @@ extension UIImageView {
     self.layer.cornerRadius = self.frame.size.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.lightBlue.cgColor
-    self.layer.borderWidth = 1.5
+    self.layer.borderWidth = 1
   }
 }
 

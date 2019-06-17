@@ -53,6 +53,8 @@ extension EditProfileVC {
     setupButtons()
     setupStaticLabels()
     setupAllPlaceholders()
+    setupSwipeGesture()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -82,8 +84,8 @@ extension EditProfileVC{
 //MARK: - Setup cancel and save buttons design
 extension EditProfileVC {
   func setupButtons() {
-    cancelAndSaveButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
-    cancelAndSaveButtons[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
+    cancelAndSaveButtons[0].commonDesign(title: .cancel)
+    cancelAndSaveButtons[1].commonDesign(title: .save)
   }
 }
 
@@ -109,18 +111,31 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Tap gesture acton to dismiss keyboard
+//MARK: - Setup outlet collection to be in order
+extension EditProfileVC {
+  func setupOutletsCollectionsOrder() {
+    backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
+//MARK: - Setup tap gesture to dismiss keyboard
 extension EditProfileVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     resignTextFieldResponders()
   }
 }
 
-//MARK: - Dismiss keyboard when done button is clicked
-extension EditProfileVC: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    resignTextFieldResponders()
-    return true
+//MARK: - Setup swipe gesture
+extension EditProfileVC {
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func setupSwipeGesture() {
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    swipeDown.direction = .down
+    view.addGestureRecognizer(swipeDown)
   }
 }
 
@@ -133,6 +148,14 @@ extension EditProfileVC {
     oldPasswordTextField.resignFirstResponder()
     newPasswordTextField.resignFirstResponder()
     confirmPasswordTextField.resignFirstResponder()
+  }
+}
+
+//MARK: - Dismiss keyboard when done button is clicked
+extension EditProfileVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    resignTextFieldResponders()
+    return true
   }
 }
 

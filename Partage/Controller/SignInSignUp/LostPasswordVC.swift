@@ -42,41 +42,67 @@ extension LostPasswordVC {
     setupEmailTextField()
     setupEmailView()
     setupEmailPlaceholder()
+    setupSwipeGesture()
+    setupOutletsCollectionsOrder()
   }
 }
 
 //MARK: - Set cancel and send buttons design
 extension LostPasswordVC {
   func setupCancelAndSendButtons() {
-    cancelAndSendButtons[0].commonDesign(title: .cancel, shadowWidth: 0, shadowHeight: -2)
-    cancelAndSendButtons[1].commonDesign(title: .send, shadowWidth: 0, shadowHeight: 2)
+    cancelAndSendButtons[0].commonDesign(title: .cancel)
+    cancelAndSendButtons[1].commonDesign(title: .send)
   }
 }
 
 //MARK: - Set email text design
 extension LostPasswordVC {
   func setupEmailTextField() {
-    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
-    emailTextField.layer.cornerRadius = 10
+    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
   
   func setupEmailView() {
-    emailView.backgroundColor = UIColor.mainBlue
-    emailView.layer.cornerRadius = 10
+    emailView.addBorder(atThe: .bottom, in: .mainBlue)
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension LostPasswordVC {
+  func setupOutletsCollectionsOrder() {
+    cancelAndSendButtons = cancelAndSendButtons.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup email placeholder design
 extension LostPasswordVC {
   func setupEmailPlaceholder() {
-    emailTextField.setupPlaceholderDesign(title: .email, color: .iceBackground)
+    emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
   }
 }
 
-//MARK: - Tap gesture dismiss keyboard
+//MARK: - Setup tap gesture to dismiss keyboard
 extension LostPasswordVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     emailTextField.resignFirstResponder()
+  }
+}
+
+//MARK: - Setup swipe gestures
+extension LostPasswordVC {
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func setupSwipeGesture() {
+    let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    swipeLeft.direction = .left
+    swipeRight.direction = .right
+    swipeDown.direction = .down
+    view.addGestureRecognizer(swipeLeft)
+    view.addGestureRecognizer(swipeDown)
+    view.addGestureRecognizer(swipeRight)
   }
 }
 

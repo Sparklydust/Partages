@@ -96,7 +96,15 @@ extension LocationHandler {
   }
 }
 
-//MARK: - #4.1 Get user direction from user location to pinned location
+//MARK - #4 Method to center map view around the meeting point
+extension LocationHandler {
+  func centerView(around meetingPoint: CLLocationCoordinate2D, onto mapView: MKMapView) {
+    let region = MKCoordinateRegion.init(center: meetingPoint, latitudinalMeters: 25, longitudinalMeters: 50)
+    mapView.setRegion(region, animated: true)
+  }
+}
+
+//MARK: - #5.1 Get user direction from user location to pinned location
 extension LocationHandler {
   func getDirectionFromUserToPinnedLocation(on mapView: MKMapView ,vc: UIViewController) {
     guard let location = locationManager.location?.coordinate else {
@@ -121,7 +129,7 @@ extension LocationHandler {
     }
   }
   
-  //MARK: - #4.2 Method to use on the proper vc to display the directions in a blue line
+  //MARK: - #5.2 Method to use on the proper vc to display the directions in a blue line
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
     renderer.strokeColor = .mainBlue
@@ -129,7 +137,7 @@ extension LocationHandler {
   }
 }
 
-//MARK - Method to enter map view around the user location
+//MARK - Method to center map view around the user location
 extension LocationHandler {
   func centerViewOnUserLocation(onto mapView: MKMapView, byMeters distance: CLLocationDistance) {
     if let location = locationManager.location?.coordinate {

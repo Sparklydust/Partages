@@ -10,15 +10,12 @@ import UIKit
 
 //MARK: - Opening display share/receive button design
 extension UIButton {
-  func shareReceiveDesign(title: ButtonName, shadowHeight height: Int) {
+  func shareReceiveDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.iceBackground, for: .normal)
+    self.setTitleColor(.iceBackground, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .twentyTwo)
-    self.backgroundColor = UIColor.mainBlue
+    self.backgroundColor = .mainBlue
     self.layer.cornerRadius = 20
-    self.layer.shadowOffset = CGSize(width: 2, height: height)
-    self.layer.shadowColor = UIColor.gray.cgColor
-    self.layer.shadowOpacity = 2
   }
 }
 
@@ -26,23 +23,20 @@ extension UIButton {
 extension UIButton {
   func signInSignUpDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.typoBlue, for: .normal)
+    self.setTitleColor(.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
   }
 }
 
 //MARK: - Common button action design
 extension UIButton {
-  func commonDesign(title: ButtonName, shadowWidth width: Int, shadowHeight height: Int) {
+  func commonDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.lightBlue, for: .normal)
+    self.setTitleColor(.iceBackground, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .twenty)
     self.titleLabel?.adjustsFontSizeToFitWidth = true
-    self.backgroundColor = UIColor.mainBlue
-    self.layer.cornerRadius = 20
-    self.layer.shadowOffset = CGSize(width: width, height: height)
-    self.layer.shadowColor = UIColor.gray.cgColor
-    self.layer.shadowOpacity = 2
+    self.backgroundColor = .mainBlue
+    self.layer.cornerRadius = 10
   }
 }
 
@@ -50,13 +44,13 @@ extension UIButton {
 extension UIButton {
   func signInOrSignUpSelectedDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.mainBlue, for: .normal)
+    self.setTitleColor(.mainBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
   }
   
   func signInOrSignUpUnselectedDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.typoBlue, for: .normal)
+    self.setTitleColor(.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
   }
 }
@@ -72,30 +66,36 @@ extension UIButton {
 
 //MARK: - History and Favorite selected design
 extension UIButton {
-  func historyFavoriteSelectedDesign(title: ButtonName, shadowWidth width: Int, shadowHeight height: Int) {
+  func historyFavoriteSelectedDesign(named title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.typoBlue, for: .normal)
-    self.backgroundColor = UIColor.iceBackground
+    self.setTitleColor(.typoBlue, for: .normal)
+    self.backgroundColor = .iceBackground
     self.layer.borderColor = UIColor.mainBlue.cgColor
     self.layer.borderWidth = 1
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
-    self.layer.shadowOffset = CGSize(width: width, height: height)
-    self.layer.shadowColor = UIColor.gray.cgColor
-    self.layer.shadowOpacity = 2
     self.isEnabled = false
   }
 }
 
 //MARK: - History and Favorite unselected design
 extension UIButton {
-  func historyFavoriteUnselectedDesign(title: ButtonName, shadowWidth width: Int, shadowHeight height: Int) {
+  func historyFavoriteUnselectedDesign(named title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
-    self.setTitleColor(UIColor.lightBlue, for: .normal)
-    self.backgroundColor = UIColor.mainBlue
+    self.setTitleColor(.iceBackground, for: .normal)
+    self.backgroundColor = .mainBlue
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
-    self.layer.shadowOffset = CGSize(width: width, height: height)
-    self.layer.shadowColor = UIColor.gray.cgColor
-    self.layer.shadowOpacity = 2
     self.isEnabled = true
+  }
+}
+
+//MARK: - Dot button is / is not selected design
+extension UIButton {
+  func isSelectedAnd(isNot: UIButton) {
+    self.setTitle("●", for: .normal)
+    isNot.setTitle("", for: .normal)
+    self.setTitleColor(.mainBlue, for: .normal)
+    isNot.setTitleColor(.typoBlue, for: .normal)
+    self.isEnabled = false
+    isNot.isEnabled = true
   }
 }

@@ -22,6 +22,7 @@ class ItemDetailsVC: UIViewController {
   @IBOutlet weak var itemDescriptionTextView: UITextView!
   
   @IBOutlet weak var donatorReceiverProfileImage: UIImageView!
+  @IBOutlet weak var itemImage: UIImageView!
   
   @IBOutlet weak var itemPictureButton: UIButton!
   @IBOutlet weak var editButton: UIBarButtonItem!
@@ -71,14 +72,16 @@ extension ItemDetailsVC {
 //MARK: - Setup main developer design
 extension ItemDetailsVC {
   func setupMainDesign() {
+    donatorReceiverProfileImage.roundedWithMainBlueBorder()
     setupMainLabels()
     setupStaticItemDetailsLabels()
     setupLittleBarViewBackgroundColor()
     setupAddToCalendarAndMessageButton()
     setupItemDescriptionTextView()
-    donatorReceiverProfileImage.roundedWithMainBlueBorder()
     setupMapView()
     setupEditButton()
+    setupItemImage()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -142,18 +145,33 @@ extension ItemDetailsVC {
   }
 }
 
+//MARK: - Setup item image design
+extension ItemDetailsVC {
+  func setupItemImage() {
+    itemImage.layer.cornerRadius = 2
+  }
+}
+
 //MARK: - Setup add to Calendar and message button design
 extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
     buttonsNameReceiverOrDonator()
-    addToCalendarAndMessageButton[0].commonDesign(title: .addToCalendar, shadowWidth: 0, shadowHeight: -2)
+    addToCalendarAndMessageButton[0].commonDesign(title: .addToCalendar)
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ItemDetailsVC {
+  func setupOutletsCollectionsOrder() {
+    staticItemDetailsLabels = staticItemDetailsLabels.sorted(by: { $0.tag < $1.tag })
+    addToCalendarAndMessageButton = addToCalendarAndMessageButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
   func buttonsNameReceiverOrDonator() {
-    addToCalendarAndMessageButton[1].commonDesign(title: .messageToReceiver, shadowWidth: 0, shadowHeight: 2)
+    addToCalendarAndMessageButton[1].commonDesign(title: .messageToReceiver)
   }
   
   func staticLabelReceiverOrDonator() {

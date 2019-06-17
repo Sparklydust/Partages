@@ -10,6 +10,8 @@ import UIKit
 
 class SharingVC: UIViewController {
   
+  @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) { }
+  
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var signInSignUpButton: UIButton!
   @IBOutlet weak var receiveButton: UIButton!
@@ -33,8 +35,8 @@ class SharingVC: UIViewController {
 //MARK: - Setup all buttons
 extension SharingVC {
   func setupAllButtons() {
-    shareButton.shareReceiveDesign(title: .shareMain, shadowHeight: -2)
-    receiveButton.shareReceiveDesign(title: .receiveMain, shadowHeight: 2)
+    shareButton.shareReceiveDesign(title: .shareMain)
+    receiveButton.shareReceiveDesign(title: .receiveMain)
     signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
   }
 }

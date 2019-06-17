@@ -17,10 +17,12 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet weak var timeLabel: UILabel!
   
   @IBOutlet weak var favoriteButton: UIButton!
-  @IBOutlet weak var itemImageButton: UIButton!
   @IBOutlet weak var mapViewButton: UIButton!
   
+  @IBOutlet weak var itemImage: UIImageView!
+  
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
+  @IBOutlet weak var littleBarView: UIView!
   
   @IBOutlet weak var itemDescriptionTextView: UITextView!
   
@@ -76,6 +78,9 @@ extension ItemSelectedVC {
     setupStaticLabels()
     setupItemDescriptionBackgroundView()
     setupItemDescriptionTextView()
+    setupItemImage()
+    setupLittleBarView()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -134,10 +139,32 @@ extension ItemSelectedVC {
   }
 }
 
+//MARK: - Setup outlet collection to be in order
+extension ItemSelectedVC {
+  func setupOutletsCollectionsOrder() {
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+    messageAndReceiveButtons = messageAndReceiveButtons.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
 //MARK: - Setup cancel and save buttons design
 extension ItemSelectedVC {
   func setupMessageAndReceiveButtons() {
-    messageAndReceiveButtons[0].commonDesign(title: .messageToDonator, shadowWidth: 0, shadowHeight: -2)
-    messageAndReceiveButtons[1].commonDesign(title: .receiveThisDonation, shadowWidth: 0, shadowHeight: 2)
+    messageAndReceiveButtons[0].commonDesign(title: .messageToDonator)
+    messageAndReceiveButtons[1].commonDesign(title: .receiveThisDonation)
+  }
+}
+
+//MARK: - Setup item image design
+extension ItemSelectedVC {
+  func setupItemImage() {
+    itemImage.layer.cornerRadius = 2
+  }
+}
+
+//MARK: - Setup little bar design
+extension ItemSelectedVC {
+  func setupLittleBarView() {
+    littleBarView.backgroundColor = .mainBlue
   }
 }

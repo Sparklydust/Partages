@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,39 +39,59 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ac2-0K-aZ7">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CkU-Wa-2SE">
                                                                 <rect key="frame" x="278.5" y="0.0" width="95.5" height="95.5"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ac2-0K-aZ7">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="95.5"/>
+                                                                        <state key="normal" image="addCross"/>
+                                                                        <connections>
+                                                                            <action selector="addItemImageButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="jpE-NB-qog"/>
+                                                                            <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesVC" id="yUK-Wu-umg"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-BZ-CiN">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="95.5"/>
+                                                                    </imageView>
+                                                                </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="Ac2-0K-aZ7" secondAttribute="height" multiplier="1:1" id="a5v-K5-0QD"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="tTV-BZ-CiN" secondAttribute="bottom" id="72K-aW-3Me"/>
+                                                                    <constraint firstItem="Ac2-0K-aZ7" firstAttribute="top" secondItem="CkU-Wa-2SE" secondAttribute="top" id="Kfn-mc-xiq"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Ac2-0K-aZ7" secondAttribute="bottom" id="ese-1H-0Ls"/>
+                                                                    <constraint firstItem="Ac2-0K-aZ7" firstAttribute="leading" secondItem="CkU-Wa-2SE" secondAttribute="leading" id="ffQ-cn-Smq"/>
+                                                                    <constraint firstItem="tTV-BZ-CiN" firstAttribute="leading" secondItem="CkU-Wa-2SE" secondAttribute="leading" id="foV-uT-aLz"/>
+                                                                    <constraint firstItem="tTV-BZ-CiN" firstAttribute="top" secondItem="CkU-Wa-2SE" secondAttribute="top" id="kaN-gb-eIY"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Ac2-0K-aZ7" secondAttribute="trailing" id="mJ1-SI-mER"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="tTV-BZ-CiN" secondAttribute="trailing" id="nKx-vE-s4S"/>
+                                                                    <constraint firstAttribute="width" secondItem="CkU-Wa-2SE" secondAttribute="height" multiplier="1:1" id="t6w-mY-US4"/>
                                                                 </constraints>
-                                                                <state key="normal" image="addCross"/>
-                                                                <connections>
-                                                                    <action selector="addItemImageButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="jpE-NB-qog"/>
-                                                                    <segue destination="vRE-mI-7an" kind="show" identifier="goToItemImagesVC" id="yUK-Wu-umg"/>
-                                                                </connections>
-                                                            </button>
+                                                            </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="Ac2-0K-aZ7" firstAttribute="centerY" secondItem="FOT-xq-aR6" secondAttribute="centerY" id="1Ap-iF-eaR"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Ac2-0K-aZ7" secondAttribute="trailing" id="aGY-Ph-BOb"/>
-                                                            <constraint firstItem="Ac2-0K-aZ7" firstAttribute="top" secondItem="hc6-lY-nw0" secondAttribute="top" id="eaa-NO-uTk"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Ac2-0K-aZ7" secondAttribute="bottom" id="pSh-H9-1rm"/>
+                                                            <constraint firstItem="CkU-Wa-2SE" firstAttribute="centerY" secondItem="FOT-xq-aR6" secondAttribute="centerY" id="138-rq-TL7"/>
+                                                            <constraint firstItem="CkU-Wa-2SE" firstAttribute="top" secondItem="hc6-lY-nw0" secondAttribute="top" id="Abo-Gj-j8O"/>
+                                                            <constraint firstAttribute="trailing" secondItem="CkU-Wa-2SE" secondAttribute="trailing" id="hwC-PC-GyN"/>
+                                                            <constraint firstAttribute="bottom" secondItem="CkU-Wa-2SE" secondAttribute="bottom" id="w3z-9N-YNp"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0x0-9e-Sqc">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGV-2w-42a">
                                                         <rect key="frame" x="0.0" y="95.5" width="374" height="1"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="3kz-e8-DLf"/>
-                                                        </constraints>
-                                                    </view>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0x0-9e-Sqc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="3kz-e8-DLf"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="hc6-lY-nw0" secondAttribute="trailing" id="3lx-5C-Gk6"/>
+                                                    <constraint firstItem="eGV-2w-42a" firstAttribute="leading" secondItem="6hO-TL-Vdv" secondAttribute="leading" id="8iW-zd-bWB"/>
                                                     <constraint firstItem="hc6-lY-nw0" firstAttribute="top" secondItem="6hO-TL-Vdv" secondAttribute="top" id="BHc-nR-3J3"/>
-                                                    <constraint firstAttribute="bottom" secondItem="0x0-9e-Sqc" secondAttribute="bottom" id="EoR-s2-eab"/>
-                                                    <constraint firstAttribute="trailing" secondItem="0x0-9e-Sqc" secondAttribute="trailing" id="FXI-Xa-0EZ"/>
-                                                    <constraint firstItem="0x0-9e-Sqc" firstAttribute="leading" secondItem="6hO-TL-Vdv" secondAttribute="leading" id="YPj-aV-5nn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eGV-2w-42a" secondAttribute="trailing" id="Uea-oa-gyY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eGV-2w-42a" secondAttribute="bottom" id="bR0-oV-H8R"/>
                                                     <constraint firstItem="hc6-lY-nw0" firstAttribute="leading" secondItem="6hO-TL-Vdv" secondAttribute="leading" id="lTC-SL-7ZO"/>
                                                 </constraints>
                                             </stackView>
@@ -89,7 +108,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-We-ze4">
                                         <rect key="frame" x="0.0" y="213" width="374" height="203"/>
                                         <subviews>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="91N-TK-Vz6">
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="91N-TK-Vz6">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="96.5"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="581874588.77953804">
                                                     <!--2019-06-10 15:49:48 +0000-->
@@ -157,7 +176,7 @@
                                     <constraint firstItem="xjh-We-ze4" firstAttribute="leading" secondItem="SEx-B1-A5k" secondAttribute="leading" id="u6o-jp-8aX"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-Qh-C3Q">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-Qh-C3Q">
                                 <rect key="frame" x="20" y="753" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="47y-fY-z4A"/>
@@ -167,7 +186,7 @@
                                     <action selector="makeADonationButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="yeG-Gs-4ie"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-GM-hMF">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-GM-hMF">
                                 <rect key="frame" x="20" y="693" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Zw7-3a-JUF"/>
@@ -200,6 +219,7 @@
                         <outlet property="itemDatePicker" destination="91N-TK-Vz6" id="YPT-gv-OKw"/>
                         <outlet property="itemDescriptionBackgroundView" destination="acE-wg-lOa" id="AFK-n0-GAl"/>
                         <outlet property="itemDescriptionTextView" destination="Rh8-ME-s91" id="BZ2-Gg-9yU"/>
+                        <outlet property="itemImage" destination="tTV-BZ-CiN" id="cWF-QI-SS2"/>
                         <outlet property="itemNameTextField" destination="FOT-xq-aR6" id="mpq-7S-ve5"/>
                         <outlet property="itemTypePickerView" destination="ZeK-d7-z6F" id="bNN-35-kbw"/>
                         <outlet property="littleBarView" destination="0x0-9e-Sqc" id="AWc-gK-mdE"/>
@@ -207,9 +227,11 @@
                         <outlet property="mapView" destination="MpS-cZ-hzH" id="nVt-np-iVZ"/>
                         <outletCollection property="resetAndDonateButton" destination="dtQ-GM-hMF" collectionClass="NSMutableArray" id="gHk-M9-bgG"/>
                         <outletCollection property="resetAndDonateButton" destination="mC6-Qh-C3Q" collectionClass="NSMutableArray" id="YIX-19-z9Y"/>
+                        <segue destination="hOX-jC-sIC" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="drK-Ik-I5j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubd-ul-m7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hOX-jC-sIC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="224.63768115942031" y="41.517857142857139"/>
         </scene>
@@ -219,7 +241,7 @@
                 <viewControllerPlaceholder storyboardName="ItemImages" id="vRE-mI-7an" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPX-8g-8Al" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="838" y="-124"/>
+            <point key="canvasLocation" x="692" y="-128"/>
         </scene>
         <!--MapView-->
         <scene sceneID="852-54-Upk">
@@ -227,7 +249,7 @@
                 <viewControllerPlaceholder storyboardName="MapView" id="eEj-oc-8me" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTz-te-pyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="825" y="13"/>
+            <point key="canvasLocation" x="801" y="17"/>
         </scene>
     </scenes>
     <resources>

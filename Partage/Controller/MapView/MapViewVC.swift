@@ -68,6 +68,6 @@ extension MapViewVC: MKMapViewDelegate, CLLocationManagerDelegate {
 //MARK: - Setup save place button design
 extension MapViewVC {
   func setupSaveLocationButton() {
-    saveLocationButton.commonDesign(title: .saveMeetingPoint, shadowWidth: 0, shadowHeight: 2)
+    saveLocationButton.commonDesign(title: .saveMeetingPoint)
   }
 }

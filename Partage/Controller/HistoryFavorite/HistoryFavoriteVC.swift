@@ -111,8 +111,8 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func setupHistoryButtonIsSelected() {
     UIView.animate(withDuration: 0.3) {
-      self.historyButton.historyFavoriteSelectedDesign(title: .history, shadowWidth: 0, shadowHeight: 0)
-      self.favoriteButton.historyFavoriteUnselectedDesign(title: .favorite, shadowWidth: -3, shadowHeight: 3)
+      self.historyButton.historyFavoriteSelectedDesign(named: .history)
+      self.favoriteButton.historyFavoriteUnselectedDesign(named: .favorite)
     }
   }
 }
@@ -121,8 +121,8 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func setupFavoriteButtonIsSelected() {
     UIView.animate(withDuration: 0.3) {
-      self.favoriteButton.historyFavoriteSelectedDesign(title: .favorite, shadowWidth: 0, shadowHeight: 0)
-      self.historyButton.historyFavoriteUnselectedDesign(title: .history, shadowWidth: 3, shadowHeight: 3)
+      self.favoriteButton.historyFavoriteSelectedDesign(named: .favorite)
+      self.historyButton.historyFavoriteUnselectedDesign(named: .history)
     }
   }
 }

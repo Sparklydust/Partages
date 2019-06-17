@@ -76,6 +76,7 @@ extension ItemImagesVC {
     setupLittleSquareImages()
     setupResetAndSaveButton()
     setupUserGuideLabel()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -122,8 +123,8 @@ extension ItemImagesVC {
 //MARK: - Setup reset and save button design
 extension ItemImagesVC {
   func setupResetAndSaveButton() {
-    resetAndSaveButton[0].commonDesign(title: .reset, shadowWidth: 0, shadowHeight: -2)
-    resetAndSaveButton[1].commonDesign(title: .save, shadowWidth: 0, shadowHeight: 2)
+    resetAndSaveButton[0].commonDesign(title: .reset)
+    resetAndSaveButton[1].commonDesign(title: .save)
   }
 }
 
@@ -176,6 +177,17 @@ extension ItemImagesVC {
     littleSquareViews[1].isHidden = false
     littleSquareViews[2].isHidden = false
     littleSquareViews[3].isHidden = false
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ItemImagesVC {
+  func setupOutletsCollectionsOrder() {
+    stackViews = stackViews.sorted(by: { $0.tag < $1.tag })
+    littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
+    littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
+    littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
+    resetAndSaveButton = resetAndSaveButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 

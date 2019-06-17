@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,9 +43,11 @@
                         <outlet property="editButton" destination="Ih5-il-RPe" id="Ei1-Kn-4WB"/>
                         <outlet property="messageTableView" destination="WQj-iK-QoL" id="kjP-Ox-VJh"/>
                         <segue destination="lLC-Dh-5o5" kind="show" identifier="goToConversationVC" id="STX-Vo-GlK"/>
+                        <segue destination="Xhi-7D-CU6" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="UNK-Ax-MF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Va-XH-L1S" sceneMemberID="firstResponder"/>
+                <exit id="Xhi-7D-CU6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2502" y="-239"/>
         </scene>

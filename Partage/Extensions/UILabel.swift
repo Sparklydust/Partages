@@ -15,3 +15,12 @@ extension UILabel {
     self.textColor = color
   }
 }
+
+//MARK: - Dot button is / is not selected design
+extension UILabel {
+  func isSelectedDesign() {
+    self.text = "●"
+    self.textColor = .mainBlue
+    self.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+  }
+}

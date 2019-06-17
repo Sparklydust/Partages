@@ -17,4 +17,8 @@ enum Segue: String {
   case goesToModifyDonationVC = "goToModifyDonationVC"
   case goesToDonatorMapViewVC = "goToDonatorMapViewVC"
   case goesToMapViewVC = "goToMapViewVC"
+  case goesToSignUpVC = "goToSignUpVC"
+  case goesToSignInVC = "goToSignInVC"
+  case unwindsToSharingVC = "unwindToSharingVC"
+  case unwindsToSignInVC = "unwindToSignInVC"
 }

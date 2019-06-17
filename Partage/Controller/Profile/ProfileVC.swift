@@ -18,14 +18,19 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var passwordLabel: UILabel!
   
   @IBOutlet var backgroundViews: [UIView]!
-  @IBOutlet var staticsLabel: [UILabel]!
-  @IBOutlet var editButtonsLabel: [UIButton]!
-  @IBOutlet var disconectionButtonsLabel: [UIButton]!
+  @IBOutlet var staticLabels: [UILabel]!
+  @IBOutlet var editButtons: [UIButton]!
+  @IBOutlet var disconectionButtons: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupProfileImage()
+    
+    firstNameLabel.text = "Roland"
+    lastNameLabel.text = "Lariotte"
+    emailLabel.text = "roland.sound@live.fr"
+    passwordLabel.text = "●●●●●●●●●●●●●●"
   }
 }
 
@@ -65,7 +70,7 @@ extension ProfileVC {
     setupEditButtons()
     setupDisconnectButtons()
     setupStaticLabelName()
-    setupBackgroundViews()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -77,39 +82,29 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Setup all background views design
-extension ProfileVC {
-  func setupBackgroundViews() {
-    for view in backgroundViews {
-      view.backgroundColor = UIColor.mainBlue
-      view.layer.cornerRadius = 10
-    }
-  }
-}
-
 //MARK: - Setup main labels design
 extension ProfileVC {
   func setupMainLabels() {
-    firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
-    lastNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
-    emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
-    passwordLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .iceBackground)
+    firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    lastNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    passwordLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
 }
 
 //MARK: - Setup all static labels design
 extension ProfileVC {
   func staticLabelFont() {
-    for label in staticsLabel {
+    for label in staticLabels {
       label.setupFont(as: .arialBold, sized: .fourteen, in: .typoBlue)
     }
   }
   
   func setupStaticLabelName() {
-    staticsLabel[0].text = StaticLabel.firsName.rawValue
-    staticsLabel[1].text = StaticLabel.lastName.rawValue
-    staticsLabel[2].text = StaticLabel.email.rawValue
-    staticsLabel[3].text = StaticLabel.password.rawValue
+    staticLabels[0].text = StaticLabel.firsName.rawValue
+    staticLabels[1].text = StaticLabel.lastName.rawValue
+    staticLabels[2].text = StaticLabel.email.rawValue
+    staticLabels[3].text = StaticLabel.password.rawValue
     staticLabelFont()
   }
 }
@@ -117,7 +112,7 @@ extension ProfileVC {
 //MARK: - Setup edit button design
 extension ProfileVC {
   func setupEditButtons() {
-    for label in editButtonsLabel {
+    for label in editButtons {
       label.signInSignUpDesign(title: .edit)
     }
   }
@@ -126,12 +121,22 @@ extension ProfileVC {
 //MARK: - Setup disconnect and delete accound button
 extension ProfileVC {
   func setupDisconnectButtons() {
-    disconectionButtonsLabel[0].setTitle(ButtonName.lowSignOut.rawValue, for: .normal)
-    disconectionButtonsLabel[0].tintColor = UIColor.typoBlue
-    disconectionButtonsLabel[1].setTitle(ButtonName.lowEraseAccount.rawValue, for: .normal)
-    disconectionButtonsLabel[1].tintColor = UIColor.mainRed
-    for label in disconectionButtonsLabel {
+    disconectionButtons[0].setTitle(ButtonName.lowSignOut.rawValue, for: .normal)
+    disconectionButtons[0].tintColor = UIColor.typoBlue
+    disconectionButtons[1].setTitle(ButtonName.lowEraseAccount.rawValue, for: .normal)
+    disconectionButtons[1].tintColor = UIColor.mainRed
+    for label in disconectionButtons {
       label.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
     }
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ProfileVC {
+  func setupOutletsCollectionsOrder() {
+    backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+    editButtons = editButtons.sorted(by: { $0.tag < $1.tag })
+    disconectionButtons = disconectionButtons.sorted(by: { $0.tag < $1.tag })
   }
 }

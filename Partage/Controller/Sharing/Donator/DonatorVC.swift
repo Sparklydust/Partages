@@ -18,6 +18,8 @@ class DonatorVC: UIViewController {
   
   @IBOutlet weak var itemDescriptionTextView: UITextView!
   
+  @IBOutlet weak var itemImage: UIImageView!
+  
   @IBOutlet weak var addItemImageButton: UIButton!
   @IBOutlet weak var mapKitButton: UIButton!
   
@@ -76,6 +78,8 @@ extension DonatorVC {
     setupItemDescriptionTextView()
     setupItemDescriptionBackgroundView()
     setupMapView()
+    setupItemImage()
+    setupOutletsCollectionsOrder()
   }
 }
 
@@ -156,8 +160,22 @@ extension DonatorVC {
 //MARK: - Setup reset and make donation button design
 extension DonatorVC {
   func setupResetAndDonateButton() {
-    resetAndDonateButton[0].commonDesign(title: .reset, shadowWidth: 0, shadowHeight: -2)
-    resetAndDonateButton[1].commonDesign(title: .makeADonation, shadowWidth: 0, shadowHeight: 2)
+    resetAndDonateButton[0].commonDesign(title: .reset)
+    resetAndDonateButton[1].commonDesign(title: .makeADonation)
+  }
+}
+
+//MARK: - Setup item image design
+extension DonatorVC {
+  func setupItemImage() {
+    itemImage.layer.cornerRadius = 1
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension DonatorVC {
+  func setupOutletsCollectionsOrder() {
+    resetAndDonateButton = resetAndDonateButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 

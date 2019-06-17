@@ -13,6 +13,7 @@ extension UITextField {
   func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
+    self.tintColor = color
   }
 }
 
@@ -24,6 +25,6 @@ extension UITextField {
       attributes: [
         NSAttributedString.Key.foregroundColor: color,
         NSAttributedString.Key.font: UIFont(
-          customFont: CustomFont.arial, withSize: FontSize.fifteen)!])
+          customFont: .arial, withSize: .fifteen)!])
   }
 }
