@@ -15,4 +15,5 @@ enum AlertTitle: String {
   case locationOff = "Localisation désactivée"
   case error = "Erreur"
   case cameraUse = "Accès à votre caméra et album"
+  case restricted = "Accès restreint"
 }

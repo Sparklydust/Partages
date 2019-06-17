@@ -19,4 +19,5 @@ enum AlertMessage: String {
   case locationIssue = "Il y a un problème de connection à la localisation du lieu de rendez-vous. Merci de réessayer ultérieurement"
   case getDirectionIssue = "Il y a un problème pour obtenir la direction au lieu de rendez-vous. Merci de vérifier vos réglages dans les paramètres ou de réessayer ultérieurement"
   case noDirectionsCalculated = "Nous n'avons pu calculer le temps de trajet. Veuillez vérifier votre connection"
+  case restricted = "L'accès à ce service ne vous est pas autorisé. Pour changer vos réglages, veuillez-vous rapprocher de la personne succeptible de lever la restriction"
 }

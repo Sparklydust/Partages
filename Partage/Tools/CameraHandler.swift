@@ -43,22 +43,13 @@ extension CameraHandler {
   }
 }
 
-//MARK: - Alert action sheet that present choices between camera and photo library
+//MARK: - Methods to show action sheet with camera and/or photo library as option
 extension CameraHandler {
-  func showCameraActionSheet(vc: UIViewController) {
-    currentVC = vc
-    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
-    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.camera.rawValue, style: .default, handler: {
-      (alert: UIAlertAction!) -> Void in
-      self.openCamera()
-    }))
-    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.photoLibrary.rawValue, style: .default, handler: {
-      (alert: UIAlertAction!) -> Void in
-      self.openPhotoLibrary()
-    }))
-    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
-    vc.present(actionSheet, animated: true, completion: nil)
+  func showActionSheetWithCameraAndLibrary(vc: UIViewController) {
+    vc.showActionSheetWithCancel(title: [
+      (ActionSheetLabel.camera, { [weak self] in self?.openCamera() }),
+      (ActionSheetLabel.photoLibrary, { [weak self] in self?.openPhotoLibrary() })
+      ])
   }
 }
 
@@ -71,7 +62,7 @@ extension CameraHandler {
     let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
     
     switch libraryStatus {
-    case .denied, .notDetermined, .restricted:
+    case .denied, .notDetermined:
       PHPhotoLibrary.requestAuthorization {
         (access) in
         guard access == .authorized else {
@@ -81,40 +72,60 @@ extension CameraHandler {
           return
         }
         switch cameraStatus {
-        case .denied, .notDetermined, .restricted:
+        case .denied, .notDetermined:
           AVCaptureDevice.requestAccess(for: .video, completionHandler: {
             (access) in
             guard access else {
-              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              DispatchQueue.main.async {
+                vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              }
               return
             }
             DispatchQueue.main.async {
-              self.showCameraActionSheet(vc: vc)
+              self.showActionSheetWithCameraAndLibrary(vc: vc)
             }
           })
+        case .restricted:
+          DispatchQueue.main.async {
+            vc.showAlert(title: .restricted, message: .restricted)
+          }
         case .authorized:
           guard libraryStatus == .authorized else {
-            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            DispatchQueue.main.async {
+              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            }
             return
           }
-          self.showCameraActionSheet(vc: vc)
+          DispatchQueue.main.async {
+            self.showActionSheetWithCameraAndLibrary(vc: vc)
+          }
         @unknown default:
           fatalError()
         }
+      }
+    case .restricted:
+      DispatchQueue.main.async {
+        vc.showAlert(title: .restricted, message: .restricted)
       }
     case .authorized:
       guard cameraStatus == .authorized else {
         AVCaptureDevice.requestAccess(for: .video, completionHandler: {
           (access) in
           guard access else {
-            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            DispatchQueue.main.async {
+              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            }
             return
           }
-          self.showCameraActionSheet(vc: vc)
+          DispatchQueue.main.async {
+            self.showActionSheetWithCameraAndLibrary(vc: vc)
+          }
         })
         return
       }
-      self.showCameraActionSheet(vc: vc)
+      DispatchQueue.main.async {
+        self.showActionSheetWithCameraAndLibrary(vc: vc)
+      }
     @unknown default:
       fatalError()
     }

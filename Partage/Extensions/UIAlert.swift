@@ -59,19 +59,18 @@ extension UIViewController {
 
 //MARK: - Alert that shows an action sheet with cancel 
 extension UIViewController {
-  func showActionSheetWithCancel(vc: UIViewController, title: [ActionSheetLabel] /*Make a function parameter here to match title*/) {
+  typealias AlertAction = () -> ()
+  typealias AlertButtonAction = (ActionSheetLabel, AlertAction)
+  
+  func showActionSheetWithCancel(title: [AlertButtonAction]) {
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
     for value in title {
-      actionSheet.addAction(UIAlertAction(title: value.rawValue, style: .default, handler: {
+      actionSheet.addAction(UIAlertAction(title: value.0.rawValue, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
-      
-        //Use the parameter function here to match title
-      
+        value.1()
     }))
     }
-    
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
-    vc.present(actionSheet, animated: true, completion: nil)
+    self.present(actionSheet, animated: true, completion: nil)
   }
 }
