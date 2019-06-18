@@ -43,6 +43,7 @@ extension SignUpVC {
 //MARK: - Setup main VC design
 extension SignUpVC {
   func setupMainDesign() {
+    setupMainView()
     setupSignUpIsSelectedButtons()
     setupCancelButton()
     setupBackgroundTextView()
@@ -52,6 +53,13 @@ extension SignUpVC {
     setupDotLabel()
     setupSwipeGesture()
     setupOutletsCollectionsOrder()
+  }
+}
+
+//MARK: - Setup main view design
+extension SignUpVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -130,7 +138,7 @@ extension SignUpVC {
     firstNameTextField.setupPlaceholderDesign(title: .firsName, color: .middleBlue)
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
     passwordTextField.setupPlaceholderDesign(title: .password, color: .middleBlue)
-    confirmPasswordTextField.setupPlaceholderDesign(title: .fullConfirmPassword, color: .middleBlue)
+    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .middleBlue)
   }
 }
 

@@ -23,7 +23,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="K1a-eD-nOy" firstAttribute="bottom" secondItem="WQj-iK-QoL" secondAttribute="bottom" id="6pE-v1-YGg"/>
                             <constraint firstItem="WQj-iK-QoL" firstAttribute="top" secondItem="K1a-eD-nOy" secondAttribute="top" id="Mof-wZ-5wt"/>
@@ -110,7 +110,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M0v-hu-DDs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XHX-Hc-e2W" secondAttribute="top" constant="30" id="2XG-YH-A3Q"/>
                             <constraint firstItem="vvM-Lz-o11" firstAttribute="leading" secondItem="XHX-Hc-e2W" secondAttribute="leading" id="CqZ-EZ-ceZ"/>

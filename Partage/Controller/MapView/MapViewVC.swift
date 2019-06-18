@@ -51,8 +51,23 @@ extension MapViewVC {
 //MARK: - Setup main developer design
 extension MapViewVC {
   func setupMainDesign() {
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
+    setupNavigationController()
     setupSaveLocationButton()
+  }
+}
+
+//MARK: - Setup main view design
+extension MapViewVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension MapViewVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
   }
 }
 

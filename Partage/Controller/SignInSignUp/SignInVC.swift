@@ -40,6 +40,7 @@ extension SignInVC {
 //MARK: - Setup main VC design
 extension SignInVC {
   func setupMainDesign() {
+    setupMainView()
     setupSignInIsSelectedButtons()
     setupCancelButton()
     setupBackgroundTextView()
@@ -50,6 +51,13 @@ extension SignInVC {
     setupDotLabel()
     setupSwipeGesture()
     setupOutletsCollectionsOrder()
+  }
+}
+
+//MARK: - Setup main view design
+extension SignInVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 

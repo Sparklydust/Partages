@@ -18,6 +18,8 @@
 		2A289FA822A56B0200EB076A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FA722A56B0200EB076A /* User.swift */; };
 		2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FAD22A5734400EB076A /* ConversationVC.swift */; };
 		2A29525522B683E500AE757D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29525422B683E500AE757D /* SignInVC.swift */; };
+		2A6D697C22B904910073053F /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697B22B904910073053F /* Key.swift */; };
+		2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697D22B97C850073053F /* UINavigationController.swift */; };
 		2A87EC5E22A6453800EB969D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC5D22A6453800EB969D /* Message.swift */; };
 		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
 		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
@@ -108,6 +110,8 @@
 		2A289FAD22A5734400EB076A /* ConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		2A29525422B683E500AE757D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		2A65C71822B780DB00BA4814 /* Partage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Partage.entitlements; sourceTree = "<group>"; };
+		2A6D697B22B904910073053F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		2A6D697D22B97C850073053F /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		2A87EC5D22A6453800EB969D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
 		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				2AC159FA22A7BBEA00CE935B /* UIButton.swift */,
 				2AFA4EC622A914A00039803E /* UIBarButtonItem.swift */,
 				2A289FA522A55B4C00EB076A /* UINavigationItem.swift */,
+				2A6D697D22B97C850073053F /* UINavigationController.swift */,
 				2AAA793C22AA47E800529F2B /* UITextField.swift */,
 				2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */,
 				2AD516AC22B2B79C0032F28F /* UILabel.swift */,
@@ -500,6 +505,7 @@
 				2A98DF4B22AEBD6400F6F2AE /* DonatorItemType.swift */,
 				2A901EA322AFA19200D3DD2A /* Segue.swift */,
 				2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */,
+				2A6D697B22B904910073053F /* Key.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 				2AD516A922B11F640032F28F /* MapViewVC.swift in Sources */,
 				2A289FA822A56B0200EB076A /* User.swift in Sources */,
 				2AD516AD22B2B79C0032F28F /* UILabel.swift in Sources */,
+				2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */,
 				2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */,
 				2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
@@ -654,6 +661,7 @@
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
 				2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */,
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
+				2A6D697C22B904910073053F /* Key.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */,

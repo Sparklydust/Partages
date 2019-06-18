@@ -34,7 +34,6 @@
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-xq-aR6">
                                                                 <rect key="frame" x="0.0" y="33" width="268.5" height="30"/>
-                                                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes"/>
@@ -197,7 +196,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="l56-0a-g00" firstAttribute="trailing" secondItem="mC6-Qh-C3Q" secondAttribute="trailing" constant="20" id="AUj-Yy-QNd"/>
                             <constraint firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" constant="20" id="CI0-cC-nDS"/>
@@ -233,7 +232,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubd-ul-m7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hOX-jC-sIC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="224.63768115942031" y="41.517857142857139"/>
+            <point key="canvasLocation" x="214" y="41"/>
         </scene>
         <!--ItemImages-->
         <scene sceneID="WVG-70-dza">

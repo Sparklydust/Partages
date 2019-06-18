@@ -74,9 +74,10 @@ extension HistoryFavoriteVC {
 //MARK: - Setup developer main design
 extension HistoryFavoriteVC {
   func setupMainDesign() {
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
     setupEditButton()
     setupAllCustomCells()
+    setupNavigationController()
   }
 }
 
@@ -97,6 +98,13 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
       
       return cell
     }
+  }
+}
+
+//MARK: - Setup main view design
+extension HistoryFavoriteVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -127,6 +135,13 @@ extension HistoryFavoriteVC {
   }
 }
 
+//MARK: - Setup navigation controller design
+extension HistoryFavoriteVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
+  }
+}
+
 //MARK: - Setup all delegates
 extension HistoryFavoriteVC {
   func setupAllDelegates() {
@@ -135,7 +150,7 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Setup all custom cells
+//MARK: - Setup all custom cells design
 extension HistoryFavoriteVC {
   func setupAllCustomCells() {
     HistoryFavoriteTableView.setupCustomCell(nibName: .historyCellIdentifier, identifier: .historyCellIdentifier)

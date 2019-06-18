@@ -21,6 +21,23 @@ class MessageTVC: UITableViewCell {
   }
 }
 
+//MARK: - Setup main developer design
+extension MessageTVC {
+  func setupMainDesign() {
+    setupMainContentView()
+    setupProfileImage()
+    setupFonts()
+    setupFontsColor()
+  }
+}
+
+//MARK: - Setup main view design
+extension MessageTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+  }
+}
+
 //MARK: - Setup all fonts
 extension MessageTVC {
   func setupFonts() {
@@ -41,14 +58,5 @@ extension MessageTVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
     profileImage.roundedWithMainBlueBorder()
-  }
-}
-
-//MARK: - Setup main developer design
-extension MessageTVC {
-  func setupMainDesign() {
-    setupProfileImage()
-    setupFonts()
-    setupFontsColor()
   }
 }

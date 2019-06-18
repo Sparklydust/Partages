@@ -50,7 +50,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="33U-0i-Fxz" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="C2A-RB-KDv"/>
                             <constraint firstItem="Iko-Xi-eoO" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="D2o-gC-FHf"/>
@@ -257,7 +257,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="0Az-hC-DCR" firstAttribute="leading" secondItem="yu9-KS-39B" secondAttribute="leading" constant="20" id="4aE-s5-2n2"/>
                                                     <constraint firstItem="Ajw-C4-xvt" firstAttribute="top" secondItem="yu9-KS-39B" secondAttribute="top" id="AtD-5O-lsc"/>
@@ -312,7 +311,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yyD-0o-p5d" firstAttribute="top" secondItem="cHl-rP-eeo" secondAttribute="bottom" constant="20" id="4DZ-0r-NYx"/>
                             <constraint firstItem="cHl-rP-eeo" firstAttribute="leading" secondItem="iT3-Ms-dvO" secondAttribute="leading" constant="40" id="9wb-HL-SCD"/>

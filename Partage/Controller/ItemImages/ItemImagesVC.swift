@@ -70,13 +70,14 @@ extension ItemImagesVC {
 //MARK: - Setup main developer design
 extension ItemImagesVC {
   func setupMainDesign() {
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
     setupMainSquare()
     setupLittleSquareViews()
     setupLittleSquareImages()
     setupResetAndSaveButton()
     setupUserGuideLabel()
     setupOutletsCollectionsOrder()
+    setupNavigationController()
   }
 }
 
@@ -94,6 +95,13 @@ extension ItemImagesVC {
   }
 }
 
+//MARK: - Setup main view design
+extension ItemImagesVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
+  }
+}
+
 //MARK: - Setup main square design
 extension ItemImagesVC {
   func setupMainSquare() {
@@ -107,6 +115,7 @@ extension ItemImagesVC {
   func setupLittleSquareViews() {
     for view in littleSquareViews {
       view.layer.cornerRadius = 5
+      view.setupMainBackgroundColor()
     }
   }
 }
@@ -117,6 +126,13 @@ extension ItemImagesVC {
     for image in littleSquareImages {
       image.layer.cornerRadius = 5
     }
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension ItemImagesVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
   }
 }
 

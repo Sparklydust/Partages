@@ -21,6 +21,25 @@ class SenderTVC: UITableViewCell {
   }
 }
 
+//MARK: - Setup main developer design
+extension SenderTVC {
+  func setupMainDesign() {
+    setupMainContentView()
+    setupProfileImage()
+    setupDateLabel()
+    setupConversationLabel()
+    setupConversationView()
+  }
+}
+
+//MARK: - Setup main view design
+extension SenderTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+    senderConversationView.setupMainBackgroundColor()
+  }
+}
+
 //MARK: - Setup profile image
 extension SenderTVC {
   func setupProfileImage() {
@@ -50,15 +69,5 @@ extension SenderTVC {
   func setupDateLabel() {
     senderDateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .ten)
     senderDateLabel.textColor = UIColor.typoBlue
-  }
-}
-
-//MARK: - Setup main developer design
-extension SenderTVC {
-  func setupMainDesign() {
-    setupProfileImage()
-    setupDateLabel()
-    setupConversationLabel()
-    setupConversationView()
   }
 }

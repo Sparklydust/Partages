@@ -46,9 +46,17 @@ extension ConversationVC {
 //MARK: - Setup developer main design
 extension ConversationVC {
   func setupMainDesign() {
+    setupMainView()
     setupAllCustomCells()
     setupSenderMessageView()
     setupSenderMessageViewText()
+  }
+}
+
+//MARK: - Setup main view design
+extension ConversationVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -67,7 +75,7 @@ extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-//MARK: - Setup sender message view frame
+//MARK: - Setup sender message view frame design
 extension ConversationVC {
   func setupSenderMessageView() {
     senderMessageView.layer.cornerRadius = 13
@@ -76,7 +84,7 @@ extension ConversationVC {
   }
 }
 
-//MARK: - Setup sender message view text field
+//MARK: - Setup sender message view text field design
 extension ConversationVC {
   func setupSenderMessageViewText() {
     senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
@@ -92,11 +100,23 @@ extension ConversationVC {
   }
 }
 
-//MARK: - Setup all custom cells
+//MARK: - Setup all custom cells design
 extension ConversationVC {
   func setupAllCustomCells() {
     conversationTableView.setupCustomCell(nibName: .conversationCellIdentifier, identifier: .conversationCellIdentifier)
     conversationTableView.setupCustomCell(nibName: .senderCellIdentifier, identifier: .senderCellIdentifier)
+  }
+}
+
+//MARK: - Setup tap gesture recognizer
+extension ConversationVC {
+  func tapGestureDismissKeyboard() {
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+    conversationTableView.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc func tableViewTapped() {
+    senderMessageTextView.endEditing(true)
   }
 }
 
@@ -142,18 +162,6 @@ extension ConversationVC: UITextViewDelegate {
   }
 }
 
-//MARK: - Tap gesture recognizer declaration
-extension ConversationVC {
-  func tapGestureDismissKeyboard() {
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
-    conversationTableView.addGestureRecognizer(tapGesture)
-  }
-  
-  @objc func tableViewTapped() {
-    senderMessageTextView.endEditing(true)
-  }
-}
-
 //MARK: - Method to manage text view height and enable its scrolling option
 extension ConversationVC {
   func textViewDidChange(_ textView: UITextView) {
@@ -168,3 +176,4 @@ extension ConversationVC {
     }
   }
 }
+

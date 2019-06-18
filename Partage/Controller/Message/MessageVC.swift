@@ -44,9 +44,17 @@ extension MessageVC {
 //MARK: - Setup developer main design
 extension MessageVC {
   func setupMainDesign() {
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
     setupCustomCell()
     setupEditButton()
+    setupNavigationController()
+  }
+}
+
+//MARK: - Setup main view design
+extension MessageVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -89,5 +97,12 @@ extension MessageVC {
 extension MessageVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     performSegue(withIdentifier: Segue.goesToConversationVC.rawValue, sender: self)
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension MessageVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
   }
 }

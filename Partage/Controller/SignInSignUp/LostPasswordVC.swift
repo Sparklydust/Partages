@@ -38,12 +38,20 @@ extension LostPasswordVC {
 //MARK: - Setup developer main design
 extension LostPasswordVC {
   func setupMainDesign() {
+    setupMainView()
     setupCancelAndSendButtons()
     setupEmailTextField()
     setupEmailView()
     setupEmailPlaceholder()
     setupSwipeGesture()
     setupOutletsCollectionsOrder()
+  }
+}
+
+//MARK: - Setup main view design
+extension LostPasswordVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 

@@ -8,6 +8,13 @@
 
 import UIKit
 
+//MARK: - Setup UIView main app background color
+extension UIView {
+  func setupMainBackgroundColor() {
+    self.backgroundColor = .iceBackground
+  }
+}
+
 //MARK: - To have a border on a specific side of a UIView
 extension UIView {
   func addBorder(atThe edge: UIRectEdge, in color: UIColor) {
@@ -32,4 +39,3 @@ extension UIView {
     layer.addSublayer(border)
   }
 }
-

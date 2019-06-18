@@ -36,6 +36,7 @@ class ReceiverTVC: UITableViewCell {
 //MARK: - Setup developer main design
 extension ReceiverTVC {
   func setupMainDesign() {
+    setupMainContentView()
     setupSquareBackgroundView()
     setupStaticLabels()
     setupItemTypeLabel()
@@ -46,6 +47,14 @@ extension ReceiverTVC {
     setupMapView()
     setupItemImage()
     setupOutletsCollectionsOrder()
+  }
+}
+
+//MARK: - Setup main view design
+extension ReceiverTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+    squareBackgroundView.setupMainBackgroundColor()
   }
 }
 

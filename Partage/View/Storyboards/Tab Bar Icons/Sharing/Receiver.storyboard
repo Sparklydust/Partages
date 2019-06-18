@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6it-Db-9rP" firstAttribute="top" secondItem="j1M-s0-MvK" secondAttribute="top" id="3o9-ki-R9h"/>
                             <constraint firstItem="6it-Db-9rP" firstAttribute="leading" secondItem="j1M-s0-MvK" secondAttribute="leading" id="UGN-WI-JcY"/>
@@ -298,7 +298,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cCv-Rr-RDn" firstAttribute="trailing" secondItem="gt3-jN-JTE" secondAttribute="trailing" constant="40" id="4SB-zw-Vrq"/>
                             <constraint firstItem="gt3-jN-JTE" firstAttribute="top" secondItem="myw-bf-D6c" secondAttribute="bottom" constant="20" id="EiL-ci-kWw"/>

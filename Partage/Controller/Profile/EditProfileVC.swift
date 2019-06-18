@@ -11,15 +11,16 @@ import UIKit
 class EditProfileVC: UIViewController {
   
   @IBOutlet weak var firstNameTextField: UITextField!
-  @IBOutlet weak var confirmPasswordTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var oldPasswordTextField: UITextField!
   @IBOutlet weak var newPasswordTextField: UITextField!
+  @IBOutlet weak var confirmPasswordTextField: UITextField!
+  
+  @IBOutlet weak var stackView: UIStackView!
   
   @IBOutlet var cancelAndSaveButtons: [UIButton]!
   @IBOutlet var backgroundViews: [UIView]!
-  @IBOutlet var staticLabels: [UILabel]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,13 +49,21 @@ extension EditProfileVC {
 //MARK: - Setup main developer design
 extension EditProfileVC {
   func setupMainDesign() {
+    setupMainView()
     setupBackgroundViews()
-    setupAllUserTextFields()
+    setupUserTextFields()
     setupButtons()
-    setupStaticLabels()
-    setupAllPlaceholders()
+    setupTextFieldPlaceholders()
     setupSwipeGesture()
     setupOutletsCollectionsOrder()
+    setupStackViewSpacingForIPhoneSE()
+  }
+}
+
+//MARK: - Setup main view design
+extension EditProfileVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -62,16 +71,14 @@ extension EditProfileVC {
 extension EditProfileVC {
   func setupBackgroundViews() {
     for view in backgroundViews {
-      view.layer.cornerRadius = 10
-      view.layer.borderWidth = 1
-      view.layer.borderColor = UIColor.mainBlue.cgColor
+      view.addBorder(atThe: .bottom, in: .mainBlue)
     }
   }
 }
 
 //MARK: - Setup all user entry text fields design
 extension EditProfileVC{
-  func setupAllUserTextFields() {
+  func setupUserTextFields() {
     firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     lastNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
@@ -89,25 +96,15 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup all static labels design
-extension EditProfileVC {
-  func setupStaticLabels() {
-    staticLabels[0].text = StaticLabel.firsName.rawValue
-    staticLabels[1].text = StaticLabel.lastName.rawValue
-    staticLabels[2].text = StaticLabel.email.rawValue
-    staticLabels[3].text = StaticLabel.password.rawValue
-    for label in staticLabels {
-      label.setupFont(as: .arialBold, sized: .fourteen, in: .typoBlue)
-    }
-  }
-}
-
 //MARK: - Setup placeholders design
 extension EditProfileVC {
-  func setupAllPlaceholders() {
-    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: .typoBlue)
-    newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: .typoBlue)
-    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .typoBlue)
+  func setupTextFieldPlaceholders() {
+    firstNameTextField.setupPlaceholderDesign(title: .firsName, color: .middleBlue)
+    lastNameTextField.setupPlaceholderDesign(title: .lastName, color: .middleBlue)
+    emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
+    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: .middleBlue)
+    newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: .middleBlue)
+    confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .middleBlue)
   }
 }
 
@@ -115,7 +112,14 @@ extension EditProfileVC {
 extension EditProfileVC {
   func setupOutletsCollectionsOrder() {
     backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
-    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
+//MARK: - Setup spaces between view on iPhoneSE
+extension EditProfileVC {
+  func setupStackViewSpacingForIPhoneSE() {
+    guard UIDevice.current.name == "iPhone SE" else { return }
+    stackView.spacing = 20
   }
 }
 

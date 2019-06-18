@@ -21,6 +21,25 @@ class ConversationTVC: UITableViewCell {
   }
 }
 
+//MARK: - Setup main developer design
+extension ConversationTVC {
+  func setupMainDesign() {
+    setupMainContentView()
+    setupProfileImage()
+    setupDateLabel()
+    setupConversationLabel()
+    setupConversationView()
+  }
+}
+
+//MARK: - Setup main view design
+extension ConversationTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+    conversationView.setupMainBackgroundColor()
+  }
+}
+
 //MARK: - Setup profile image
 extension ConversationTVC {
   func setupProfileImage() {
@@ -50,15 +69,5 @@ extension ConversationTVC {
   func setupDateLabel() {
     dateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .ten)
     dateLabel.textColor = UIColor.typoBlue
-  }
-}
-
-//MARK: - Setup main developer design
-extension ConversationTVC {
-  func setupMainDesign() {
-    setupProfileImage()
-    setupDateLabel()
-    setupConversationLabel()
-    setupConversationView()
   }
 }

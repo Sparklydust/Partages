@@ -34,8 +34,12 @@ class ItemDetailsVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.setupNavBarProfileImage()
     setupMainDesign()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    donatorReceiverProfileImage.roundedWithMainBlueBorder()
   }
 }
 
@@ -72,7 +76,7 @@ extension ItemDetailsVC {
 //MARK: - Setup main developer design
 extension ItemDetailsVC {
   func setupMainDesign() {
-    donatorReceiverProfileImage.roundedWithMainBlueBorder()
+    setupMainView()
     setupMainLabels()
     setupStaticItemDetailsLabels()
     setupLittleBarViewBackgroundColor()
@@ -82,6 +86,14 @@ extension ItemDetailsVC {
     setupEditButton()
     setupItemImage()
     setupOutletsCollectionsOrder()
+    setupNavigationController()
+  }
+}
+
+//MARK: - Setup main view design
+extension ItemDetailsVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -149,6 +161,13 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func setupItemImage() {
     itemImage.layer.cornerRadius = 2
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension ItemDetailsVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
   }
 }
 

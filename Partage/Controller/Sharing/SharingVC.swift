@@ -18,7 +18,7 @@ class SharingVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupAllButtons()
+    setupMainDesign()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +29,21 @@ class SharingVC: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     navigationController?.setNavigationBarHidden(false, animated: true)
+  }
+}
+
+//MARK: - Setup developer main design
+extension SharingVC {
+  func setupMainDesign() {
+    setupMainView()
+    setupAllButtons()
+  }
+}
+
+//MARK: - Setup main view design
+extension SharingVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 

@@ -32,7 +32,7 @@ class DonatorVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupMainAppDesign()
+    setupMainDesign()
     setupAllDelegates()
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
@@ -46,6 +46,7 @@ class DonatorVC: UIViewController {
 //MARK: - Add item image button action
 extension DonatorVC {
   @IBAction func addItemImageButtonAction(_ sender: Any) {
+    view.endEditing(true)
   }
 }
 
@@ -69,8 +70,8 @@ extension DonatorVC {
 
 //MARK: - Setup developer main design
 extension DonatorVC {
-  func setupMainAppDesign() {
-    navigationItem.setupNavBarProfileImage()
+  func setupMainDesign() {
+    setupMainView()
     setupResetAndDonateButton()
     setupItemNameTextField()
     setupItemNameTextFieldPlaceholder()
@@ -80,6 +81,16 @@ extension DonatorVC {
     setupMapView()
     setupItemImage()
     setupOutletsCollectionsOrder()
+    setupItemPicker()
+    setupDatePicker()
+    setupNavigationController()
+  }
+}
+
+//MARK: - Setup main view design
+extension DonatorVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -110,12 +121,20 @@ extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return DonatorItem.type[row].rawValue
   }
+  
+  // Change picker view item text color
+  func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    let titleData = DonatorItem.type[row].rawValue
+    let myTitles = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
+    return myTitles
+  }
 }
 
 //MARK: - Setup date picker design
 extension DonatorVC {
   func setupDatePicker() {
     itemDatePicker.backgroundColor = UIColor.iceBackground
+    itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.rawValue)
   }
 }
 
@@ -123,6 +142,7 @@ extension DonatorVC {
 extension DonatorVC {
   func setupItemNameTextField() {
     itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+    itemNameTextField.setupMainBackgroundColor()
   }
 }
 
@@ -172,6 +192,13 @@ extension DonatorVC {
   }
 }
 
+//MARK: - Setup navigation controller design
+extension DonatorVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
+  }
+}
+
 //MARK: - Setup outlet collection to be in order
 extension DonatorVC {
   func setupOutletsCollectionsOrder() {
@@ -179,7 +206,7 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup item description text view design with a placeholder
+//MARK: - Setup item description text view design with a placeholder and actions
 extension DonatorVC: UITextViewDelegate {
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
@@ -207,7 +234,7 @@ extension DonatorVC: UITextViewDelegate {
   }
 }
 
-//MARK: - Setup item name text field design
+//MARK: - Setup item name text field design and actions
 extension DonatorVC: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
     actionsAreEnable(false)
@@ -215,7 +242,11 @@ extension DonatorVC: UITextFieldDelegate {
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     actionsAreEnable(true)
-    view.endEditing(true)
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    itemNameTextField.resignFirstResponder()
+    return true
   }
 }
 
@@ -263,5 +294,6 @@ extension DonatorVC {
     resetAndDonateButton[0].isEnabled = action
     mapKitButton.isEnabled = action
     itemDatePicker.isEnabled = action
+    itemTypePickerView.isUserInteractionEnabled = action
   }
 }

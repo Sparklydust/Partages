@@ -22,8 +22,23 @@ class ReceiverVC: UIViewController {
 //MARK: - Setup developer main design
 extension ReceiverVC {
   func setupMainDesign() {
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
+    setupNavigationController()
     setupCustomCell()
+  }
+}
+
+//MARK: - Setup main view design
+extension ReceiverVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension ReceiverVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
   }
 }
 

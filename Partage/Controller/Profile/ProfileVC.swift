@@ -13,13 +13,14 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var profileImage: UIImageView!
   
   @IBOutlet weak var firstNameLabel: UILabel!
-  @IBOutlet weak var lastNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
   @IBOutlet weak var passwordLabel: UILabel!
   
+  @IBOutlet weak var editProfileButton: UIBarButtonItem!
+  
+  @IBOutlet weak var editProfilePictureButton: UIButton!
+  
   @IBOutlet var backgroundViews: [UIView]!
-  @IBOutlet var staticLabels: [UILabel]!
-  @IBOutlet var editButtons: [UIButton]!
   @IBOutlet var disconectionButtons: [UIButton]!
   
   override func viewDidLoad() {
@@ -28,21 +29,20 @@ class ProfileVC: UIViewController {
     setupProfileImage()
     
     firstNameLabel.text = "Roland"
-    lastNameLabel.text = "Lariotte"
     emailLabel.text = "roland.sound@live.fr"
     passwordLabel.text = "●●●●●●●●●●●●●●"
   }
 }
 
-//MARK: - Edit full profile button action
+//MARK: - Edit profile button action
 extension ProfileVC {
-  @IBAction func editFullProfileButton(_ sender: Any) {
+  @IBAction func editProfileButtonAction(_ sender: Any) {
   }
 }
 
 //MARK: - Edit profile picture button action
 extension ProfileVC {
-  @IBAction func editProfilePictureButton(_ sender: Any) {
+  @IBAction func editProfilePictureButtonAction(_ sender: Any) {
     CameraHandler.shared.goesToUserLibraryOrCamera(vc: self)
     CameraHandler.shared.imagePickedBlock = {
       (image) in
@@ -66,11 +66,20 @@ extension ProfileVC {
 //MARK: - Setup main developer design
 extension ProfileVC {
   func setupMainDesign() {
+    setupMainView()
     setupMainLabels()
-    setupEditButtons()
+    setupEditProfilePictureButton()
+    setupEditProfileButton()
     setupDisconnectButtons()
-    setupStaticLabelName()
     setupOutletsCollectionsOrder()
+    setupNavigationController()
+  }
+}
+
+//MARK: - Setup main view design
+extension ProfileVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -86,35 +95,25 @@ extension ProfileVC {
 extension ProfileVC {
   func setupMainLabels() {
     firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    lastNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     passwordLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-  }
-}
-
-//MARK: - Setup all static labels design
-extension ProfileVC {
-  func staticLabelFont() {
-    for label in staticLabels {
-      label.setupFont(as: .arialBold, sized: .fourteen, in: .typoBlue)
-    }
-  }
-  
-  func setupStaticLabelName() {
-    staticLabels[0].text = StaticLabel.firsName.rawValue
-    staticLabels[1].text = StaticLabel.lastName.rawValue
-    staticLabels[2].text = StaticLabel.email.rawValue
-    staticLabels[3].text = StaticLabel.password.rawValue
-    staticLabelFont()
+    firstNameLabel.textAlignment = .center
+    emailLabel.textAlignment = .center
+    passwordLabel.textAlignment = .center
   }
 }
 
 //MARK: - Setup edit button design
 extension ProfileVC {
-  func setupEditButtons() {
-    for label in editButtons {
-      label.signInSignUpDesign(title: .edit)
-    }
+  func setupEditProfilePictureButton() {
+      editProfilePictureButton.signInSignUpDesign(title: .edit)
+  }
+}
+
+//MARK: - Setup edit profile button
+extension ProfileVC {
+  func setupEditProfileButton() {
+    editProfileButton.editButtonDesign()
   }
 }
 
@@ -135,8 +134,13 @@ extension ProfileVC {
 extension ProfileVC {
   func setupOutletsCollectionsOrder() {
     backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
-    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
-    editButtons = editButtons.sorted(by: { $0.tag < $1.tag })
     disconectionButtons = disconectionButtons.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension ProfileVC {
+  func setupNavigationController() {
+    navigationController?.hideNavigationControllerBorder()
   }
 }

@@ -70,8 +70,7 @@ extension ItemSelectedVC {
 //MARK: - Setup developer main design
 extension ItemSelectedVC {
   func setupMainDesign() {
-    view.backgroundColor = UIColor.iceBackground
-    navigationItem.setupNavBarProfileImage()
+    setupMainView()
     setupMessageAndReceiveButtons()
     setupAllLabels()
     setupMapView()
@@ -81,6 +80,14 @@ extension ItemSelectedVC {
     setupItemImage()
     setupLittleBarView()
     setupOutletsCollectionsOrder()
+    setupNavigationController()
+  }
+}
+
+//MARK: - Setup main view design
+extension ItemSelectedVC {
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -127,7 +134,14 @@ extension ItemSelectedVC {
   }
 }
 
-//MARK: - Setup static labels
+//MARK: - Setup navigation controller design
+extension ItemSelectedVC {
+  func setupNavigationController() {
+    navigationItem.setupNavBarProfileImage()
+  }
+}
+
+//MARK: - Setup static labels design
 extension ItemSelectedVC {
   func setupStaticLabels() {
     staticLabels[0].text = StaticItemDetail.type.rawValue

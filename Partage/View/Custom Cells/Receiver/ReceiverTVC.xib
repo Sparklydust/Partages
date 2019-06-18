@@ -139,7 +139,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="QtP-ss-A72" secondAttribute="trailing" constant="20" id="b0B-bJ-rHP"/>
                     <constraint firstAttribute="bottom" secondItem="QtP-ss-A72" secondAttribute="bottom" constant="10" id="cPf-TR-YGO"/>
