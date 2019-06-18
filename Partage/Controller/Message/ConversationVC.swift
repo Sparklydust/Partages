@@ -19,7 +19,9 @@ class ConversationVC: UIViewController {
   
   @IBOutlet weak var sendMessageButton: UIButton!
   
-  var keyboardHeight = CGFloat(0)
+  // Match textViewHeight with its height in attribute inspector
+  var textViewHeight: CGFloat = 150
+  var keyboardHeight: CGFloat = 0
   
   let messageArray = ["first message", "second message", "Lorem ipsum dolor"]
   
@@ -128,6 +130,7 @@ extension ConversationVC: UITextViewDelegate {
       self.stackViewBottomConstraint.constant = self.keyboardHeight - (self.tabBarController?.tabBar.frame.size.height)! + 10
       self.view.layoutIfNeeded()
     }
+    conversationTableView.scrollToBottomRow()
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
@@ -135,6 +138,7 @@ extension ConversationVC: UITextViewDelegate {
       self.stackViewBottomConstraint.constant = 10
       self.view.layoutIfNeeded()
     }
+    conversationTableView.scrollToBottomRow()
   }
 }
 
@@ -147,5 +151,20 @@ extension ConversationVC {
   
   @objc func tableViewTapped() {
     senderMessageTextView.endEditing(true)
+  }
+}
+
+//MARK: - Method to manage text view height and enable its scrolling option
+extension ConversationVC {
+  func textViewDidChange(_ textView: UITextView) {
+    if senderMessageTextView.contentSize.height >= textViewHeight {
+      senderMessageTextView.isScrollEnabled = true
+      conversationTableView.scrollToBottomRow()
+    }
+    else {
+      senderMessageTextView.frame.size.height = senderMessageTextView.contentSize.height
+      senderMessageTextView.isScrollEnabled = false
+      conversationTableView.scrollToBottomRow()
+    }
   }
 }

@@ -82,6 +82,19 @@
 		2AFA4ED022A9AB540039803E /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFA4ECF22A9AB540039803E /* FontSize.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2A6D696622B8B4CE0073053F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2A06727D229E907900FFAECE /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		2A06727F229EAE4000FFAECE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -512,6 +525,7 @@
 				2AB43521229E55FE007BFB93 /* Sources */,
 				2AB43522229E55FE007BFB93 /* Frameworks */,
 				2AB43523229E55FE007BFB93 /* Resources */,
+				2A6D696622B8B4CE0073053F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);

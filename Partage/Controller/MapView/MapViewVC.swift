@@ -30,7 +30,6 @@ class MapViewVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
-    
   }
 }
 
