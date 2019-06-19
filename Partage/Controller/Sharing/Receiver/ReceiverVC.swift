@@ -25,6 +25,7 @@ extension ReceiverVC {
     setupMainView()
     setupNavigationController()
     setupCustomCell()
+    setupTableViewDesign()
   }
 }
 
@@ -39,6 +40,13 @@ extension ReceiverVC {
 extension ReceiverVC {
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
+  }
+}
+
+//MARK: - Setup table view design
+extension ReceiverVC {
+  func setupTableViewDesign() {
+    receiverTableView.setupMainBackgroundColor()
   }
 }
 

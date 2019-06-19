@@ -27,8 +27,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSw-8p-IM6">
                                 <rect key="frame" x="102" y="263" width="210" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="OfP-TV-0tE"/>
-                                    <constraint firstAttribute="width" constant="210" id="san-kq-M3p"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="OfP-TV-0tE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="san-kq-M3p"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -38,8 +38,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-aY-XVd">
                                 <rect key="frame" x="102" y="513" width="210" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="Wg1-ly-2eI"/>
-                                    <constraint firstAttribute="height" constant="120" id="j9n-hL-Cyf"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="Wg1-ly-2eI"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="j9n-hL-Cyf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -53,8 +53,12 @@
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="centerY" secondItem="oFA-4z-Jn6" secondAttribute="centerY" constant="-2.5" id="6PY-Y0-iut"/>
                             <constraint firstItem="V3g-aY-XVd" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="9u8-pU-765"/>
                             <constraint firstItem="wSw-8p-IM6" firstAttribute="centerX" secondItem="g5G-Kr-6an" secondAttribute="centerX" id="vAa-gt-E5W"/>
-                            <constraint firstItem="cHB-eS-4A7" firstAttribute="top" secondItem="wSw-8p-IM6" secondAttribute="bottom" constant="50" id="yEB-k4-Cvg"/>
-                            <constraint firstItem="V3g-aY-XVd" firstAttribute="top" secondItem="cHB-eS-4A7" secondAttribute="bottom" constant="50" id="zk9-rP-oDv"/>
+                            <constraint firstItem="cHB-eS-4A7" firstAttribute="top" secondItem="wSw-8p-IM6" secondAttribute="bottom" constant="50" id="yEB-k4-Cvg">
+                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                            </constraint>
+                            <constraint firstItem="V3g-aY-XVd" firstAttribute="top" secondItem="cHB-eS-4A7" secondAttribute="bottom" constant="50" id="zk9-rP-oDv">
+                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oFA-4z-Jn6"/>
                     </view>

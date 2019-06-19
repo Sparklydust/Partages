@@ -24,6 +24,24 @@ class FavoriteTVC: UITableViewCell {
   }
 }
 
+//MARK: - Setup main developer design
+extension FavoriteTVC {
+  func setupMainDesign() {
+    setupTopLabel()
+    setupMiddleLabel()
+    setupBottomLabel()
+    setupBarDesignView()
+    setupMainContentView()
+  }
+}
+
+//MARK: - Setup main view design
+extension FavoriteTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+  }
+}
+
 //MARK: Setup top label design
 extension FavoriteTVC {
   func setupTopLabel() {
@@ -52,15 +70,5 @@ extension FavoriteTVC {
 extension FavoriteTVC {
   func setupBarDesignView() {
     barDesignView.backgroundColor = UIColor.middleBlue
-  }
-}
-
-//MARK: - Setup main developer design
-extension FavoriteTVC {
-  func setupMainDesign() {
-    setupTopLabel()
-    setupMiddleLabel()
-    setupBottomLabel()
-    setupBarDesignView()
   }
 }

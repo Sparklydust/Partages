@@ -15,6 +15,13 @@ extension UIView {
   }
 }
 
+//MARK: - Setup a custom background color
+extension UIView {
+  func setupBackgroundColorIn(_ color: UIColor) {
+    self.backgroundColor = color
+  }
+}
+
 //MARK: - To have a border on a specific side of a UIView
 extension UIView {
   func addBorder(atThe edge: UIRectEdge, in color: UIColor) {

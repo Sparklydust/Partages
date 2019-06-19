@@ -14,13 +14,13 @@ class SignInVC: UIViewController {
   
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
-  
   @IBOutlet weak var dotLabel: UILabel!
-  
   @IBOutlet weak var lostPasswordButton: UIButton!
+  @IBOutlet weak var signInButton: UIButton!
+  @IBOutlet weak var signUpButton: UIButton!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var connectionButton: UIButton!
   
-  @IBOutlet var signInSignUpButtons: [UIButton]!
-  @IBOutlet var cancelAndConnectionButtons: [UIButton]!
   @IBOutlet var backgroundTextView: [UIView]!
   
   override func viewDidLoad() {
@@ -50,7 +50,6 @@ extension SignInVC {
     setupLostPasswordButton()
     setupDotLabel()
     setupSwipeGesture()
-    setupOutletsCollectionsOrder()
   }
 }
 
@@ -72,10 +71,10 @@ extension SignInVC {
 //MARK: - Setup sign in button design
 extension SignInVC {
   func setupSignInIsSelectedButtons() {
-    signInSignUpButtons[0].signInOrSignUpSelectedDesign(title: .lowSignIn)
-    signInSignUpButtons[1].signInOrSignUpUnselectedDesign(title: .lowSignUp)
-    signInSignUpButtons[0].isEnabled = false
-    signInSignUpButtons[1].isEnabled = true
+    signInButton.signInOrSignUpSelectedDesign(title: .lowSignIn)
+    signUpButton.signInOrSignUpUnselectedDesign(title: .lowSignUp)
+    signInButton.isEnabled = false
+    signUpButton.isEnabled = true
   }
 }
 
@@ -90,7 +89,7 @@ extension SignInVC {
 extension SignInVC {
   func setupBackgroundTextView() {
     for view in backgroundTextView {
-      view.addBorder(atThe: .bottom, in: .mainBlue)
+      view.setupBackgroundColorIn(.mainBlue)
     }
   }
 }
@@ -106,23 +105,14 @@ extension SignInVC: UITextFieldDelegate {
 ///MARK: - Setup cancel button design
 extension SignInVC {
   func setupCancelButton() {
-    cancelAndConnectionButtons[0].commonDesign(title: .cancel)
+    cancelButton.commonDesign(title: .cancel)
   }
 }
 
 //MARK: - Setup sign in connection button design
 extension SignInVC {
   func setupConnectionButton() {
-    cancelAndConnectionButtons[1].commonDesign(title: .signIn)
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension SignInVC {
-  func setupOutletsCollectionsOrder() {
-    signInSignUpButtons = signInSignUpButtons.sorted(by: { $0.tag < $1.tag })
-    cancelAndConnectionButtons = cancelAndConnectionButtons.sorted(by: { $0.tag < $1.tag })
-    backgroundTextView = backgroundTextView.sorted(by: { $0.tag < $1.tag })
+    connectionButton.commonDesign(title: .signIn)
   }
 }
 

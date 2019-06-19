@@ -14,11 +14,12 @@ class SignUpVC: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
-  
   @IBOutlet weak var dotLabel: UILabel!
+  @IBOutlet weak var signInButton: UIButton!
+  @IBOutlet weak var signUpButton: UIButton!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var registerButton: UIButton!
   
-  @IBOutlet var signInSignUpButtons: [UIButton]!
-  @IBOutlet var cancelAndRegisterButtons: [UIButton]!
   @IBOutlet var backgroundTextView: [UIView]!
   
   override func viewDidLoad() {
@@ -52,7 +53,6 @@ extension SignUpVC {
     setupRegisterButton()
     setupDotLabel()
     setupSwipeGesture()
-    setupOutletsCollectionsOrder()
   }
 }
 
@@ -76,10 +76,10 @@ extension SignUpVC {
 //MARK: - Setup little sign up button design
 extension SignUpVC {
   func setupSignUpIsSelectedButtons() {
-    signInSignUpButtons[0].signInOrSignUpUnselectedDesign(title: .lowSignIn)
-    signInSignUpButtons[1].signInOrSignUpSelectedDesign(title: .lowSignUp)
-    signInSignUpButtons[0].isEnabled = true
-    signInSignUpButtons[1].isEnabled = false
+    signInButton.signInOrSignUpUnselectedDesign(title: .lowSignIn)
+    signUpButton.signInOrSignUpSelectedDesign(title: .lowSignUp)
+    signInButton.isEnabled = true
+    signUpButton.isEnabled = false
   }
 }
 
@@ -93,14 +93,14 @@ extension SignUpVC {
 ///MARK: - Setup cancel button design
 extension SignUpVC {
   func setupCancelButton() {
-    cancelAndRegisterButtons[0].commonDesign(title: .cancel)
+    cancelButton.commonDesign(title: .cancel)
   }
 }
 
 //MARK: - Setup sign up user register button design
 extension SignUpVC {
   func setupRegisterButton() {
-    cancelAndRegisterButtons[1].commonDesign(title: .signUp)
+    registerButton.commonDesign(title: .signUp)
   }
 }
 
@@ -108,17 +108,8 @@ extension SignUpVC {
 extension SignUpVC {
   func setupBackgroundTextView() {
     for view in backgroundTextView {
-      view.addBorder(atThe: .bottom, in: .mainBlue)
+      view.setupBackgroundColorIn(.mainBlue)
     }
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension SignUpVC {
-  func setupOutletsCollectionsOrder() {
-    signInSignUpButtons = signInSignUpButtons.sorted(by: { $0.tag < $1.tag })
-    cancelAndRegisterButtons = cancelAndRegisterButtons.sorted(by: { $0.tag < $1.tag })
-    backgroundTextView = backgroundTextView.sorted(by: { $0.tag < $1.tag })
   }
 }
 
@@ -201,8 +192,8 @@ extension SignUpVC {
     let keyboardFrame = keyboardSize.cgRectValue
     guard UIDevice.current.name == "iPhone SE" else { return }
     
-    guard signInSignUpButtons[0].isEnabled else { return }
-    guard !signInSignUpButtons[1].isEnabled else { return }
+    guard signInButton.isEnabled else { return }
+    guard !signUpButton.isEnabled else { return }
     
     if confirmPasswordTextField.isEditing || passwordTextField.isEditing {
       if view.frame.origin.y == 0 {

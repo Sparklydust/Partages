@@ -12,8 +12,8 @@ class LostPasswordVC: UIViewController {
   
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var emailView: UIView!
-  
-  @IBOutlet var cancelAndSendButtons: [UIButton]!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,7 +44,6 @@ extension LostPasswordVC {
     setupEmailView()
     setupEmailPlaceholder()
     setupSwipeGesture()
-    setupOutletsCollectionsOrder()
   }
 }
 
@@ -58,8 +57,8 @@ extension LostPasswordVC {
 //MARK: - Set cancel and send buttons design
 extension LostPasswordVC {
   func setupCancelAndSendButtons() {
-    cancelAndSendButtons[0].commonDesign(title: .cancel)
-    cancelAndSendButtons[1].commonDesign(title: .send)
+    cancelButton.commonDesign(title: .cancel)
+    saveButton.commonDesign(title: .send)
   }
 }
 
@@ -70,14 +69,7 @@ extension LostPasswordVC {
   }
   
   func setupEmailView() {
-    emailView.addBorder(atThe: .bottom, in: .mainBlue)
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension LostPasswordVC {
-  func setupOutletsCollectionsOrder() {
-    cancelAndSendButtons = cancelAndSendButtons.sorted(by: { $0.tag < $1.tag })
+    emailView.setupBackgroundColorIn(.mainBlue)
   }
 }
 

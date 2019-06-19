@@ -14,6 +14,11 @@ extension UITextField {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
     self.tintColor = color
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.font = UIFont(customFont: font, withSize: .thirtyTwo)
+    }
   }
 }
 
@@ -26,5 +31,15 @@ extension UITextField {
         NSAttributedString.Key.foregroundColor: color,
         NSAttributedString.Key.font: UIFont(
           customFont: .arial, withSize: .fifteen)!])
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.attributedPlaceholder = NSAttributedString(
+        string: title.rawValue,
+        attributes: [
+          NSAttributedString.Key.foregroundColor: color,
+          NSAttributedString.Key.font: UIFont(
+            customFont: .arial, withSize: .twentyTwo)!])
+    }
   }
 }

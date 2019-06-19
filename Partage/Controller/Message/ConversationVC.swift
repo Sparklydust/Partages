@@ -50,6 +50,14 @@ extension ConversationVC {
     setupAllCustomCells()
     setupSenderMessageView()
     setupSenderMessageViewText()
+    setupTableViewDesign()
+  }
+}
+
+//MARK: - Setup table view design
+extension ConversationVC {
+  func setupTableViewDesign() {
+    conversationTableView.setupMainBackgroundColor()
   }
 }
 

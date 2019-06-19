@@ -16,11 +16,18 @@ extension UILabel {
   }
 }
 
-//MARK: - Dot button is / is not selected design
+//MARK: - Dot button is selected design
 extension UILabel {
   func isSelectedDesign() {
     self.text = "●"
     self.textColor = .mainBlue
     self.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.font = UIFont(customFont: .arialBold, withSize: .twentyFive)
+      self.heightAnchor.constraint(equalToConstant: 36).isActive = true
+      self.widthAnchor.constraint(equalToConstant: 36).isActive = true
+    }
   }
 }

@@ -48,6 +48,7 @@ extension MessageVC {
     setupCustomCell()
     setupEditButton()
     setupNavigationController()
+    setupTableViewDesign()
   }
 }
 
@@ -66,7 +67,14 @@ extension MessageVC {
   }
 }
 
-//MARK: Setup Table view cells to display messages
+//MARK: - Setup table view design
+extension MessageVC {
+  func setupTableViewDesign() {
+    messageTableView.setupMainBackgroundColor()
+  }
+}
+
+//MARK: Setup Table view to display messages
 extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 5

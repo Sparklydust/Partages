@@ -16,6 +16,13 @@ extension UIButton {
     self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .twentyTwo)
     self.backgroundColor = .mainBlue
     self.layer.cornerRadius = 20
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .thirtyTwo)
+      self.heightAnchor.constraint(equalToConstant: 180).isActive = true
+      self.widthAnchor.constraint(equalToConstant: 315).isActive = true
+    }
   }
 }
 
@@ -25,6 +32,11 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .twentyTwo)
+    }
   }
 }
 
@@ -37,6 +49,12 @@ extension UIButton {
     self.titleLabel?.adjustsFontSizeToFitWidth = true
     self.backgroundColor = .mainBlue
     self.layer.cornerRadius = 10
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.heightAnchor.constraint(equalToConstant: 60).isActive = true
+      self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .thirty)
+    }
   }
 }
 
@@ -46,12 +64,22 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(.mainBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .twentyFive)
+    }
   }
   
   func signInOrSignUpUnselectedDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .twentyFive)
+    }
   }
 }
 
@@ -61,6 +89,11 @@ extension UIButton {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(color, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .twenty)
+    }
   }
 }
 
@@ -85,17 +118,5 @@ extension UIButton {
     self.backgroundColor = .mainBlue
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
     self.isEnabled = true
-  }
-}
-
-//MARK: - Dot button is / is not selected design
-extension UIButton {
-  func isSelectedAnd(isNot: UIButton) {
-    self.setTitle("●", for: .normal)
-    isNot.setTitle("", for: .normal)
-    self.setTitleColor(.mainBlue, for: .normal)
-    isNot.setTitleColor(.typoBlue, for: .normal)
-    self.isEnabled = false
-    isNot.isEnabled = true
   }
 }

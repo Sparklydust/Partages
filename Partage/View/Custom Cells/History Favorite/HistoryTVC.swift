@@ -24,6 +24,24 @@ class HistoryTVC: UITableViewCell {
   }
 }
 
+//MARK: - Setup main developer design
+extension HistoryTVC {
+  func setupMainDesign() {
+    setupTopLabel()
+    setupMiddleLabel()
+    setupBottomLabel()
+    setupBarDesignView()
+    setupMainContentView()
+  }
+}
+
+//MARK: - Setup main view design
+extension HistoryTVC {
+  func setupMainContentView() {
+    contentView.setupMainBackgroundColor()
+  }
+}
+
 //MARK: Setup top label design
 extension HistoryTVC {
   func setupTopLabel() {
@@ -52,15 +70,5 @@ extension HistoryTVC {
 extension HistoryTVC {
   func setupBarDesignView() {
     barDesignView.backgroundColor = UIColor.middleBlue
-  }
-}
-
-//MARK: - Setup main developer design
-extension HistoryTVC {
-  func setupMainDesign() {
-    setupTopLabel()
-    setupMiddleLabel()
-    setupBottomLabel()
-    setupBarDesignView()
   }
 }

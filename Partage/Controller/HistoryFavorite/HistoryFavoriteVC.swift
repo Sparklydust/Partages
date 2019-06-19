@@ -78,6 +78,7 @@ extension HistoryFavoriteVC {
     setupEditButton()
     setupAllCustomCells()
     setupNavigationController()
+    setupTableViewDesign()
   }
 }
 
@@ -105,6 +106,13 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
 extension HistoryFavoriteVC {
   func setupMainView() {
     view.setupMainBackgroundColor()
+  }
+}
+
+//MARK: - Setup table view design
+extension HistoryFavoriteVC {
+  func setupTableViewDesign() {
+    HistoryFavoriteTableView.setupMainBackgroundColor()
   }
 }
 
