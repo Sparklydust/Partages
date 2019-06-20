@@ -15,21 +15,17 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet weak var itemNameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
-  
   @IBOutlet weak var favoriteButton: UIButton!
   @IBOutlet weak var mapViewButton: UIButton!
-  
+  @IBOutlet weak var messageToDonatorButton: UIButton!
+  @IBOutlet weak var receiveDonationButton: UIButton!
   @IBOutlet weak var itemImage: UIImageView!
-  
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
   @IBOutlet weak var littleBarView: UIView!
-  
   @IBOutlet weak var itemDescriptionTextView: UITextView!
-  
   @IBOutlet weak var mapView: MKMapView!
   
   @IBOutlet var staticLabels: [UILabel]!
-  @IBOutlet var messageAndReceiveButtons: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -63,7 +59,7 @@ extension ItemSelectedVC {
 
 //MARK: - Receive this donation button action
 extension ItemSelectedVC {
-  @IBAction func ReceiveThisDonationButtonAction(_ sender: Any) {
+  @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
   }
 }
 
@@ -157,15 +153,14 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupOutletsCollectionsOrder() {
     staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
-    messageAndReceiveButtons = messageAndReceiveButtons.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup cancel and save buttons design
 extension ItemSelectedVC {
   func setupMessageAndReceiveButtons() {
-    messageAndReceiveButtons[0].commonDesign(title: .messageToDonator)
-    messageAndReceiveButtons[1].commonDesign(title: .receiveThisDonation)
+    messageToDonatorButton.commonDesign(title: .messageToDonator)
+    receiveDonationButton.commonDesign(title: .receiveThisDonation)
   }
 }
 

@@ -11,7 +11,7 @@ import UIKit
 class LostPasswordVC: UIViewController {
   
   @IBOutlet weak var emailTextField: UITextField!
-  @IBOutlet weak var emailView: UIView!
+  @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
   
@@ -41,7 +41,7 @@ extension LostPasswordVC {
     setupMainView()
     setupCancelAndSendButtons()
     setupEmailTextField()
-    setupEmailView()
+    setupUnderlineView()
     setupEmailPlaceholder()
     setupSwipeGesture()
   }
@@ -68,8 +68,8 @@ extension LostPasswordVC {
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
   
-  func setupEmailView() {
-    emailView.setupBackgroundColorIn(.mainBlue)
+  func setupUnderlineView() {
+    underlineView.setupBackgroundColorIn(.mainBlue)
   }
 }
 

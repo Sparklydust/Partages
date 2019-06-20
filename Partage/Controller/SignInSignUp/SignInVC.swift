@@ -21,7 +21,7 @@ class SignInVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var connectionButton: UIButton!
   
-  @IBOutlet var backgroundTextView: [UIView]!
+  @IBOutlet var underlinesView: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,7 +43,7 @@ extension SignInVC {
     setupMainView()
     setupSignInIsSelectedButtons()
     setupCancelButton()
-    setupBackgroundTextView()
+    setupUnderlinesView()
     setupAllTextFields()
     setupAllPlaceholders()
     setupConnectionButton()
@@ -87,9 +87,9 @@ extension SignInVC {
 
 //MARK: - Setup background text view design
 extension SignInVC {
-  func setupBackgroundTextView() {
-    for view in backgroundTextView {
-      view.setupBackgroundColorIn(.mainBlue)
+  func setupUnderlinesView() {
+    for underline in underlinesView {
+      underline.setupBackgroundColorIn(.mainBlue)
     }
   }
 }

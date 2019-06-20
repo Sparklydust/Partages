@@ -13,22 +13,16 @@ class DonatorVC: UIViewController {
   
   @IBOutlet weak var itemTypePickerView: UIPickerView!
   @IBOutlet weak var itemDatePicker: UIDatePicker!
-  
   @IBOutlet weak var itemNameTextField: UITextField!
-  
   @IBOutlet weak var itemDescriptionTextView: UITextView!
-  
   @IBOutlet weak var itemImage: UIImageView!
-  
   @IBOutlet weak var addItemImageButton: UIButton!
   @IBOutlet weak var mapKitButton: UIButton!
-  
+  @IBOutlet weak var resetButton: UIButton!
+  @IBOutlet weak var makeDonationButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
-  
   @IBOutlet weak var littleBarView: UIView!
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
-  
-  @IBOutlet var resetAndDonateButton: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -76,11 +70,10 @@ extension DonatorVC {
     setupItemNameTextField()
     setupItemNameTextFieldPlaceholder()
     setupLittleBarViewDesign()
-    setupItemDescriptionTextView()
+    setupItemDescriptionTextViewPlacehoder()
     setupItemDescriptionBackgroundView()
     setupMapView()
     setupItemImage()
-    setupOutletsCollectionsOrder()
     setupItemPicker()
     setupDatePicker()
     setupNavigationController()
@@ -104,28 +97,29 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup item type picker view design and data
+//MARK: - Setup item type picker view design data
 extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
     itemTypePickerView.backgroundColor = UIColor.iceBackground
   }
-  
+
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
-  
+
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return DonatorItem.type.count
   }
-  
+
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return DonatorItem.type[row].rawValue
   }
-  
+
   // Change picker view item text color
   func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     let titleData = DonatorItem.type[row].rawValue
-    let myTitles = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
+    let myTitles = NSAttributedString(string: titleData, attributes: [
+      NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
     return myTitles
   }
 }
@@ -180,8 +174,8 @@ extension DonatorVC {
 //MARK: - Setup reset and make donation button design
 extension DonatorVC {
   func setupResetAndDonateButton() {
-    resetAndDonateButton[0].commonDesign(title: .reset)
-    resetAndDonateButton[1].commonDesign(title: .makeADonation)
+    resetButton.commonDesign(title: .reset)
+    makeDonationButton.commonDesign(title: .makeADonation)
   }
 }
 
@@ -199,16 +193,9 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup outlet collection to be in order
-extension DonatorVC {
-  func setupOutletsCollectionsOrder() {
-    resetAndDonateButton = resetAndDonateButton.sorted(by: { $0.tag < $1.tag })
-  }
-}
-
 //MARK: - Setup item description text view design with a placeholder and actions
 extension DonatorVC: UITextViewDelegate {
-  func setupItemDescriptionTextView() {
+  func setupItemDescriptionTextViewPlacehoder() {
     itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
   }
   
@@ -291,7 +278,7 @@ extension DonatorVC {
 //MARK: - Enable or disable actions when tap gesture enable
 extension DonatorVC {
   func actionsAreEnable(_ action: Bool) {
-    resetAndDonateButton[0].isEnabled = action
+    resetButton.isEnabled = action
     mapKitButton.isEnabled = action
     itemDatePicker.isEnabled = action
     itemTypePickerView.isUserInteractionEnabled = action

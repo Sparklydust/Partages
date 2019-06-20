@@ -193,10 +193,10 @@
                         <outlet property="registerButton" destination="sNF-5W-f88" id="eOC-Zm-zIn"/>
                         <outlet property="signInButton" destination="b1K-aN-WH6" id="MuN-fM-LV8"/>
                         <outlet property="signUpButton" destination="91i-Ip-w3w" id="sqz-6g-In1"/>
-                        <outletCollection property="backgroundTextView" destination="qqd-aX-PSH" collectionClass="NSMutableArray" id="sGY-RK-yiq"/>
-                        <outletCollection property="backgroundTextView" destination="BpR-td-oUz" collectionClass="NSMutableArray" id="KMH-nl-oc3"/>
-                        <outletCollection property="backgroundTextView" destination="E5t-uR-uHT" collectionClass="NSMutableArray" id="bAI-RD-UiJ"/>
-                        <outletCollection property="backgroundTextView" destination="FCd-OT-1eh" collectionClass="NSMutableArray" id="QaD-Er-xZI"/>
+                        <outletCollection property="underlinesView" destination="qqd-aX-PSH" collectionClass="NSMutableArray" id="o2l-Cj-xGR"/>
+                        <outletCollection property="underlinesView" destination="BpR-td-oUz" collectionClass="NSMutableArray" id="B7h-CE-Q18"/>
+                        <outletCollection property="underlinesView" destination="E5t-uR-uHT" collectionClass="NSMutableArray" id="1ot-mO-GYL"/>
+                        <outletCollection property="underlinesView" destination="FCd-OT-1eh" collectionClass="NSMutableArray" id="j0j-2u-bgb"/>
                         <segue destination="DEV-gF-bcw" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="80z-kf-HFf"/>
                     </connections>
                 </viewController>
@@ -295,8 +295,8 @@
                     <connections>
                         <outlet property="cancelButton" destination="rEu-W0-SiM" id="lzQ-7X-QZB"/>
                         <outlet property="emailTextField" destination="xpL-yr-qKp" id="k9d-gy-DMG"/>
-                        <outlet property="emailView" destination="WDw-TS-GgZ" id="IcC-b1-AW3"/>
                         <outlet property="saveButton" destination="P3O-TD-9c0" id="bw3-K4-Wyq"/>
+                        <outlet property="underlineView" destination="WDw-TS-GgZ" id="IcC-b1-AW3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ksC-JA-9Y5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,8 +463,8 @@
                         <outlet property="passwordTextField" destination="h8p-iL-eTI" id="X87-N3-Icb"/>
                         <outlet property="signInButton" destination="MgC-Lr-oEw" id="xMj-Ha-odx"/>
                         <outlet property="signUpButton" destination="09h-Xr-8nn" id="7xA-7d-mkj"/>
-                        <outletCollection property="backgroundTextView" destination="6LI-c7-YL0" collectionClass="NSMutableArray" id="vzD-Rh-3rM"/>
-                        <outletCollection property="backgroundTextView" destination="dZA-Gz-nua" collectionClass="NSMutableArray" id="Jhr-ZS-x7o"/>
+                        <outletCollection property="underlinesView" destination="6LI-c7-YL0" collectionClass="NSMutableArray" id="vzD-Rh-3rM"/>
+                        <outletCollection property="underlinesView" destination="dZA-Gz-nua" collectionClass="NSMutableArray" id="Jhr-ZS-x7o"/>
                         <segue destination="FlS-wc-sAg" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="h7I-Zk-Ij1"/>
                     </connections>
                 </viewController>

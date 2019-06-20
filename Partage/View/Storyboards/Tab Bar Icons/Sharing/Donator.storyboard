@@ -103,6 +103,7 @@
                                             <constraint firstItem="ZeK-d7-z6F" firstAttribute="leading" secondItem="0nM-Ai-gEh" secondAttribute="leading" id="vsP-uh-zOB"/>
                                             <constraint firstAttribute="trailing" secondItem="6hO-TL-Vdv" secondAttribute="trailing" id="wpT-1f-Wfy"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-We-ze4">
                                         <rect key="frame" x="0.0" y="213" width="374" height="203"/>
@@ -147,6 +148,7 @@
                                             <constraint firstAttribute="trailing" secondItem="8a8-Ti-9PV" secondAttribute="trailing" id="iXz-Ac-eUh"/>
                                             <constraint firstAttribute="trailing" secondItem="91N-TK-Vz6" secondAttribute="trailing" id="pa5-Nw-PKn"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acE-wg-lOa">
                                         <rect key="frame" x="0.0" y="426" width="374" height="203"/>
@@ -174,11 +176,12 @@
                                     <constraint firstAttribute="trailing" secondItem="xjh-We-ze4" secondAttribute="trailing" id="mvD-HL-j1G"/>
                                     <constraint firstItem="xjh-We-ze4" firstAttribute="leading" secondItem="SEx-B1-A5k" secondAttribute="leading" id="u6o-jp-8aX"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
                             </stackView>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-Qh-C3Q">
                                 <rect key="frame" x="20" y="753" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="47y-fY-z4A"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="47y-fY-z4A"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -188,7 +191,7 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-GM-hMF">
                                 <rect key="frame" x="20" y="693" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Zw7-3a-JUF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Zw7-3a-JUF"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -198,16 +201,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="l56-0a-g00" firstAttribute="trailing" secondItem="mC6-Qh-C3Q" secondAttribute="trailing" constant="20" id="AUj-Yy-QNd"/>
-                            <constraint firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" constant="20" id="CI0-cC-nDS"/>
-                            <constraint firstItem="dtQ-GM-hMF" firstAttribute="top" secondItem="SEx-B1-A5k" secondAttribute="bottom" constant="20" id="EhN-8i-yVw"/>
-                            <constraint firstItem="dtQ-GM-hMF" firstAttribute="leading" secondItem="l56-0a-g00" secondAttribute="leading" constant="20" id="EyJ-pm-XEm"/>
-                            <constraint firstItem="l56-0a-g00" firstAttribute="trailing" secondItem="dtQ-GM-hMF" secondAttribute="trailing" constant="20" id="GYB-Zf-HDT"/>
-                            <constraint firstItem="SEx-B1-A5k" firstAttribute="leading" secondItem="zkT-I0-SsY" secondAttribute="leading" constant="20" id="JEA-g0-NtZ"/>
-                            <constraint firstItem="mC6-Qh-C3Q" firstAttribute="leading" secondItem="l56-0a-g00" secondAttribute="leading" constant="20" id="QJY-uc-3k8"/>
-                            <constraint firstItem="mC6-Qh-C3Q" firstAttribute="top" secondItem="dtQ-GM-hMF" secondAttribute="bottom" constant="20" id="Sz6-td-59u"/>
+                            <constraint firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" constant="20" id="CI0-cC-nDS">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="dtQ-GM-hMF" firstAttribute="top" secondItem="SEx-B1-A5k" secondAttribute="bottom" constant="20" id="EhN-8i-yVw">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="SEx-B1-A5k" firstAttribute="leading" secondItem="zkT-I0-SsY" secondAttribute="leading" constant="20" id="JEA-g0-NtZ">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="mC6-Qh-C3Q" firstAttribute="top" secondItem="dtQ-GM-hMF" secondAttribute="bottom" constant="20" id="Sz6-td-59u">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
                             <constraint firstItem="SEx-B1-A5k" firstAttribute="top" secondItem="l56-0a-g00" secondAttribute="top" id="WIo-JH-MrC"/>
-                            <constraint firstItem="l56-0a-g00" firstAttribute="bottom" secondItem="mC6-Qh-C3Q" secondAttribute="bottom" constant="20" id="chP-Uj-sae"/>
+                            <constraint firstItem="mC6-Qh-C3Q" firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" id="YWc-4h-ikg"/>
+                            <constraint firstItem="dtQ-GM-hMF" firstAttribute="leading" secondItem="SEx-B1-A5k" secondAttribute="leading" id="ZCu-1O-Bd7"/>
+                            <constraint firstItem="dtQ-GM-hMF" firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" id="cOD-qW-qSH"/>
+                            <constraint firstItem="l56-0a-g00" firstAttribute="bottom" secondItem="mC6-Qh-C3Q" secondAttribute="bottom" constant="20" id="chP-Uj-sae">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="mC6-Qh-C3Q" firstAttribute="leading" secondItem="SEx-B1-A5k" secondAttribute="leading" id="nLI-D6-T9q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l56-0a-g00"/>
                     </view>
@@ -222,10 +235,10 @@
                         <outlet property="itemNameTextField" destination="FOT-xq-aR6" id="mpq-7S-ve5"/>
                         <outlet property="itemTypePickerView" destination="ZeK-d7-z6F" id="bNN-35-kbw"/>
                         <outlet property="littleBarView" destination="0x0-9e-Sqc" id="AWc-gK-mdE"/>
+                        <outlet property="makeDonationButton" destination="mC6-Qh-C3Q" id="xJI-zx-RzD"/>
                         <outlet property="mapKitButton" destination="RBT-I8-Wus" id="qxn-cW-nW7"/>
                         <outlet property="mapView" destination="MpS-cZ-hzH" id="nVt-np-iVZ"/>
-                        <outletCollection property="resetAndDonateButton" destination="dtQ-GM-hMF" collectionClass="NSMutableArray" id="gHk-M9-bgG"/>
-                        <outletCollection property="resetAndDonateButton" destination="mC6-Qh-C3Q" collectionClass="NSMutableArray" id="YIX-19-z9Y"/>
+                        <outlet property="resetButton" destination="dtQ-GM-hMF" id="EZO-QX-ddf"/>
                         <segue destination="hOX-jC-sIC" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="drK-Ik-I5j"/>
                     </connections>
                 </viewController>

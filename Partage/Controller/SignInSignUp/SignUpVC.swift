@@ -20,7 +20,7 @@ class SignUpVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var registerButton: UIButton!
   
-  @IBOutlet var backgroundTextView: [UIView]!
+  @IBOutlet var underlinesView: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,7 +47,7 @@ extension SignUpVC {
     setupMainView()
     setupSignUpIsSelectedButtons()
     setupCancelButton()
-    setupBackgroundTextView()
+    setupUnderlinesView()
     setupAllTextFields()
     setupAllPlaceholders()
     setupRegisterButton()
@@ -106,9 +106,9 @@ extension SignUpVC {
 
 //MARK: - Setup background text view design
 extension SignUpVC {
-  func setupBackgroundTextView() {
-    for view in backgroundTextView {
-      view.setupBackgroundColorIn(.mainBlue)
+  func setupUnderlinesView() {
+    for underline in underlinesView {
+      underline.setupBackgroundColorIn(.mainBlue)
     }
   }
 }

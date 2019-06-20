@@ -14,6 +14,11 @@ extension UITextView {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
     self.tintColor = color
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.font = UIFont(customFont: font, withSize: .twentyTwo)
+    }
   }
 }
 
@@ -24,5 +29,10 @@ extension UITextView {
     self.textColor = UIColor.middleBlue
     self.text = placeholderText.rawValue
     self.font = UIFont(customFont: .arial, withSize: .fifteen)
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.font = UIFont(customFont: .arial, withSize: .twentyTwo)
+    }
   }
 }
