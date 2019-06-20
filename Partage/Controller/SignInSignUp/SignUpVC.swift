@@ -190,7 +190,7 @@ extension SignUpVC {
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
-    guard UIDevice.current.name == "iPhone SE" else { return }
+    guard UIDevice.current.name == DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
     
     guard signInButton.isEnabled else { return }
     guard !signUpButton.isEnabled else { return }

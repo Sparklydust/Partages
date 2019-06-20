@@ -16,10 +16,10 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var oldPasswordTextField: UITextField!
   @IBOutlet weak var newPasswordTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
   
-  @IBOutlet weak var stackView: UIStackView!
-  
-  @IBOutlet var cancelAndSaveButtons: [UIButton]!
+  @IBOutlet var spaceBetweenViewsConstraints: [NSLayoutConstraint]!
   @IBOutlet var backgroundViews: [UIView]!
   
   override func viewDidLoad() {
@@ -35,14 +35,14 @@ class EditProfileVC: UIViewController {
 
 //MARK: - Cancel Button action
 extension EditProfileVC {
-  @IBAction func cancelButton(_ sender: Any) {
+  @IBAction func cancelButtonAction(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
 }
 
 //MARK: - Save Button action
 extension EditProfileVC {
-  @IBAction func saveButton(_ sender: Any) {
+  @IBAction func saveButtonAction(_ sender: Any) {
   }
 }
 
@@ -55,8 +55,7 @@ extension EditProfileVC {
     setupButtons()
     setupTextFieldPlaceholders()
     setupSwipeGesture()
-    setupOutletsCollectionsOrder()
-    setupStackViewSpacingForIPhoneSE()
+    setupViewsSpacingForUIDevices()
   }
 }
 
@@ -71,7 +70,7 @@ extension EditProfileVC {
 extension EditProfileVC {
   func setupBackgroundViews() {
     for view in backgroundViews {
-      view.addBorder(atThe: .bottom, in: .mainBlue)
+      view.setupBackgroundColorIn(.mainBlue)
     }
   }
 }
@@ -91,8 +90,8 @@ extension EditProfileVC{
 //MARK: - Setup cancel and save buttons design
 extension EditProfileVC {
   func setupButtons() {
-    cancelAndSaveButtons[0].commonDesign(title: .cancel)
-    cancelAndSaveButtons[1].commonDesign(title: .save)
+    cancelButton.commonDesign(title: .cancel)
+    saveButton.commonDesign(title: .save)
   }
 }
 
@@ -108,18 +107,30 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup outlet collection to be in order
-extension EditProfileVC {
-  func setupOutletsCollectionsOrder() {
-    backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
-  }
-}
-
 //MARK: - Setup spaces between view on iPhoneSE
 extension EditProfileVC {
-  func setupStackViewSpacingForIPhoneSE() {
-    guard UIDevice.current.name == "iPhone SE" else { return }
-    stackView.spacing = 20
+  func setupViewsSpacingForUIDevices() {
+    for constraint in spaceBetweenViewsConstraints {
+      switch UIDevice.current.name {
+      case DeviceName.iPhoneFiveS.rawValue,
+           DeviceName.iPhoneSE.rawValue:
+        constraint.constant = 60
+      case DeviceName.iPadFithGeneration.rawValue,
+           DeviceName.iPadSixthGeneration.rawValue,
+           DeviceName.iPadAir.rawValue,
+           DeviceName.iPadAirThirdGeneration.rawValue,
+           DeviceName.iPadAirTwo.rawValue,
+           DeviceName.iPadProNineSevenInch.rawValue,
+           DeviceName.iPadProTenFiveInch.rawValue:
+        constraint.constant = 105
+      case DeviceName.iPadProElevenInch.rawValue,
+           DeviceName.iPadProTwelveNineInch.rawValue,
+           DeviceName.iPadProSecondGeneration.rawValue,
+           DeviceName.iPadProThirdGeneration.rawValue:
+        constraint.constant = 140
+      default: ()
+      }
+    }
   }
 }
 
@@ -174,7 +185,7 @@ extension EditProfileVC {
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
-    guard UIDevice.current.name == "iPhone SE" else { return }
+    guard UIDevice.current.name == DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
     guard confirmPasswordTextField.isEditing || newPasswordTextField.isEditing else { return }
     guard view.frame.origin.y == 0 else { return }
     UIView.animate(withDuration: 0.4) {

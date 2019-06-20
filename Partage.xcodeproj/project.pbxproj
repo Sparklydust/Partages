@@ -42,6 +42,7 @@
 		2A98DF4A22AEBC9800F6F2AE /* DonatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */; };
 		2A98DF4C22AEBD6400F6F2AE /* DonatorItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4B22AEBD6400F6F2AE /* DonatorItemType.swift */; };
 		2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */; };
+		2A99310022BA87E100BB3DF2 /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */; };
 		2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAA793C22AA47E800529F2B /* UITextField.swift */; };
 		2AAA794322AAB8E000529F2B /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAA794222AAB8E000529F2B /* ItemDetailsVC.swift */; };
 		2AB43529229E55FE007BFB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB43528229E55FE007BFB93 /* AppDelegate.swift */; };
@@ -134,6 +135,7 @@
 		2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatorItem.swift; sourceTree = "<group>"; };
 		2A98DF4B22AEBD6400F6F2AE /* DonatorItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatorItemType.swift; sourceTree = "<group>"; };
 		2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceName.swift; sourceTree = "<group>"; };
 		2AAA793C22AA47E800529F2B /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		2AAA794222AAB8E000529F2B /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 		2AB43525229E55FE007BFB93 /* Partage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,6 +508,7 @@
 				2A901EA322AFA19200D3DD2A /* Segue.swift */,
 				2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */,
 				2A6D697B22B904910073053F /* Key.swift */,
+				2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				2AFA4EC722A914A00039803E /* UIBarButtonItem.swift in Sources */,
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
+				2A99310022BA87E100BB3DF2 /* DeviceName.swift in Sources */,
 				2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */,
 				2A966BA222B4439E00418CFF /* UIView.swift in Sources */,
 				2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */,

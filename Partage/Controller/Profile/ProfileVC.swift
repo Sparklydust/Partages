@@ -11,17 +11,15 @@ import UIKit
 class ProfileVC: UIViewController {
   
   @IBOutlet weak var profileImage: UIImageView!
-  
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
   @IBOutlet weak var passwordLabel: UILabel!
-  
   @IBOutlet weak var editProfileButton: UIBarButtonItem!
-  
   @IBOutlet weak var editProfilePictureButton: UIButton!
+  @IBOutlet weak var disconnectProfileButton: UIButton!
+  @IBOutlet weak var deleteProfileButton: UIButton!
   
   @IBOutlet var backgroundViews: [UIView]!
-  @IBOutlet var disconectionButtons: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,13 +51,13 @@ extension ProfileVC {
 
 //MARK: - Disconnect profile button action
 extension ProfileVC {
-  @IBAction func disconnectProfileButton(_ sender: Any) {
+  @IBAction func disconnectProfileButtonAction(_ sender: Any) {
   }
 }
 
 //MARK: - Delete profile button action
 extension ProfileVC {
-  @IBAction func deleteProfileButton(_ sender: Any) {
+  @IBAction func deleteProfileButtonAction(_ sender: Any) {
   }
 }
 
@@ -71,7 +69,6 @@ extension ProfileVC {
     setupEditProfilePictureButton()
     setupEditProfileButton()
     setupDisconnectButtons()
-    setupOutletsCollectionsOrder()
     setupNavigationController()
   }
 }
@@ -120,21 +117,8 @@ extension ProfileVC {
 //MARK: - Setup disconnect and delete accound button
 extension ProfileVC {
   func setupDisconnectButtons() {
-    disconectionButtons[0].setTitle(ButtonName.lowSignOut.rawValue, for: .normal)
-    disconectionButtons[0].tintColor = UIColor.typoBlue
-    disconectionButtons[1].setTitle(ButtonName.lowEraseAccount.rawValue, for: .normal)
-    disconectionButtons[1].tintColor = UIColor.mainRed
-    for label in disconectionButtons {
-      label.titleLabel?.font = UIFont(customFont: .georgiaBold, withSize: .thirteen)
-    }
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension ProfileVC {
-  func setupOutletsCollectionsOrder() {
-    backgroundViews = backgroundViews.sorted(by: { $0.tag < $1.tag })
-    disconectionButtons = disconectionButtons.sorted(by: { $0.tag < $1.tag })
+    disconnectProfileButton.littleButtonDesign(title: .lowSignOut, color: .typoBlue)
+    deleteProfileButton.littleButtonDesign(title: .lowEraseAccount, color: .red)
   }
 }
 

@@ -24,7 +24,4 @@ extension UIColor {
   
   static let iceBackground = UIColor(
     red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
-  
-  static let mainRed = UIColor(
-    red: 1, green: 0, blue: 0, alpha: 0)
 }

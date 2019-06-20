@@ -13,6 +13,11 @@ extension UILabel {
   func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.font = UIFont(customFont: font, withSize: .thirtyTwo)
+    }
   }
 }
 

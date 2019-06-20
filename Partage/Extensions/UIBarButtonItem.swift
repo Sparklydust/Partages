@@ -17,5 +17,14 @@ extension UIBarButtonItem {
         customFont: .arialBold, withSize: .fifteen)!,
        NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
       for: .normal)
+    
+    //Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.setTitleTextAttributes(
+        [NSAttributedString.Key.font: UIFont(
+          customFont: .arialBold, withSize: .twenty)!,
+         NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
+        for: .normal)
+    }
   }
 }
