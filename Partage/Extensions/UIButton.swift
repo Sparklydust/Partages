@@ -107,6 +107,12 @@ extension UIButton {
     self.layer.borderWidth = 1
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
     self.isEnabled = false
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .thirty)
+      self.heightAnchor.constraint(equalToConstant: 75).isActive = true
+    }
   }
 }
 
@@ -118,5 +124,11 @@ extension UIButton {
     self.backgroundColor = .mainBlue
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
     self.isEnabled = true
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .thirty)
+      self.heightAnchor.constraint(equalToConstant: 75).isActive = true
+    }
   }
 }

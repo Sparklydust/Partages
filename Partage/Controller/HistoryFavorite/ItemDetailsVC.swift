@@ -15,22 +15,18 @@ class ItemDetailsVC: UIViewController {
   @IBOutlet weak var donatorReceiverNameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
-  
-  @IBOutlet weak var littleBarView: UIView!
+  @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionBackgroudView: UIView!
-  
   @IBOutlet weak var itemDescriptionTextView: UITextView!
-  
   @IBOutlet weak var donatorReceiverProfileImage: UIImageView!
   @IBOutlet weak var itemImage: UIImageView!
-  
+  @IBOutlet weak var addToCalendarButton: UIButton!
+  @IBOutlet weak var messageToButton: UIButton!
   @IBOutlet weak var itemPictureButton: UIButton!
   @IBOutlet weak var editButton: UIBarButtonItem!
-  
   @IBOutlet weak var mapView: MKMapView!
   
   @IBOutlet var staticItemDetailsLabels: [UILabel]!
-  @IBOutlet var addToCalendarAndMessageButton: [UIButton]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -79,7 +75,7 @@ extension ItemDetailsVC {
     setupMainView()
     setupMainLabels()
     setupStaticItemDetailsLabels()
-    setupLittleBarViewBackgroundColor()
+    setupUnderlineViewBackgroundColor()
     setupAddToCalendarAndMessageButton()
     setupItemDescriptionTextView()
     setupMapView()
@@ -120,10 +116,10 @@ extension ItemDetailsVC {
   }
 }
 
-//MARK: - Setup little bar view background color design
+//MARK: - Setup underline view background color design
 extension ItemDetailsVC {
-  func setupLittleBarViewBackgroundColor() {
-    littleBarView.backgroundColor = UIColor.mainBlue
+  func setupUnderlineViewBackgroundColor() {
+    underlineView.setupBackgroundColorIn(.mainBlue)
   }
 }
 
@@ -136,7 +132,6 @@ extension ItemDetailsVC {
   }
   
   func setupItemDescriptionBackgroundView() {
-    itemDescriptionBackgroudView.backgroundColor = UIColor.iceBackground
     itemDescriptionBackgroudView.layer.cornerRadius = 10
     itemDescriptionBackgroudView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroudView.layer.borderWidth = 1
@@ -175,7 +170,7 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
     buttonsNameReceiverOrDonator()
-    addToCalendarAndMessageButton[0].commonDesign(title: .addToCalendar)
+    addToCalendarButton.commonDesign(title: .addToCalendar)
   }
 }
 
@@ -183,14 +178,13 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func setupOutletsCollectionsOrder() {
     staticItemDetailsLabels = staticItemDetailsLabels.sorted(by: { $0.tag < $1.tag })
-    addToCalendarAndMessageButton = addToCalendarAndMessageButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
   func buttonsNameReceiverOrDonator() {
-    addToCalendarAndMessageButton[1].commonDesign(title: .messageToReceiver)
+    messageToButton.commonDesign(title: .messageToReceiver)
   }
   
   func staticLabelReceiverOrDonator() {

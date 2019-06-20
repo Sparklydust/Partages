@@ -21,7 +21,7 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet weak var receiveDonationButton: UIButton!
   @IBOutlet weak var itemImage: UIImageView!
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
-  @IBOutlet weak var littleBarView: UIView!
+  @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionTextView: UITextView!
   @IBOutlet weak var mapView: MKMapView!
   
@@ -74,7 +74,7 @@ extension ItemSelectedVC {
     setupItemDescriptionBackgroundView()
     setupItemDescriptionTextView()
     setupItemImage()
-    setupLittleBarView()
+    setupUnderlineView()
     setupOutletsCollectionsOrder()
     setupNavigationController()
   }
@@ -144,7 +144,7 @@ extension ItemSelectedVC {
     staticLabels[1].text = StaticItemDetail.the.rawValue
     staticLabels[2].text = StaticItemDetail.at.rawValue
     for label in staticLabels {
-      label.setupFont(as: .arialBold, sized: .heighteen, in: .typoBlue)
+      label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
     }
   }
 }
@@ -171,9 +171,9 @@ extension ItemSelectedVC {
   }
 }
 
-//MARK: - Setup little bar design
+//MARK: - Setup underline view design
 extension ItemSelectedVC {
-  func setupLittleBarView() {
-    littleBarView.backgroundColor = .mainBlue
+  func setupUnderlineView() {
+    underlineView.backgroundColor = .mainBlue
   }
 }
