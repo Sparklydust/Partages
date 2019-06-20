@@ -11,17 +11,22 @@ import UIKit
 class ConversationVC: UIViewController {
   
   @IBOutlet weak var senderMessageView: UIView!
-  
   @IBOutlet weak var senderMessageTextView: UITextView!
   @IBOutlet weak var conversationTableView: UITableView!
-  
   @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
-  
   @IBOutlet weak var sendMessageButton: UIButton!
   
-  // Match textViewHeight with its height in attribute inspector
-  var textViewHeight: CGFloat = 150
   var keyboardHeight: CGFloat = 0
+  
+  // Match textViewHeight with its height in attribute inspector
+  var textViewHeight: CGFloat {
+    get {
+      guard UIDevice.current.userInterfaceIdiom == .pad else {
+        return 150
+      }
+      return 300
+    }
+  }
   
   let messageArray = ["first message", "second message", "Lorem ipsum dolor"]
   
@@ -49,7 +54,7 @@ extension ConversationVC {
     setupMainView()
     setupAllCustomCells()
     setupSenderMessageView()
-    setupSenderMessageViewText()
+    setupSenderMessageTextView()
     setupTableViewDesign()
   }
 }
@@ -89,13 +94,15 @@ extension ConversationVC {
     senderMessageView.layer.cornerRadius = 13
     senderMessageView.layer.borderWidth = 1
     senderMessageView.layer.borderColor = UIColor.typoBlue.cgColor
+    senderMessageView.setupBackgroundColorIn(.iceBackground)
   }
 }
 
 //MARK: - Setup sender message view text field design
 extension ConversationVC {
-  func setupSenderMessageViewText() {
+  func setupSenderMessageTextView() {
     senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
+    senderMessageTextView.setupBackgroundColorIn(.iceBackground)
   }
 }
 

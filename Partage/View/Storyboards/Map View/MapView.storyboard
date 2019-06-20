@@ -26,7 +26,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-Ps-DUV">
                                 <rect key="frame" x="40" y="802" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="UEY-Ml-u0c"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="UEY-Ml-u0c"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -37,11 +37,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JdK-Av-pVs" firstAttribute="trailing" secondItem="uth-aH-OL9" secondAttribute="trailing" id="6VS-xJ-qo1"/>
-                            <constraint firstItem="JdK-Av-pVs" firstAttribute="trailing" secondItem="Nue-Ps-DUV" secondAttribute="trailing" constant="40" id="GEs-i6-wW9"/>
-                            <constraint firstItem="JdK-Av-pVs" firstAttribute="bottom" secondItem="Nue-Ps-DUV" secondAttribute="bottom" constant="20" id="Tun-wZ-cYY"/>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="trailing" secondItem="Nue-Ps-DUV" secondAttribute="trailing" constant="40" id="GEs-i6-wW9">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
+                            <constraint firstItem="JdK-Av-pVs" firstAttribute="bottom" secondItem="Nue-Ps-DUV" secondAttribute="bottom" constant="20" id="Tun-wZ-cYY">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
                             <constraint firstItem="uth-aH-OL9" firstAttribute="leading" secondItem="JdK-Av-pVs" secondAttribute="leading" id="arc-tn-Ty1"/>
                             <constraint firstItem="JdK-Av-pVs" firstAttribute="bottom" secondItem="uth-aH-OL9" secondAttribute="bottom" id="gXd-qZ-dQU"/>
-                            <constraint firstItem="Nue-Ps-DUV" firstAttribute="leading" secondItem="JdK-Av-pVs" secondAttribute="leading" constant="40" id="tM2-8O-Xrj"/>
+                            <constraint firstItem="Nue-Ps-DUV" firstAttribute="leading" secondItem="JdK-Av-pVs" secondAttribute="leading" constant="40" id="tM2-8O-Xrj">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="uth-aH-OL9" firstAttribute="top" secondItem="JdK-Av-pVs" secondAttribute="top" id="vE8-6n-y7t"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JdK-Av-pVs"/>

@@ -202,13 +202,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SEx-B1-A5k" secondAttribute="trailing" constant="20" id="CI0-cC-nDS">
-                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
                             <constraint firstItem="dtQ-GM-hMF" firstAttribute="top" secondItem="SEx-B1-A5k" secondAttribute="bottom" constant="20" id="EhN-8i-yVw">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
                             <constraint firstItem="SEx-B1-A5k" firstAttribute="leading" secondItem="zkT-I0-SsY" secondAttribute="leading" constant="20" id="JEA-g0-NtZ">
-                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
                             <constraint firstItem="mC6-Qh-C3Q" firstAttribute="top" secondItem="dtQ-GM-hMF" secondAttribute="bottom" constant="20" id="Sz6-td-59u">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>

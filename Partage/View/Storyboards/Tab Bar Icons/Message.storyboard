@@ -71,32 +71,44 @@
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v53-ub-6IF">
                                                 <rect key="frame" x="5" y="5" width="354" height="100"/>
-                                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="1Ix-jZ-zQv"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="1Ix-jZ-zQv">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                                    </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjg-sC-OXA">
                                                 <rect key="frame" x="364" y="80" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="HaT-mA-Sdd"/>
-                                                    <constraint firstAttribute="width" constant="25" id="i4G-Mw-JGo"/>
+                                                    <constraint firstAttribute="height" constant="25" id="HaT-mA-Sdd">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" constant="25" id="i4G-Mw-JGo">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    </constraint>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="sendMessage"/>
+                                                <state key="normal" image="sendMessage"/>
                                                 <connections>
                                                     <action selector="sendMessageButton:" destination="lLC-Dh-5o5" eventType="touchUpInside" id="CQc-2u-iB6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Pjg-sC-OXA" secondAttribute="bottom" constant="5" id="1LZ-4Y-be9"/>
-                                            <constraint firstItem="Pjg-sC-OXA" firstAttribute="leading" secondItem="v53-ub-6IF" secondAttribute="trailing" constant="5" id="6ap-ay-61D"/>
-                                            <constraint firstItem="v53-ub-6IF" firstAttribute="leading" secondItem="UMc-rU-qiH" secondAttribute="leading" constant="5" id="8wr-bW-thj"/>
-                                            <constraint firstItem="v53-ub-6IF" firstAttribute="top" secondItem="UMc-rU-qiH" secondAttribute="top" constant="5" id="bKb-Ga-1e6"/>
-                                            <constraint firstAttribute="bottom" secondItem="v53-ub-6IF" secondAttribute="bottom" constant="5" id="jaw-01-5jm"/>
+                                            <constraint firstItem="Pjg-sC-OXA" firstAttribute="leading" secondItem="v53-ub-6IF" secondAttribute="trailing" constant="5" id="6ap-ay-61D">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
+                                            <constraint firstItem="v53-ub-6IF" firstAttribute="leading" secondItem="UMc-rU-qiH" secondAttribute="leading" constant="5" id="8wr-bW-thj">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
+                                            <constraint firstItem="v53-ub-6IF" firstAttribute="top" secondItem="UMc-rU-qiH" secondAttribute="top" constant="5" id="bKb-Ga-1e6">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
+                                            <constraint firstAttribute="bottom" secondItem="v53-ub-6IF" secondAttribute="bottom" constant="5" id="jaw-01-5jm">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="Pjg-sC-OXA" secondAttribute="trailing" constant="5" id="zUT-Wf-r0g"/>
                                             <constraint firstItem="Pjg-sC-OXA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UMc-rU-qiH" secondAttribute="top" constant="5" id="zfZ-mr-9ey"/>
                                         </constraints>
@@ -114,11 +126,19 @@
                         <constraints>
                             <constraint firstItem="M0v-hu-DDs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XHX-Hc-e2W" secondAttribute="top" constant="30" id="2XG-YH-A3Q"/>
                             <constraint firstItem="vvM-Lz-o11" firstAttribute="leading" secondItem="XHX-Hc-e2W" secondAttribute="leading" id="CqZ-EZ-ceZ"/>
-                            <constraint firstItem="M0v-hu-DDs" firstAttribute="top" secondItem="vvM-Lz-o11" secondAttribute="bottom" constant="10" id="KzP-tv-tge"/>
-                            <constraint firstItem="XHX-Hc-e2W" firstAttribute="trailing" secondItem="M0v-hu-DDs" secondAttribute="trailing" constant="10" id="PzN-Ug-jP6"/>
-                            <constraint firstItem="M0v-hu-DDs" firstAttribute="leading" secondItem="XHX-Hc-e2W" secondAttribute="leading" constant="10" id="ZzO-9l-FNl"/>
+                            <constraint firstItem="M0v-hu-DDs" firstAttribute="top" secondItem="vvM-Lz-o11" secondAttribute="bottom" constant="10" id="KzP-tv-tge">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="XHX-Hc-e2W" firstAttribute="trailing" secondItem="M0v-hu-DDs" secondAttribute="trailing" constant="10" id="PzN-Ug-jP6">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="M0v-hu-DDs" firstAttribute="leading" secondItem="XHX-Hc-e2W" secondAttribute="leading" constant="10" id="ZzO-9l-FNl">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
                             <constraint firstItem="vvM-Lz-o11" firstAttribute="top" secondItem="XHX-Hc-e2W" secondAttribute="top" priority="750" id="kSO-B6-eyt"/>
-                            <constraint firstItem="XHX-Hc-e2W" firstAttribute="bottom" secondItem="M0v-hu-DDs" secondAttribute="bottom" constant="10" id="m3z-XK-KDk"/>
+                            <constraint firstItem="XHX-Hc-e2W" firstAttribute="bottom" secondItem="M0v-hu-DDs" secondAttribute="bottom" constant="10" id="m3z-XK-KDk">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
                             <constraint firstItem="XHX-Hc-e2W" firstAttribute="trailing" secondItem="vvM-Lz-o11" secondAttribute="trailing" id="ovj-IH-8Va"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XHX-Hc-e2W"/>

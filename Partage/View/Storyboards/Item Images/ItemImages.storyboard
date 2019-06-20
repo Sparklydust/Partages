@@ -17,6 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uxt-NW-oCF">
+                                <rect key="frame" x="40" y="84" width="334" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vll-af-lRw" userLabel="squareView">
                                 <rect key="frame" x="40" y="281" width="334" height="334"/>
                                 <subviews>
@@ -32,8 +38,12 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addCross" translatesAutoresizingMaskIntoConstraints="NO" id="VrT-eX-EzP">
                                                                 <rect key="frame" x="60" y="60" width="40" height="40"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="40" id="T79-Lw-0tu"/>
-                                                                    <constraint firstAttribute="height" constant="40" id="evJ-lZ-huX"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="T79-Lw-0tu">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
+                                                                    <constraint firstAttribute="height" constant="40" id="evJ-lZ-huX">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q3W-jo-UNa" userLabel="topLeftImage">
@@ -71,8 +81,12 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addCross" translatesAutoresizingMaskIntoConstraints="NO" id="k1s-CH-4tG">
                                                                 <rect key="frame" x="60" y="60" width="40" height="40"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="0ia-V2-Eym"/>
-                                                                    <constraint firstAttribute="width" constant="40" id="b5w-No-Quj"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="0ia-V2-Eym">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
+                                                                    <constraint firstAttribute="width" constant="40" id="b5w-No-Quj">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ARt-rc-KTS" userLabel="topRightImage">
@@ -105,6 +119,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
+                                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                                             </stackView>
                                             <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HwX-at-0pg" userLabel="bottomStackView">
                                                 <rect key="frame" x="0.0" y="164.5" width="324" height="159.5"/>
@@ -115,8 +130,12 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addCross" translatesAutoresizingMaskIntoConstraints="NO" id="2cU-VV-Zbj">
                                                                 <rect key="frame" x="60" y="60" width="40" height="40"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="QRy-b1-2dI"/>
-                                                                    <constraint firstAttribute="width" constant="40" id="npS-4l-UtL"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="QRy-b1-2dI">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
+                                                                    <constraint firstAttribute="width" constant="40" id="npS-4l-UtL">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bwh-iE-dSr" userLabel="bottomLeftImage">
@@ -154,8 +173,12 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addCross" translatesAutoresizingMaskIntoConstraints="NO" id="wZ6-yb-hc4">
                                                                 <rect key="frame" x="60" y="60" width="40" height="40"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="40" id="Mmh-bn-4Ya"/>
-                                                                    <constraint firstAttribute="height" constant="40" id="i9j-gf-c6p"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="Mmh-bn-4Ya">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
+                                                                    <constraint firstAttribute="height" constant="40" id="i9j-gf-c6p">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FK4-Nq-wH4" userLabel="bottomRightImage">
@@ -188,18 +211,28 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
+                                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                                             </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tuV-km-LvZ" secondAttribute="height" multiplier="1:1" id="cWN-9V-M2v"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="tuV-km-LvZ" secondAttribute="bottom" constant="5" id="9T5-jA-lVh"/>
-                                    <constraint firstItem="tuV-km-LvZ" firstAttribute="leading" secondItem="vll-af-lRw" secondAttribute="leading" constant="5" id="CaR-VR-Vlt"/>
-                                    <constraint firstAttribute="trailing" secondItem="tuV-km-LvZ" secondAttribute="trailing" constant="5" id="Igq-jl-Er1"/>
-                                    <constraint firstItem="tuV-km-LvZ" firstAttribute="top" secondItem="vll-af-lRw" secondAttribute="top" constant="5" id="cYw-lG-q2l"/>
+                                    <constraint firstAttribute="bottom" secondItem="tuV-km-LvZ" secondAttribute="bottom" constant="5" id="9T5-jA-lVh">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    </constraint>
+                                    <constraint firstItem="tuV-km-LvZ" firstAttribute="leading" secondItem="vll-af-lRw" secondAttribute="leading" constant="5" id="CaR-VR-Vlt">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="tuV-km-LvZ" secondAttribute="trailing" constant="5" id="Igq-jl-Er1">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    </constraint>
+                                    <constraint firstItem="tuV-km-LvZ" firstAttribute="top" secondItem="vll-af-lRw" secondAttribute="top" constant="5" id="cYw-lG-q2l">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" secondItem="vll-af-lRw" secondAttribute="height" multiplier="1:1" id="omI-BM-3DK"/>
                                     <constraint firstAttribute="width" secondItem="vll-af-lRw" secondAttribute="height" multiplier="1:1" id="xoI-De-twW"/>
                                 </constraints>
@@ -218,7 +251,7 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vN-ho-bUC">
                                 <rect key="frame" x="40" y="742" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="zuI-Wo-sJq"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="zuI-Wo-sJq"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -228,37 +261,45 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g50-Ni-fn3">
                                 <rect key="frame" x="40" y="802" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="xcA-wg-Ihg"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="xcA-wg-Ihg"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="saveButtonAction:" destination="GnZ-N3-8M9" eventType="touchUpInside" id="XVH-8f-xgN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uxt-NW-oCF">
-                                <rect key="frame" x="40" y="84" width="334" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="trailing" secondItem="Uxt-NW-oCF" secondAttribute="trailing" constant="40" id="0dD-Ea-ycE"/>
-                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="trailing" secondItem="4vN-ho-bUC" secondAttribute="trailing" constant="40" id="6at-HO-Y4S"/>
                             <constraint firstItem="vll-af-lRw" firstAttribute="centerY" secondItem="tN5-Mn-xr2" secondAttribute="centerY" priority="750" constant="-5" id="8cL-61-KnG"/>
-                            <constraint firstItem="vll-af-lRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Uxt-NW-oCF" secondAttribute="bottom" constant="20" id="8l7-8c-hi0"/>
-                            <constraint firstItem="vll-af-lRw" firstAttribute="leading" secondItem="tN5-Mn-xr2" secondAttribute="leading" constant="40" id="8vw-rQ-Cms"/>
+                            <constraint firstItem="vll-af-lRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Uxt-NW-oCF" secondAttribute="bottom" constant="20" id="8l7-8c-hi0">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="vll-af-lRw" firstAttribute="leading" secondItem="tN5-Mn-xr2" secondAttribute="leading" constant="40" id="8vw-rQ-Cms">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
+                            <constraint firstItem="4vN-ho-bUC" firstAttribute="leading" secondItem="vll-af-lRw" secondAttribute="leading" id="B6K-1W-PYh"/>
                             <constraint firstItem="vll-af-lRw" firstAttribute="centerX" secondItem="tN5-Mn-xr2" secondAttribute="centerX" id="Dwv-Ck-Wrj"/>
-                            <constraint firstItem="Uxt-NW-oCF" firstAttribute="leading" secondItem="tN5-Mn-xr2" secondAttribute="leading" constant="40" id="Imz-EZ-a91"/>
-                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="bottom" secondItem="g50-Ni-fn3" secondAttribute="bottom" constant="20" id="J2r-s6-tIB"/>
-                            <constraint firstItem="4vN-ho-bUC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vll-af-lRw" secondAttribute="bottom" constant="20" id="JXI-L7-bez"/>
-                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="trailing" secondItem="vll-af-lRw" secondAttribute="trailing" constant="40" id="Jth-jV-sLt"/>
-                            <constraint firstItem="4vN-ho-bUC" firstAttribute="leading" secondItem="tN5-Mn-xr2" secondAttribute="leading" constant="40" id="V0T-tF-1A9"/>
-                            <constraint firstItem="g50-Ni-fn3" firstAttribute="leading" secondItem="tN5-Mn-xr2" secondAttribute="leading" constant="40" id="bei-KX-dy9"/>
-                            <constraint firstItem="g50-Ni-fn3" firstAttribute="top" secondItem="4vN-ho-bUC" secondAttribute="bottom" constant="20" id="diW-qO-Yta"/>
-                            <constraint firstItem="Uxt-NW-oCF" firstAttribute="top" secondItem="tN5-Mn-xr2" secondAttribute="top" priority="750" constant="40" id="iCc-Ya-TIi"/>
-                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="trailing" secondItem="g50-Ni-fn3" secondAttribute="trailing" constant="40" id="wZF-Z0-qjG"/>
+                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="bottom" secondItem="g50-Ni-fn3" secondAttribute="bottom" constant="20" id="J2r-s6-tIB">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="4vN-ho-bUC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vll-af-lRw" secondAttribute="bottom" constant="20" id="JXI-L7-bez">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="tN5-Mn-xr2" firstAttribute="trailing" secondItem="vll-af-lRw" secondAttribute="trailing" constant="40" id="Jth-jV-sLt">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
+                            <constraint firstItem="g50-Ni-fn3" firstAttribute="trailing" secondItem="vll-af-lRw" secondAttribute="trailing" id="Nlm-pf-PV6"/>
+                            <constraint firstItem="4vN-ho-bUC" firstAttribute="trailing" secondItem="vll-af-lRw" secondAttribute="trailing" id="ZuG-Bh-Svy"/>
+                            <constraint firstItem="g50-Ni-fn3" firstAttribute="top" secondItem="4vN-ho-bUC" secondAttribute="bottom" constant="20" id="diW-qO-Yta">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="Uxt-NW-oCF" firstAttribute="trailing" secondItem="vll-af-lRw" secondAttribute="trailing" id="eYJ-Po-RZt"/>
+                            <constraint firstItem="Uxt-NW-oCF" firstAttribute="leading" secondItem="vll-af-lRw" secondAttribute="leading" id="hot-jK-uJm"/>
+                            <constraint firstItem="Uxt-NW-oCF" firstAttribute="top" secondItem="tN5-Mn-xr2" secondAttribute="top" priority="750" constant="40" id="iCc-Ya-TIi">
+                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                            </constraint>
+                            <constraint firstItem="g50-Ni-fn3" firstAttribute="leading" secondItem="vll-af-lRw" secondAttribute="leading" id="zLf-ac-vR4"/>
                             <constraint firstItem="vll-af-lRw" firstAttribute="width" secondItem="vll-af-lRw" secondAttribute="height" multiplier="1:1" id="zSh-oW-yhl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tN5-Mn-xr2"/>
