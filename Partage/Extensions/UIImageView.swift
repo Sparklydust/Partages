@@ -12,14 +12,16 @@ import UIKit
 //MARK: - Round up a square image
 extension UIImageView {
   func rounded() {
-    self.layer.cornerRadius = self.frame.size.width / 2
+    self.layer.cornerRadius = self.frame.width / 2
+    self.layer.masksToBounds = false
     self.clipsToBounds = true
   }
 }
 //MARK: - Round up a square image with a main blue border
 extension UIImageView {
   func roundedWithMainBlueBorder() {
-    self.layer.cornerRadius = self.frame.size.width / 2
+    self.layer.cornerRadius = self.frame.width / 2
+    self.layer.masksToBounds = false
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.mainBlue.cgColor
     self.layer.borderWidth = 1
@@ -28,7 +30,7 @@ extension UIImageView {
 //MARK: - Round up a square image with a middle blue border
 extension UIImageView {
   func roundedWithMiddleBlueBorder() {
-    self.layer.cornerRadius = self.frame.size.width / 2
+    self.layer.cornerRadius = self.frame.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.middleBlue.cgColor
     self.layer.borderWidth = 1
@@ -38,7 +40,7 @@ extension UIImageView {
 //MARK: - Round up a square image with a light blue border
 extension UIImageView {
   func roundedWithLightBlueBorder() {
-    self.layer.cornerRadius = self.frame.size.width / 2
+    self.layer.cornerRadius = self.frame.width / 2
     self.clipsToBounds = true
     self.layer.borderColor = UIColor.lightBlue.cgColor
     self.layer.borderWidth = 1

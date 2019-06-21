@@ -11,12 +11,10 @@ import UIKit
 class FavoriteTVC: UITableViewCell {
   
   @IBOutlet weak var itemImage: UIImageView!
-  
   @IBOutlet weak var topLabel: UILabel!
   @IBOutlet weak var middleLabel: UILabel!
   @IBOutlet weak var bottomLabel: UILabel!
-  
-  @IBOutlet weak var barDesignView: UIView!
+  @IBOutlet weak var underlineView: UIView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -30,8 +28,9 @@ extension FavoriteTVC {
     setupTopLabel()
     setupMiddleLabel()
     setupBottomLabel()
-    setupBarDesignView()
+    setupUnderlineView()
     setupMainContentView()
+    setupItemImage()
   }
 }
 
@@ -45,30 +44,34 @@ extension FavoriteTVC {
 //MARK: Setup top label design
 extension FavoriteTVC {
   func setupTopLabel() {
-    topLabel.font = UIFont(customFont: .superclarendonBold, withSize: .fifteen)
-    topLabel.textColor = UIColor.typoBlue
+    topLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
   }
 }
 
 //MARK: Setup middle label design
 extension FavoriteTVC {
   func setupMiddleLabel() {
-    middleLabel.font = UIFont(customFont: .superclarendonBold, withSize: .fifteen)
-    middleLabel.textColor = UIColor.typoBlue
+    middleLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
   }
 }
 
 //MARK: Setup bottom label design
 extension FavoriteTVC {
   func setupBottomLabel() {
-    bottomLabel.font = UIFont(customFont: .arialBlack, withSize: .fifteen)
-    bottomLabel.textColor = UIColor.typoBlue
+    bottomLabel.setupFont(as: .arialBlack, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
   }
 }
 
-//MARK: - Setup bar view design
+//MARK: - Setup underline view design
 extension FavoriteTVC {
-  func setupBarDesignView() {
-    barDesignView.backgroundColor = UIColor.middleBlue
+  func setupUnderlineView() {
+    underlineView.backgroundColor = UIColor.middleBlue
+  }
+}
+
+//MARK: - Setup item image design
+extension FavoriteTVC {
+  func setupItemImage() {
+    itemImage.layer.cornerRadius = 2
   }
 }

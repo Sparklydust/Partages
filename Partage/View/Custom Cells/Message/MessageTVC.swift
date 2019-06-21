@@ -27,7 +27,6 @@ extension MessageTVC {
     setupMainContentView()
     setupProfileImage()
     setupFonts()
-    setupFontsColor()
   }
 }
 
@@ -41,15 +40,9 @@ extension MessageTVC {
 //MARK: - Setup all fonts
 extension MessageTVC {
   func setupFonts() {
-    nameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .sixteen )
-    dateLabel.font = UIFont(customFont: .superclarendonLight, withSize: .twelve)
-    conversationLabel.font = UIFont(customFont: .arial, withSize: .fifteen)
-  }
-  
-  func setupFontsColor() {
-    nameLabel.textColor = UIColor.typoBlue
-    dateLabel.textColor = UIColor.middleBlue
-    conversationLabel.textColor = UIColor.typoBlue
+    nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+    dateLabel.setupFont(as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
+    conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
   }
 }
 

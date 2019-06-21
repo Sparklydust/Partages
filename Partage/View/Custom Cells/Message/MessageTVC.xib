@@ -45,16 +45,34 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="o6E-3j-7zB" secondAttribute="trailing" constant="10" id="DSV-52-Glm"/>
-                    <constraint firstAttribute="bottom" secondItem="bey-hA-gJW" secondAttribute="bottom" constant="10" id="Nle-Qh-BhR"/>
-                    <constraint firstAttribute="trailing" secondItem="0Rf-Wk-maQ" secondAttribute="trailing" constant="10" id="TnD-fg-Izy"/>
-                    <constraint firstItem="Dsc-S6-O5B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="V3Y-ok-KaY"/>
-                    <constraint firstItem="Dsc-S6-O5B" firstAttribute="leading" secondItem="bey-hA-gJW" secondAttribute="trailing" constant="10" id="ajQ-Vy-NbL"/>
+                    <constraint firstAttribute="trailing" secondItem="o6E-3j-7zB" secondAttribute="trailing" constant="10" id="DSV-52-Glm">
+                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                    </constraint>
+                    <constraint firstAttribute="bottom" secondItem="bey-hA-gJW" secondAttribute="bottom" constant="10" id="Nle-Qh-BhR">
+                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                    </constraint>
+                    <constraint firstAttribute="trailing" secondItem="0Rf-Wk-maQ" secondAttribute="trailing" constant="10" id="TnD-fg-Izy">
+                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                    </constraint>
+                    <constraint firstItem="Dsc-S6-O5B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="V3Y-ok-KaY">
+                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                    </constraint>
+                    <constraint firstItem="Dsc-S6-O5B" firstAttribute="leading" secondItem="bey-hA-gJW" secondAttribute="trailing" constant="10" id="ajQ-Vy-NbL">
+                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                    </constraint>
                     <constraint firstItem="bey-hA-gJW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fkF-qc-Jsy"/>
-                    <constraint firstItem="0Rf-Wk-maQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dsc-S6-O5B" secondAttribute="trailing" priority="750" constant="10" id="ihj-MJ-rAn"/>
-                    <constraint firstItem="bey-hA-gJW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jiV-vB-fr4"/>
-                    <constraint firstItem="o6E-3j-7zB" firstAttribute="top" secondItem="Dsc-S6-O5B" secondAttribute="bottom" constant="5" id="nnh-uj-NE8"/>
-                    <constraint firstItem="o6E-3j-7zB" firstAttribute="leading" secondItem="bey-hA-gJW" secondAttribute="trailing" constant="10" id="wAG-UT-U0u"/>
+                    <constraint firstItem="0Rf-Wk-maQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dsc-S6-O5B" secondAttribute="trailing" priority="750" constant="10" id="ihj-MJ-rAn">
+                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                    </constraint>
+                    <constraint firstItem="bey-hA-gJW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jiV-vB-fr4">
+                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                    </constraint>
+                    <constraint firstItem="o6E-3j-7zB" firstAttribute="top" secondItem="Dsc-S6-O5B" secondAttribute="bottom" constant="5" id="nnh-uj-NE8">
+                        <variation key="heightClass=regular-widthClass=regular" constant="7"/>
+                    </constraint>
+                    <constraint firstItem="o6E-3j-7zB" firstAttribute="leading" secondItem="bey-hA-gJW" secondAttribute="trailing" constant="10" id="wAG-UT-U0u">
+                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                    </constraint>
                     <constraint firstItem="0Rf-Wk-maQ" firstAttribute="bottom" secondItem="Dsc-S6-O5B" secondAttribute="bottom" id="xvU-y2-0JI"/>
                 </constraints>
             </tableViewCellContentView>

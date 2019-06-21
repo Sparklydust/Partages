@@ -11,7 +11,6 @@ import UIKit
 class ItemImagesVC: UIViewController {
   
   @IBOutlet weak var userGuideLabel: UILabel!
-  
   @IBOutlet weak var mainSquareView: UIView!
   
   @IBOutlet var stackViews: [UIStackView]!
@@ -105,7 +104,7 @@ extension ItemImagesVC {
 //MARK: - Setup main square design
 extension ItemImagesVC {
   func setupMainSquare() {
-    mainSquareView.backgroundColor = UIColor.middleBlue
+    mainSquareView.backgroundColor = .middleBlue
     mainSquareView.layer.cornerRadius = 5
   }
 }

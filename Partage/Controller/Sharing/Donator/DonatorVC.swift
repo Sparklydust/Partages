@@ -21,7 +21,7 @@ class DonatorVC: UIViewController {
   @IBOutlet weak var resetButton: UIButton!
   @IBOutlet weak var makeDonationButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var littleBarView: UIView!
+  @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
   
   override func viewDidLoad() {
@@ -69,7 +69,7 @@ extension DonatorVC {
     setupResetAndDonateButton()
     setupItemNameTextField()
     setupItemNameTextFieldPlaceholder()
-    setupLittleBarViewDesign()
+    setupUnderlineView()
     setupItemDescriptionTextViewPlacehoder()
     setupItemDescriptionBackgroundView()
     setupMapView()
@@ -100,7 +100,7 @@ extension DonatorVC {
 //MARK: - Setup item type picker view design data
 extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
-    itemTypePickerView.backgroundColor = UIColor.iceBackground
+    itemTypePickerView.backgroundColor = .iceBackground
   }
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -127,7 +127,7 @@ extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
 //MARK: - Setup date picker design
 extension DonatorVC {
   func setupDatePicker() {
-    itemDatePicker.backgroundColor = UIColor.iceBackground
+    itemDatePicker.backgroundColor = .iceBackground
     itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.rawValue)
   }
 }
@@ -147,17 +147,17 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup little bar view design
+//MARK: - Setup underline view design
 extension DonatorVC {
-  func setupLittleBarViewDesign() {
-    littleBarView.backgroundColor = UIColor.mainBlue
+  func setupUnderlineView() {
+    underlineView.backgroundColor = .mainBlue
   }
 }
 
 //MARK: - Setup item description background view design
 extension DonatorVC {
   func setupItemDescriptionBackgroundView() {
-    itemDescriptionBackgroundView.backgroundColor = UIColor.iceBackground
+    itemDescriptionBackgroundView.backgroundColor = .iceBackground
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
@@ -201,9 +201,9 @@ extension DonatorVC: UITextViewDelegate {
   
   // Custom font shows up when user start editing
   func textViewDidBeginEditing(_ textView: UITextView) {
-    if itemDescriptionTextView.textColor == UIColor.middleBlue {
+    if itemDescriptionTextView.textColor == .middleBlue {
       itemDescriptionTextView.text = ""
-      itemDescriptionTextView.backgroundColor = UIColor.iceBackground
+      itemDescriptionTextView.backgroundColor = .iceBackground
       itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
     }
     // To avoid buttons action on tap gesture to dismiss keyboard

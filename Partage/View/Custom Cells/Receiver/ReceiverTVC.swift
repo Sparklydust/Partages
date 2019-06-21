@@ -16,13 +16,9 @@ class ReceiverTVC: UITableViewCell {
   @IBOutlet weak var itemNameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
-  
   @IBOutlet weak var squareBackgroundView: UIView!
-  
   @IBOutlet weak var itemImage: UIImageView!
-  
   @IBOutlet weak var mapView: MKMapView!
-  
   @IBOutlet weak var favoriteButton: UIButton!
   
   @IBOutlet var staticLabels: [UILabel]!
@@ -61,7 +57,7 @@ extension ReceiverTVC {
 //MARK: - Setup square background view design
 extension ReceiverTVC {
   func setupSquareBackgroundView() {
-    squareBackgroundView.backgroundColor = UIColor.iceBackground
+    squareBackgroundView.backgroundColor = .iceBackground
     squareBackgroundView.layer.cornerRadius = 10
     squareBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     squareBackgroundView.layer.borderWidth = 1
@@ -72,41 +68,36 @@ extension ReceiverTVC {
 //MARK: - Setup item type label design
 extension ReceiverTVC {
   func setupItemTypeLabel() {
-    itemTypeLabel.font = UIFont(customFont: .arialBold, withSize: .twenty)
-    itemTypeLabel.textColor = UIColor.typoBlue
     itemTypeLabel.textAlignment = .center
+    itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
 //MARK: - Setup item distance label design
 extension ReceiverTVC {
   func setupItemDistanceLabel() {
-    itemDistanceLabel.font = UIFont(customFont: .arial, withSize: .heighteen)
-    itemDistanceLabel.textColor = UIColor.typoBlue
+    itemDistanceLabel.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
   }
 }
 
 //MARK: - Setup item name label design
 extension ReceiverTVC {
   func setupItemNameLabel() {
-    itemNameLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    itemNameLabel.textColor = UIColor.typoBlue
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
 //MARK: - Setup date label design
 extension ReceiverTVC {
   func setupDateLabel() {
-    dateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    dateLabel.textColor = UIColor.typoBlue
+    dateLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
 //MARK: - Setup time label design
 extension ReceiverTVC {
   func setupTimeLabel() {
-    timeLabel.font = UIFont(customFont: .superclarendonBold, withSize: .twenty)
-    timeLabel.textColor = UIColor.typoBlue
+    timeLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
@@ -131,8 +122,7 @@ extension ReceiverTVC {
     staticLabels[1].text = StaticItemDetail.the.rawValue
     staticLabels[2].text = StaticItemDetail.at.rawValue
     for label in staticLabels {
-      label.font = UIFont(customFont: .arialBold, withSize: .heighteen)
-      label.textColor = UIColor.typoBlue
+      label.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
     }
   }
 }

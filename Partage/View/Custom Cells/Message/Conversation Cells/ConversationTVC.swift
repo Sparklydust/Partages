@@ -51,8 +51,7 @@ extension ConversationTVC {
 //MARK: - Setup conversation Label
 extension ConversationTVC {
   func setupConversationLabel() {
-    conversationLabel.textColor = UIColor.typoBlue
-        conversationLabel.font = UIFont(customFont: .arialBold, withSize: .fifteen)
+    conversationLabel.setupFont(as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
   }
 }
 
@@ -67,7 +66,6 @@ extension ConversationTVC {
 //MARK: - Setup date Label
 extension ConversationTVC {
   func setupDateLabel() {
-    dateLabel.font = UIFont(customFont: .superclarendonBold, withSize: .ten)
-    dateLabel.textColor = UIColor.typoBlue
+    dateLabel.setupFont(as: .superclarendonBold, sized: .ten, forIPad: .twentyTwo, in: .typoBlue)
   }
 }

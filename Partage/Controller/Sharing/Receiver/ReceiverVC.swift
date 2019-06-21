@@ -26,6 +26,7 @@ extension ReceiverVC {
     setupNavigationController()
     setupCustomCell()
     setupTableViewDesign()
+    setupCellHeightForIPad()
   }
 }
 
@@ -62,6 +63,15 @@ extension ReceiverVC {
 extension ReceiverVC {
   func setupCustomCell() {
     receiverTableView.setupCustomCell(nibName: .receiverCellIdentifier, identifier: .receiverCellIdentifier)
+  }
+}
+
+//MARK: - Setup custom cell heigt for iPad
+extension ReceiverVC {
+  func setupCellHeightForIPad() {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      receiverTableView.rowHeight = 360
+    }
   }
 }
 

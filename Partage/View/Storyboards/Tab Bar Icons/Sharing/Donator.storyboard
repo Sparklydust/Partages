@@ -234,11 +234,11 @@
                         <outlet property="itemImage" destination="tTV-BZ-CiN" id="cWF-QI-SS2"/>
                         <outlet property="itemNameTextField" destination="FOT-xq-aR6" id="mpq-7S-ve5"/>
                         <outlet property="itemTypePickerView" destination="ZeK-d7-z6F" id="bNN-35-kbw"/>
-                        <outlet property="littleBarView" destination="0x0-9e-Sqc" id="AWc-gK-mdE"/>
                         <outlet property="makeDonationButton" destination="mC6-Qh-C3Q" id="xJI-zx-RzD"/>
                         <outlet property="mapKitButton" destination="RBT-I8-Wus" id="qxn-cW-nW7"/>
                         <outlet property="mapView" destination="MpS-cZ-hzH" id="nVt-np-iVZ"/>
                         <outlet property="resetButton" destination="dtQ-GM-hMF" id="EZO-QX-ddf"/>
+                        <outlet property="underlineView" destination="0x0-9e-Sqc" id="AWc-gK-mdE"/>
                         <segue destination="hOX-jC-sIC" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="drK-Ik-I5j"/>
                     </connections>
                 </viewController>

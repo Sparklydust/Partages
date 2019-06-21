@@ -11,7 +11,6 @@ import UIKit
 class HistoryFavoriteVC: UIViewController {
   
   @IBOutlet weak var HistoryFavoriteTableView: UITableView!
-  
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var historyButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
@@ -56,7 +55,7 @@ extension HistoryFavoriteVC {
   @IBAction func editButton(_ sender: UIBarButtonItem) {
     UIView.animate(withDuration: 0.3) {
       self.HistoryFavoriteTableView.isEditing = !self.HistoryFavoriteTableView.isEditing
-      sender.title = (self.HistoryFavoriteTableView.isEditing) ? "Done" : "Edit"
+      sender.title = (self.HistoryFavoriteTableView.isEditing) ? ButtonName.done.rawValue : ButtonName.edit.rawValue
     }
   }
   
@@ -67,7 +66,7 @@ extension HistoryFavoriteVC {
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    cell.backgroundColor = UIColor.iceBackground
+    cell.backgroundColor = .iceBackground
   }
 }
 
@@ -79,6 +78,7 @@ extension HistoryFavoriteVC {
     setupAllCustomCells()
     setupNavigationController()
     setupTableViewDesign()
+    setupCellSizeForIPad()
   }
 }
 
@@ -155,6 +155,15 @@ extension HistoryFavoriteVC {
   func setupAllDelegates() {
     HistoryFavoriteTableView.delegate = self
     HistoryFavoriteTableView.dataSource = self
+  }
+}
+
+//MARK: - Setup cell size for iPad
+extension HistoryFavoriteVC {
+  func setupCellSizeForIPad() {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      HistoryFavoriteTableView.rowHeight = 150
+    }
   }
 }
 

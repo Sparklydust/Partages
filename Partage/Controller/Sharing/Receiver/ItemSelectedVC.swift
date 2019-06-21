@@ -115,7 +115,7 @@ extension ItemSelectedVC {
 //MARK: - Setup item description background view design
 extension ItemSelectedVC {
   func setupItemDescriptionBackgroundView() {
-    itemDescriptionBackgroundView.backgroundColor = UIColor.iceBackground
+    itemDescriptionBackgroundView.backgroundColor = .iceBackground
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
@@ -125,7 +125,7 @@ extension ItemSelectedVC {
 //MARK: - Setup item description text view design
 extension ItemSelectedVC {
   func setupItemDescriptionTextView() {
-    itemDescriptionTextView.backgroundColor = UIColor.iceBackground
+    itemDescriptionTextView.backgroundColor = .iceBackground
     itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
   }
 }

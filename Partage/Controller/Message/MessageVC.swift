@@ -25,7 +25,7 @@ extension MessageVC {
   @IBAction func editButton(_ sender: UIBarButtonItem) {
     UIView.animate(withDuration: 0.3) {
       self.messageTableView.isEditing = !self.messageTableView.isEditing
-      sender.title = (self.messageTableView.isEditing) ? "Done" : "Edit"
+      sender.title = (self.messageTableView.isEditing) ? ButtonName.done.rawValue : ButtonName.edit.rawValue
     }
   }
   
@@ -48,6 +48,7 @@ extension MessageVC {
     setupEditButton()
     setupNavigationController()
     setupTableViewDesign()
+    setupCellHeightForIPad()
   }
 }
 
@@ -111,5 +112,14 @@ extension MessageVC {
 extension MessageVC {
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
+  }
+}
+
+//MARK: - Setup custom cell heigt for iPad
+extension MessageVC {
+  func setupCellHeightForIPad() {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      messageTableView.rowHeight = 120
+    }
   }
 }
