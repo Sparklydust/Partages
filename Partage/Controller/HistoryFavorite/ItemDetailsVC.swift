@@ -39,39 +39,34 @@ class ItemDetailsVC: UIViewController {
   }
 }
 
-//MARK: - Item picture button action
+//MARK: - Buttons actions
 extension ItemDetailsVC {
+  //MARK: Item picture button action
   @IBAction func itemPictureButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Map kit view button action
-extension ItemDetailsVC {
+  
+  //MARK: Map kit view button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Add to calendar or modify button action
-extension ItemDetailsVC {
+  
+  //MARK: Add to calendar or modify button action
   @IBAction func addToCalendarButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Message to receiver or donator button action
-extension ItemDetailsVC {
+  
+  //MARK: Message to receiver or donator button action
   @IBAction func messageToButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Edit donation button action
-extension ItemDetailsVC {
+  
+  //MARK: Edit donation button action
   @IBAction func editButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Main setup
 extension ItemDetailsVC {
+  //MARK: Developer main design
   func setupMainDesign() {
+    setupOutletsCollectionsOrder()
     setupMainView()
     setupMainLabels()
     setupStaticItemDetailsLabels()
@@ -81,13 +76,10 @@ extension ItemDetailsVC {
     setupMapView()
     setupEditButton()
     setupItemImage()
-    setupOutletsCollectionsOrder()
     setupNavigationController()
   }
-}
-
-//MARK: - Setup main view design
-extension ItemDetailsVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -100,6 +92,13 @@ extension ItemDetailsVC {
     donatorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ItemDetailsVC {
+  func setupOutletsCollectionsOrder() {
+    staticItemDetailsLabels = staticItemDetailsLabels.sorted(by: { $0.tag < $1.tag })
   }
 }
 
@@ -171,13 +170,6 @@ extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
     buttonsNameReceiverOrDonator()
     addToCalendarButton.commonDesign(title: .addToCalendar)
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension ItemDetailsVC {
-  func setupOutletsCollectionsOrder() {
-    staticItemDetailsLabels = staticItemDetailsLabels.sorted(by: { $0.tag < $1.tag })
   }
 }
 

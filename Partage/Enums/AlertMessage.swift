@@ -20,4 +20,9 @@ enum AlertMessage: String {
   case getDirectionIssue = "Il y a un problème pour obtenir la direction au lieu de rendez-vous. Merci de vérifier vos réglages dans les paramètres ou de réessayer ultérieurement"
   case noDirectionsCalculated = "Nous n'avons pu calculer le temps de trajet. Veuillez vérifier votre connection"
   case restricted = "L'accès à ce service ne vous est pas autorisé. Pour changer vos réglages, veuillez-vous rapprocher de la personne succeptible de lever la restriction"
+  case contactUs = "partage@contact.com"
+  case contactUsCanceled = "N'hésitez pas à nous contacter ultérieurement, nous serrons à votre écoute."
+  case contactUsFailed = "Contactez-nous à: \n\npartage@contact.com"
+  case contactUsSaved = "N'hésitez pas à nous contacter, nous serrons à votre écoute."
+  case contactUsSent = "Nous vous répondrons dans les plus brefs délais."
 }

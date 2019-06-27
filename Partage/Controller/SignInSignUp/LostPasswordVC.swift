@@ -22,21 +22,21 @@ class LostPasswordVC: UIViewController {
   }
 }
 
-//MARK: - Send password button action
+//MARK: - Buttons actions
 extension LostPasswordVC {
+  //MARK: Send password button action
   @IBAction func sendPasswordButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Cancel button action
-extension LostPasswordVC {
+  
+  //MARK: Cancel button action
   @IBAction func cancelButtonActions(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension LostPasswordVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupCancelAndSendButtons()
@@ -45,10 +45,8 @@ extension LostPasswordVC {
     setupEmailPlaceholder()
     setupSwipeGesture()
   }
-}
-
-//MARK: - Setup main view design
-extension LostPasswordVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -90,7 +88,16 @@ extension LostPasswordVC {
 //MARK: - Setup swipe gestures
 extension LostPasswordVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-    dismiss(animated: true, completion: nil)
+    if sender.direction == .down {
+      guard emailTextField.isFirstResponder else {
+        dismiss(animated: true, completion: nil)
+        return
+      }
+      view.endEditing(true)
+    }
+    else {
+      dismiss(animated: true, completion: nil)
+    }
   }
   
   func setupSwipeGesture() {

@@ -12,15 +12,26 @@ class ReceiverVC: UIViewController {
   
   @IBOutlet weak var receiverTableView: UITableView!
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    navigationController?.setNavigationBarHidden(false, animated: false)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
   }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(true)
+    navigationController?.setNavigationBarHidden(true, animated: true)
+  }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension ReceiverVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupNavigationController()
@@ -28,12 +39,16 @@ extension ReceiverVC {
     setupTableViewDesign()
     setupCellHeightForIPad()
   }
-}
-
-//MARK: - Setup main view design
-extension ReceiverVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
+  }
+  
+  //MARK: All delegates
+  func setupAllDelegates() {
+    receiverTableView.delegate = self
+    receiverTableView.dataSource = self
   }
 }
 
@@ -48,14 +63,6 @@ extension ReceiverVC {
 extension ReceiverVC {
   func setupTableViewDesign() {
     receiverTableView.setupMainBackgroundColor()
-  }
-}
-
-//MARK: - Setup all ReceiverVC delegate
-extension ReceiverVC {
-  func setupAllDelegates() {
-    receiverTableView.delegate = self
-    receiverTableView.dataSource = self
   }
 }
 

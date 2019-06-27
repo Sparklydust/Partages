@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class ProfileVC: UIViewController {
   
@@ -16,6 +17,7 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var passwordLabel: UILabel!
   @IBOutlet weak var editProfileButton: UIBarButtonItem!
   @IBOutlet weak var editProfilePictureButton: UIButton!
+  @IBOutlet weak var contactUsButton: UIButton!
   @IBOutlet weak var disconnectProfileButton: UIButton!
   @IBOutlet weak var deleteProfileButton: UIButton!
   
@@ -32,14 +34,13 @@ class ProfileVC: UIViewController {
   }
 }
 
-//MARK: - Edit profile button action
+//MARK: - Buttons actions
 extension ProfileVC {
+  //MARK: Edit profile button action
   @IBAction func editProfileButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Edit profile picture button action
-extension ProfileVC {
+  
+  //MARK: Edit profile picture button action
   @IBAction func editProfilePictureButtonAction(_ sender: Any) {
     CameraHandler.shared.goesToUserLibraryOrCamera(vc: self)
     CameraHandler.shared.imagePickedBlock = {
@@ -47,22 +48,24 @@ extension ProfileVC {
       self.profileImage.image = image
     }
   }
-}
-
-//MARK: - Disconnect profile button action
-extension ProfileVC {
+  
+  //MARK: Contact Us button action
+  @IBAction func contactUsButtonAction(_ sender: Any) {
+    sendEmail()
+  }
+  
+  //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Delete profile button action
-extension ProfileVC {
+  
+  //MARK: Delete profile button action
   @IBAction func deleteProfileButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Main setup
 extension ProfileVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupMainLabels()
@@ -71,10 +74,8 @@ extension ProfileVC {
     setupDisconnectButtons()
     setupNavigationController()
   }
-}
-
-//MARK: - Setup main view design
-extension ProfileVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -103,7 +104,7 @@ extension ProfileVC {
 //MARK: - Setup edit button design
 extension ProfileVC {
   func setupEditProfilePictureButton() {
-      editProfilePictureButton.signInSignUpDesign(title: .edit)
+    editProfilePictureButton.signInSignUpDesign(title: .edit)
   }
 }
 
@@ -117,6 +118,7 @@ extension ProfileVC {
 //MARK: - Setup disconnect and delete accound button
 extension ProfileVC {
   func setupDisconnectButtons() {
+    contactUsButton.littleButtonDesign(title: .lowContactUs, color: .typoBlue)
     disconnectProfileButton.littleButtonDesign(title: .lowSignOut, color: .typoBlue)
     deleteProfileButton.littleButtonDesign(title: .lowEraseAccount, color: .red)
   }
@@ -125,6 +127,43 @@ extension ProfileVC {
 //MARK: - Setup navigation controller design
 extension ProfileVC {
   func setupNavigationController() {
+    navigationController?.navigationBar.barStyle = .default
+    navigationController?.navigationBar.tintColor = .typoBlue
+    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.isTranslucent = false
     navigationController?.hideNavigationControllerBorder()
+  }
+}
+
+//MARK: - Open mail app to contact us
+extension ProfileVC: MFMailComposeViewControllerDelegate {
+  func sendEmail() {
+    guard MFMailComposeViewController.canSendMail() else { return }
+    let mail = MFMailComposeViewController()
+    mail.mailComposeDelegate = self
+    mail.setToRecipients([ContactUs.partageEmail.rawValue])
+    mail.setSubject(ContactUs.subject.rawValue)
+    mail.setMessageBody(ContactUs.messageBody.rawValue, isHTML: true)
+    
+    present(mail, animated: true)
+  }
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    if let _ = error {
+      controller.dismiss(animated: true)
+    }
+    controller.dismiss(animated: true)
+    switch result {
+    case .cancelled:
+      showAlert(title: .contactUsCanceled, message: .contactUsCanceled)
+    case .failed:
+      showAlert(title: .contactUsFailed, message: .contactUsFailed)
+    case .saved:
+      showAlert(title: .contactUsSaved, message: .contactUsSaved)
+    case .sent:
+      showAlert(title: .contactUsSent, message: .contactUsSent)
+    @unknown default:
+      fatalError()
+    }
   }
 }

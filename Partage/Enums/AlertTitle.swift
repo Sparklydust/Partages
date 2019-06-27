@@ -16,4 +16,9 @@ enum AlertTitle: String {
   case error = "Erreur"
   case cameraUse = "Accès à votre caméra et album"
   case restricted = "Accès restreint"
+  case contactUs = "email de contact"
+  case contactUsCanceled = "Envoi annulé"
+  case contactUsFailed = "Erreur de Mail app"
+  case contactUsSaved = "Email sauvegardé"
+  case contactUsSent = "Merci de votre envoi"
 }

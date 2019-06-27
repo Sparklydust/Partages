@@ -16,6 +16,7 @@ enum ButtonName: String {
   case save = "Enregistrer"
   case signUp = "S'inscrire"
   case signIn = "Se connecter"
+  case lowContactUs = "contactez-nous"
   case lowSignUp = "s'inscrire"
   case lowSignIn = "se connecter"
   case lowSignOut = "se déconnecter"

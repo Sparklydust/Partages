@@ -14,18 +14,18 @@ class HistoryFavoriteVC: UIViewController {
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var historyButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
-
+  
   var isHistoryButtonClicked = true
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    setupLastUserHistoryOrFavoriteChoice()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    setupLastUserHistoryOrFavoriteChoice()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -34,31 +34,31 @@ class HistoryFavoriteVC: UIViewController {
   }
 }
 
-//MARK: - History button action
+//MARK: - Buttons actions
 extension HistoryFavoriteVC {
+  //MARK: History button action
   @IBAction func historyButton(_ sender: Any) {
     setupHistoryButtonIsSelected()
     showHistoryCustomCell(true)
   }
-}
-
-//MARK: - Favorite button action
-extension HistoryFavoriteVC {
+  
+  //MARK: Favorite button action
   @IBAction func favoriteButton(_ sender: Any) {
     setupFavoriteButtonIsSelected()
     showHistoryCustomCell(false)
   }
-}
-
-//MARK: - Edit button action
-extension HistoryFavoriteVC {
+  
+  //MARK: Edit button action
   @IBAction func editButton(_ sender: UIBarButtonItem) {
     UIView.animate(withDuration: 0.3) {
       self.HistoryFavoriteTableView.isEditing = !self.HistoryFavoriteTableView.isEditing
       sender.title = (self.HistoryFavoriteTableView.isEditing) ? ButtonName.done.rawValue : ButtonName.edit.rawValue
     }
   }
-  
+}
+
+//MARK: - Swipe to delete cell action
+extension HistoryFavoriteVC {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -70,8 +70,9 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension HistoryFavoriteVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupEditButton()
@@ -79,6 +80,17 @@ extension HistoryFavoriteVC {
     setupNavigationController()
     setupTableViewDesign()
     setupCellSizeForIPad()
+  }
+  
+  //MARK: Main view design
+  func setupMainView() {
+    view.setupMainBackgroundColor()
+  }
+  
+  //MARK: All delegates
+  func setupAllDelegates() {
+    HistoryFavoriteTableView.delegate = self
+    HistoryFavoriteTableView.dataSource = self
   }
 }
 
@@ -90,22 +102,15 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if isHistoryButtonClicked {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.historyCellIdentifier.rawValue, for: indexPath) as! HistoryTVC
+      let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.historyCellIdentifier.rawValue, for: indexPath) as! HistoryTVC
       
-    return cell
+      return cell
     }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.favoriteCellIdentifier.rawValue, for: indexPath) as! FavoriteTVC
       
       return cell
     }
-  }
-}
-
-//MARK: - Setup main view design
-extension HistoryFavoriteVC {
-  func setupMainView() {
-    view.setupMainBackgroundColor()
   }
 }
 
@@ -146,15 +151,11 @@ extension HistoryFavoriteVC {
 //MARK: - Setup navigation controller design
 extension HistoryFavoriteVC {
   func setupNavigationController() {
+    navigationController?.navigationBar.barStyle = .default
+    navigationController?.navigationBar.tintColor = .typoBlue
+    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.isTranslucent = false
     navigationItem.setupNavBarProfileImage()
-  }
-}
-
-//MARK: - Setup all delegates
-extension HistoryFavoriteVC {
-  func setupAllDelegates() {
-    HistoryFavoriteTableView.delegate = self
-    HistoryFavoriteTableView.dataSource = self
   }
 }
 

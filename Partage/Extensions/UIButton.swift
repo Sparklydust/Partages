@@ -52,7 +52,6 @@ extension UIButton {
     
     // Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
-      self.heightAnchor.constraint(equalToConstant: 60).isActive = true
       self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .thirty)
     }
   }

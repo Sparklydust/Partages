@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpVC: UIViewController {
-
+  
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
@@ -20,7 +20,7 @@ class SignUpVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var registerButton: UIButton!
   
-  @IBOutlet var underlinesView: [UIView]!
+  @IBOutlet var underlineViews: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,15 +34,17 @@ class SignUpVC: UIViewController {
   }
 }
 
-//MARK: - Register Button Action
+//MARK: - Buttons actions
 extension SignUpVC {
+  //MARK: Register Button Action
   @IBAction func registerButtonAction(_ sender: Any) {
     
   }
 }
 
-//MARK: - Setup main VC design
+//MARK: - Main setup
 extension SignUpVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupSignUpIsSelectedButtons()
@@ -54,17 +56,13 @@ extension SignUpVC {
     setupDotLabel()
     setupSwipeGesture()
   }
-}
-
-//MARK: - Setup main view design
-extension SignUpVC {
+  
+  //MARK: Setup main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-}
-
-//MARK: - Setup all delegates
-extension SignUpVC {
+  
+  //MARK: All delegates
   func setupAllDelegates() {
     firstNameTextField.delegate = self
     emailTextField.delegate = self
@@ -107,7 +105,7 @@ extension SignUpVC {
 //MARK: - Setup background text view design
 extension SignUpVC {
   func setupUnderlinesView() {
-    for underline in underlinesView {
+    for underline in underlineViews {
       underline.setupBackgroundColorIn(.mainBlue)
     }
   }
@@ -147,7 +145,14 @@ extension SignUpVC {
       performSegue(withIdentifier: Segue.goesToSignInVC.rawValue, sender: self)
     }
     if sender.direction == .down {
-      performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+      guard firstNameTextField.isFirstResponder ||
+        emailTextField.isFirstResponder ||
+        passwordTextField.isFirstResponder ||
+        confirmPasswordTextField.isFirstResponder else {
+          performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          return
+      }
+      view.endEditing(true)
     }
   }
   
@@ -196,7 +201,7 @@ extension SignUpVC {
     guard !signUpButton.isEnabled else { return }
     
     if confirmPasswordTextField.isEditing || passwordTextField.isEditing {
-      if view.frame.origin.y == 0 {
+      if view.frame.origin.y == .zero {
         UIView.animate(withDuration: 0.4) {
           self.view.frame.origin.y -= (keyboardFrame.height / 3)
         }
@@ -205,9 +210,9 @@ extension SignUpVC {
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    if view.frame.origin.y != 0 {
+    if view.frame.origin.y != .zero {
       UIView.animate(withDuration: 0.4) {
-        self.view.frame.origin.y = 0
+        self.view.frame.origin.y = .zero
       }
     }
   }

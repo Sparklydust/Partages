@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    setupTabBar()
     return true
   }
 
@@ -41,7 +41,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
-
-
 }
 
+//MARK: - Setup TabBar design
+extension AppDelegate {
+  func setupTabBar() {
+    UITabBar.appearance().barTintColor = .iceBackground
+    UITabBar.appearance().tintColor = .mainBlue
+    UITabBar.appearance().unselectedItemTintColor = .typoBlueLight
+    UITabBar.appearance().layer.borderColor = UIColor.clear.cgColor
+    UITabBar.appearance().clipsToBounds = true
+  }
+}

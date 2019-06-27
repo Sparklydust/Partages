@@ -34,6 +34,8 @@
 		<string>Arial Black.ttf</string>
 		<string>superclarendon-rg-bold.ttf</string>
 	</array>
+	<key></key>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

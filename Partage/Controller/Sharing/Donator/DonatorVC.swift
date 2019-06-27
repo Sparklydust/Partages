@@ -24,6 +24,13 @@ class DonatorVC: UIViewController {
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
   
+  var keyboardFrame: CGRect = .zero
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    navigationController?.setNavigationBarHidden(false, animated: false)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -31,39 +38,40 @@ class DonatorVC: UIViewController {
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
   }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(true)
+    navigationController?.setNavigationBarHidden(true, animated: true)
+  }
   
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
 }
 
-//MARK: - Add item image button action
+//MARK: - Buttons actions
 extension DonatorVC {
+  //MARK: Add item image button action
   @IBAction func addItemImageButtonAction(_ sender: Any) {
     view.endEditing(true)
   }
-}
-
-//MARK: - Map kit button action
-extension DonatorVC {
+  
+  //MARK: Map kit button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Reset Button Action
-extension DonatorVC {
+  
+  //MARK: Reset Button Action
   @IBAction func resetButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Make a donation button action
-extension DonatorVC {
+  
+  //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension DonatorVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupResetAndDonateButton()
@@ -77,18 +85,15 @@ extension DonatorVC {
     setupItemPicker()
     setupDatePicker()
     setupNavigationController()
+    setupSwipeGesture()
   }
-}
-
-//MARK: - Setup main view design
-extension DonatorVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-}
-
-//MARK: - Setup all view controllers delegates
-extension DonatorVC {
+  
+  //MARK: All delegates
   func setupAllDelegates() {
     itemTypePickerView.delegate = self
     itemTypePickerView.dataSource = self
@@ -102,19 +107,19 @@ extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
     itemTypePickerView.backgroundColor = .iceBackground
   }
-
+  
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return DonatorItem.type.count
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return DonatorItem.type[row].rawValue
   }
-
+  
   // Change picker view item text color
   func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     let titleData = DonatorItem.type[row].rawValue
@@ -164,7 +169,7 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup map kit view view design
+//MARK: - Setup map kit view design
 extension DonatorVC {
   func setupMapView() {
     mapView.layer.cornerRadius = 10
@@ -193,34 +198,6 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Setup item description text view design with a placeholder and actions
-extension DonatorVC: UITextViewDelegate {
-  func setupItemDescriptionTextViewPlacehoder() {
-    itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
-  }
-  
-  // Custom font shows up when user start editing
-  func textViewDidBeginEditing(_ textView: UITextView) {
-    if itemDescriptionTextView.textColor == .middleBlue {
-      itemDescriptionTextView.text = ""
-      itemDescriptionTextView.backgroundColor = .iceBackground
-      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
-    }
-    // To avoid buttons action on tap gesture to dismiss keyboard
-    actionsAreEnable(false)
-    observeKeyboardNotification()
-  }
-  
-  // Placeholder comes back when text view is empty
-  func textViewDidEndEditing(_ textView: UITextView) {
-    if itemDescriptionTextView.text == "" {
-      itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
-    }
-    // Put button back to normal after tap gesture dismiss keyboard
-    actionsAreEnable(true)
-  }
-}
-
 //MARK: - Setup item name text field design and actions
 extension DonatorVC: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -237,6 +214,32 @@ extension DonatorVC: UITextFieldDelegate {
   }
 }
 
+//MARK: - Setup item description text view design with a placeholder and actions
+extension DonatorVC: UITextViewDelegate {
+  func setupItemDescriptionTextViewPlacehoder() {
+    itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
+  }
+  
+  // Custom font shows up when user start editing
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if itemDescriptionTextView.textColor == .middleBlue {
+      itemDescriptionTextView.text = ""
+      itemDescriptionTextView.backgroundColor = .iceBackground
+      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    }
+    actionsAreEnable(false)
+    resizeViewWhenKeyboardShows()
+  }
+  
+  // Placeholder comes back when text view is empty
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if itemDescriptionTextView.text == "" {
+      itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
+    }
+    actionsAreEnable(true)
+  }
+}
+
 //MARK: - Setup Tap gesture recognizer to dismiss keyboard
 extension DonatorVC {
   func hideKeyboardOnTapGesture() {
@@ -249,33 +252,54 @@ extension DonatorVC {
   }
 }
 
-//MARK: - Handle to show hidden text view
+//MARK: - Setup swipe gesture to dismiss keyboard
+extension DonatorVC {
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    view.endEditing(true)
+  }
+  
+  func setupSwipeGesture() {
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    swipeDown.direction = .down
+    view.addGestureRecognizer(swipeDown)
+  }
+}
+
+//MARK: - Handler to show hidden text view
 extension DonatorVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
     center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-
+  
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
-    let keyboardFrame = keyboardSize.cgRectValue
+    keyboardFrame = keyboardSize.cgRectValue
+    resizeViewWhenKeyboardShows()
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    keyboardFrame = .zero
+    resizeViewWhenKeyboardHides()
+  }
+  
+  func resizeViewWhenKeyboardShows() {
     guard itemDescriptionTextView.isFirstResponder else { return }
-    guard view.frame.origin.y == 0 else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y -= (keyboardFrame.height / 2)
+      self.view.frame.origin.y -= (self.keyboardFrame.height / 2) - self.navigationController!.navigationBar.frame.size.height
     }
   }
-
-  @objc func keyboardWillHide(notification: NSNotification) {
-    guard view.frame.origin.y != 0 else { return }
+  
+  func resizeViewWhenKeyboardHides() {
+    guard view.frame.origin.y != .zero else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y = 0
+      self.view.frame.origin.y = self.navigationController!.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.size.height
     }
   }
 }
 
-//MARK: - Enable or disable actions when tap gesture enable
+//MARK: - Enable or disable actions when tap gesture is enabled
 extension DonatorVC {
   func actionsAreEnable(_ action: Bool) {
     resetButton.isEnabled = action

@@ -12,7 +12,7 @@ import UIKit
 extension UINavigationItem {
   func setupNavBarProfileImage() {
     let button = UIButton(type: .custom)
-    button.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
+    button.frame = CGRect(x: .zero, y: .zero, width: 45, height: 45)
     button.setImage(#imageLiteral(resourceName: "noPicture"), for: .normal)
     button.imageView?.rounded()
     button.addTarget(self, action: #selector(clickedOnProfileImage), for: .touchUpInside)

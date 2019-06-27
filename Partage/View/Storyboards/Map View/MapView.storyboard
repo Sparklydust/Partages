@@ -26,7 +26,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-Ps-DUV">
                                 <rect key="frame" x="40" y="802" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="UEY-Ml-u0c"/>
+                                    <constraint firstAttribute="height" constant="40" id="UEY-Ml-u0c">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>

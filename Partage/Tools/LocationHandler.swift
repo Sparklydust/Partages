@@ -17,7 +17,7 @@ class LocationHandler: CLLocationManager {
   var meetingPoint = CLLocation()
   
   let metersAroundUser: CLLocationDistance = 500
-  var distanceInMetersToItem: Double = 0
+  var distanceInMetersToItem: Double = .zero
 }
 
 //MARK: - Get user location accuracy to best
@@ -32,8 +32,6 @@ extension LocationHandler {
   func setupUserLocationAtBest(onto mapView: MKMapView, byMeters: CLLocationDistance, vc: UIViewController) {
     setupLocationServices(on: mapView, vc: vc)
     centerViewOnUserLocation(onto: mapView, byMeters: byMeters)
-    checkLocationAuthorization(for: mapView, vc: vc)
-    userChangeLocationAuthorization(for: mapView, vc: vc)
   }
 }
 
@@ -75,8 +73,8 @@ extension LocationHandler {
         latitude = location.coordinate.latitude
         longitude = location.coordinate.longitude
       }
-      let streetName = placemark.thoroughfare ?? ""
       let streetNumber = placemark.subThoroughfare ?? ""
+      let streetName = placemark.thoroughfare ?? ""
       let postalCode = placemark.postalCode ?? ""
       let cityName = placemark.locality ?? ""
       let countryName = placemark.country ?? ""
@@ -108,7 +106,9 @@ extension LocationHandler {
 extension LocationHandler {
   func getDirectionFromUserToPinnedLocation(on mapView: MKMapView ,vc: UIViewController) {
     guard let location = locationManager.location?.coordinate else {
-      vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+      DispatchQueue.main.async {
+        vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+      }
       return
     }
     let request = createDirectionRequest(from: location, to: meetingPoint.coordinate.latitude, and: meetingPoint.coordinate.longitude)
@@ -155,7 +155,9 @@ extension LocationHandler {
       checkLocationAuthorization(for: mapView, vc: vc)
     }
     else {
-      vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+      DispatchQueue.main.async {
+        vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+      }
     }
   }
 }
@@ -178,10 +180,16 @@ extension LocationHandler {
     switch CLLocationManager.authorizationStatus() {
     case .authorizedWhenInUse:
       startTrackingUserLocation(on: mapView)
-    case .denied, .restricted:
-      vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+    case .denied:
+      DispatchQueue.main.async {
+        vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+      }
+    case .restricted:
+      vc.showAlert(title: .restricted, message: .restricted)
     case .notDetermined:
-      locationManager.requestWhenInUseAuthorization()
+      DispatchQueue.main.async {
+        self.locationManager.requestWhenInUseAuthorization()
+      }
     case .authorizedAlways:
       break
     @unknown default:
@@ -196,15 +204,6 @@ extension LocationHandler {
     mapView.showsUserLocation = true
     centerViewOnUserLocation(onto: mapView, byMeters: metersAroundUser)
     locationManager.startUpdatingLocation()
-  }
-}
-
-//MARK: - User Change location authorization method
-extension LocationHandler {
-  func userChangeLocationAuthorization(for mapView: MKMapView, vc: UIViewController) {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-      checkLocationAuthorization(for: mapView, vc: vc)
-    }
   }
 }
 

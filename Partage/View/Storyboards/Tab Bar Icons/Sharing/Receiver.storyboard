@@ -292,7 +292,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myw-bf-D6c">
                                 <rect key="frame" x="40" y="693" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="3Q1-Z6-O4S"/>
+                                    <constraint firstAttribute="height" constant="40" id="3Q1-Z6-O4S">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -302,7 +304,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt3-jN-JTE">
                                 <rect key="frame" x="40" y="753" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="g5C-XA-Ij0"/>
+                                    <constraint firstAttribute="height" constant="40" id="g5C-XA-Ij0">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>

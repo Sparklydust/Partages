@@ -16,7 +16,7 @@ class ConversationVC: UIViewController {
   @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var sendMessageButton: UIButton!
   
-  var keyboardHeight: CGFloat = 0
+  var keyboardHeight: CGFloat = .zero
   
   // Match textViewHeight with its height in attribute inspector
   var textViewHeight: CGFloat {
@@ -34,7 +34,6 @@ class ConversationVC: UIViewController {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
-    tapGestureDismissKeyboard()
     observeKeyboardNotification()
     manageTableViewConversationCellSize()
     conversationTableView.scrollToBottomRow()
@@ -48,14 +47,29 @@ extension ConversationVC {
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension ConversationVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupAllCustomCells()
     setupSenderMessageView()
     setupSenderMessageTextView()
     setupTableViewDesign()
+    setupTapGesture()
+    setupSwipeGesture()
+  }
+  
+  //MARK: Main view design
+  func setupMainView() {
+    view.setupMainBackgroundColor()
+  }
+  
+  //MARK: All delegates
+  func setupAllDelegates() {
+    conversationTableView.delegate = self
+    conversationTableView.dataSource = self
+    senderMessageTextView.delegate = self
   }
 }
 
@@ -63,13 +77,6 @@ extension ConversationVC {
 extension ConversationVC {
   func setupTableViewDesign() {
     conversationTableView.setupMainBackgroundColor()
-  }
-}
-
-//MARK: - Setup main view design
-extension ConversationVC {
-  func setupMainView() {
-    view.setupMainBackgroundColor()
   }
 }
 
@@ -106,15 +113,6 @@ extension ConversationVC {
   }
 }
 
-//MARK: - Setup all delegates
-extension ConversationVC {
-  func setupAllDelegates() {
-    conversationTableView.delegate = self
-    conversationTableView.dataSource = self
-    senderMessageTextView.delegate = self
-  }
-}
-
 //MARK: - Setup all custom cells design
 extension ConversationVC {
   func setupAllCustomCells() {
@@ -125,13 +123,26 @@ extension ConversationVC {
 
 //MARK: - Setup tap gesture recognizer
 extension ConversationVC {
-  func tapGestureDismissKeyboard() {
+  func setupTapGesture() {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     conversationTableView.addGestureRecognizer(tapGesture)
   }
   
   @objc func tableViewTapped() {
     senderMessageTextView.endEditing(true)
+  }
+}
+
+//MARK: - Setup swipe gesture to dismiss keyboard
+extension ConversationVC {
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    view.endEditing(true)
+  }
+  
+  func setupSwipeGesture() {
+    let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+    swipeDown.direction = .down
+    view.addGestureRecognizer(swipeDown)
   }
 }
 

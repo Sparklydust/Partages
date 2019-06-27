@@ -25,58 +25,55 @@ class ItemImagesVC: UIViewController {
   }
 }
 
-//MARK: - Load top left image button action
+//MARK: - Buttons actions
 extension ItemImagesVC {
+  //MARK: Load top left image button action
   @IBAction func topLeftImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[0])
   }
-}
-
-//MARK: - Load top right image button action
-extension ItemImagesVC {
+  
+  //MARK: Load top right image button action
   @IBAction func topRightImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[1])
   }
-}
-
-//MARK: - Load bottom left image button action
-extension ItemImagesVC {
+  
+  //MARK: Load bottom left image button action
   @IBAction func bottomLeftImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[2])
   }
-}
-
-//MARK: - Load bottom right image button action
-extension ItemImagesVC {
+  
+  //MARK: Load bottom right image button action
   @IBAction func bottomRightImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[3])
   }
-}
-
-//MARK: - Reset images Button action
-extension ItemImagesVC {
+  
+  //MARK: Reset images Button action
   @IBAction func resetButtonAction(_ sender: Any) {
     deleteLittleSquareImages()
   }
-}
-
-//MARK: - Save images button action
-extension ItemImagesVC {
+  
+  //MARK: Save images button action
   @IBAction func saveButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Main setup
 extension ItemImagesVC {
+  //MARK: Developer main design
   func setupMainDesign() {
+    setupOutletsCollectionsOrder()
     setupMainView()
     setupMainSquare()
     setupLittleSquareViews()
     setupLittleSquareImages()
     setupResetAndSaveButton()
     setupUserGuideLabel()
-    setupOutletsCollectionsOrder()
     setupNavigationController()
+  }
+  
+  //MARK: Main view design
+  func setupMainView() {
+    view.setupMainBackgroundColor()
   }
 }
 
@@ -91,13 +88,6 @@ extension ItemImagesVC {
 extension ItemImagesVC {
   func setupReceiverVCLook() {
     
-  }
-}
-
-//MARK: - Setup main view design
-extension ItemImagesVC {
-  func setupMainView() {
-    view.setupMainBackgroundColor()
   }
 }
 
@@ -132,6 +122,17 @@ extension ItemImagesVC {
 extension ItemImagesVC {
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
+  }
+}
+
+//MARK: - Setup outlet collection to be in order
+extension ItemImagesVC {
+  func setupOutletsCollectionsOrder() {
+    stackViews = stackViews.sorted(by: { $0.tag < $1.tag })
+    littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
+    littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
+    littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
+    resetAndSaveButton = resetAndSaveButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 
@@ -192,17 +193,6 @@ extension ItemImagesVC {
     littleSquareViews[1].isHidden = false
     littleSquareViews[2].isHidden = false
     littleSquareViews[3].isHidden = false
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension ItemImagesVC {
-  func setupOutletsCollectionsOrder() {
-    stackViews = stackViews.sorted(by: { $0.tag < $1.tag })
-    littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
-    littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
-    littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
-    resetAndSaveButton = resetAndSaveButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 

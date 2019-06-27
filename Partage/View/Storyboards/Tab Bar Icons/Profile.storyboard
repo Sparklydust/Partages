@@ -122,7 +122,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdh-MK-fok">
                                 <rect key="frame" x="40" y="732" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="e9e-2Y-FIX"/>
+                                    <constraint firstAttribute="height" constant="40" id="e9e-2Y-FIX">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Button"/>
@@ -138,7 +140,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j28-zS-M1E">
                                 <rect key="frame" x="40" y="792" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="T1c-9a-AZq"/>
+                                    <constraint firstAttribute="height" constant="40" id="T1c-9a-AZq">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Button"/>
@@ -223,12 +227,12 @@
                         <outlet property="newPasswordTextField" destination="YK9-4H-0Ys" id="4YD-61-deB"/>
                         <outlet property="oldPasswordTextField" destination="fIJ-DE-cEo" id="Tqc-gB-tOX"/>
                         <outlet property="saveButton" destination="j28-zS-M1E" id="RYA-cA-YQH"/>
-                        <outletCollection property="backgroundViews" destination="2NI-pU-eH9" collectionClass="NSMutableArray" id="RrK-LY-wMy"/>
-                        <outletCollection property="backgroundViews" destination="nvv-AM-idW" collectionClass="NSMutableArray" id="Qh6-GN-Eg8"/>
-                        <outletCollection property="backgroundViews" destination="Mu0-AV-fQ1" collectionClass="NSMutableArray" id="YG4-cH-uae"/>
-                        <outletCollection property="backgroundViews" destination="lHd-Qf-HgV" collectionClass="NSMutableArray" id="3Tb-if-tQh"/>
-                        <outletCollection property="backgroundViews" destination="E4o-x6-soh" collectionClass="NSMutableArray" id="i6t-L0-KZt"/>
-                        <outletCollection property="backgroundViews" destination="Tkq-ab-66R" collectionClass="NSMutableArray" id="uJD-rJ-Q8R"/>
+                        <outletCollection property="underlineViews" destination="2NI-pU-eH9" collectionClass="NSMutableArray" id="RrK-LY-wMy"/>
+                        <outletCollection property="underlineViews" destination="nvv-AM-idW" collectionClass="NSMutableArray" id="Qh6-GN-Eg8"/>
+                        <outletCollection property="underlineViews" destination="Mu0-AV-fQ1" collectionClass="NSMutableArray" id="YG4-cH-uae"/>
+                        <outletCollection property="underlineViews" destination="lHd-Qf-HgV" collectionClass="NSMutableArray" id="3Tb-if-tQh"/>
+                        <outletCollection property="underlineViews" destination="E4o-x6-soh" collectionClass="NSMutableArray" id="i6t-L0-KZt"/>
+                        <outletCollection property="underlineViews" destination="Tkq-ab-66R" collectionClass="NSMutableArray" id="uJD-rJ-Q8R"/>
                         <outletCollection property="spaceBetweenViewsConstraints" destination="9sa-2d-1wH" collectionClass="NSMutableArray" id="JmR-Z9-Awv"/>
                         <outletCollection property="spaceBetweenViewsConstraints" destination="cW1-WI-mt2" collectionClass="NSMutableArray" id="KDH-lg-gMk"/>
                         <outletCollection property="spaceBetweenViewsConstraints" destination="0zh-61-ZNK" collectionClass="NSMutableArray" id="qQ3-iM-O2j"/>
@@ -356,29 +360,26 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH9-W6-Eth">
-                                <rect key="frame" x="156.5" y="703" width="101" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="Q12-Hp-Leq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="13"/>
-                                <state key="normal" title="se déconnecter">
-                                    <color key="titleColor" red="0.066666666669999999" green="0.25098039220000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <rect key="frame" x="184" y="708" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="disconnectProfileButtonAction:" destination="VSA-tz-bYP" eventType="touchUpInside" id="oWt-oi-Cqj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJt-md-kzl">
-                                <rect key="frame" x="140" y="748" width="134" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="ads-yj-tsk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="13"/>
-                                <state key="normal" title="effacer mon compte">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <rect key="frame" x="184" y="753" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="deleteProfileButtonAction:" destination="VSA-tz-bYP" eventType="touchUpInside" id="4nD-cw-rgh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wkd-OJ-UZM">
+                                <rect key="frame" x="184" y="663" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="contactUsButtonAction:" destination="VSA-tz-bYP" eventType="touchUpInside" id="TDc-0V-VJo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -389,17 +390,21 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
                             <constraint firstItem="BR9-fP-p5g" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="KTd-Av-AFH"/>
-                            <constraint firstItem="bJt-md-kzl" firstAttribute="top" secondItem="OH9-W6-Eth" secondAttribute="bottom" constant="20" id="LV2-R0-2OU">
-                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            <constraint firstItem="bJt-md-kzl" firstAttribute="top" secondItem="OH9-W6-Eth" secondAttribute="bottom" constant="15" id="LV2-R0-2OU">
+                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                            </constraint>
+                            <constraint firstItem="OH9-W6-Eth" firstAttribute="top" secondItem="Wkd-OJ-UZM" secondAttribute="bottom" constant="15" id="YJ4-l1-1Ai">
+                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="centerY" secondItem="BaT-Cg-a2w" secondAttribute="centerY" constant="-2.5" id="atz-rE-FMO"/>
                             <constraint firstItem="bJt-md-kzl" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="fy4-Pc-poD"/>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="leading" secondItem="BaT-Cg-a2w" secondAttribute="leading" constant="40" id="hh6-kq-I2q">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
-                            <constraint firstItem="BaT-Cg-a2w" firstAttribute="bottom" secondItem="bJt-md-kzl" secondAttribute="bottom" constant="40" id="iQF-5a-Pjp">
-                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            <constraint firstItem="BaT-Cg-a2w" firstAttribute="bottom" secondItem="bJt-md-kzl" secondAttribute="bottom" constant="30" id="iQF-5a-Pjp">
+                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                             </constraint>
+                            <constraint firstItem="OH9-W6-Eth" firstAttribute="centerX" secondItem="Wkd-OJ-UZM" secondAttribute="centerX" id="j6O-28-Fpp"/>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="top" secondItem="BR9-fP-p5g" secondAttribute="bottom" constant="20" id="kLW-bt-5GS">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
@@ -416,6 +421,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="contactUsButton" destination="Wkd-OJ-UZM" id="xJ2-KN-AQL"/>
                         <outlet property="deleteProfileButton" destination="bJt-md-kzl" id="T5W-yd-Xhe"/>
                         <outlet property="disconnectProfileButton" destination="OH9-W6-Eth" id="zmG-dS-ZWb"/>
                         <outlet property="editProfileButton" destination="ru2-Is-uVu" id="jgI-qd-mlu"/>

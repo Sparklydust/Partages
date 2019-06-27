@@ -21,7 +21,7 @@ class SignInVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var connectionButton: UIButton!
   
-  @IBOutlet var underlinesView: [UIView]!
+  @IBOutlet var underlineViews: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,15 +30,17 @@ class SignInVC: UIViewController {
   }
 }
 
-//MARK: - Connection button action
+//MARK: - Buttons actions
 extension SignInVC {
+  //MARK: Connection button action
   @IBAction func connectionButtonAction(_ sender: Any) {
     
   }
 }
 
-//MARK: - Setup main VC design
+//MARK: - Main setup
 extension SignInVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupSignInIsSelectedButtons()
@@ -51,17 +53,13 @@ extension SignInVC {
     setupDotLabel()
     setupSwipeGesture()
   }
-}
-
-//MARK: - Setup main view design
-extension SignInVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-}
-
-//MARK: - Setup all delegates
-extension SignInVC {
+  
+  //MARK: All delegates
   func setupAllDelegates() {
     emailTextField.delegate = self
     passwordTextField.delegate = self
@@ -88,7 +86,7 @@ extension SignInVC {
 //MARK: - Setup background text view design
 extension SignInVC {
   func setupUnderlinesView() {
-    for underline in underlinesView {
+    for underline in underlineViews {
       underline.setupBackgroundColorIn(.mainBlue)
     }
   }
@@ -145,7 +143,11 @@ extension SignInVC {
       performSegue(withIdentifier: Segue.goesToSignUpVC.rawValue, sender: self)
     }
     if sender.direction == .down {
-      performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+      guard emailTextField.isFirstResponder || passwordTextField.isFirstResponder else {
+        performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+        return
+      }
+      view.endEditing(true)
     }
   }
   

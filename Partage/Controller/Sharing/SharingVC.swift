@@ -16,32 +16,32 @@ class SharingVC: UIViewController {
   @IBOutlet weak var signInSignUpButton: UIButton!
   @IBOutlet weak var receiveButton: UIButton!
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: true)
-  }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
+    super.viewWillDisappear(false)
     navigationController?.setNavigationBarHidden(false, animated: true)
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension SharingVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupAllButtons()
+    setupNavigationController()
   }
-}
 
-//MARK: - Setup main view design
-extension SharingVC {
+//MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -53,5 +53,15 @@ extension SharingVC {
     shareButton.shareReceiveDesign(title: .shareMain)
     receiveButton.shareReceiveDesign(title: .receiveMain)
     signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
+  }
+}
+
+//MARK: - Setup navigation controller design
+extension SharingVC {
+  func setupNavigationController() {
+    navigationController?.navigationBar.barStyle = .default
+    navigationController?.navigationBar.tintColor = .typoBlue
+    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.isTranslucent = false
   }
 }

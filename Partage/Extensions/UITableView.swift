@@ -19,23 +19,23 @@ extension UITableView {
 extension UITableView {
   func scrollToBottomRow() {
     DispatchQueue.main.async {
-      guard self.numberOfSections > 0 else { return }
+      guard self.numberOfSections > .zero else { return }
       
       // Make an attempt to use the bottom-most section with at least one row
-      var section = max(self.numberOfSections - 1, 0)
-      var row = max(self.numberOfRows(inSection: section) - 1, 0)
+      var section = max(self.numberOfSections - 1, .zero)
+      var row = max(self.numberOfRows(inSection: section) - 1, .zero)
       var indexPath = IndexPath(row: row, section: section)
       
       // Ensure the index path is valid, otherwise use the section above (sections can
       // contain 0 rows which leads to an invalid index path)
       while !self.indexPathIsValid(indexPath) {
-        section = max(section - 1, 0)
-        row = max(self.numberOfRows(inSection: section) - 1, 0)
+        section = max(section - 1, .zero)
+        row = max(self.numberOfRows(inSection: section) - 1, .zero)
         indexPath = IndexPath(row: row, section: section)
         
         // If we're down to the last section, attempt to use the first row
-        if indexPath.section == 0 {
-          indexPath = IndexPath(row: 0, section: 0)
+        if indexPath.section == .zero {
+          indexPath = IndexPath(row: .zero, section: .zero)
           break
         }
       }

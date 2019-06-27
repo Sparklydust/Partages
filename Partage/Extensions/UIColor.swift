@@ -24,4 +24,7 @@ extension UIColor {
   
   static let iceBackground = UIColor(
     red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
+  
+  static let typoBlueLight = UIColor(
+    red: 56/255.0, green: 94/255.0, blue: 115/255.0, alpha: 1)
 }

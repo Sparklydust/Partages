@@ -20,15 +20,19 @@ class MessageVC: UIViewController {
   }
 }
 
-//MARK: - Delete message cell with Edit button or by swaping left on it
+//MARK: - Buttons actions
 extension MessageVC {
+  //MARK: Edit button action
   @IBAction func editButton(_ sender: UIBarButtonItem) {
     UIView.animate(withDuration: 0.3) {
       self.messageTableView.isEditing = !self.messageTableView.isEditing
       sender.title = (self.messageTableView.isEditing) ? ButtonName.done.rawValue : ButtonName.edit.rawValue
     }
   }
-  
+}
+
+//MARK: - Swap to delete cell action
+extension MessageVC {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -40,8 +44,9 @@ extension MessageVC {
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension MessageVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupCustomCell()
@@ -50,17 +55,13 @@ extension MessageVC {
     setupTableViewDesign()
     setupCellHeightForIPad()
   }
-}
-
-//MARK: - Setup main view design
-extension MessageVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-}
-
-//MARK: - Setup all delegates
-extension MessageVC {
+  
+  //MARK: All delegates
   func setupAllDelegates() {
     messageTableView.delegate = self
     messageTableView.dataSource = self
@@ -74,10 +75,10 @@ extension MessageVC {
   }
 }
 
-//MARK: Setup Table view to display messages
+//MARK: - Setup Table view to display messages
 extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return 10
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,6 +112,10 @@ extension MessageVC {
 //MARK: - Setup navigation controller design
 extension MessageVC {
   func setupNavigationController() {
+    navigationController?.navigationBar.barStyle = .default
+    navigationController?.navigationBar.tintColor = .typoBlue
+    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.isTranslucent = false
     navigationItem.setupNavBarProfileImage()
   }
 }

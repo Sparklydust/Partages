@@ -25,41 +25,47 @@ class MapViewVC: UIViewController {
     setupMainDesign()
     setupAllDelegates()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
-  }
 }
 
-//MARK: - Save location button action
+//MARK: - Buttons actions
 extension MapViewVC {
+  //MARK: Save location button action
   @IBAction func saveLocationButtonAction(_ sender: Any) {
     LocationHandler.shared.convertLatLonToAnAdress(vc: self)
   }
-}
-
-//MARK: - Long press gesture recognizer add pin with a vibration
-extension MapViewVC {
+  
+  //MARK: Long press gesture recognizer add pin with a vibration
   @IBAction func addPinLongPressGesture(_ sender: UILongPressGestureRecognizer) {
     LocationHandler.shared.userPinAndGetCoordinates(of: .meetingPoint, on: mapView, sender: sender)
     generator.impactOccurred()
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Main setup
 extension MapViewVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
     setupNavigationController()
     setupSaveLocationButton()
   }
-}
-
-//MARK: - Setup main view design
-extension MapViewVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
+  }
+  
+  //MARK: All delegates
+  func setupAllDelegates() {
+    mapView.delegate = self
+    locationManager.delegate = self
+  }
+}
+
+//MARK: - User change authorization status
+extension MapViewVC: MKMapViewDelegate, CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
   }
 }
 
@@ -67,14 +73,6 @@ extension MapViewVC {
 extension MapViewVC {
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
-  }
-}
-
-//MARK: - Setup all delegates
-extension MapViewVC: MKMapViewDelegate, CLLocationManagerDelegate {
-  func setupAllDelegates() {
-    mapView.delegate = self
-    locationManager.delegate = self
   }
 }
 

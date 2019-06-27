@@ -115,6 +115,13 @@ extension ReceiverTVC {
   }
 }
 
+//MARK: - Setup outlet collection to be in order
+extension ReceiverTVC {
+  func setupOutletsCollectionsOrder() {
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
 //MARK: - Setup static labels
 extension ReceiverTVC {
   func setupStaticLabels() {
@@ -124,12 +131,5 @@ extension ReceiverTVC {
     for label in staticLabels {
       label.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
     }
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension ReceiverTVC {
-  func setupOutletsCollectionsOrder() {
-    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
   }
 }

@@ -20,7 +20,7 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   
   @IBOutlet var spaceBetweenViewsConstraints: [NSLayoutConstraint]!
-  @IBOutlet var backgroundViews: [UIView]!
+  @IBOutlet var underlineViews: [UIView]!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,43 +33,41 @@ class EditProfileVC: UIViewController {
   }
 }
 
-//MARK: - Cancel Button action
+//MARK: - Buttons actions
 extension EditProfileVC {
+  //MARK: Cancel Button action
   @IBAction func cancelButtonAction(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
-}
-
-//MARK: - Save Button action
-extension EditProfileVC {
+  
+  //MARK: Save Button action
   @IBAction func saveButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup main developer design
+//MARK: - Main setup
 extension EditProfileVC {
+  //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
-    setupBackgroundViews()
+    setupUnderlineViews()
     setupUserTextFields()
     setupButtons()
     setupTextFieldPlaceholders()
     setupSwipeGesture()
     setupViewsSpacingForUIDevices()
   }
-}
-
-//MARK: - Setup main view design
-extension EditProfileVC {
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
 }
 
-//MARK: - Setup all views background text field views design
+//MARK: - Setup all underline views design
 extension EditProfileVC {
-  func setupBackgroundViews() {
-    for view in backgroundViews {
+  func setupUnderlineViews() {
+    for view in underlineViews {
       view.setupBackgroundColorIn(.mainBlue)
     }
   }
@@ -144,7 +142,16 @@ extension EditProfileVC {
 //MARK: - Setup swipe gesture
 extension EditProfileVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-    dismiss(animated: true, completion: nil)
+    guard firstNameTextField.isFirstResponder ||
+      lastNameTextField.isFirstResponder ||
+      emailTextField.isFirstResponder ||
+      oldPasswordTextField.isFirstResponder ||
+      newPasswordTextField.isFirstResponder ||
+      confirmPasswordTextField.isFirstResponder else {
+        dismiss(animated: true, completion: nil)
+        return
+    }
+    view.endEditing(true)
   }
   
   func setupSwipeGesture() {
@@ -174,29 +181,29 @@ extension EditProfileVC: UITextFieldDelegate {
   }
 }
 
-//MARK: - Handle to show hidden text field on iPhone SE
+//MARK: - Handler to show hidden text field on iPhone SE
 extension EditProfileVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
     center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-
+  
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
     guard UIDevice.current.name == DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
     guard confirmPasswordTextField.isEditing || newPasswordTextField.isEditing else { return }
-    guard view.frame.origin.y == 0 else { return }
+    guard view.frame.origin.y == .zero else { return }
     UIView.animate(withDuration: 0.4) {
       self.view.frame.origin.y -= (keyboardFrame.height / 3)
     }
   }
-
+  
   @objc func keyboardWillHide(notification: NSNotification) {
-    guard view.frame.origin.y != 0 else { return }
+    guard view.frame.origin.y != .zero else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y = 0
+      self.view.frame.origin.y = .zero
     }
   }
 }

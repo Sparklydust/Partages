@@ -20,7 +20,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUt-kE-o3c">
                                 <rect key="frame" x="40" y="697" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="eZQ-r6-gJa"/>
+                                    <constraint firstAttribute="height" constant="40" id="eZQ-r6-gJa">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -30,7 +32,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-5W-f88">
                                 <rect key="frame" x="40" y="757" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="5Wq-eH-xmc"/>
+                                    <constraint firstAttribute="height" constant="40" id="5Wq-eH-xmc">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -193,10 +197,10 @@
                         <outlet property="registerButton" destination="sNF-5W-f88" id="eOC-Zm-zIn"/>
                         <outlet property="signInButton" destination="b1K-aN-WH6" id="MuN-fM-LV8"/>
                         <outlet property="signUpButton" destination="91i-Ip-w3w" id="sqz-6g-In1"/>
-                        <outletCollection property="underlinesView" destination="qqd-aX-PSH" collectionClass="NSMutableArray" id="o2l-Cj-xGR"/>
-                        <outletCollection property="underlinesView" destination="BpR-td-oUz" collectionClass="NSMutableArray" id="B7h-CE-Q18"/>
-                        <outletCollection property="underlinesView" destination="E5t-uR-uHT" collectionClass="NSMutableArray" id="1ot-mO-GYL"/>
-                        <outletCollection property="underlinesView" destination="FCd-OT-1eh" collectionClass="NSMutableArray" id="j0j-2u-bgb"/>
+                        <outletCollection property="underlineViews" destination="qqd-aX-PSH" collectionClass="NSMutableArray" id="o2l-Cj-xGR"/>
+                        <outletCollection property="underlineViews" destination="BpR-td-oUz" collectionClass="NSMutableArray" id="B7h-CE-Q18"/>
+                        <outletCollection property="underlineViews" destination="E5t-uR-uHT" collectionClass="NSMutableArray" id="1ot-mO-GYL"/>
+                        <outletCollection property="underlineViews" destination="FCd-OT-1eh" collectionClass="NSMutableArray" id="j0j-2u-bgb"/>
                         <segue destination="DEV-gF-bcw" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="80z-kf-HFf"/>
                     </connections>
                 </viewController>
@@ -227,7 +231,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-W0-SiM">
                                 <rect key="frame" x="40" y="697" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="xxf-ds-03b"/>
+                                    <constraint firstAttribute="height" constant="40" id="xxf-ds-03b">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -237,7 +243,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3O-TD-9c0">
                                 <rect key="frame" x="40" y="757" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JnD-Uh-M6j"/>
+                                    <constraint firstAttribute="height" constant="40" id="JnD-Uh-M6j">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -325,7 +333,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dY-9Z-1ZQ">
                                 <rect key="frame" x="40" y="697" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="iso-63-E0X"/>
+                                    <constraint firstAttribute="height" constant="40" id="iso-63-E0X">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -335,7 +345,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WR-Tq-BZw">
                                 <rect key="frame" x="40" y="757" width="334" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ojq-9Z-HU0"/>
+                                    <constraint firstAttribute="height" constant="40" id="ojq-9Z-HU0">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -463,8 +475,8 @@
                         <outlet property="passwordTextField" destination="h8p-iL-eTI" id="X87-N3-Icb"/>
                         <outlet property="signInButton" destination="MgC-Lr-oEw" id="xMj-Ha-odx"/>
                         <outlet property="signUpButton" destination="09h-Xr-8nn" id="7xA-7d-mkj"/>
-                        <outletCollection property="underlinesView" destination="6LI-c7-YL0" collectionClass="NSMutableArray" id="vzD-Rh-3rM"/>
-                        <outletCollection property="underlinesView" destination="dZA-Gz-nua" collectionClass="NSMutableArray" id="Jhr-ZS-x7o"/>
+                        <outletCollection property="underlineViews" destination="6LI-c7-YL0" collectionClass="NSMutableArray" id="vzD-Rh-3rM"/>
+                        <outletCollection property="underlineViews" destination="dZA-Gz-nua" collectionClass="NSMutableArray" id="Jhr-ZS-x7o"/>
                         <segue destination="FlS-wc-sAg" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="h7I-Zk-Ij1"/>
                     </connections>
                 </viewController>

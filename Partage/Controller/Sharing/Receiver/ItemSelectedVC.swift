@@ -33,39 +33,34 @@ class ItemSelectedVC: UIViewController {
   }
 }
 
-//MARK: - Favorite button action
+//MARK: - Buttons actions
 extension ItemSelectedVC {
+  //MARK: Favorite button action
   @IBAction func favoriteButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Item image button action
-extension ItemSelectedVC {
+  
+  //MARK: Item image button action
   @IBAction func itemImageButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Map view button action
-extension ItemSelectedVC {
+  
+  //MARK: Map view button action
   @IBAction func mapViewButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Messagge to donator button action
-extension ItemSelectedVC {
+  
+  //MARK: Messagge to donator button action
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
   }
-}
-
-//MARK: - Receive this donation button action
-extension ItemSelectedVC {
+  
+  //MARK: Receive this donation button action
   @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
   }
 }
 
-//MARK: - Setup developer main design
+//MARK: - Main setup
 extension ItemSelectedVC {
+  //MARK: Developer main design
   func setupMainDesign() {
+    setupOutletsCollectionsOrder()
     setupMainView()
     setupMessageAndReceiveButtons()
     setupAllLabels()
@@ -75,13 +70,10 @@ extension ItemSelectedVC {
     setupItemDescriptionTextView()
     setupItemImage()
     setupUnderlineView()
-    setupOutletsCollectionsOrder()
     setupNavigationController()
   }
-}
 
-//MARK: - Setup main view design
-extension ItemSelectedVC {
+//MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -137,6 +129,13 @@ extension ItemSelectedVC {
   }
 }
 
+//MARK: - Setup outlet collection to be in order
+extension ItemSelectedVC {
+  func setupOutletsCollectionsOrder() {
+    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
+  }
+}
+
 //MARK: - Setup static labels design
 extension ItemSelectedVC {
   func setupStaticLabels() {
@@ -146,13 +145,6 @@ extension ItemSelectedVC {
     for label in staticLabels {
       label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
     }
-  }
-}
-
-//MARK: - Setup outlet collection to be in order
-extension ItemSelectedVC {
-  func setupOutletsCollectionsOrder() {
-    staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
   }
 }
 

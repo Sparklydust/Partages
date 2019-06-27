@@ -70,6 +70,12 @@ extension UIViewController {
         value.1()
     }))
     }
+    // PopoverController is for iPad
+    if let popoverController = actionSheet.popoverPresentationController {
+      popoverController.sourceView = view
+      popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: .zero, height: .zero)
+      popoverController.permittedArrowDirections = []
+    }
     actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
     self.present(actionSheet, animated: true, completion: nil)
   }

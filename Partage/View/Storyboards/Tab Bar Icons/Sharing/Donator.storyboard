@@ -121,7 +121,8 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="96.5"/>
                                                     </mapView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBT-I8-Wus">
-                                                        <rect key="frame" x="10" y="10" width="354" height="76.5"/>
+                                                        <rect key="frame" x="5" y="5" width="364" height="86.5"/>
+                                                        <state key="normal" title="Button"/>
                                                         <connections>
                                                             <action selector="mapKitButtonAction:" destination="4NT-Qx-osB" eventType="touchUpInside" id="eOc-js-BMl"/>
                                                             <segue destination="eEj-oc-8me" kind="show" identifier="goToMapViewVC" id="oKt-4q-3hn"/>
@@ -130,12 +131,12 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="MpS-cZ-hzH" firstAttribute="leading" secondItem="8a8-Ti-9PV" secondAttribute="leading" id="DQ6-9z-QNq"/>
-                                                    <constraint firstItem="RBT-I8-Wus" firstAttribute="leading" secondItem="8a8-Ti-9PV" secondAttribute="leading" constant="10" id="HE9-lc-Ps2"/>
-                                                    <constraint firstItem="RBT-I8-Wus" firstAttribute="top" secondItem="8a8-Ti-9PV" secondAttribute="top" constant="10" id="SjK-tq-Kr0"/>
+                                                    <constraint firstItem="RBT-I8-Wus" firstAttribute="leading" secondItem="8a8-Ti-9PV" secondAttribute="leading" constant="5" id="HE9-lc-Ps2"/>
+                                                    <constraint firstItem="RBT-I8-Wus" firstAttribute="top" secondItem="8a8-Ti-9PV" secondAttribute="top" constant="5" id="SjK-tq-Kr0"/>
                                                     <constraint firstItem="MpS-cZ-hzH" firstAttribute="top" secondItem="8a8-Ti-9PV" secondAttribute="top" id="XIb-2N-R5q"/>
                                                     <constraint firstAttribute="bottom" secondItem="MpS-cZ-hzH" secondAttribute="bottom" id="pOi-ei-7Z5"/>
-                                                    <constraint firstAttribute="bottom" secondItem="RBT-I8-Wus" secondAttribute="bottom" constant="10" id="pgt-dc-W0e"/>
-                                                    <constraint firstAttribute="trailing" secondItem="RBT-I8-Wus" secondAttribute="trailing" constant="10" id="tLg-4U-xxv"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RBT-I8-Wus" secondAttribute="bottom" constant="5" id="pgt-dc-W0e"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RBT-I8-Wus" secondAttribute="trailing" constant="5" id="tLg-4U-xxv"/>
                                                     <constraint firstAttribute="trailing" secondItem="MpS-cZ-hzH" secondAttribute="trailing" id="vmo-rg-yfV"/>
                                                 </constraints>
                                             </view>
@@ -181,7 +182,9 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-Qh-C3Q">
                                 <rect key="frame" x="20" y="753" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="47y-fY-z4A"/>
+                                    <constraint firstAttribute="height" constant="40" id="47y-fY-z4A">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -191,7 +194,9 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-GM-hMF">
                                 <rect key="frame" x="20" y="693" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Zw7-3a-JUF"/>
+                                    <constraint firstAttribute="height" constant="40" id="Zw7-3a-JUF">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -243,9 +248,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubd-ul-m7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="AAX-ZM-dfZ">
+                    <connections>
+                        <outlet property="delegate" destination="zkT-I0-SsY" id="JY1-fR-Zo5"/>
+                    </connections>
+                </swipeGestureRecognizer>
                 <exit id="hOX-jC-sIC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="214" y="41"/>
+            <point key="canvasLocation" x="-51" y="51"/>
         </scene>
         <!--ItemImages-->
         <scene sceneID="WVG-70-dza">
