@@ -41,4 +41,6 @@ enum ButtonName: String {
   case reset = "Réinitialiser"
   case makeADonation = "Faire un don"
   case saveMeetingPoint = "Enregistrer lieu de rdv"
+  case setupMeetingPoint = "Cliquer ici pour ajouter le lieu de RDV"
+  case confirm = "Confirmer"
 }

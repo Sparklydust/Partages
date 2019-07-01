@@ -325,8 +325,8 @@
                         <outletCollection property="littleSquareButtons" destination="GgG-3H-lHl" collectionClass="NSMutableArray" id="ZPD-pv-UsH"/>
                         <outletCollection property="littleSquareButtons" destination="ngl-iB-35o" collectionClass="NSMutableArray" id="rnY-eK-waO"/>
                         <outletCollection property="littleSquareButtons" destination="W3d-fM-X2y" collectionClass="NSMutableArray" id="dzL-ea-uvb"/>
-                        <outletCollection property="resetAndSaveButton" destination="4vN-ho-bUC" collectionClass="NSMutableArray" id="2OA-G5-HP4"/>
-                        <outletCollection property="resetAndSaveButton" destination="g50-Ni-fn3" collectionClass="NSMutableArray" id="oaP-kg-oPi"/>
+                        <outletCollection property="CancelAndSaveButton" destination="4vN-ho-bUC" collectionClass="NSMutableArray" id="2OA-G5-HP4"/>
+                        <outletCollection property="CancelAndSaveButton" destination="g50-Ni-fn3" collectionClass="NSMutableArray" id="oaP-kg-oPi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5c-kw-t0T" userLabel="First Responder" sceneMemberID="firstResponder"/>

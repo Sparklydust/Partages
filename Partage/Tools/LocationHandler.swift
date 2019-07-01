@@ -51,9 +51,9 @@ extension LocationHandler {
 
 //MARK: - #3 Use this method to convert pin latitude and longitude to a physical address
 extension LocationHandler {
-  func convertLatLonToAnAdress(vc: UIViewController) {
-    var latitude = annotation.coordinate.latitude
-    var longitude = annotation.coordinate.longitude
+  func convertLatLonToAnAdress(vc: MapViewVC) {
+    let latitude = annotation.coordinate.latitude
+    let longitude = annotation.coordinate.longitude
     
     meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
     
@@ -69,26 +69,16 @@ extension LocationHandler {
         vc.showAlert(title: .error, message: .locationIssue)
         return
       }
-      if let location = placemark.location {
-        latitude = location.coordinate.latitude
-        longitude = location.coordinate.longitude
-      }
+      let coordinates = placemark.location
       let streetNumber = placemark.subThoroughfare ?? ""
       let streetName = placemark.thoroughfare ?? ""
       let postalCode = placemark.postalCode ?? ""
       let cityName = placemark.locality ?? ""
       let countryName = placemark.country ?? ""
+      
       DispatchQueue.main.async {
-        print("""
-          
-          Latitude is: \(latitude)
-          Longitute is: \(longitude)
-          
-          \(streetNumber) \(streetName)
-          \(postalCode) \(cityName)
-          \(countryName)
-          
-          """)
+        // Sending the address and coordinates to Donator VC
+        vc.delegate?.addressReceived(coordinates: coordinates!, streetNumber: streetNumber, streetName: streetName, postalCode: postalCode, cityName: cityName, countryName: countryName)
       }
     }
   }
@@ -134,6 +124,21 @@ extension LocationHandler {
     let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
     renderer.strokeColor = .mainBlue
     return renderer
+  }
+}
+
+//MARK: - #6 Method to add an annotation on any map
+extension LocationHandler {
+  func itemAnnotationShown(on mapView: MKMapView, located locationCoordinates: CLLocationCoordinate2D) {
+    annotation.coordinate = locationCoordinates
+    annotation.title = StaticLabel.meetingPoint.rawValue
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.addAnnotation(annotation)
+    
+    let coordinate = locationCoordinates
+    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    mapView.setRegion(region, animated: true)
   }
 }
 

@@ -131,3 +131,17 @@ extension UIButton {
     }
   }
 }
+
+extension UIButton {
+  func setupAddMeetingPointButton(named title: ButtonName) {
+    self.setTitle(title.rawValue, for: .normal)
+    self.setTitleColor(.mainBlue, for: .normal)
+    self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .thirteen)
+    self.backgroundColor = .clear
+    
+    // Settings for iPad
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .twenty)
+    }
+  }
+}

@@ -17,7 +17,16 @@ class ItemImagesVC: UIViewController {
   @IBOutlet var littleSquareViews: [UIView]!
   @IBOutlet var littleSquareImages: [UIImageView]!
   @IBOutlet var littleSquareButtons: [UIButton]!
-  @IBOutlet var resetAndSaveButton: [UIButton]!
+  @IBOutlet var cancelAndSaveButton: [UIButton]!
+  
+  var images = [UIImage]()
+  
+  var delegate: CanReceiveItemImages?
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    navigationController?.setNavigationBarHidden(false, animated: true)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,8 +48,7 @@ extension ItemImagesVC {
   
   //MARK: Load bottom left image button action
   @IBAction func bottomLeftImageButtonAction(_ sender: Any) {
-    loadImage(to: littleSquareImages[2])
-  }
+    loadImage(to: littleSquareImages[2])  }
   
   //MARK: Load bottom right image button action
   @IBAction func bottomRightImageButtonAction(_ sender: Any) {
@@ -54,6 +62,13 @@ extension ItemImagesVC {
   
   //MARK: Save images button action
   @IBAction func saveButtonAction(_ sender: Any) {
+    saveEachImageInImagesList()
+    guard !images.isEmpty else {
+      showAlert(title: .error, message: .noImageSelected)
+      return
+    }
+    delegate?.imagesReceived(image: images)
+    navigationController?.popViewController(animated: true)
   }
 }
 
@@ -132,15 +147,15 @@ extension ItemImagesVC {
     littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
     littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
     littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
-    resetAndSaveButton = resetAndSaveButton.sorted(by: { $0.tag < $1.tag })
+    cancelAndSaveButton = cancelAndSaveButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup reset and save button design
 extension ItemImagesVC {
   func setupResetAndSaveButton() {
-    resetAndSaveButton[0].commonDesign(title: .reset)
-    resetAndSaveButton[1].commonDesign(title: .save)
+    cancelAndSaveButton[0].commonDesign(title: .reset)
+    cancelAndSaveButton[1].commonDesign(title: .save)
   }
 }
 
@@ -227,6 +242,17 @@ extension ItemImagesVC {
             square.image = nil
           }
         }
+      }
+    }
+  }
+}
+
+//MARK: - Method to save each little square image in images
+extension ItemImagesVC {
+  func saveEachImageInImagesList() {
+    for image in littleSquareImages {
+      if let image = image.image {
+        images.append(image)
       }
     }
   }

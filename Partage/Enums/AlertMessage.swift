@@ -25,4 +25,13 @@ enum AlertMessage: String {
   case contactUsFailed = "Contactez-nous à: \n\npartage@contact.com"
   case contactUsSaved = "N'hésitez pas à nous contacter, nous serrons à votre écoute."
   case contactUsSent = "Nous vous répondrons dans les plus brefs délais."
+  case noImageSelected = "Vous n'avez pas ajoutez d'images. Merci de procéder avant tout enregistrement."
+  case noAnnotationPoint = "Merci de rester appuyer sur lieu de rendez-vous pour le définir avant de l'enregistrer."
+  case noItemTypeSelected = "Merci de sélectionner un type de don."
+  case noItemName = "Merci de choisir un nom à votre don."
+  case noItemDate = "Merci de choisir une date et une heure pour la remide de votre don."
+  case noMeetingPoint = "Merci de choisir un lieu de rendez-vous."
+  case noDescription = "Merci de choisir une description de votre don."
+  case noImage = "Merci de choisir au minimum une image de votre don."
+  case confirmDonation = "Veuillez confirmer votre don."
 }

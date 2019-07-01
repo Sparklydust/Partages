@@ -21,4 +21,6 @@ enum AlertTitle: String {
   case contactUsFailed = "Erreur de Mail app"
   case contactUsSaved = "Email sauvegardé"
   case contactUsSent = "Merci de votre envoi"
+  case emptyCase = "Élément manquant"
+  case thankYou = "Merci"
 }

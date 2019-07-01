@@ -20,6 +20,13 @@ class MapViewVC: UIViewController {
   let generator = UIImpactFeedbackGenerator(style: .light)
   let aroundUserLocation: CLLocationDistance = 500
   
+  var delegate: CanReceiveItemAddress?
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    navigationController?.setNavigationBarHidden(false, animated: true)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -32,6 +39,7 @@ extension MapViewVC {
   //MARK: Save location button action
   @IBAction func saveLocationButtonAction(_ sender: Any) {
     LocationHandler.shared.convertLatLonToAnAdress(vc: self)
+    navigationController?.popViewController(animated: true)
   }
   
   //MARK: Long press gesture recognizer add pin with a vibration

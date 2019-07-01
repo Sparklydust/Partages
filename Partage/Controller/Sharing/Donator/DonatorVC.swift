@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import Firebase
+import FirebaseDatabase
 
 class DonatorVC: UIViewController {
   
@@ -23,8 +25,15 @@ class DonatorVC: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
+  @IBOutlet weak var viewForScrollView: UIView!
+  @IBOutlet weak var scrollView: UIScrollView!
   
   var keyboardFrame: CGRect = .zero
+  
+  private var rootRef: DatabaseReference!
+  
+  var address: Address!
+  var images = [UIImage]()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -37,6 +46,8 @@ class DonatorVC: UIViewController {
     setupAllDelegates()
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
+    
+    rootRef = Database.database().reference()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -53,19 +64,22 @@ class DonatorVC: UIViewController {
 extension DonatorVC {
   //MARK: Add item image button action
   @IBAction func addItemImageButtonAction(_ sender: Any) {
-    view.endEditing(true)
+    dismissKeyboard()
   }
   
   //MARK: Map kit button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
+    dismissKeyboard()
   }
   
   //MARK: Reset Button Action
   @IBAction func resetButtonAction(_ sender: Any) {
+    setupAllEntriesBackToOriginState()
   }
   
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
+    createDonatorItemAndSaveItIntoFirebase()
   }
 }
 
@@ -91,6 +105,7 @@ extension DonatorVC {
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
+    viewForScrollView.setupMainBackgroundColor()
   }
   
   //MARK: All delegates
@@ -173,6 +188,15 @@ extension DonatorVC {
 extension DonatorVC {
   func setupMapView() {
     mapView.layer.cornerRadius = 10
+    mapView.isHidden = true
+    mapKitButton.setupAddMeetingPointButton(named: .setupMeetingPoint)
+  }
+  
+  func mapViewActionsAreDisabled() {
+    mapKitButton.setTitle(nil, for: .normal)
+    mapView.isHidden = false
+    mapView.isZoomEnabled = false
+    mapView.isScrollEnabled = false
   }
 }
 
@@ -248,20 +272,36 @@ extension DonatorVC {
   }
   
   @objc func dismissKeyboardOnTap() {
-    view.endEditing(true)
+    dismissKeyboard()
   }
 }
 
 //MARK: - Setup swipe gesture to dismiss keyboard
 extension DonatorVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-    view.endEditing(true)
+    dismissKeyboard()
   }
   
   func setupSwipeGesture() {
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     swipeDown.direction = .down
     view.addGestureRecognizer(swipeDown)
+  }
+  
+  func dismissKeyboard() {
+    view.endEditing(true)
+  }
+}
+
+//MARK: - Setup all entries back to their origin state
+extension DonatorVC {
+  func setupAllEntriesBackToOriginState() {
+    itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
+    itemDatePicker.setDate(Date.init(), animated: true)
+    itemNameTextField.text = ""
+    itemDescriptionTextView.text = ""
+    itemImage.image = nil
+    setupMapView()
   }
 }
 
@@ -274,11 +314,11 @@ extension DonatorVC {
   }
   
   @objc func keyboardWillShow(notification: NSNotification) {
-    guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+   guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     keyboardFrame = keyboardSize.cgRectValue
     resizeViewWhenKeyboardShows()
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
     keyboardFrame = .zero
     resizeViewWhenKeyboardHides()
@@ -306,5 +346,84 @@ extension DonatorVC {
     mapKitButton.isEnabled = action
     itemDatePicker.isEnabled = action
     itemTypePickerView.isUserInteractionEnabled = action
+  }
+}
+
+//MARK: - Prepare for segue methods
+extension DonatorVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goesToItemImagesVC.rawValue {
+      let secondVC = segue.destination as! ItemImagesVC
+      secondVC.delegate = self
+    }
+    else if segue.identifier == Segue.goesToMapViewVC.rawValue {
+      let secondVC = segue.destination as! MapViewVC
+      secondVC.delegate = self
+    }
+  }
+}
+
+//MARK: - Item address receiver from MapViewVC
+extension DonatorVC: CanReceiveItemAddress {
+  func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String) {
+    address = Address(
+      coordinates: coordinates,
+      streetNumber: streetNumber,
+      streetName: streetName,
+      postalCode: postalCode,
+      city: cityName,
+      country: countryName
+    )
+    mapViewActionsAreDisabled()
+    LocationHandler.shared.itemAnnotationShown(on: mapView, located: coordinates.coordinate)
+  }
+}
+
+//MARK: - Item images receiver from ItemImagesVC
+extension DonatorVC: CanReceiveItemImages {
+  func imagesReceived(image: [UIImage]) {
+    images = image
+    itemImage.image = image[0]
+  }
+}
+
+extension DonatorVC {
+  func createDonatorItemAndSaveItIntoFirebase() {
+    let donatorItem = DonatorItem(
+      selectedType: DonatorItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+      name: itemNameTextField.text!,
+      image: images,
+      pickupDate: itemDatePicker.date,
+      address: address ?? Address(coordinates: CLLocation(latitude: .zero, longitude: .zero), streetNumber: "", streetName: "", postalCode: "", city: "", country: ""),
+      description: itemDescriptionTextView.text!
+    )
+    switch true {
+    case donatorItem.selectedType == DonatorItemType.selectItem.rawValue:
+      showAlert(title: .emptyCase, message: .noItemTypeSelected)
+      break
+    case donatorItem.name == "":
+      showAlert(title: .emptyCase, message: .noItemName)
+      break
+    case donatorItem.image == [UIImage]():
+      showAlert(title: .emptyCase, message: .noImage)
+      break
+    case donatorItem.pickUpDate.isLessThanDate(dateToCompare: Date()) || donatorItem.pickUpDate.equalToDate(dateToCompare: Date()):
+      showAlert(title: .emptyCase, message: .noItemDate)
+      break
+    case donatorItem.address.countryName == "":
+      showAlert(title: .emptyCase, message: .noMeetingPoint)
+      break
+    case donatorItem.description == StaticLabel.enterItemDescription.rawValue || donatorItem.description == "":
+      showAlert(title: .emptyCase, message: .noDescription)
+    default:
+      showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
+        (true) in
+        print("Save item into firebase")
+        print("\(donatorItem)")
+//        let donatorsItemsRef = self.rootRef.child(FirebaseRoot.donatorsItems.rawValue)
+//        let itemRef = donatorsItemsRef.childByAutoId()
+//        itemRef.setValue(donatorItem.toDictionary())
+      }
+    }
   }
 }
