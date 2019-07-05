@@ -172,7 +172,6 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func setupAllCustomCells() {
     HistoryFavoriteTableView.setupCustomCell(nibName: .historyCellIdentifier, identifier: .historyCellIdentifier)
-    
     HistoryFavoriteTableView.setupCustomCell(nibName: .favoriteCellIdentifier, identifier: .favoriteCellIdentifier)
   }
 }
@@ -193,7 +192,9 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func showHistoryCustomCell(_ bool: Bool) {
     isHistoryButtonClicked = bool
-    HistoryFavoriteTableView.reloadData()
+    DispatchQueue.main.async {
+      self.HistoryFavoriteTableView.reloadData()
+    }
   }
 }
 
@@ -205,7 +206,6 @@ extension HistoryFavoriteVC {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToItemDetailsVC.rawValue {
-      
     }
   }
 }

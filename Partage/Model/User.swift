@@ -16,5 +16,8 @@ struct User {
   var email: String
   var password: String
   
+  var itemDonated: [DonatorItem]
+  var itemReceived: [DonatorItem]
+  
   var message: [Message]
 }

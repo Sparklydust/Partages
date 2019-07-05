@@ -83,21 +83,21 @@ extension ReceiverTVC {
 //MARK: - Setup item name label design
 extension ReceiverTVC {
   func setupItemNameLabel() {
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
 //MARK: - Setup date label design
 extension ReceiverTVC {
   func setupDateLabel() {
-    dateLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
+    dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
 //MARK: - Setup time label design
 extension ReceiverTVC {
   func setupTimeLabel() {
-    timeLabel.setupFont(as: .superclarendonBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
+    timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
   }
 }
 
@@ -105,13 +105,14 @@ extension ReceiverTVC {
 extension ReceiverTVC {
   func setupMapView() {
     mapView.layer.cornerRadius = 10
+    mapView.isUserInteractionEnabled = false
   }
 }
 
 //MARK: - Setup item image design
 extension ReceiverTVC {
   func setupItemImage() {
-    itemImage.layer.cornerRadius = 2
+    itemImage.layer.cornerRadius = 3
   }
 }
 
@@ -129,7 +130,22 @@ extension ReceiverTVC {
     staticLabels[1].text = StaticItemDetail.the.rawValue
     staticLabels[2].text = StaticItemDetail.at.rawValue
     for label in staticLabels {
-      label.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+      label.setupFont(as: .arial, sized: .seventeen, forIPad: .twentyThree, in: .typoBlue)
     }
+  }
+}
+
+extension ReceiverTVC {
+  func addMeetingPointOnMap(latitude: Double, longitude: Double) {
+    let annotation = MKPointAnnotation()
+    let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    annotation.coordinate = locationCoordinates
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.addAnnotation(annotation)
+    
+    let coordinate = locationCoordinates
+    let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    mapView.setRegion(region, animated: true)
   }
 }

@@ -52,7 +52,6 @@
                                                                                         <state key="normal" image="addCross"/>
                                                                                         <connections>
                                                                                             <action selector="addItemImageButtonAction:" destination="CXn-nS-Uxz" eventType="touchUpInside" id="cGa-qc-iUM"/>
-                                                                                            <segue destination="DKq-RX-RYw" kind="show" identifier="goToItemImagesVC" id="DP1-dc-G3I"/>
                                                                                         </connections>
                                                                                     </button>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="reC-Pl-hGx">
@@ -131,7 +130,6 @@
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="mapKitButtonAction:" destination="CXn-nS-Uxz" eventType="touchUpInside" id="xHP-gW-09a"/>
-                                                                            <segue destination="b0h-Oq-N0Y" kind="show" identifier="goToMapViewVC" id="DRe-hq-MQ6"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -278,6 +276,8 @@
                         <outlet property="underlineView" destination="7FM-J6-AIu" id="P9R-an-eBl"/>
                         <outlet property="viewForScrollView" destination="m3C-Ox-Q7e" id="NfI-eF-zLq"/>
                         <segue destination="31d-TN-Bjg" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="r9C-51-3RD"/>
+                        <segue destination="DKq-RX-RYw" kind="show" identifier="goToItemImagesVC" id="rYe-da-3gp"/>
+                        <segue destination="b0h-Oq-N0Y" kind="show" identifier="goToMapViewVC" id="BQZ-o6-WxK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5r-ou-YBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +298,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VR8-kM-Zgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1601" y="-117"/>
+            <point key="canvasLocation" x="1602" y="-120"/>
         </scene>
         <!--MapView-->
         <scene sceneID="Gxv-Za-MXT">
@@ -308,7 +308,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c66-KC-PmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1702" y="18"/>
+            <point key="canvasLocation" x="1741" y="23"/>
         </scene>
     </scenes>
     <resources>

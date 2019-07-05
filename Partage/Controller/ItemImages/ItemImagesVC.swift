@@ -23,11 +23,6 @@ class ItemImagesVC: UIViewController {
   
   var delegate: CanReceiveItemImages?
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    navigationController?.setNavigationBarHidden(false, animated: true)
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -236,7 +231,7 @@ extension ItemImagesVC {
   func deleteLittleSquareImages() {
     for square in littleSquareImages {
       if square.image != nil {
-        showAlert(title: .resetImage, message: .resetImage, buttonName: .reset) {
+        showAlert(title: .reset, message: .resetImage, buttonName: .reset) {
           (true) in
           for square in self.littleSquareImages {
             square.image = nil

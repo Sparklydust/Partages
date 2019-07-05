@@ -43,10 +43,12 @@ class ItemDetailsVC: UIViewController {
 extension ItemDetailsVC {
   //MARK: Item picture button action
   @IBAction func itemPictureButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToItemImagesVC.rawValue, sender: self)
   }
   
   //MARK: Map kit view button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
   }
   
   //MARK: Add to calendar or modify button action
@@ -59,6 +61,7 @@ extension ItemDetailsVC {
   
   //MARK: Edit donation button action
   @IBAction func editButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToDonatorVC.rawValue, sender: self)
   }
 }
 
@@ -154,7 +157,7 @@ extension ItemDetailsVC {
 //MARK: - Setup item image design
 extension ItemDetailsVC {
   func setupItemImage() {
-    itemImage.layer.cornerRadius = 2
+    itemImage.layer.cornerRadius = 3
   }
 }
 

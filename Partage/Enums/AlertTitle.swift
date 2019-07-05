@@ -11,7 +11,7 @@ import UIKit
 //MARK: - UIAlert title
 enum AlertTitle: String {
   case addToCalendar = "Ajouté au calendrier"
-  case resetImage = "Réinitialiser"
+  case reset = "Réinitialiser"
   case locationOff = "Localisation désactivée"
   case error = "Erreur"
   case cameraUse = "Accès à votre caméra et album"
@@ -23,4 +23,5 @@ enum AlertTitle: String {
   case contactUsSent = "Merci de votre envoi"
   case emptyCase = "Élément manquant"
   case thankYou = "Merci"
+  case sorry = "Désolé"
 }

@@ -21,16 +21,18 @@ class MapViewVC: UIViewController {
   let aroundUserLocation: CLLocationDistance = 500
   
   var delegate: CanReceiveItemAddress?
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    navigationController?.setNavigationBarHidden(false, animated: true)
-  }
+  var donatorItemLatitude: Double = .zero
+  var donatorItemLongitude: Double = .zero
+  var buttonName: ButtonName = .saveMeetingPoint
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
+    
+    guard donatorItemLatitude != .zero else { return }
+    LocationHandler.shared.getDirectionFromUserToPinnedLocation(on: mapView, latitude: donatorItemLatitude, longitude: donatorItemLongitude, vc: self)
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItemLatitude, longitude: donatorItemLongitude)
   }
 }
 
@@ -38,6 +40,10 @@ class MapViewVC: UIViewController {
 extension MapViewVC {
   //MARK: Save location button action
   @IBAction func saveLocationButtonAction(_ sender: Any) {
+    guard buttonName == .saveMeetingPoint else {
+      LocationHandler.shared.openAppleMapApp(itemLatitude: donatorItemLatitude, itemLongitude: donatorItemLongitude)
+      return
+    }
     LocationHandler.shared.convertLatLonToAnAdress(vc: self)
     navigationController?.popViewController(animated: true)
   }
@@ -70,13 +76,6 @@ extension MapViewVC {
   }
 }
 
-//MARK: - User change authorization status
-extension MapViewVC: MKMapViewDelegate, CLLocationManagerDelegate {
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
-  }
-}
-
 //MARK: - Setup navigation controller design
 extension MapViewVC {
   func setupNavigationController() {
@@ -87,6 +86,22 @@ extension MapViewVC {
 //MARK: - Setup save place button design
 extension MapViewVC {
   func setupSaveLocationButton() {
-    saveLocationButton.commonDesign(title: .saveMeetingPoint)
+    saveLocationButton.commonDesign(title: buttonName)
+  }
+}
+
+//MARK: - User change authorization status
+extension MapViewVC: MKMapViewDelegate, CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    LocationHandler.shared.setupUserLocationAtBest(onto: mapView, byMeters: aroundUserLocation, vc: self)
+  }
+}
+
+//MARK: - Method to display the directions line as a custom color
+extension MapViewVC {
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+    renderer.strokeColor = .mainBlue
+    return renderer
   }
 }

@@ -60,7 +60,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERc-Vi-7Zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.29999999999999999" id="dLg-2w-tR6">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.10000000000000001" id="dLg-2w-tR6">
                     <connections>
                         <action selector="addPinLongPressGesture:" destination="7j2-Iy-d0c" id="26o-Gd-37Z"/>
                     </connections>

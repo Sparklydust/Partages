@@ -15,4 +15,11 @@ enum FirebaseKey: String {
   case pickUpDate
   case address
   case description
+  case latitude
+  case longitude
+  case streetNumber
+  case streetName
+  case postalCode
+  case cityName
+  case countryName
 }

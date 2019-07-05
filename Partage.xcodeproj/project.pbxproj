@@ -409,9 +409,9 @@
 			isa = PBXGroup;
 			children = (
 				2A289FA722A56B0200EB076A /* User.swift */,
-				2A87EC5D22A6453800EB969D /* Message.swift */,
 				2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */,
 				2A310DEA22C96BDA0049CB74 /* Address.swift */,
+				2A87EC5D22A6453800EB969D /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

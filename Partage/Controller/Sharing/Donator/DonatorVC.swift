@@ -34,10 +34,11 @@ class DonatorVC: UIViewController {
   
   var address: Address!
   var images = [UIImage]()
+  var pickupDateAndTime: Date!
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    navigationController?.setNavigationBarHidden(false, animated: false)
+    navigationController?.setNavigationBarHidden(false, animated: true)
   }
   
   override func viewDidLoad() {
@@ -48,11 +49,6 @@ class DonatorVC: UIViewController {
     hideKeyboardOnTapGesture()
     
     rootRef = Database.database().reference()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(true)
-    navigationController?.setNavigationBarHidden(true, animated: true)
   }
   
   deinit {
@@ -65,11 +61,13 @@ extension DonatorVC {
   //MARK: Add item image button action
   @IBAction func addItemImageButtonAction(_ sender: Any) {
     dismissKeyboard()
+    performSegue(withIdentifier: Segue.goesToItemImagesVC.rawValue, sender: self)
   }
   
   //MARK: Map kit button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
     dismissKeyboard()
+    performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
   }
   
   //MARK: Reset Button Action
@@ -211,7 +209,7 @@ extension DonatorVC {
 //MARK: - Setup item image design
 extension DonatorVC {
   func setupItemImage() {
-    itemImage.layer.cornerRadius = 1
+    itemImage.layer.cornerRadius = 3
   }
 }
 
@@ -296,12 +294,14 @@ extension DonatorVC {
 //MARK: - Setup all entries back to their origin state
 extension DonatorVC {
   func setupAllEntriesBackToOriginState() {
-    itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
-    itemDatePicker.setDate(Date.init(), animated: true)
-    itemNameTextField.text = ""
-    itemDescriptionTextView.text = ""
-    itemImage.image = nil
-    setupMapView()
+    showAlert(title: .reset, message: .resetDonation, buttonName: .reset) { (true) in
+      self.itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
+      self.itemDatePicker.setDate(Date.init(), animated: true)
+      self.itemNameTextField.text = ""
+      self.itemDescriptionTextView.text = ""
+      self.itemImage.image = nil
+      self.setupMapView()
+    }
   }
 }
 
@@ -314,11 +314,11 @@ extension DonatorVC {
   }
   
   @objc func keyboardWillShow(notification: NSNotification) {
-   guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+    guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     keyboardFrame = keyboardSize.cgRectValue
     resizeViewWhenKeyboardShows()
   }
-
+  
   @objc func keyboardWillHide(notification: NSNotification) {
     keyboardFrame = .zero
     resizeViewWhenKeyboardHides()
@@ -367,7 +367,8 @@ extension DonatorVC {
 extension DonatorVC: CanReceiveItemAddress {
   func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String) {
     address = Address(
-      coordinates: coordinates,
+      latitude: coordinates.coordinate.latitude,
+      longitude: coordinates.coordinate.longitude,
       streetNumber: streetNumber,
       streetName: streetName,
       postalCode: postalCode,
@@ -387,14 +388,19 @@ extension DonatorVC: CanReceiveItemImages {
   }
 }
 
+//MARK: - Creation of the donator item and saving it to Firebase database if all fields are filled
 extension DonatorVC {
   func createDonatorItemAndSaveItIntoFirebase() {
+    pickupDateAndTime = itemDatePicker.date
+    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
+    
     let donatorItem = DonatorItem(
       selectedType: DonatorItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
       name: itemNameTextField.text!,
-      image: images,
-      pickupDate: itemDatePicker.date,
-      address: address ?? Address(coordinates: CLLocation(latitude: .zero, longitude: .zero), streetNumber: "", streetName: "", postalCode: "", city: "", country: ""),
+//      image: images,
+      pickupDate: dateAndTime,
+      latitude: address.latitude,
+      longitude: address.longitude,
       description: itemDescriptionTextView.text!
     )
     switch true {
@@ -404,25 +410,25 @@ extension DonatorVC {
     case donatorItem.name == "":
       showAlert(title: .emptyCase, message: .noItemName)
       break
-    case donatorItem.image == [UIImage]():
-      showAlert(title: .emptyCase, message: .noImage)
-      break
-    case donatorItem.pickUpDate.isLessThanDate(dateToCompare: Date()) || donatorItem.pickUpDate.equalToDate(dateToCompare: Date()):
+//    case donatorItem.image == [UIImage]():
+//      showAlert(title: .emptyCase, message: .noImage)
+//      break
+    case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
-    case donatorItem.address.countryName == "":
+    case donatorItem.latitude == .zero:
       showAlert(title: .emptyCase, message: .noMeetingPoint)
       break
     case donatorItem.description == StaticLabel.enterItemDescription.rawValue || donatorItem.description == "":
       showAlert(title: .emptyCase, message: .noDescription)
+      break
     default:
       showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        print("Save item into firebase")
-        print("\(donatorItem)")
-//        let donatorsItemsRef = self.rootRef.child(FirebaseRoot.donatorsItems.rawValue)
-//        let itemRef = donatorsItemsRef.childByAutoId()
-//        itemRef.setValue(donatorItem.toDictionary())
+        // Saving donator item to Firebase
+        let donatorsItemsRef = self.rootRef.child(FirebaseRoot.donatorsItems.rawValue)
+        let itemRef = donatorsItemsRef.childByAutoId()
+        itemRef.setValue(donatorItem.toDictionary())
       }
     }
   }

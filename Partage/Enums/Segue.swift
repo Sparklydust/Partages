@@ -10,12 +10,13 @@ import UIKit
 
 //MARK: - All segue identifiers
 enum Segue: String {
+  case goesToDonatorVC = "goToDonatorVC"
+  case goesToSignInSignUpVC = "goToSignInSignUpVC"
+  case goesToReceiverVC = "goToReceiverVC"
   case goesToConversationVC = "goToConversationVC"
   case goesToItemDetailsVC = "goToItemDetailsVC"
   case goesToItemImagesVC = "goToItemImagesVC"
   case goesToItemSelectedVC = "goToItemSelectedVC"
-  case goesToModifyDonationVC = "goToModifyDonationVC"
-  case goesToDonatorMapViewVC = "goToDonatorMapViewVC"
   case goesToMapViewVC = "goToMapViewVC"
   case goesToSignUpVC = "goToSignUpVC"
   case goesToSignInVC = "goToSignInVC"

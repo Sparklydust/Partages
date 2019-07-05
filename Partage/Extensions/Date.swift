@@ -43,3 +43,21 @@ extension Date {
     return isEqualTo
   }
 }
+
+//MARK: - Create a date String from Date()
+extension Date {
+  func asString(style: DateFormatter.Style) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = style
+    return dateFormatter.string(from: self)
+  }
+}
+
+//MARK: - Create a time String form Date()
+extension Date {
+  func asString() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+    return dateFormatter.string(from: self)
+  }
+}

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="184" y="345" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="IyE-xf-fKZ" kind="presentation" id="iVf-h9-igZ"/>
+                                    <action selector="signInSignUpButtonAction:" destination="Mmn-lr-IfY" eventType="touchUpInside" id="8pg-vQ-Wwc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSw-8p-IM6">
@@ -32,9 +32,12 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="3PW-gF-k9g" kind="show" id="x4q-8I-g1N"/>
+                                    <action selector="shareButtonAction:" destination="Mmn-lr-IfY" eventType="touchUpInside" id="DcF-To-pMe"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Anp-UV-6Uy">
+                                <rect key="frame" x="102" y="425" width="210" height="120"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-aY-XVd">
                                 <rect key="frame" x="102" y="425" width="210" height="120"/>
                                 <constraints>
@@ -43,7 +46,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="vlQ-o0-aRd" kind="show" id="TbR-z8-8HW"/>
+                                    <action selector="receiverButtonAction:" destination="Mmn-lr-IfY" eventType="touchUpInside" id="50e-rW-59b"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -51,7 +54,11 @@
                         <constraints>
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="0tK-ty-FVG"/>
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="centerY" secondItem="oFA-4z-Jn6" secondAttribute="centerY" constant="-2.5" id="6PY-Y0-iut"/>
+                            <constraint firstItem="Anp-UV-6Uy" firstAttribute="width" secondItem="V3g-aY-XVd" secondAttribute="width" id="8Rk-cd-N7z"/>
                             <constraint firstItem="V3g-aY-XVd" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="9u8-pU-765"/>
+                            <constraint firstItem="Anp-UV-6Uy" firstAttribute="centerX" secondItem="V3g-aY-XVd" secondAttribute="centerX" id="Khy-U3-6hD"/>
+                            <constraint firstItem="Anp-UV-6Uy" firstAttribute="height" secondItem="V3g-aY-XVd" secondAttribute="height" id="VC0-ch-h0N"/>
+                            <constraint firstItem="Anp-UV-6Uy" firstAttribute="centerY" secondItem="V3g-aY-XVd" secondAttribute="centerY" id="py8-Tt-je3"/>
                             <constraint firstItem="wSw-8p-IM6" firstAttribute="centerX" secondItem="g5G-Kr-6an" secondAttribute="centerX" id="vAa-gt-E5W"/>
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="top" secondItem="wSw-8p-IM6" secondAttribute="bottom" constant="50" id="yEB-k4-Cvg">
                                 <variation key="heightClass=regular-widthClass=regular" constant="100"/>
@@ -64,9 +71,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="bWp-3k-6r6"/>
                     <connections>
+                        <outlet property="activityIndicatorReceive" destination="Anp-UV-6Uy" id="jhP-gI-k7J"/>
                         <outlet property="receiveButton" destination="V3g-aY-XVd" id="WP0-bY-BWs"/>
                         <outlet property="shareButton" destination="wSw-8p-IM6" id="Swv-uV-A9i"/>
                         <outlet property="signInSignUpButton" destination="cHB-eS-4A7" id="DeQ-ls-8Tz"/>
+                        <segue destination="3PW-gF-k9g" kind="show" identifier="goToDonatorVC" id="woJ-mO-T8n"/>
+                        <segue destination="IyE-xf-fKZ" kind="presentation" identifier="goToSignInSignUpVC" id="gGy-7s-Lgh"/>
+                        <segue destination="vlQ-o0-aRd" kind="show" identifier="goToReceiverVC" id="qgn-cK-aDJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYJ-pa-YOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -79,7 +90,7 @@
                 <viewControllerPlaceholder storyboardName="Donator" id="3PW-gF-k9g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6c8-n4-LVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3215" y="-1223"/>
+            <point key="canvasLocation" x="3175" y="-1226"/>
         </scene>
         <!--SignInSignUp-->
         <scene sceneID="bO6-wf-d8N">
@@ -87,7 +98,7 @@
                 <viewControllerPlaceholder storyboardName="SignInSignUp" id="IyE-xf-fKZ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgd-ny-f8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3216" y="-1137"/>
+            <point key="canvasLocation" x="3174" y="-1137"/>
         </scene>
         <!--Receiver-->
         <scene sceneID="eBD-Qf-Ojo">
@@ -95,7 +106,7 @@
                 <viewControllerPlaceholder storyboardName="Receiver" id="vlQ-o0-aRd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7y-ak-8uq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3215" y="-1048"/>
+            <point key="canvasLocation" x="3172" y="-1055"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0HZ-fI-STk">

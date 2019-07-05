@@ -12,6 +12,9 @@ class ReceiverVC: UIViewController {
   
   @IBOutlet weak var receiverTableView: UITableView!
   
+  var donatorsItems = [DonatorItem]()
+  var oneDonatorItem: DonatorItem?
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
@@ -21,11 +24,9 @@ class ReceiverVC: UIViewController {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(true)
-    navigationController?.setNavigationBarHidden(true, animated: true)
+    DispatchQueue.main.async {
+      self.receiverTableView.reloadData()
+    }
   }
 }
 
@@ -82,21 +83,62 @@ extension ReceiverVC {
   }
 }
 
-//MARK: - Setup ReceiverVC table view
+//MARK: - Setup ReceiverVC table view and its action when a cell is clicked
 extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return donatorsItems.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.receiverCellIdentifier.rawValue, for: indexPath) as! ReceiverTVC
+    
+    populateDonatorsItems(into: cell, at: indexPath)
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    setupDonatorItemFromSelectedCell(at: indexPath)
+    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: oneDonatorItem)
   }
 }
 
-//MARK: - Action when a cell is selected
+//MARK: - Setup one donator item from selected cell to send to ItemSelectedVC
 extension ReceiverVC {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: self)
+  func setupDonatorItemFromSelectedCell(at indexPath: IndexPath) {
+    oneDonatorItem = DonatorItem(
+      selectedType: donatorsItems[indexPath.row].selectedType,
+      name: donatorsItems[indexPath.row].name,
+      pickupDate: donatorsItems[indexPath.row].pickUpDate,
+      latitude: donatorsItems[indexPath.row].latitude,
+      longitude: donatorsItems[indexPath.row].longitude,
+      description: donatorsItems[indexPath.row].description
+    )
+  }
+}
+
+//MARK: - Populate cells with donators Items from Firebase
+extension ReceiverVC {
+  func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
+    let donatorItem = donatorsItems[indexPath.row]
+    
+    let isoDateString = donatorItem.pickUpDate
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    let date = dateAndTime?.asString(style: .short)
+    let time = dateAndTime?.asString()
+    
+    cell.itemTypeLabel.text = donatorItem.selectedType
+    cell.itemNameLabel.text = donatorItem.name
+    cell.dateLabel.text = date
+    cell.timeLabel.text = time
+    cell.addMeetingPointOnMap(latitude: donatorItem.latitude, longitude: donatorItem.longitude)
+  }
+}
+
+//MARK: - Prepare for segue
+extension ReceiverVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let destinationVC = segue.destination as? ItemSelectedVC else { return }
+    destinationVC.donatorItem = oneDonatorItem
   }
 }

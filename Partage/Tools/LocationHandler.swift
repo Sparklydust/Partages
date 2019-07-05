@@ -94,14 +94,14 @@ extension LocationHandler {
 
 //MARK: - #5.1 Get user direction from user location to pinned location
 extension LocationHandler {
-  func getDirectionFromUserToPinnedLocation(on mapView: MKMapView ,vc: UIViewController) {
+  func getDirectionFromUserToPinnedLocation(on mapView: MKMapView, latitude: Double, longitude: Double, vc: UIViewController) {
     guard let location = locationManager.location?.coordinate else {
       DispatchQueue.main.async {
         vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
       }
       return
     }
-    let request = createDirectionRequest(from: location, to: meetingPoint.coordinate.latitude, and: meetingPoint.coordinate.longitude)
+    let request = createDirectionRequest(from: location, to: latitude, and: longitude)
     let directions = MKDirections(request: request)
     
     directions.calculate {
@@ -112,18 +112,11 @@ extension LocationHandler {
       }
       for route in response.routes {
         mapView.addOverlay(route.polyline)
-        mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+        mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: .zero, left: 100, bottom: .zero, right: 100), animated: true)
         
         self.distanceInMetersToItem = route.distance
       }
     }
-  }
-  
-  //MARK: - #5.2 Method to use on the proper vc to display the directions in a blue line
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-    renderer.strokeColor = .mainBlue
-    return renderer
   }
 }
 
@@ -136,10 +129,24 @@ extension LocationHandler {
     mapView.addAnnotation(annotation)
     
     let coordinate = locationCoordinates
-    let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+    let span = MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
     let region = MKCoordinateRegion(center: coordinate, span: span)
     mapView.setRegion(region, animated: true)
   }
+  
+  func itemAnnotationShown(on mapView: MKMapView, latitude: Double, longitude: Double) {
+    let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    annotation.coordinate = locationCoordinates
+    annotation.title = StaticLabel.meetingPoint.rawValue
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.addAnnotation(annotation)
+    
+    let coordinate = locationCoordinates
+    let span = MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    mapView.setRegion(region, animated: true)
+  }
+
 }
 
 //MARK - Method to center map view around the user location
@@ -221,8 +228,21 @@ extension LocationHandler {
     let request = MKDirections.Request()
     request.source = MKMapItem(placemark: startingLocation)
     request.destination = MKMapItem(placemark: destination)
-    request.transportType = .any
+    request.transportType = .walking
     request.requestsAlternateRoutes = true
     return request
+  }
+}
+
+//MARK: - Method to open Apple Map App with user and meeting point route
+extension LocationHandler {
+  func openAppleMapApp(itemLatitude: Double, itemLongitude: Double) {
+    let source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.location!.coordinate))
+    source.name = StaticLabel.userPosition.rawValue
+    
+    let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: itemLatitude, longitude: itemLongitude)))
+    destination.name = StaticLabel.meetingPoint.rawValue
+    
+    MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
   }
 }

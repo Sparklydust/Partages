@@ -27,9 +27,12 @@ class ItemSelectedVC: UIViewController {
   
   @IBOutlet var staticLabels: [UILabel]!
   
+  var donatorItem: DonatorItem!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
+    setupVCInfofrom(donatorItem)
   }
 }
 
@@ -41,10 +44,12 @@ extension ItemSelectedVC {
   
   //MARK: Item image button action
   @IBAction func itemImageButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToItemImagesVC.rawValue, sender: self)
   }
   
   //MARK: Map view button action
   @IBAction func mapViewButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
   }
   
   //MARK: Messagge to donator button action
@@ -84,8 +89,8 @@ extension ItemSelectedVC {
   func setupAllLabels() {
     setupItemTypeLabel()
     itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
-    dateLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
-    timeLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+    dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
+    timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
   }
 }
 
@@ -101,6 +106,7 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupMapView() {
     mapView.layer.cornerRadius = 10
+    mapView.isUserInteractionEnabled = false
   }
 }
 
@@ -159,7 +165,7 @@ extension ItemSelectedVC {
 //MARK: - Setup item image design
 extension ItemSelectedVC {
   func setupItemImage() {
-    itemImage.layer.cornerRadius = 2
+    itemImage.layer.cornerRadius = 3
   }
 }
 
@@ -167,5 +173,34 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupUnderlineView() {
     underlineView.backgroundColor = .mainBlue
+  }
+}
+
+extension ItemSelectedVC {
+  func setupVCInfofrom(_ donatorItem: DonatorItem) {
+    let isoDateString = donatorItem.pickUpDate
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    let date = dateAndTime?.asString(style: .short)
+    let time = dateAndTime?.asString()
+    
+    itemTypeLabel.text = donatorItem.selectedType
+    itemNameLabel.text = donatorItem.name
+    dateLabel.text = date
+    timeLabel.text = time
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
+    itemDescriptionTextView.text = donatorItem.description
+  }
+}
+
+//MARK: - Prepare for segue methods
+extension ItemSelectedVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goesToMapViewVC.rawValue {
+      let destinationVC = segue.destination as! MapViewVC
+      destinationVC.donatorItemLatitude = donatorItem.latitude
+      destinationVC.donatorItemLongitude = donatorItem.longitude
+      destinationVC.buttonName = .openMapApp
+    }
   }
 }

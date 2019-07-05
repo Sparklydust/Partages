@@ -43,4 +43,6 @@ enum ButtonName: String {
   case saveMeetingPoint = "Enregistrer lieu de rdv"
   case setupMeetingPoint = "Cliquer ici pour ajouter le lieu de RDV"
   case confirm = "Confirmer"
+  case emptyString = ""
+  case openMapApp = "Ouvrir dans Plans"
 }

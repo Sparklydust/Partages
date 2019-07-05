@@ -34,4 +34,6 @@ enum AlertMessage: String {
   case noDescription = "Merci de choisir une description de votre don."
   case noImage = "Merci de choisir au minimum une image de votre don."
   case confirmDonation = "Veuillez confirmer votre don."
+  case noFirebaseData = "Il n'y a, à ce jour, aucune donation. N'hésitez pas à réessayer ultérieurement."
+  case resetDonation = "Êtes-vous sûr de réinitialiser votre don?"
 }
