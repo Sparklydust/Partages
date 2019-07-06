@@ -434,6 +434,7 @@
                         <outletCollection property="backgroundViews" destination="anv-g9-ol8" collectionClass="NSMutableArray" id="m0M-H7-IuL"/>
                         <outletCollection property="backgroundViews" destination="3qD-kT-4Nz" collectionClass="NSMutableArray" id="A5S-Ga-iX9"/>
                         <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="k0p-go-eVK"/>
+                        <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="wB6-5A-TFK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJy-G0-1xI" userLabel="First Responder" sceneMemberID="firstResponder"/>

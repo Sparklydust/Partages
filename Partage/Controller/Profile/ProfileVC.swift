@@ -56,6 +56,8 @@ extension ProfileVC {
   
   //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
+    FirebaseNetwork.shared.userSignOut()
+    performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   
   //MARK: Delete profile button action

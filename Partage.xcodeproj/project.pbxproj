@@ -19,7 +19,7 @@
 		2A289FAE22A5734400EB076A /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289FAD22A5734400EB076A /* ConversationVC.swift */; };
 		2A29525522B683E500AE757D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29525422B683E500AE757D /* SignInVC.swift */; };
 		2A310DE222C8E3480049CB74 /* FirebaseRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DE122C8E3480049CB74 /* FirebaseRoot.swift */; };
-		2A310DE522C935890049CB74 /* CanReceiveProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DE422C935890049CB74 /* CanReceiveProtocols.swift */; };
+		2A310DE522C935890049CB74 /* CanReceiveDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DE422C935890049CB74 /* CanReceiveDelegates.swift */; };
 		2A310DE722C9574B0049CB74 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DE622C9574B0049CB74 /* ImageName.swift */; };
 		2A310DE922C962DC0049CB74 /* FirebaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DE822C962DC0049CB74 /* FirebaseKey.swift */; };
 		2A310DEB22C96BDA0049CB74 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A310DEA22C96BDA0049CB74 /* Address.swift */; };
@@ -27,6 +27,8 @@
 		2A5393F622CA072100BB49F0 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5393F522CA072100BB49F0 /* Date.swift */; };
 		2A6D697C22B904910073053F /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697B22B904910073053F /* Key.swift */; };
 		2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697D22B97C850073053F /* UINavigationController.swift */; };
+		2A6DBB7122CF932200B0EC75 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DBB7022CF932200B0EC75 /* String.swift */; };
+		2A6DBB7422D016ED00B0EC75 /* FirebaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DBB7322D016ED00B0EC75 /* FirebaseNetwork.swift */; };
 		2A87EC5E22A6453800EB969D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC5D22A6453800EB969D /* Message.swift */; };
 		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
 		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
@@ -120,7 +122,7 @@
 		2A289FAD22A5734400EB076A /* ConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		2A29525422B683E500AE757D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		2A310DE122C8E3480049CB74 /* FirebaseRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRoot.swift; sourceTree = "<group>"; };
-		2A310DE422C935890049CB74 /* CanReceiveProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanReceiveProtocols.swift; sourceTree = "<group>"; };
+		2A310DE422C935890049CB74 /* CanReceiveDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanReceiveDelegates.swift; sourceTree = "<group>"; };
 		2A310DE622C9574B0049CB74 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		2A310DE822C962DC0049CB74 /* FirebaseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseKey.swift; sourceTree = "<group>"; };
 		2A310DEA22C96BDA0049CB74 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -129,6 +131,8 @@
 		2A65C71822B780DB00BA4814 /* Partage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Partage.entitlements; sourceTree = "<group>"; };
 		2A6D697B22B904910073053F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		2A6D697D22B97C850073053F /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		2A6DBB7022CF932200B0EC75 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		2A6DBB7322D016ED00B0EC75 /* FirebaseNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetwork.swift; sourceTree = "<group>"; };
 		2A87EC5D22A6453800EB969D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
 		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				2AD516AC22B2B79C0032F28F /* UILabel.swift */,
 				2A966BA122B4439E00418CFF /* UIView.swift */,
 				2A5393F522CA072100BB49F0 /* Date.swift */,
+				2A6DBB7022CF932200B0EC75 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -274,9 +279,42 @@
 		2A310DE322C935340049CB74 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				2A310DE422C935890049CB74 /* CanReceiveProtocols.swift */,
+				2A310DE422C935890049CB74 /* CanReceiveDelegates.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2A6DBB7222D016C100B0EC75 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				2A6DBB7322D016ED00B0EC75 /* FirebaseNetwork.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		2A6DBB7522D01FA800B0EC75 /* DonatorItem */ = {
+			isa = PBXGroup;
+			children = (
+				2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */,
+				2A310DEA22C96BDA0049CB74 /* Address.swift */,
+			);
+			path = DonatorItem;
+			sourceTree = "<group>";
+		};
+		2A6DBB7622D01FC000B0EC75 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				2A289FA722A56B0200EB076A /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		2A6DBB7722D01FD300B0EC75 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				2A87EC5D22A6453800EB969D /* Message.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		2A87EC5F22A659F300EB969D /* Conversation Cells */ = {
@@ -408,10 +446,10 @@
 		2AB4353D229E5712007BFB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A289FA722A56B0200EB076A /* User.swift */,
-				2A98DF4922AEBC9800F6F2AE /* DonatorItem.swift */,
-				2A310DEA22C96BDA0049CB74 /* Address.swift */,
-				2A87EC5D22A6453800EB969D /* Message.swift */,
+				2A6DBB7222D016C100B0EC75 /* Firebase */,
+				2A6DBB7622D01FC000B0EC75 /* User */,
+				2A6DBB7522D01FA800B0EC75 /* DonatorItem */,
+				2A6DBB7722D01FD300B0EC75 /* Message */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -700,6 +738,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Partage/Pods-Partage-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -708,6 +747,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -732,7 +772,7 @@
 				2AFA4EC722A914A00039803E /* UIBarButtonItem.swift in Sources */,
 				2A067282229EB94000FFAECE /* UIViewController.swift in Sources */,
 				2AB43545229E63F1007BFB93 /* MessageVC.swift in Sources */,
-				2A310DE522C935890049CB74 /* CanReceiveProtocols.swift in Sources */,
+				2A310DE522C935890049CB74 /* CanReceiveDelegates.swift in Sources */,
 				2A99310022BA87E100BB3DF2 /* DeviceName.swift in Sources */,
 				2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */,
 				2A966BA222B4439E00418CFF /* UIView.swift in Sources */,
@@ -763,6 +803,7 @@
 				2A289FA822A56B0200EB076A /* User.swift in Sources */,
 				2AD516AD22B2B79C0032F28F /* UILabel.swift in Sources */,
 				2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */,
+				2A6DBB7122CF932200B0EC75 /* String.swift in Sources */,
 				2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */,
 				2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */,
 				2AB43543229E63C6007BFB93 /* SharingVC.swift in Sources */,
@@ -782,6 +823,7 @@
 				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
 				2AF66B2922AC0AA8005BAE31 /* EventHandler.swift in Sources */,
 				2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */,
+				2A6DBB7422D016ED00B0EC75 /* FirebaseNetwork.swift in Sources */,
 				2A98DF4622AE8F6800F6F2AE /* DonatorVC.swift in Sources */,
 				2AC15A0322A7FC2C00CE935B /* LostPasswordVC.swift in Sources */,
 				2A90FB40229FC3DF006C246B /* UIFont.swift in Sources */,

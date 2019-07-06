@@ -124,8 +124,8 @@ extension SharingVC {
 extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToReceiverVC.rawValue {
-      let secondVC = segue.destination as! ReceiverVC
-      secondVC.donatorsItems = donatorsItems
+      let destinationVC = segue.destination as! ReceiverVC
+      destinationVC.donatorsItems = donatorsItems
     }
   }
 }

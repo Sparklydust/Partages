@@ -364,7 +364,7 @@ extension DonatorVC {
 }
 
 //MARK: - Item address receiver from MapViewVC
-extension DonatorVC: CanReceiveItemAddress {
+extension DonatorVC: CanReceiveItemAddressDelegate {
   func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String) {
     address = Address(
       latitude: coordinates.coordinate.latitude,
@@ -381,7 +381,7 @@ extension DonatorVC: CanReceiveItemAddress {
 }
 
 //MARK: - Item images receiver from ItemImagesVC
-extension DonatorVC: CanReceiveItemImages {
+extension DonatorVC: CanReceiveItemImagesDelegate {
   func imagesReceived(image: [UIImage]) {
     images = image
     itemImage.image = image[0]

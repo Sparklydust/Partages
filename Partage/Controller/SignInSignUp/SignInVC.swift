@@ -20,6 +20,8 @@ class SignInVC: UIViewController {
   @IBOutlet weak var signUpButton: UIButton!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var connectionButton: UIButton!
+  @IBOutlet weak var ConnectionActivityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
   
   @IBOutlet var underlineViews: [UIView]!
   
@@ -27,6 +29,7 @@ class SignInVC: UIViewController {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
+    triggerActivityIndicator(false)
   }
 }
 
@@ -34,7 +37,7 @@ class SignInVC: UIViewController {
 extension SignInVC {
   //MARK: Connection button action
   @IBAction func connectionButtonAction(_ sender: Any) {
-    
+    userLoginWithFirebase()
   }
 }
 
@@ -174,5 +177,51 @@ extension SignInVC {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     resignAllResponser()
     return true
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension SignInVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    ConnectionActivityIndicator.isHidden = false
+    ConnectionActivityIndicator.style = .whiteLarge
+    ConnectionActivityIndicator.color = .iceBackground
+    view.addSubview(ConnectionActivityIndicator)
+    ConnectionActivityIndicator.startAnimating()
+    connectionButton.commonDesign(title: .emptyString)
+    connectionButton.isHidden = false
+    cancelButton.isEnabled = false
+    signUpButton.isEnabled = false
+    swipeGestureRecognizer.isEnabled = false
+  }
+  
+  func hideActivityIndicator() {
+    ConnectionActivityIndicator.isHidden = true
+    connectionButton.commonDesign(title: .signIn)
+    cancelButton.isEnabled = true
+    signUpButton.isEnabled = true
+    swipeGestureRecognizer.isEnabled = true
+  }
+}
+
+//MARK: - User login with Firebase method
+extension SignInVC {
+  func userLoginWithFirebase() {
+    guard let email = emailTextField.text,
+      let password = passwordTextField.text else {
+        return
+    }
+    triggerActivityIndicator(true)
+    FirebaseNetwork.shared.userLoginWith(email, password, vc: self, completion: {
+      self.triggerActivityIndicator(false)
+    })
   }
 }

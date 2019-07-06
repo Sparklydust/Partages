@@ -21,7 +21,7 @@ class ItemImagesVC: UIViewController {
   
   var images = [UIImage]()
   
-  var delegate: CanReceiveItemImages?
+  var delegate: CanReceiveItemImagesDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()

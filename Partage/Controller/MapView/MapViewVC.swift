@@ -20,7 +20,7 @@ class MapViewVC: UIViewController {
   let generator = UIImpactFeedbackGenerator(style: .light)
   let aroundUserLocation: CLLocationDistance = 500
   
-  var delegate: CanReceiveItemAddress?
+  var delegate: CanReceiveItemAddressDelegate?
   var donatorItemLatitude: Double = .zero
   var donatorItemLongitude: Double = .zero
   var buttonName: ButtonName = .saveMeetingPoint

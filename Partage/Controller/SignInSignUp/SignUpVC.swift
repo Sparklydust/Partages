@@ -19,6 +19,8 @@ class SignUpVC: UIViewController {
   @IBOutlet weak var signUpButton: UIButton!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var registerButton: UIButton!
+  @IBOutlet weak var registerActivityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
   
   @IBOutlet var underlineViews: [UIView]!
   
@@ -27,6 +29,7 @@ class SignUpVC: UIViewController {
     setupMainDesign()
     setupAllDelegates()
     observeKeyboardNotification()
+    triggerActivityIndicator(false)
   }
   
   deinit {
@@ -38,7 +41,7 @@ class SignUpVC: UIViewController {
 extension SignUpVC {
   //MARK: Register Button Action
   @IBAction func registerButtonAction(_ sender: Any) {
-    
+    createUserIntoFirebase()
   }
 }
 
@@ -149,7 +152,7 @@ extension SignUpVC {
         emailTextField.isFirstResponder ||
         passwordTextField.isFirstResponder ||
         confirmPasswordTextField.isFirstResponder else {
-          performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          unwindToSharingVC()
           return
       }
       view.endEditing(true)
@@ -163,6 +166,13 @@ extension SignUpVC {
     swipeDown.direction = .down
     view.addGestureRecognizer(swipeRight)
     view.addGestureRecognizer(swipeDown)
+  }
+}
+
+//MARK: - Unwind to sharingVC
+extension SignUpVC {
+  func unwindToSharingVC() {
+    performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
 }
 
@@ -214,6 +224,68 @@ extension SignUpVC {
       UIView.animate(withDuration: 0.4) {
         self.view.frame.origin.y = .zero
       }
+    }
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension SignUpVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    registerActivityIndicator.isHidden = false
+    registerActivityIndicator.style = .whiteLarge
+    registerActivityIndicator.color = .iceBackground
+    view.addSubview(registerActivityIndicator)
+    registerActivityIndicator.startAnimating()
+    registerButton.commonDesign(title: .emptyString)
+    registerButton.isHidden = false
+    cancelButton.isEnabled = false
+    signInButton.isEnabled = false
+    swipeGestureRecognizer.isEnabled = false
+  }
+  
+  func hideActivityIndicator() {
+    registerActivityIndicator.isHidden = true
+    registerButton.commonDesign(title: .signUp)
+    cancelButton.isEnabled = true
+    signInButton.isEnabled = true
+    swipeGestureRecognizer.isEnabled = true
+  }
+}
+
+//MARK: - User create an account with Firebase
+extension SignUpVC {
+  func createUserIntoFirebase() {
+    guard let firstName = firstNameTextField.text,
+      let email = emailTextField.text,
+      let password = confirmPasswordTextField.text else {
+        return
+    }
+    switch true {
+    case firstName == "":
+      showAlert(title: .firstNameError, message: .addFirstName)
+      break
+    case email == "" || !email.isValidEmail():
+      showAlert(title: .emailError, message: .addEmail)
+      break
+    case password == "" || password != passwordTextField.text:
+      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      break
+    case password.count < 5:
+      showAlert(title: .passwordError, message: .passwordTooShort)
+      break
+    default:
+      triggerActivityIndicator(true)
+      FirebaseNetwork.shared.userRegisterWith(firstName, email, password, vc: self, completion: {
+        self.triggerActivityIndicator(false)
+      })
     }
   }
 }

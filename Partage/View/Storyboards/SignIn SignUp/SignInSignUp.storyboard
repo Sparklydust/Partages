@@ -118,6 +118,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="k8t-iy-yuD">
+                                <rect key="frame" x="40" y="757" width="334" height="40"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -144,6 +147,7 @@
                             </constraint>
                             <constraint firstItem="E5t-uR-uHT" firstAttribute="top" secondItem="oaX-wG-voV" secondAttribute="bottom" constant="5" id="KZo-rB-eL0"/>
                             <constraint firstItem="BpR-td-oUz" firstAttribute="trailing" secondItem="Ua1-PX-Zjk" secondAttribute="trailing" constant="10" id="KmP-as-2dg"/>
+                            <constraint firstItem="k8t-iy-yuD" firstAttribute="height" secondItem="sNF-5W-f88" secondAttribute="height" id="L2I-ZQ-CWk"/>
                             <constraint firstItem="FCd-OT-1eh" firstAttribute="top" secondItem="E5t-uR-uHT" secondAttribute="bottom" constant="70" id="LBT-y5-SYm">
                                 <variation key="heightClass=regular-widthClass=regular" constant="140"/>
                             </constraint>
@@ -151,6 +155,7 @@
                             <constraint firstItem="BpR-td-oUz" firstAttribute="leading" secondItem="qqd-aX-PSH" secondAttribute="leading" id="PBM-Dg-ana"/>
                             <constraint firstItem="91i-Ip-w3w" firstAttribute="centerX" secondItem="fsI-zj-POg" secondAttribute="centerX" multiplier="1.4" id="PZD-4x-2EA"/>
                             <constraint firstItem="FCd-OT-1eh" firstAttribute="trailing" secondItem="CcP-3g-Wc4" secondAttribute="trailing" constant="10" id="QhH-8f-ToD"/>
+                            <constraint firstItem="k8t-iy-yuD" firstAttribute="centerX" secondItem="sNF-5W-f88" secondAttribute="centerX" id="RYq-BC-duP"/>
                             <constraint firstItem="E5t-uR-uHT" firstAttribute="trailing" secondItem="oaX-wG-voV" secondAttribute="trailing" constant="10" id="RuB-8E-vsb"/>
                             <constraint firstItem="9LO-Rh-AK7" firstAttribute="trailing" secondItem="qqd-aX-PSH" secondAttribute="trailing" constant="-10" id="S9Z-T7-KMD"/>
                             <constraint firstItem="91i-Ip-w3w" firstAttribute="bottom" secondItem="b1K-aN-WH6" secondAttribute="bottom" id="TNt-cS-SQ8"/>
@@ -165,6 +170,7 @@
                             <constraint firstItem="1OK-oG-x6w" firstAttribute="top" secondItem="91i-Ip-w3w" secondAttribute="bottom" id="jjH-5k-9Sh"/>
                             <constraint firstItem="sNF-5W-f88" firstAttribute="trailing" secondItem="gUt-kE-o3c" secondAttribute="trailing" id="k8k-Vx-nVa"/>
                             <constraint firstItem="E5t-uR-uHT" firstAttribute="leading" secondItem="qqd-aX-PSH" secondAttribute="leading" id="kz0-E8-fYE"/>
+                            <constraint firstItem="k8t-iy-yuD" firstAttribute="width" secondItem="sNF-5W-f88" secondAttribute="width" id="lWW-Xx-7aA"/>
                             <constraint firstItem="BpR-td-oUz" firstAttribute="top" secondItem="o1g-qm-5eS" secondAttribute="top" constant="205" id="oJa-sY-e4j">
                                 <variation key="heightClass=regular-widthClass=regular" constant="360"/>
                             </constraint>
@@ -177,6 +183,7 @@
                             <constraint firstItem="sNF-5W-f88" firstAttribute="top" secondItem="gUt-kE-o3c" secondAttribute="bottom" constant="20" id="zHN-B1-4hg">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="k8t-iy-yuD" firstAttribute="centerY" secondItem="sNF-5W-f88" secondAttribute="centerY" id="zMl-YS-z3V"/>
                             <constraint firstItem="BpR-td-oUz" firstAttribute="top" secondItem="qqd-aX-PSH" secondAttribute="bottom" constant="70" id="zmn-xJ-Zp7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="140"/>
                             </constraint>
@@ -194,9 +201,11 @@
                         <outlet property="emailTextField" destination="Ua1-PX-Zjk" id="ea3-OK-CfU"/>
                         <outlet property="firstNameTextField" destination="9LO-Rh-AK7" id="XcB-Hf-YC6"/>
                         <outlet property="passwordTextField" destination="oaX-wG-voV" id="szz-o5-Gbm"/>
+                        <outlet property="registerActivityIndicator" destination="k8t-iy-yuD" id="KG0-fJ-gxD"/>
                         <outlet property="registerButton" destination="sNF-5W-f88" id="eOC-Zm-zIn"/>
                         <outlet property="signInButton" destination="b1K-aN-WH6" id="MuN-fM-LV8"/>
                         <outlet property="signUpButton" destination="91i-Ip-w3w" id="sqz-6g-In1"/>
+                        <outlet property="swipeGestureRecognizer" destination="Ol9-ps-kQ7" id="N5D-RO-apa"/>
                         <outletCollection property="underlineViews" destination="qqd-aX-PSH" collectionClass="NSMutableArray" id="o2l-Cj-xGR"/>
                         <outletCollection property="underlineViews" destination="BpR-td-oUz" collectionClass="NSMutableArray" id="B7h-CE-Q18"/>
                         <outletCollection property="underlineViews" destination="E5t-uR-uHT" collectionClass="NSMutableArray" id="1ot-mO-GYL"/>
@@ -266,6 +275,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="email"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Fi1-Gq-iz2">
+                                <rect key="frame" x="40" y="757" width="334" height="40"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -273,7 +285,10 @@
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="top" secondItem="bvs-Uf-xZx" secondAttribute="top" constant="205" id="3Ol-ra-VHz">
                                 <variation key="heightClass=regular-widthClass=regular" constant="360"/>
                             </constraint>
+                            <constraint firstItem="Fi1-Gq-iz2" firstAttribute="centerX" secondItem="P3O-TD-9c0" secondAttribute="centerX" id="3ak-Cq-iLD"/>
+                            <constraint firstItem="Fi1-Gq-iz2" firstAttribute="centerY" secondItem="P3O-TD-9c0" secondAttribute="centerY" id="468-kB-zRQ"/>
                             <constraint firstItem="P3O-TD-9c0" firstAttribute="trailing" secondItem="rEu-W0-SiM" secondAttribute="trailing" id="4jt-86-QKW"/>
+                            <constraint firstItem="Fi1-Gq-iz2" firstAttribute="height" secondItem="P3O-TD-9c0" secondAttribute="height" id="5jn-rr-TEe"/>
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="leading" secondItem="bvs-Uf-xZx" secondAttribute="leading" constant="40" id="6oK-MJ-0f7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -282,6 +297,7 @@
                             </constraint>
                             <constraint firstItem="rEu-W0-SiM" firstAttribute="trailing" secondItem="WDw-TS-GgZ" secondAttribute="trailing" id="Q0M-bw-dhP"/>
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="trailing" secondItem="xpL-yr-qKp" secondAttribute="trailing" constant="10" id="Tgd-i3-M07"/>
+                            <constraint firstItem="Fi1-Gq-iz2" firstAttribute="width" secondItem="P3O-TD-9c0" secondAttribute="width" id="Z0X-VZ-32L"/>
                             <constraint firstItem="P3O-TD-9c0" firstAttribute="trailing" secondItem="WDw-TS-GgZ" secondAttribute="trailing" id="bu6-yp-7fe"/>
                             <constraint firstItem="WDw-TS-GgZ" firstAttribute="top" secondItem="xpL-yr-qKp" secondAttribute="bottom" constant="5" id="i6q-IZ-j6o"/>
                             <constraint firstItem="P3O-TD-9c0" firstAttribute="top" secondItem="rEu-W0-SiM" secondAttribute="bottom" constant="20" id="j96-1f-3A7">
@@ -303,7 +319,9 @@
                     <connections>
                         <outlet property="cancelButton" destination="rEu-W0-SiM" id="lzQ-7X-QZB"/>
                         <outlet property="emailTextField" destination="xpL-yr-qKp" id="k9d-gy-DMG"/>
+                        <outlet property="saveActivityIndicator" destination="Fi1-Gq-iz2" id="QTZ-JC-LIQ"/>
                         <outlet property="saveButton" destination="P3O-TD-9c0" id="bw3-K4-Wyq"/>
+                        <outlet property="swipeGestureRecognizer" destination="sSD-C8-IUz" id="41h-gR-QQK"/>
                         <outlet property="underlineView" destination="WDw-TS-GgZ" id="IcC-b1-AW3"/>
                     </connections>
                 </viewController>
@@ -410,6 +428,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="username"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pjE-4B-Lh0">
+                                <rect key="frame" x="40" y="757" width="334" height="40"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -421,6 +442,7 @@
                             <constraint firstItem="D0R-cG-NZx" firstAttribute="trailing" secondItem="6LI-c7-YL0" secondAttribute="trailing" constant="40" id="EGU-A4-pqV">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
+                            <constraint firstItem="pjE-4B-Lh0" firstAttribute="centerY" secondItem="5WR-Tq-BZw" secondAttribute="centerY" id="HpQ-qQ-tqL"/>
                             <constraint firstItem="6LI-c7-YL0" firstAttribute="leading" secondItem="D0R-cG-NZx" secondAttribute="leading" constant="40" id="NYe-wk-CLN">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -451,9 +473,12 @@
                             </constraint>
                             <constraint firstItem="6LI-c7-YL0" firstAttribute="top" secondItem="T6u-Fg-uyy" secondAttribute="bottom" constant="5" id="oUJ-RY-y8S"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="leading" secondItem="2dY-9Z-1ZQ" secondAttribute="leading" id="ohq-xi-nj4"/>
+                            <constraint firstItem="pjE-4B-Lh0" firstAttribute="height" secondItem="5WR-Tq-BZw" secondAttribute="height" id="qGJ-xL-gyo"/>
+                            <constraint firstItem="pjE-4B-Lh0" firstAttribute="centerX" secondItem="5WR-Tq-BZw" secondAttribute="centerX" id="qvj-ZS-N4A"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="trailing" secondItem="6LI-c7-YL0" secondAttribute="trailing" id="rIo-va-SkF"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="leading" secondItem="6LI-c7-YL0" secondAttribute="leading" id="rk1-zx-m9e"/>
                             <constraint firstItem="fKz-8h-dJj" firstAttribute="centerX" secondItem="cRw-Ry-bY2" secondAttribute="centerX" id="to8-a5-ZrC"/>
+                            <constraint firstItem="pjE-4B-Lh0" firstAttribute="width" secondItem="5WR-Tq-BZw" secondAttribute="width" id="tsv-T1-Rnx"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="trailing" secondItem="2dY-9Z-1ZQ" secondAttribute="trailing" id="vrf-aL-d9e"/>
                             <constraint firstItem="09h-Xr-8nn" firstAttribute="bottom" secondItem="MgC-Lr-oEw" secondAttribute="bottom" id="x3r-ss-cke"/>
                             <constraint firstItem="D0R-cG-NZx" firstAttribute="bottom" secondItem="5WR-Tq-BZw" secondAttribute="bottom" constant="65" id="xMl-oe-rto">
@@ -467,6 +492,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="ConnectionActivityIndicator" destination="pjE-4B-Lh0" id="Hpz-Qu-wMK"/>
                         <outlet property="cancelButton" destination="2dY-9Z-1ZQ" id="AFY-KW-LTc"/>
                         <outlet property="connectionButton" destination="5WR-Tq-BZw" id="LfY-Pc-CKy"/>
                         <outlet property="dotLabel" destination="14N-Kx-4YT" id="Vdv-yv-H85"/>
@@ -475,6 +501,7 @@
                         <outlet property="passwordTextField" destination="h8p-iL-eTI" id="X87-N3-Icb"/>
                         <outlet property="signInButton" destination="MgC-Lr-oEw" id="xMj-Ha-odx"/>
                         <outlet property="signUpButton" destination="09h-Xr-8nn" id="7xA-7d-mkj"/>
+                        <outlet property="swipeGestureRecognizer" destination="Sz6-cW-bi6" id="Bsr-14-jzV"/>
                         <outletCollection property="underlineViews" destination="6LI-c7-YL0" collectionClass="NSMutableArray" id="vzD-Rh-3rM"/>
                         <outletCollection property="underlineViews" destination="dZA-Gz-nua" collectionClass="NSMutableArray" id="Jhr-ZS-x7o"/>
                         <segue destination="FlS-wc-sAg" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="h7I-Zk-Ij1"/>

@@ -14,11 +14,14 @@ class LostPasswordVC: UIViewController {
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
+  @IBOutlet weak var saveActivityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     emailTextField.delegate = self
     setupMainDesign()
+    triggerActivityIndicator(false)
   }
 }
 
@@ -26,6 +29,7 @@ class LostPasswordVC: UIViewController {
 extension LostPasswordVC {
   //MARK: Send password button action
   @IBAction func sendPasswordButtonAction(_ sender: Any) {
+    userResetItsLostFirebasePassword()
   }
   
   //MARK: Cancel button action
@@ -118,5 +122,45 @@ extension LostPasswordVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     emailTextField.resignFirstResponder()
     return true
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension LostPasswordVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    saveActivityIndicator.isHidden = false
+    saveActivityIndicator.style = .whiteLarge
+    saveActivityIndicator.color = .iceBackground
+    view.addSubview(saveActivityIndicator)
+    saveActivityIndicator.startAnimating()
+    saveButton.commonDesign(title: .emptyString)
+    saveButton.isHidden = false
+    cancelButton.isEnabled = false
+    swipeGestureRecognizer.isEnabled = false
+  }
+  
+  func hideActivityIndicator() {
+    saveActivityIndicator.isHidden = true
+    saveButton.commonDesign(title: .send)
+    cancelButton.isEnabled = true
+    swipeGestureRecognizer.isEnabled = true
+  }
+}
+
+extension LostPasswordVC {
+  func userResetItsLostFirebasePassword() {
+    guard let email = emailTextField.text else { return }
+    triggerActivityIndicator(true)
+    FirebaseNetwork.shared.userResetPasswordWith(email, vc: self, completion: {
+      self.triggerActivityIndicator(false)
+    })
   }
 }

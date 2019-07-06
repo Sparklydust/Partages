@@ -36,4 +36,13 @@ enum AlertMessage: String {
   case confirmDonation = "Veuillez confirmer votre don."
   case noFirebaseData = "Il n'y a, à ce jour, aucune donation. N'hésitez pas à réessayer ultérieurement."
   case resetDonation = "Êtes-vous sûr de réinitialiser votre don?"
+  case emailAlreadyInUse = "Cette adresse email est déjà utilisé par un autre compte."
+  case registrationSuccess = "Votre compte a bien été créé."
+  case passwordDoesntMatch = "Votre mot de passe ne correspond pas."
+  case addFirstName = "Veuillez ajouter un prénom."
+  case addEmail = "Veuillez ajouter un email."
+  case passwordTooShort = "Votre mot de passe doit comporter un minimum de six caractères."
+  case loginError = "Vérifiez votre email et mot de passe."
+  case unknownEmail = "Email inconnu de notre base de données."
+  case resetPassword = "Un email vous a été envoyé pour la réinitialisation de votre mot de passe."
 }

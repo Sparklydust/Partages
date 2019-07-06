@@ -14,6 +14,7 @@ enum AlertTitle: String {
   case reset = "Réinitialiser"
   case locationOff = "Localisation désactivée"
   case error = "Erreur"
+  case success = "Succès"
   case cameraUse = "Accès à votre caméra et album"
   case restricted = "Accès restreint"
   case contactUs = "email de contact"
@@ -24,4 +25,8 @@ enum AlertTitle: String {
   case emptyCase = "Élément manquant"
   case thankYou = "Merci"
   case sorry = "Désolé"
+  case firstNameError = "Prénom invalide"
+  case emailError = "Email invalide"
+  case passwordError = "Mot de passe invalide"
+  case loginError = "Erreur d'authentification"
 }

@@ -8,38 +8,51 @@
 
 import UIKit
 
-//MARK: - Alert with completion handler
+typealias BoolCompletion = (_ result: Bool) -> Void
+
+//MARK: - Alert with two actions and a completion handler
 extension UIViewController {
-  func showAlert(title: AlertTitle,
-                  message: AlertMessage,
-                  buttonName: ButtonName,
-                  completion: @escaping (_ result: Bool) -> Void) {
-    let deleteAlert = UIAlertController(
+  func showAlert(title: AlertTitle, message: AlertMessage, buttonName: ButtonName, completion: @escaping BoolCompletion) {
+    let alert = UIAlertController(
       title: title.rawValue,
       message: message.rawValue,
       preferredStyle: .alert)
-    deleteAlert.addAction(UIAlertAction(
+    alert.addAction(UIAlertAction(
       title: buttonName.rawValue,
       style: .default, handler: { (action) in
         completion(true)
     }))
-    deleteAlert.addAction(UIAlertAction(
+    alert.addAction(UIAlertAction(
       title: ButtonName.cancel.rawValue,
       style: .cancel, handler: nil))
-    present(deleteAlert, animated: true, completion: nil)
+    present(alert, animated: true, completion: nil)
   }
 }
 
 //MARK: - Alert with one action
 extension UIViewController {
   func showAlert(title: AlertTitle, message: AlertMessage) {
-    let noEntryAlert = UIAlertController(
+    let alert = UIAlertController(
       title: title.rawValue,
       message: message.rawValue,
       preferredStyle: .alert)
-    noEntryAlert.addAction(UIAlertAction(
+    alert.addAction(UIAlertAction(
       title: ButtonName.ok.rawValue, style: .cancel, handler: nil))
-    present(noEntryAlert, animated: true, completion: nil)
+    present(alert, animated: true, completion: nil)
+  }
+}
+
+//MARK: - Alert with one action and a completion handler
+extension UIViewController {
+  func showAlert(title: AlertTitle, message: AlertMessage, completion: @escaping BoolCompletion) {
+    let alert = UIAlertController(
+      title: title.rawValue,
+      message: message.rawValue,
+      preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: ButtonName.ok.rawValue, style: .cancel, handler: { (action) in
+      completion(true)
+    }))
+    present(alert, animated: true, completion: nil)
   }
 }
 
