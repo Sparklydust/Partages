@@ -13,6 +13,10 @@ class MessageVC: UIViewController {
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()

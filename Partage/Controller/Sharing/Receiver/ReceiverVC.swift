@@ -28,6 +28,13 @@ class ReceiverVC: UIViewController {
       self.receiverTableView.reloadData()
     }
   }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(false)
+    if self.isMovingFromParent {
+      navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+  }
 }
 
 //MARK: - Main setup
@@ -108,6 +115,7 @@ extension ReceiverVC {
     oneDonatorItem = DonatorItem(
       selectedType: donatorsItems[indexPath.row].selectedType,
       name: donatorsItems[indexPath.row].name,
+      image: donatorsItems[indexPath.row].image,
       pickupDate: donatorsItems[indexPath.row].pickUpDate,
       latitude: donatorsItems[indexPath.row].latitude,
       longitude: donatorsItems[indexPath.row].longitude,
@@ -116,7 +124,7 @@ extension ReceiverVC {
   }
 }
 
-//MARK: - Populate cells with donators Items from Firebase
+//MARK: - Populate cells with donators Items from database
 extension ReceiverVC {
   func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
     let donatorItem = donatorsItems[indexPath.row]

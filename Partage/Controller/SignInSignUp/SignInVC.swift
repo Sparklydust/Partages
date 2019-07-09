@@ -37,7 +37,6 @@ class SignInVC: UIViewController {
 extension SignInVC {
   //MARK: Connection button action
   @IBAction func connectionButtonAction(_ sender: Any) {
-    userLoginWithFirebase()
   }
 }
 
@@ -209,19 +208,5 @@ extension SignInVC {
     cancelButton.isEnabled = true
     signUpButton.isEnabled = true
     swipeGestureRecognizer.isEnabled = true
-  }
-}
-
-//MARK: - User login with Firebase method
-extension SignInVC {
-  func userLoginWithFirebase() {
-    guard let email = emailTextField.text,
-      let password = passwordTextField.text else {
-        return
-    }
-    triggerActivityIndicator(true)
-    FirebaseNetwork.shared.userLoginWith(email, password, vc: self, completion: {
-      self.triggerActivityIndicator(false)
-    })
   }
 }

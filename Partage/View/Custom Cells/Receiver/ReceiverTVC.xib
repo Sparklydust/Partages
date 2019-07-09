@@ -49,6 +49,9 @@
                                     </constraint>
                                 </constraints>
                                 <state key="normal" title="Button" image="emptyHeart"/>
+                                <connections>
+                                    <action selector="favoriteButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fmh-hR-ErA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="hzr-bC-z0m">
                                 <rect key="frame" x="10" y="70" width="42" height="20.5"/>

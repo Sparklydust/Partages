@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 class SharingVC: UIViewController {
   
@@ -19,7 +17,6 @@ class SharingVC: UIViewController {
   @IBOutlet weak var receiveButton: UIButton!
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
-  private var rootRef: DatabaseReference!
   private var donatorsItems = [DonatorItem]()
   
   override func viewWillAppear(_ animated: Bool) {
@@ -31,13 +28,6 @@ class SharingVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    
-    rootRef = Database.database().reference()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(false)
-    navigationController?.setNavigationBarHidden(false, animated: true)
   }
 }
 
@@ -56,7 +46,6 @@ extension SharingVC {
   //MARK: - Receiver Button Action
   @IBAction func receiverButtonAction(_ sender: Any) {
     triggerActivityIndicator(true)
-    fetchDonatorsItemsFromFirebase()
   }
 }
 
@@ -68,8 +57,8 @@ extension SharingVC {
     setupAllButtons()
     setupNavigationController()
   }
-
-//MARK: Main view design
+  
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -126,29 +115,6 @@ extension SharingVC {
     if segue.identifier == Segue.goesToReceiverVC.rawValue {
       let destinationVC = segue.destination as! ReceiverVC
       destinationVC.donatorsItems = donatorsItems
-    }
-  }
-}
-
-extension SharingVC {
-  func fetchDonatorsItemsFromFirebase() {
-    donatorsItems.removeAll()
-    rootRef.child(FirebaseRoot.donatorsItems.rawValue).observe(.value) {
-      (snapshot) in
-      guard snapshot.exists() else {
-        self.showAlert(title: .sorry, message: .noFirebaseData)
-        return
-      }
-      let donatorItemDictionary = snapshot.value as? FirebaseDictionary ?? [:]
-      for (key, _) in donatorItemDictionary {
-        if let donatorItemDict = donatorItemDictionary[key] as? FirebaseDictionary {
-          if let donatorItem = DonatorItem(donatorItemDict) {
-            self.donatorsItems.append(donatorItem)
-          }
-        }
-      }
-      self.performSegue(withIdentifier: Segue.goesToReceiverVC.rawValue, sender: self.donatorsItems)
-      self.triggerActivityIndicator(false)
     }
   }
 }

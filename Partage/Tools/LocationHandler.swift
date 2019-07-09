@@ -234,7 +234,7 @@ extension LocationHandler {
   }
 }
 
-//MARK: - Method to open Apple Map App with user and meeting point route
+//MARK: - Method to open Apple Map App with user to meeting point direction
 extension LocationHandler {
   func openAppleMapApp(itemLatitude: Double, itemLongitude: Double) {
     let source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.location!.coordinate))
@@ -244,5 +244,31 @@ extension LocationHandler {
     destination.name = StaticLabel.meetingPoint.rawValue
     
     MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
+  }
+}
+
+//MARK: - Return user distance between its location to the meeting point
+extension LocationHandler {
+  func getDistanceFromUserToMeetingPoint(_ meetingPointLatitude: Double, _ meetingPointLongitude: Double, vc: UIViewController) -> Double {
+    if let location = locationManager.location?.coordinate {
+      let request = createDirectionRequest(from: location, to: meetingPointLatitude, and: meetingPointLongitude)
+      let directions = MKDirections(request: request)
+      directions.calculate {
+        (response, error) in
+        guard let response = response else {
+          vc.showAlert(title: .error, message: .noDirectionsCalculated)
+          return
+        }
+        for route in response.routes {
+          self.distanceInMetersToItem = route.distance
+        }
+      }
+    }
+    else {
+      DispatchQueue.main.async {
+        vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+      }
+    }
+    return distanceInMetersToItem
   }
 }

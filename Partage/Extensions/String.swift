@@ -23,3 +23,10 @@ extension String {
     return emailTest.evaluate(with: self)
   }
 }
+
+//MARK: - Remove special characters on User email address
+extension String {
+  func removeSpecialCharacters() -> String {
+    return self.components(separatedBy: CharacterSet.letters.inverted).joined()
+  }
+}

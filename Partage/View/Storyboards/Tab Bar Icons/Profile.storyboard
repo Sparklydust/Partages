@@ -9,6 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--SignInSignUp-->
+        <scene sceneID="DM4-Ys-bsg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="wCe-Ot-49S" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mDy-Gs-1oJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-300" y="272"/>
+        </scene>
         <!--Edit ProfileVC-->
         <scene sceneID="lNw-Bs-kzj">
             <objects>
@@ -435,6 +443,7 @@
                         <outletCollection property="backgroundViews" destination="3qD-kT-4Nz" collectionClass="NSMutableArray" id="A5S-Ga-iX9"/>
                         <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="k0p-go-eVK"/>
                         <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="wB6-5A-TFK"/>
+                        <segue destination="wCe-Ot-49S" kind="presentation" identifier="goToSignInSignUpVC" id="HdU-fR-3b6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJy-G0-1xI" userLabel="First Responder" sceneMemberID="firstResponder"/>

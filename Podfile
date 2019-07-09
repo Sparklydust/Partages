@@ -7,8 +7,5 @@ target 'Partage' do
 
   # Pods for Partage
 
-pod 'Firebase/Core'
-pod 'Firebase/Database'
-pod 'Firebase/Auth'
 
 end

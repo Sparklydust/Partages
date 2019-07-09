@@ -8,8 +8,6 @@
 
 import UIKit
 import MapKit
-import Firebase
-import FirebaseDatabase
 
 class DonatorVC: UIViewController {
   
@@ -30,8 +28,6 @@ class DonatorVC: UIViewController {
   
   var keyboardFrame: CGRect = .zero
   
-  private var rootRef: DatabaseReference!
-  
   var address: Address!
   var images = [UIImage]()
   var pickupDateAndTime: Date!
@@ -47,8 +43,13 @@ class DonatorVC: UIViewController {
     setupAllDelegates()
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
-    
-    rootRef = Database.database().reference()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(false)
+    if self.isMovingFromParent {
+      navigationController?.setNavigationBarHidden(true, animated: true)
+    }
   }
   
   deinit {
@@ -72,12 +73,12 @@ extension DonatorVC {
   
   //MARK: Reset Button Action
   @IBAction func resetButtonAction(_ sender: Any) {
-    setupAllEntriesBackToOriginState()
+    allEntriesBackToOriginStateWithAlert()
   }
   
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
-    createDonatorItemAndSaveItIntoFirebase()
+    
   }
 }
 
@@ -255,9 +256,6 @@ extension DonatorVC: UITextViewDelegate {
   
   // Placeholder comes back when text view is empty
   func textViewDidEndEditing(_ textView: UITextView) {
-    if itemDescriptionTextView.text == "" {
-      itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
-    }
     actionsAreEnable(true)
   }
 }
@@ -293,15 +291,23 @@ extension DonatorVC {
 
 //MARK: - Setup all entries back to their origin state
 extension DonatorVC {
-  func setupAllEntriesBackToOriginState() {
+  func allEntriesBackToOriginStateWithAlert() {
     showAlert(title: .reset, message: .resetDonation, buttonName: .reset) { (true) in
-      self.itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
-      self.itemDatePicker.setDate(Date.init(), animated: true)
-      self.itemNameTextField.text = ""
-      self.itemDescriptionTextView.text = ""
-      self.itemImage.image = nil
-      self.setupMapView()
+      self.clearAllEntries()
     }
+  }
+  
+  func allEntriesBackToOriginStateWithoutAlert() {
+    clearAllEntries()
+  }
+  
+  func clearAllEntries() {
+    itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
+    itemDatePicker.setDate(Date.init(), animated: true)
+    itemNameTextField.text = ""
+    itemDescriptionTextView.text = ""
+    itemImage.image = nil
+    setupMapView()
   }
 }
 
@@ -334,7 +340,7 @@ extension DonatorVC {
   func resizeViewWhenKeyboardHides() {
     guard view.frame.origin.y != .zero else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y = self.navigationController!.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.size.height
+      self.view.frame.origin.y = (self.navigationController?.navigationBar.frame.size.height ?? 0.0) + UIApplication.shared.statusBarFrame.size.height
     }
   }
 }
@@ -388,16 +394,27 @@ extension DonatorVC: CanReceiveItemImagesDelegate {
   }
 }
 
-//MARK: - Creation of the donator item and saving it to Firebase database if all fields are filled
+//MARK: - Unwind to VC methods
 extension DonatorVC {
-  func createDonatorItemAndSaveItIntoFirebase() {
+  func unwindToSharingVC() {
+    self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+  }
+  
+  func unwindToSignInVC() {
+    performSegue(withIdentifier: Segue.unwindsToSignInVC.rawValue, sender: self)
+  }
+}
+
+//MARK: - Creation of the donator item and saving it into database if all fields are filled
+extension DonatorVC {
+  func createDonatorItemAndSaveItIntoDatabase() {
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
     
     let donatorItem = DonatorItem(
       selectedType: DonatorItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
       name: itemNameTextField.text!,
-//      image: images,
+      image: images,
       pickupDate: dateAndTime,
       latitude: address.latitude,
       longitude: address.longitude,
@@ -410,9 +427,9 @@ extension DonatorVC {
     case donatorItem.name == "":
       showAlert(title: .emptyCase, message: .noItemName)
       break
-//    case donatorItem.image == [UIImage]():
-//      showAlert(title: .emptyCase, message: .noImage)
-//      break
+    case donatorItem.image == [UIImage]():
+      showAlert(title: .emptyCase, message: .noImage)
+      break
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
@@ -423,13 +440,19 @@ extension DonatorVC {
       showAlert(title: .emptyCase, message: .noDescription)
       break
     default:
+      
+      
       showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        // Saving donator item to Firebase
-        let donatorsItemsRef = self.rootRef.child(FirebaseRoot.donatorsItems.rawValue)
-        let itemRef = donatorsItemsRef.childByAutoId()
-        itemRef.setValue(donatorItem.toDictionary())
+        
+        
+        
+        
+        
+        self.allEntriesBackToOriginStateWithoutAlert()
+        self.unwindToSharingVC()
       }
+      
     }
   }
 }

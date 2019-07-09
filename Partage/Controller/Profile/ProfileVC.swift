@@ -23,6 +23,10 @@ class ProfileVC: UIViewController {
   
   @IBOutlet var backgroundViews: [UIView]!
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -56,7 +60,6 @@ extension ProfileVC {
   
   //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
-    FirebaseNetwork.shared.userSignOut()
     performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   

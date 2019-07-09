@@ -29,7 +29,6 @@ class LostPasswordVC: UIViewController {
 extension LostPasswordVC {
   //MARK: Send password button action
   @IBAction func sendPasswordButtonAction(_ sender: Any) {
-    userResetItsLostFirebasePassword()
   }
   
   //MARK: Cancel button action
@@ -152,15 +151,5 @@ extension LostPasswordVC {
     saveButton.commonDesign(title: .send)
     cancelButton.isEnabled = true
     swipeGestureRecognizer.isEnabled = true
-  }
-}
-
-extension LostPasswordVC {
-  func userResetItsLostFirebasePassword() {
-    guard let email = emailTextField.text else { return }
-    triggerActivityIndicator(true)
-    FirebaseNetwork.shared.userResetPasswordWith(email, vc: self, completion: {
-      self.triggerActivityIndicator(false)
-    })
   }
 }

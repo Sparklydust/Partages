@@ -41,7 +41,6 @@ class SignUpVC: UIViewController {
 extension SignUpVC {
   //MARK: Register Button Action
   @IBAction func registerButtonAction(_ sender: Any) {
-    createUserIntoFirebase()
   }
 }
 
@@ -260,9 +259,9 @@ extension SignUpVC {
   }
 }
 
-//MARK: - User create an account with Firebase
+//MARK: - User create an account in Database
 extension SignUpVC {
-  func createUserIntoFirebase() {
+  func createUserIntoDatabase() {
     guard let firstName = firstNameTextField.text,
       let email = emailTextField.text,
       let password = confirmPasswordTextField.text else {
@@ -283,9 +282,7 @@ extension SignUpVC {
       break
     default:
       triggerActivityIndicator(true)
-      FirebaseNetwork.shared.userRegisterWith(firstName, email, password, vc: self, completion: {
-        self.triggerActivityIndicator(false)
-      })
+      
     }
   }
 }

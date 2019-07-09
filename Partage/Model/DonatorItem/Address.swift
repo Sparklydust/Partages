@@ -28,16 +28,16 @@ struct Address {
   }
 }
 
-////MARK: Initialization for when address comes back from DonatorItem in Firebase
+////MARK: Initialization for when address comes back from DonatorItem database
 //extension Address {
-//  init?(_ dictionary: FirebaseDictionary) {
-//    guard let latitude = dictionary[FirebaseKey.latitude.rawValue] as? Double,
-//    let longitutde = dictionary[FirebaseKey.longitude.rawValue] as? Double,
-//    let streetNumber = dictionary[FirebaseKey.streetNumber.rawValue] as? String,
-//    let streetName = dictionary[FirebaseKey.streetName.rawValue] as? String,
-//    let postalCode = dictionary[FirebaseKey.postalCode.rawValue] as? String,
-//    let cityName = dictionary[FirebaseKey.cityName.rawValue] as? String,
-//      let countryName = dictionary[FirebaseKey.countryName.rawValue] as? String else {
+//  init?(_ dictionary: DatabaseDictionary) {
+//    guard let latitude = dictionary[DatabaseKey.latitude.rawValue] as? Double,
+//      let longitutde = dictionary[DatabaseKey.longitude.rawValue] as? Double,
+//      let streetNumber = dictionary[DatabaseKey.streetNumber.rawValue] as? String,
+//      let streetName = dictionary[DatabaseKey.streetName.rawValue] as? String,
+//      let postalCode = dictionary[DatabaseKey.postalCode.rawValue] as? String,
+//      let cityName = dictionary[DatabaseKey.cityName.rawValue] as? String,
+//      let countryName = dictionary[DatabaseKey.countryName.rawValue] as? String else {
 //        return nil
 //    }
 //    self.latitude = latitude
@@ -47,20 +47,5 @@ struct Address {
 //    self.postalCode = postalCode
 //    self.cityName = cityName
 //    self.countryName = countryName
-//  }
-//}
-//
-////MARK: - Method to save a dictionary structure to Firebase
-//extension Address {
-//  func toDictionary() -> FirebaseDictionary {
-//    return [
-//      FirebaseKey.latitude.rawValue: latitude,
-//      FirebaseKey.longitude.rawValue: longitude,
-//      FirebaseKey.streetNumber.rawValue: streetNumber,
-//      FirebaseKey.streetName.rawValue: streetName,
-//      FirebaseKey.postalCode.rawValue: postalCode,
-//      FirebaseKey.cityName.rawValue: cityName,
-//      FirebaseKey.countryName.rawValue: countryName
-//    ]
 //  }
 //}

@@ -27,6 +27,9 @@ class ReceiverTVC: UITableViewCell {
     super.awakeFromNib()
     setupMainDesign()
   }
+  
+  @IBAction func favoriteButtonAction(_ sender: Any) {
+  }
 }
 
 //MARK: - Setup developer main design

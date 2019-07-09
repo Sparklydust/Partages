@@ -278,6 +278,8 @@
                         <segue destination="31d-TN-Bjg" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="r9C-51-3RD"/>
                         <segue destination="DKq-RX-RYw" kind="show" identifier="goToItemImagesVC" id="rYe-da-3gp"/>
                         <segue destination="b0h-Oq-N0Y" kind="show" identifier="goToMapViewVC" id="BQZ-o6-WxK"/>
+                        <segue destination="31d-TN-Bjg" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="dVf-Jh-cHe"/>
+                        <segue destination="ODw-Pk-RQL" kind="presentation" identifier="goToSignInSignUpVC" id="pym-XK-53L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5r-ou-YBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -309,6 +311,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c66-KC-PmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1741" y="23"/>
+        </scene>
+        <!--SignInSignUp-->
+        <scene sceneID="CiE-bV-Lgn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="ODw-Pk-RQL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAP-io-JIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135" y="473"/>
         </scene>
     </scenes>
     <resources>

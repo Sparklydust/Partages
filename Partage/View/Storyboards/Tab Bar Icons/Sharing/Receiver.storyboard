@@ -363,6 +363,7 @@
                         <segue destination="Al1-us-VNv" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="tcN-6X-5cj"/>
                         <segue destination="vaX-7N-YS6" kind="show" identifier="goToMapViewVC" id="XEf-hb-1RB"/>
                         <segue destination="zdi-X6-Pp9" kind="show" identifier="goToItemImagesVC" id="edr-H1-K53"/>
+                        <segue destination="26Q-4y-bdA" kind="presentation" identifier="goToSignInSignUpVC" id="ExJ-oD-cuo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpl-Zc-FpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -385,6 +386,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RP4-vF-S0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1696" y="110"/>
+        </scene>
+        <!--SignInSignUp-->
+        <scene sceneID="a48-ba-A3q">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="26Q-4y-bdA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i9H-q9-ziQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090" y="519"/>
         </scene>
     </scenes>
     <resources>

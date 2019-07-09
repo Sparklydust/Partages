@@ -78,12 +78,21 @@
                         <outlet property="historyButton" destination="Puk-s8-dHr" id="iTm-O3-6Qj"/>
                         <segue destination="9Jz-Qm-H6A" kind="show" identifier="goToItemDetailsVC" id="chu-9N-NEz"/>
                         <segue destination="FEs-bx-wjW" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="bUU-4F-frc"/>
+                        <segue destination="SDQ-L0-F1v" kind="presentation" identifier="goToSignInSignUpVC" id="LYy-g6-7qU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YML-hT-sqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FEs-bx-wjW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-703" y="-796"/>
+        </scene>
+        <!--SignInSignUp-->
+        <scene sceneID="qEY-m4-8c4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="SDQ-L0-F1v" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-Gg-14j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-704" y="-361"/>
         </scene>
         <!--Item DetailsVC-->
         <scene sceneID="yhY-KR-WcN">

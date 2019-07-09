@@ -9,7 +9,6 @@
 import UIKit
 
 struct User {
-  // Profile
   var profilePicture: UIImage
   var firstName: String
   var lastName: String

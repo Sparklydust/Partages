@@ -44,12 +44,21 @@
                         <outlet property="messageTableView" destination="WQj-iK-QoL" id="kjP-Ox-VJh"/>
                         <segue destination="lLC-Dh-5o5" kind="show" identifier="goToConversationVC" id="STX-Vo-GlK"/>
                         <segue destination="Xhi-7D-CU6" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="UNK-Ax-MF7"/>
+                        <segue destination="PCr-2K-JBy" kind="presentation" identifier="goToSignInSignUpVC" id="aK5-Di-dXp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Va-XH-L1S" sceneMemberID="firstResponder"/>
                 <exit id="Xhi-7D-CU6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2502" y="-239"/>
+        </scene>
+        <!--SignInSignUp-->
+        <scene sceneID="Fef-SA-Dbs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignInSignUp" id="PCr-2K-JBy" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O3x-ph-dnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2501" y="206"/>
         </scene>
         <!--ConversationVC-->
         <scene sceneID="GlX-Ja-zJ8">
