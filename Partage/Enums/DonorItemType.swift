@@ -1,5 +1,5 @@
 //
-//  DonatorItemType.swift
+//  DonorItemType.swift
 //  Partage
 //
 //  Created by Roland Lariotte on 10/06/2019.
@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: - Donator item type to be chosen on DonationItem
-enum DonatorItemType: String {
+enum DonorItemType: String {
   case selectItem = "- sélectionner -"
   case food = "Nourriture"
   case clothes = "Vêtement"

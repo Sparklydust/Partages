@@ -127,16 +127,16 @@ extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return DonatorItem.type.count
+    return DonatedItem.type.count
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return DonatorItem.type[row].rawValue
+    return DonatedItem.type[row].rawValue
   }
   
   // Change picker view item text color
   func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-    let titleData = DonatorItem.type[row].rawValue
+    let titleData = DonatedItem.type[row].rawValue
     let myTitles = NSAttributedString(string: titleData, attributes: [
       NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
     return myTitles
@@ -411,25 +411,24 @@ extension DonatorVC {
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
     
-    let donatorItem = DonatorItem(
-      selectedType: DonatorItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+    let donatorItem = DonatedItem(
+      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
       name: itemNameTextField.text!,
-      image: images,
-      pickupDate: dateAndTime,
+      pickUpDateTime: dateAndTime,
+      description: itemDescriptionTextView.text!,
       latitude: address.latitude,
-      longitude: address.longitude,
-      description: itemDescriptionTextView.text!
+      longitude: address.longitude
     )
     switch true {
-    case donatorItem.selectedType == DonatorItemType.selectItem.rawValue:
+    case donatorItem.selectedType == DonorItemType.selectItem.rawValue:
       showAlert(title: .emptyCase, message: .noItemTypeSelected)
       break
     case donatorItem.name == "":
       showAlert(title: .emptyCase, message: .noItemName)
       break
-    case donatorItem.image == [UIImage]():
-      showAlert(title: .emptyCase, message: .noImage)
-      break
+//    case donatorItem.image == [UIImage]():
+//      showAlert(title: .emptyCase, message: .noImage)
+//      break
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break

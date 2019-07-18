@@ -17,7 +17,7 @@ class SharingVC: UIViewController {
   @IBOutlet weak var receiveButton: UIButton!
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
-  private var donatorsItems = [DonatorItem]()
+  private var donorsItems = [DonatedItem]()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -114,7 +114,7 @@ extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToReceiverVC.rawValue {
       let destinationVC = segue.destination as! ReceiverVC
-      destinationVC.donatorsItems = donatorsItems
+      destinationVC.donorsItems = donorsItems
     }
   }
 }

@@ -27,12 +27,12 @@ class ItemSelectedVC: UIViewController {
   
   @IBOutlet var staticLabels: [UILabel]!
   
-  var donatorItem: DonatorItem!
+  var donatorItem: DonatedItem!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    setupVCInfofrom(donatorItem)
+    //setupVCInfofrom(donatorItem)
   }
 }
 
@@ -176,22 +176,23 @@ extension ItemSelectedVC {
   }
 }
 
-extension ItemSelectedVC {
-  func setupVCInfofrom(_ donatorItem: DonatorItem) {
-    let isoDateString = donatorItem.pickUpDate
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-    let date = dateAndTime?.asString(style: .short)
-    let time = dateAndTime?.asString()
-    
-    itemTypeLabel.text = donatorItem.selectedType
-    itemNameLabel.text = donatorItem.name
-    dateLabel.text = date
-    timeLabel.text = time
-    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
-    itemDescriptionTextView.text = donatorItem.description
-  }
-}
+////MARK: - Populate donated item info
+//extension ItemSelectedVC {
+//  func setupVCInfofrom(_ donatorItem: DonatorItem) {
+//    let isoDateString = donatorItem.pickUpDate
+//    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+//    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+//    let date = dateAndTime?.asString(style: .short)
+//    let time = dateAndTime?.asString()
+//
+//    itemTypeLabel.text = donatorItem.selectedType
+//    itemNameLabel.text = donatorItem.name
+//    dateLabel.text = date
+//    timeLabel.text = time
+//    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
+//    itemDescriptionTextView.text = donatorItem.description
+//  }
+//}
 
 //MARK: - Prepare for segue methods
 extension ItemSelectedVC {

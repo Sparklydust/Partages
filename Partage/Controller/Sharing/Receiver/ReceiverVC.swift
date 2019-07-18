@@ -12,8 +12,8 @@ class ReceiverVC: UIViewController {
   
   @IBOutlet weak var receiverTableView: UITableView!
   
-  var donatorsItems = [DonatorItem]()
-  var oneDonatorItem: DonatorItem?
+  var donorsItems = [DonatedItem]()
+  var oneDonorItem: DonatedItem?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -93,7 +93,7 @@ extension ReceiverVC {
 //MARK: - Setup ReceiverVC table view and its action when a cell is clicked
 extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return donatorsItems.count
+    return donorsItems.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,21 +105,20 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     setupDonatorItemFromSelectedCell(at: indexPath)
-    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: oneDonatorItem)
+    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: oneDonorItem)
   }
 }
 
 //MARK: - Setup one donator item from selected cell to send to ItemSelectedVC
 extension ReceiverVC {
   func setupDonatorItemFromSelectedCell(at indexPath: IndexPath) {
-    oneDonatorItem = DonatorItem(
-      selectedType: donatorsItems[indexPath.row].selectedType,
-      name: donatorsItems[indexPath.row].name,
-      image: donatorsItems[indexPath.row].image,
-      pickupDate: donatorsItems[indexPath.row].pickUpDate,
-      latitude: donatorsItems[indexPath.row].latitude,
-      longitude: donatorsItems[indexPath.row].longitude,
-      description: donatorsItems[indexPath.row].description
+    oneDonorItem = DonatedItem(
+      selectedType: donorsItems[indexPath.row].selectedType,
+      name: donorsItems[indexPath.row].name,
+      pickUpDateTime: donorsItems[indexPath.row].pickUpDateTime,
+      description: donorsItems[indexPath.row].description,
+      latitude: donorsItems[indexPath.row].latitude,
+      longitude: donorsItems[indexPath.row].longitude
     )
   }
 }
@@ -127,19 +126,19 @@ extension ReceiverVC {
 //MARK: - Populate cells with donators Items from database
 extension ReceiverVC {
   func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
-    let donatorItem = donatorsItems[indexPath.row]
+    let donorItem = donorsItems[indexPath.row]
     
-    let isoDateString = donatorItem.pickUpDate
+    let isoDateString = donorItem.pickUpDateTime
     let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
     
-    cell.itemTypeLabel.text = donatorItem.selectedType
-    cell.itemNameLabel.text = donatorItem.name
+    cell.itemTypeLabel.text = donorItem.selectedType
+    cell.itemNameLabel.text = donorItem.name
     cell.dateLabel.text = date
     cell.timeLabel.text = time
-    cell.addMeetingPointOnMap(latitude: donatorItem.latitude, longitude: donatorItem.longitude)
+    cell.addMeetingPointOnMap(latitude: donorItem.latitude, longitude: donorItem.longitude)
   }
 }
 
@@ -147,6 +146,6 @@ extension ReceiverVC {
 extension ReceiverVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let destinationVC = segue.destination as? ItemSelectedVC else { return }
-    destinationVC.donatorItem = oneDonatorItem
+    destinationVC.donatorItem = oneDonorItem
   }
 }
