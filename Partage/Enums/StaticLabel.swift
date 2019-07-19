@@ -22,4 +22,5 @@ enum StaticLabel: String {
   case imageLoaderGuide = "Ajoutez de une à quatre images"
   case meetingPoint = "Lieu de rendez-vous"
   case userPosition = "Votre position"
+  case emptyString = ""
 }

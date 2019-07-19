@@ -45,4 +45,6 @@ enum AlertMessage: String {
   case unknownEmail = "Email inconnu de notre base de données."
   case resetPassword = "Un email vous a été envoyé pour la réinitialisation de votre mot de passe."
   case notConnected = "Merci de vous authentifier pour accéder à cette fonctionnalité."
+  case signUpError = "Cet email est enregistrer dans notre base de donnée."
+  case saveItemError = "Il y a eu un problème pour sauvegarder votre don."
 }

@@ -72,12 +72,19 @@
 		2AD516A922B11F640032F28F /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD516A822B11F640032F28F /* MapViewVC.swift */; };
 		2AD516AB22B13A5B0032F28F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD516AA22B13A5B0032F28F /* LocationHandler.swift */; };
 		2AD516AD22B2B79C0032F28F /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD516AC22B2B79C0032F28F /* UILabel.swift */; };
+		2AD9308C22E1A6B30023FE46 /* DonatedItemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9308B22E1A6B30023FE46 /* DonatedItemRequest.swift */; };
+		2AD9308E22E1AA420023FE46 /* ResourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9308D22E1AA420023FE46 /* ResourceRequest.swift */; };
+		2AD9309022E1AAD60023FE46 /* SaveResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9308F22E1AAD60023FE46 /* SaveResult.swift */; };
 		2ADD45D222A634DB003B12E6 /* ConversationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */; };
 		2ADD45D322A634DB003B12E6 /* ConversationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */; };
 		2ADDE4FA22DF014B00C568BB /* DonatedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDE4F922DF014B00C568BB /* DonatedItem.swift */; };
 		2ADDE4FC22DF023500C568BB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDE4FB22DF023500C568BB /* Message.swift */; };
 		2ADDE4FE22DF0BA300C568BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDE4FD22DF0BA300C568BB /* User.swift */; };
 		2ADDF12822E07C7200C568BB /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDF12722E07C7200C568BB /* Token.swift */; };
+		2ADDF12F22E08F2E00C568BB /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDF12E22E08F2E00C568BB /* Auth.swift */; };
+		2ADDF13222E090CE00C568BB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDF13122E090CE00C568BB /* UserDefaultsService.swift */; };
+		2ADDF13422E092AB00C568BB /* NetworkPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDF13322E092AB00C568BB /* NetworkPath.swift */; };
+		2ADDF13822E0B33500C568BB /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADDF13722E0B33500C568BB /* UserRequest.swift */; };
 		2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B222ADC5B600CF627C /* AlertTitle.swift */; };
 		2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B422ADC69400CF627C /* AlertMessage.swift */; };
 		2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */; };
@@ -177,12 +184,19 @@
 		2AD516A822B11F640032F28F /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		2AD516AA22B13A5B0032F28F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		2AD516AC22B2B79C0032F28F /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		2AD9308B22E1A6B30023FE46 /* DonatedItemRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatedItemRequest.swift; sourceTree = "<group>"; };
+		2AD9308D22E1AA420023FE46 /* ResourceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRequest.swift; sourceTree = "<group>"; };
+		2AD9308F22E1AAD60023FE46 /* SaveResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResult.swift; sourceTree = "<group>"; };
 		2ADD45D022A634DB003B12E6 /* ConversationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTVC.swift; sourceTree = "<group>"; };
 		2ADD45D122A634DB003B12E6 /* ConversationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTVC.xib; sourceTree = "<group>"; };
 		2ADDE4F922DF014B00C568BB /* DonatedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatedItem.swift; sourceTree = "<group>"; };
 		2ADDE4FB22DF023500C568BB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		2ADDE4FD22DF0BA300C568BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2ADDF12722E07C7200C568BB /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		2ADDF12E22E08F2E00C568BB /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		2ADDF13122E090CE00C568BB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		2ADDF13322E092AB00C568BB /* NetworkPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPath.swift; sourceTree = "<group>"; };
+		2ADDF13722E0B33500C568BB /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
 		2AE322B222ADC5B600CF627C /* AlertTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitle.swift; sourceTree = "<group>"; };
 		2AE322B422ADC69400CF627C /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItemDetail.swift; sourceTree = "<group>"; };
@@ -411,6 +425,8 @@
 		2AB4353D229E5712007BFB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2ADDF13022E0908F00C568BB /* Service */,
+				2ADDF12B22E085AB00C568BB /* Network */,
 				2ADDE4FD22DF0BA300C568BB /* User.swift */,
 				2ADDF12722E07C7200C568BB /* Token.swift */,
 				2ADDE4F922DF014B00C568BB /* DonatedItem.swift */,
@@ -520,6 +536,35 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		2AD9309122E1AB270023FE46 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2A6C12DC22D4C587001AAE31 /* DatabaseKey.swift */,
+				2ADDF13322E092AB00C568BB /* NetworkPath.swift */,
+				2AD9308F22E1AAD60023FE46 /* SaveResult.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2ADDF12B22E085AB00C568BB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2ADDF12E22E08F2E00C568BB /* Auth.swift */,
+				2ADDF13722E0B33500C568BB /* UserRequest.swift */,
+				2AD9308B22E1A6B30023FE46 /* DonatedItemRequest.swift */,
+				2AD9308D22E1AA420023FE46 /* ResourceRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2ADDF13022E0908F00C568BB /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2ADDF13122E090CE00C568BB /* UserDefaultsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		2AF66B2C22AC0DEF005BAE31 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,7 +604,7 @@
 				2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */,
 				2A3469B922C4C546009255C0 /* ContactUs.swift */,
 				2A310DE622C9574B0049CB74 /* ImageName.swift */,
-				2A6C12DC22D4C587001AAE31 /* DatabaseKey.swift */,
+				2AD9309122E1AB270023FE46 /* Network */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -699,6 +744,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ADDF12F22E08F2E00C568BB /* Auth.swift in Sources */,
 				2A901EAE22AFFDDB00D3DD2A /* CustomCell.swift in Sources */,
 				2AFA4ECE22A9AB320039803E /* CustomFont.swift in Sources */,
 				2AFA4ED022A9AB540039803E /* FontSize.swift in Sources */,
@@ -709,7 +755,9 @@
 				2A310DE522C935890049CB74 /* CanReceiveDelegates.swift in Sources */,
 				2A99310022BA87E100BB3DF2 /* DeviceName.swift in Sources */,
 				2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */,
+				2AD9308E22E1AA420023FE46 /* ResourceRequest.swift in Sources */,
 				2A966BA222B4439E00418CFF /* UIView.swift in Sources */,
+				2ADDF13222E090CE00C568BB /* UserDefaultsService.swift in Sources */,
 				2A901EA422AFA19200D3DD2A /* Segue.swift in Sources */,
 				2AAA794322AAB8E000529F2B /* ItemDetailsVC.swift in Sources */,
 				2A067280229EAE4000FFAECE /* UIColor.swift in Sources */,
@@ -722,6 +770,7 @@
 				2AFA4EC422A8FCBB0039803E /* FavoriteTVC.swift in Sources */,
 				2A90FB4222A05D40006C246B /* CameraHandler.swift in Sources */,
 				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
+				2AD9309022E1AAD60023FE46 /* SaveResult.swift in Sources */,
 				2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */,
 				2AD516A122B05B280032F28F /* ItemSelectedVC.swift in Sources */,
 				2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */,
@@ -746,15 +795,18 @@
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
 				2A6C12DD22D4C587001AAE31 /* DatabaseKey.swift in Sources */,
 				2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */,
+				2ADDF13822E0B33500C568BB /* UserRequest.swift in Sources */,
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
 				2A6D697C22B904910073053F /* Key.swift in Sources */,
 				2ADDE4FC22DF023500C568BB /* Message.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
+				2ADDF13422E092AB00C568BB /* NetworkPath.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2A3469BA22C4C546009255C0 /* ContactUs.swift in Sources */,
 				2A5393F622CA072100BB49F0 /* Date.swift in Sources */,
 				2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */,
 				2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */,
+				2AD9308C22E1A6B30023FE46 /* DonatedItemRequest.swift in Sources */,
 				2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */,
 				2AF66B2922AC0AA8005BAE31 /* EventHandler.swift in Sources */,
 				2ADDE4FA22DF014B00C568BB /* DonatedItem.swift in Sources */,

@@ -41,6 +41,7 @@ class SignUpVC: UIViewController {
 extension SignUpVC {
   //MARK: Register Button Action
   @IBAction func registerButtonAction(_ sender: Any) {
+    createUserIntoDatabase()
   }
 }
 
@@ -136,7 +137,7 @@ extension SignUpVC {
 //MARK: - Setup tap gesture to dismiss keyboard
 extension SignUpVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    resignAllResponser()
+    resignAllResponder()
   }
 }
 
@@ -177,7 +178,7 @@ extension SignUpVC {
 
 //MARK: - Method to resign all responders
 extension SignUpVC {
-  func resignAllResponser() {
+  func resignAllResponder() {
     firstNameTextField.resignFirstResponder()
     emailTextField.resignFirstResponder()
     passwordTextField.resignFirstResponder()
@@ -188,7 +189,7 @@ extension SignUpVC {
 //MARK: - Dismiss keyboard when done keyboard button is clicked
 extension SignUpVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    resignAllResponser()
+    resignAllResponder()
     return true
   }
 }
@@ -268,21 +269,48 @@ extension SignUpVC {
         return
     }
     switch true {
-    case firstName == "":
+    case firstName.isEmpty:
       showAlert(title: .firstNameError, message: .addFirstName)
       break
-    case email == "" || !email.isValidEmail():
+    case email.isEmpty || !email.isValidEmail():
       showAlert(title: .emailError, message: .addEmail)
       break
-    case password == "" || password != passwordTextField.text:
+    case password.isEmpty || password != passwordTextField.text:
       showAlert(title: .passwordError, message: .passwordDoesntMatch)
       break
     case password.count < 5:
       showAlert(title: .passwordError, message: .passwordTooShort)
       break
     default:
+      let user = CreateUser(firstName: firstName,
+                            lastName: StaticLabel.emptyString.rawValue,
+                            email: email,
+                            password: password
+      )
+      resignAllResponder()
       triggerActivityIndicator(true)
-      
+      UserRequest<CreateUser>(resourcePath: NetworkPath.saveUser.rawValue).save(user) { [weak self] result in
+        switch result {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .signUpError)
+          }
+        case .success:
+          Auth().login(email: email, password: password, completion: { (result) in
+            switch result {
+            case .success:
+              DispatchQueue.main.async { [weak self] in
+                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+              }
+            case .failure:
+              DispatchQueue.main.async { [weak self] in
+                self?.showAlert(title: .loginError, message: .loginError)
+              }
+            }
+          })
+        }
+      }
+      triggerActivityIndicator(false)
     }
   }
 }

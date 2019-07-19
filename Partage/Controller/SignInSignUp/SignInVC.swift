@@ -37,6 +37,7 @@ class SignInVC: UIViewController {
 extension SignInVC {
   //MARK: Connection button action
   @IBAction func connectionButtonAction(_ sender: Any) {
+    userLogin()
   }
 }
 
@@ -127,7 +128,7 @@ extension SignInVC {
 //MARK: - Setup tap gesture to dismiss keyboard
 extension SignInVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    resignAllResponser()
+    resignAllResponder()
   }
 }
 
@@ -165,7 +166,7 @@ extension SignInVC {
 
 //MARK: - Method to resign all responders
 extension SignInVC {
-  func resignAllResponser() {
+  func resignAllResponder() {
     emailTextField.resignFirstResponder()
     passwordTextField.resignFirstResponder()
   }
@@ -174,7 +175,7 @@ extension SignInVC {
 //MARK: - Dismiss keyboard when done keyboard button is clicked
 extension SignInVC {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    resignAllResponser()
+    resignAllResponder()
     return true
   }
 }
@@ -208,5 +209,35 @@ extension SignInVC {
     cancelButton.isEnabled = true
     signUpButton.isEnabled = true
     swipeGestureRecognizer.isEnabled = true
+  }
+}
+
+//MARK: - Method for the user to log in
+extension SignInVC {
+  func userLogin() {
+    guard let email = emailTextField.text, !email.isEmpty else {
+      showAlert(title: .emailError, message: .addEmail)
+      return
+    }
+    guard let password = passwordTextField.text, !password.isEmpty else {
+      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      return
+    }
+    resignAllResponder()
+    triggerActivityIndicator(true)
+    Auth().login(email: email, password: password) { (result) in
+      switch result {
+      case .success:
+        DispatchQueue.main.async {
+          self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          self.triggerActivityIndicator(false)
+        }
+      case .failure:
+        DispatchQueue.main.async {
+          self.showAlert(title: .loginError, message: .loginError)
+          self.triggerActivityIndicator(false)
+        }
+      }
+    }
   }
 }

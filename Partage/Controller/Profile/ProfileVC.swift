@@ -60,6 +60,7 @@ extension ProfileVC {
   
   //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
+    UserDefaultsService.token = nil
     performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   

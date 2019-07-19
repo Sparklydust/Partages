@@ -78,7 +78,13 @@ extension DonatorVC {
   
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
-    
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
+    }
+    createDonatorItemAndSaveItIntoDatabase()
   }
 }
 
@@ -411,7 +417,7 @@ extension DonatorVC {
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
     
-    let donatorItem = DonatedItem(
+    let donatedItem = DonatedItem(
       selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
       name: itemNameTextField.text!,
       pickUpDateTime: dateAndTime,
@@ -420,10 +426,10 @@ extension DonatorVC {
       longitude: address.longitude
     )
     switch true {
-    case donatorItem.selectedType == DonorItemType.selectItem.rawValue:
+    case donatedItem.selectedType == DonorItemType.selectItem.rawValue:
       showAlert(title: .emptyCase, message: .noItemTypeSelected)
       break
-    case donatorItem.name == "":
+    case donatedItem.name == "":
       showAlert(title: .emptyCase, message: .noItemName)
       break
 //    case donatorItem.image == [UIImage]():
@@ -432,26 +438,29 @@ extension DonatorVC {
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
-    case donatorItem.latitude == .zero:
+    case donatedItem.latitude == .zero:
       showAlert(title: .emptyCase, message: .noMeetingPoint)
       break
-    case donatorItem.description == StaticLabel.enterItemDescription.rawValue || donatorItem.description == "":
+    case donatedItem.description == StaticLabel.enterItemDescription.rawValue || donatedItem.description == "":
       showAlert(title: .emptyCase, message: .noDescription)
       break
     default:
-      
-      
       showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        
-        
-        
-        
-        
-        self.allEntriesBackToOriginStateWithoutAlert()
-        self.unwindToSharingVC()
+        ResourceRequest<DonatedItem>(resourcePath: "donatedItems").save(donatedItem, completion: { [weak self] (result) in
+          switch result {
+          case .failure:
+            DispatchQueue.main.async { [weak self] in
+              self?.showAlert(title: .error, message: .saveItemError)
+            }
+          case .success:
+            DispatchQueue.main.async { [weak self] in
+              self?.unwindToSharingVC()
+              self?.allEntriesBackToOriginStateWithoutAlert()
+            }
+          }
+        })
       }
-      
     }
   }
 }

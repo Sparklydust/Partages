@@ -17,12 +17,13 @@ class SharingVC: UIViewController {
   @IBOutlet weak var receiveButton: UIButton!
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
-  private var donorsItems = [DonatedItem]()
+  var donatedItems = [DonatedItem]()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(true, animated: false)
     triggerActivityIndicator(false)
+    populateSignInSignUpButtonDesign()
   }
   
   override func viewDidLoad() {
@@ -54,7 +55,7 @@ extension SharingVC {
   //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
-    setupAllButtons()
+    setupShareReceiveButtons()
     setupNavigationController()
   }
   
@@ -66,10 +67,9 @@ extension SharingVC {
 
 //MARK: - Setup all buttons
 extension SharingVC {
-  func setupAllButtons() {
+  func setupShareReceiveButtons() {
     shareButton.shareReceiveDesign(title: .shareMain)
     receiveButton.shareReceiveDesign(title: .receiveMain)
-    signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
   }
 }
 
@@ -114,7 +114,22 @@ extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToReceiverVC.rawValue {
       let destinationVC = segue.destination as! ReceiverVC
-      destinationVC.donorsItems = donorsItems
+      
+      destinationVC.donatedItems = donatedItems
+    }
+  }
+}
+
+//MARK: - User sign in change SignInSignUp button
+extension SharingVC {
+  func populateSignInSignUpButtonDesign() {
+    if UserDefaultsService.token != nil {
+      signInSignUpButton.signInSignUpDesign(title: .afterSignedIn)
+      signInSignUpButton.isEnabled = false
+    }
+    else {
+      signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
+      signInSignUpButton.isEnabled = true
     }
   }
 }

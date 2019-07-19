@@ -27,7 +27,7 @@ class ItemSelectedVC: UIViewController {
   
   @IBOutlet var staticLabels: [UILabel]!
   
-  var donatorItem: DonatedItem!
+  var donatedItem: DonatedItem!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -199,8 +199,8 @@ extension ItemSelectedVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToMapViewVC.rawValue {
       let destinationVC = segue.destination as! MapViewVC
-      destinationVC.donatorItemLatitude = donatorItem.latitude
-      destinationVC.donatorItemLongitude = donatorItem.longitude
+      destinationVC.donatorItemLatitude = donatedItem.latitude
+      destinationVC.donatorItemLongitude = donatedItem.longitude
       destinationVC.buttonName = .openMapApp
     }
   }
