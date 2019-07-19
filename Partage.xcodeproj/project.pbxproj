@@ -23,7 +23,6 @@
 		2A3469BA22C4C546009255C0 /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3469B922C4C546009255C0 /* ContactUs.swift */; };
 		2A5393F622CA072100BB49F0 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5393F522CA072100BB49F0 /* Date.swift */; };
 		2A6C12D922D35379001AAE31 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6C12D822D35379001AAE31 /* Encodable.swift */; };
-		2A6C12DD22D4C587001AAE31 /* DatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6C12DC22D4C587001AAE31 /* DatabaseKey.swift */; };
 		2A6D697C22B904910073053F /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697B22B904910073053F /* Key.swift */; };
 		2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D697D22B97C850073053F /* UINavigationController.swift */; };
 		2A6DBB7122CF932200B0EC75 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DBB7022CF932200B0EC75 /* String.swift */; };
@@ -133,7 +132,6 @@
 		2A5393F522CA072100BB49F0 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		2A65C71822B780DB00BA4814 /* Partage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Partage.entitlements; sourceTree = "<group>"; };
 		2A6C12D822D35379001AAE31 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
-		2A6C12DC22D4C587001AAE31 /* DatabaseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseKey.swift; sourceTree = "<group>"; };
 		2A6D697B22B904910073053F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		2A6D697D22B97C850073053F /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		2A6DBB7022CF932200B0EC75 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -539,7 +537,6 @@
 		2AD9309122E1AB270023FE46 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				2A6C12DC22D4C587001AAE31 /* DatabaseKey.swift */,
 				2ADDF13322E092AB00C568BB /* NetworkPath.swift */,
 				2AD9308F22E1AAD60023FE46 /* SaveResult.swift */,
 			);
@@ -589,10 +586,11 @@
 		2AFA4EC822A9A9EE0039803E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				2AD9309122E1AB270023FE46 /* Network */,
+				2AFA4ECF22A9AB540039803E /* FontSize.swift */,
 				2AFA4EC922A9AA290039803E /* StaticLabel.swift */,
 				2AFA4ECB22A9AAF30039803E /* ButtonName.swift */,
 				2AFA4ECD22A9AB320039803E /* CustomFont.swift */,
-				2AFA4ECF22A9AB540039803E /* FontSize.swift */,
 				2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */,
 				2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */,
 				2AE322B222ADC5B600CF627C /* AlertTitle.swift */,
@@ -604,7 +602,6 @@
 				2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */,
 				2A3469B922C4C546009255C0 /* ContactUs.swift */,
 				2A310DE622C9574B0049CB74 /* ImageName.swift */,
-				2AD9309122E1AB270023FE46 /* Network */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -793,7 +790,6 @@
 				2ADDE4FE22DF0BA300C568BB /* User.swift in Sources */,
 				2A98DF4C22AEBD6400F6F2AE /* DonorItemType.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
-				2A6C12DD22D4C587001AAE31 /* DatabaseKey.swift in Sources */,
 				2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */,
 				2ADDF13822E0B33500C568BB /* UserRequest.swift in Sources */,
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,

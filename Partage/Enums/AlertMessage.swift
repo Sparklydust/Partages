@@ -47,4 +47,5 @@ enum AlertMessage: String {
   case notConnected = "Merci de vous authentifier pour accéder à cette fonctionnalité."
   case signUpError = "Cet email est enregistrer dans notre base de donnée."
   case saveItemError = "Il y a eu un problème pour sauvegarder votre don."
+  case loadItemError = "Il y a eu un problème pour télécharger les dons."
 }

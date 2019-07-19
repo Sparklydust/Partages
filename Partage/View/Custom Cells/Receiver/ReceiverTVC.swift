@@ -20,12 +20,14 @@ class ReceiverTVC: UITableViewCell {
   @IBOutlet weak var itemImage: UIImageView!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var favoriteButton: UIButton!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   @IBOutlet var staticLabels: [UILabel]!
   
   override func awakeFromNib() {
     super.awakeFromNib()
     setupMainDesign()
+    triggerActivityIndicator(false)
   }
   
   @IBAction func favoriteButtonAction(_ sender: Any) {
@@ -138,6 +140,7 @@ extension ReceiverTVC {
   }
 }
 
+//MARK: - To add the meeting point shown on the map
 extension ReceiverTVC {
   func addMeetingPointOnMap(latitude: Double, longitude: Double) {
     let annotation = MKPointAnnotation()
@@ -150,5 +153,28 @@ extension ReceiverTVC {
     let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
     let region = MKCoordinateRegion(center: coordinate, span: span)
     mapView.setRegion(region, animated: true)
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension ReceiverTVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .mainBlue
+    contentView.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
   }
 }

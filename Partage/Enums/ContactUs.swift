@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Contact us email sender attributes
 enum ContactUs: String {
   case partageEmail = "partage@contact.com"
   case subject = "Partage et ses utilisateurs"

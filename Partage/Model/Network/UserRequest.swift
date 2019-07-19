@@ -16,6 +16,11 @@ struct UserRequest<ResourceType> where ResourceType: Codable {
     guard let resourceURL = URL(string: baseURL) else { fatalError() }
     self.resourceURL = resourceURL.appendingPathComponent(resourcePath)
   }
+  
+  init(resourcePath: String, userID: String) {
+    guard let resourceURL = URL(string: baseURL) else { fatalError() }
+    self.resourceURL = resourceURL.appendingPathComponent(resourcePath + userID)
+  }
 }
 
 //MARK: - To save a new user to the database
@@ -38,5 +43,26 @@ extension UserRequest {
     } catch {
       completion(.failure)
     }
+  }
+}
+
+//MARK: - Retrieve one user with his userID number
+extension UserRequest {
+  func get(completion: @escaping (DonatedItemUserRequestResult) -> Void) {
+    let urlRequest = URLRequest(url: resourceURL)
+    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
+      guard let jsonData = data else {
+        completion(.failure)
+        return
+      }
+      do {
+        let decoder = JSONDecoder()
+        let user = try decoder.decode(User.self, from: jsonData)
+        completion(.success(user))
+      } catch {
+        completion(.failure)
+      }
+    }
+    dataTask.resume()
   }
 }

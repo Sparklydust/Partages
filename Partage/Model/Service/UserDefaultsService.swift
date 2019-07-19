@@ -11,7 +11,8 @@ import Foundation
 //MARK: = User defaults saver class
 class UserDefaultsService {
   private struct Keys {
-    static let token = "PARTAGE-API-KEY"
+    static let token = Key.partageAPIKey.rawValue
+    static let userID = Key.partageUserID.rawValue
   }
   
   //MARK: - Save or unsave the user token key
@@ -23,6 +24,17 @@ class UserDefaultsService {
     set {
       UserDefaults.standard.set(
         newValue, forKey: Keys.token)
+    }
+  }
+  
+  static var userID: String? {
+    get {
+      return UserDefaults.standard.string(
+        forKey: Keys.userID)
+    }
+    set {
+      UserDefaults.standard.set(
+        newValue, forKey: Keys.userID)
     }
   }
 }

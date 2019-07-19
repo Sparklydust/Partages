@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Apple devices name
 enum DeviceName: String {
   case iPadFithGeneration = "iPad (5th generation)"
   case iPadSixthGeneration = "iPad (6th generation)"

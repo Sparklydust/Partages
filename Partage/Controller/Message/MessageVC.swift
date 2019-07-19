@@ -15,6 +15,7 @@ class MessageVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
+    checkIfAnUserIsConnected()
   }
   
   override func viewDidLoad() {
@@ -129,6 +130,18 @@ extension MessageVC {
   func setupCellHeightForIPad() {
     if UIDevice.current.userInterfaceIdiom == .pad {
       messageTableView.rowHeight = 120
+    }
+  }
+}
+
+//MARK: - Check if an user is connected, else send him to SignInVC
+extension MessageVC {
+  func checkIfAnUserIsConnected() {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
     }
   }
 }

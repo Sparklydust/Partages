@@ -400,7 +400,7 @@ extension DonatorVC: CanReceiveItemImagesDelegate {
   }
 }
 
-//MARK: - Unwind to VC methods
+//MARK: - Unwind to VCs methods
 extension DonatorVC {
   func unwindToSharingVC() {
     self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)

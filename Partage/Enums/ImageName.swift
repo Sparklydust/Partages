@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Assets.xcassets images name
 enum ImageName: String {
   case noImage
   case noPicture

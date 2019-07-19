@@ -26,14 +26,12 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puk-s8-dHr">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
-                                        <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="historyButton:" destination="FIT-Tf-2tP" eventType="touchUpInside" id="SBu-Cq-Tc7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7i-ke-RLG">
                                         <rect key="frame" x="207" y="0.0" width="207" height="50"/>
-                                        <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="favoriteButton:" destination="FIT-Tf-2tP" eventType="touchUpInside" id="L5k-ky-b2r"/>
                                         </connections>

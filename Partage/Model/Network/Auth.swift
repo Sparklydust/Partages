@@ -40,6 +40,7 @@ class Auth {
       do {
         let token = try JSONDecoder().decode(Token.self, from: jsonData)
         UserDefaultsService.token = token.token
+        UserDefaultsService.userID = token.userID.uuidString
         completion(.success)
       }
       catch {

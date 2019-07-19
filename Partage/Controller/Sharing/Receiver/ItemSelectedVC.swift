@@ -32,7 +32,7 @@ class ItemSelectedVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    //setupVCInfofrom(donatorItem)
+    setupVCInfofrom(donatedItem)
   }
 }
 
@@ -40,6 +40,13 @@ class ItemSelectedVC: UIViewController {
 extension ItemSelectedVC {
   //MARK: Favorite button action
   @IBAction func favoriteButtonAction(_ sender: Any) {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
+    }
+    
   }
   
   //MARK: Item image button action
@@ -54,10 +61,24 @@ extension ItemSelectedVC {
   
   //MARK: Messagge to donator button action
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
+    }
+    
   }
   
   //MARK: Receive this donation button action
   @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
+    }
+    
   }
 }
 
@@ -176,23 +197,23 @@ extension ItemSelectedVC {
   }
 }
 
-////MARK: - Populate donated item info
-//extension ItemSelectedVC {
-//  func setupVCInfofrom(_ donatorItem: DonatorItem) {
-//    let isoDateString = donatorItem.pickUpDate
-//    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-//    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-//    let date = dateAndTime?.asString(style: .short)
-//    let time = dateAndTime?.asString()
-//
-//    itemTypeLabel.text = donatorItem.selectedType
-//    itemNameLabel.text = donatorItem.name
-//    dateLabel.text = date
-//    timeLabel.text = time
-//    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
-//    itemDescriptionTextView.text = donatorItem.description
-//  }
-//}
+//MARK: - Populate donated item info
+extension ItemSelectedVC {
+  func setupVCInfofrom(_ donatorItem: DonatedItem) {
+    let isoDateString = donatorItem.pickUpDateTime
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    let date = dateAndTime?.asString(style: .short)
+    let time = dateAndTime?.asString()
+
+    itemTypeLabel.text = donatorItem.selectedType
+    itemNameLabel.text = donatorItem.name
+    dateLabel.text = date
+    timeLabel.text = time
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
+    itemDescriptionTextView.text = donatorItem.description
+  }
+}
 
 //MARK: - Prepare for segue methods
 extension ItemSelectedVC {

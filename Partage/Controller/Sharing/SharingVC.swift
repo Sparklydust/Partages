@@ -18,6 +18,7 @@ class SharingVC: UIViewController {
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
   var donatedItems = [DonatedItem]()
+  var user: User?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -46,7 +47,7 @@ extension SharingVC {
   
   //MARK: - Receiver Button Action
   @IBAction func receiverButtonAction(_ sender: Any) {
-    triggerActivityIndicator(true)
+    fetchDonorsItemsFromDatabase()
   }
 }
 
@@ -124,12 +125,55 @@ extension SharingVC {
 extension SharingVC {
   func populateSignInSignUpButtonDesign() {
     if UserDefaultsService.token != nil {
-      signInSignUpButton.signInSignUpDesign(title: .afterSignedIn)
+      fetchUserFromTheDatabase()
+      let hello = ButtonName.afterSignedIn.rawValue
+      signInSignUpButton.signInSignUpDesign(title: hello)
+      signInSignUpButton.setTitle(hello , for: .normal)
       signInSignUpButton.isEnabled = false
     }
     else {
-      signInSignUpButton.signInSignUpDesign(title: .signInSignUp)
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.signInSignUp.rawValue)
       signInSignUpButton.isEnabled = true
+    }
+  }
+}
+
+//MARK: - Fetch donors item from database and perform segue to ReceiverVC
+extension SharingVC {
+  func fetchDonorsItemsFromDatabase() {
+    triggerActivityIndicator(true)
+    ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).getAll { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loadItemError)
+        }
+      case .success(let donatedItems):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.donatedItems = donatedItems
+          self.performSegue(withIdentifier: Segue.goesToReceiverVC.rawValue, sender: donatedItems)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch user from the database
+extension SharingVC {
+  func fetchUserFromTheDatabase() {
+    guard UserDefaultsService.userID != nil else { return }
+    UserRequest<User>(resourcePath: NetworkPath.saveUser.rawValue, userID: UserDefaultsService.userID!).get { [weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loginError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.user = user
+        }
+      }
     }
   }
 }

@@ -23,18 +23,22 @@ class ProfileVC: UIViewController {
   
   @IBOutlet var backgroundViews: [UIView]!
   
+  var user: User? {
+    didSet {
+      updateUserProfile()
+    }
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
+    checkIfAnUserIsConnected()
+    fetchUserFromTheDatabase()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupProfileImage()
-    
-    firstNameLabel.text = "Roland"
-    emailLabel.text = "roland.sound@live.fr"
-    passwordLabel.text = "●●●●●●●●●●●●●●"
   }
 }
 
@@ -60,7 +64,8 @@ extension ProfileVC {
   
   //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
-    UserDefaultsService.token = nil
+    deleteUserFromUserDefaults()
+    deleteAllLabels()
     performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   
@@ -110,7 +115,7 @@ extension ProfileVC {
 //MARK: - Setup edit button design
 extension ProfileVC {
   func setupEditProfilePictureButton() {
-    editProfilePictureButton.signInSignUpDesign(title: .edit)
+    editProfilePictureButton.signInSignUpDesign(title: ButtonName.edit.rawValue)
   }
 }
 
@@ -171,5 +176,60 @@ extension ProfileVC: MFMailComposeViewControllerDelegate {
     @unknown default:
       fatalError()
     }
+  }
+}
+
+//MARK: - Check if an user is connected, else send him to SignInVC
+extension ProfileVC {
+  func checkIfAnUserIsConnected() {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
+    }
+  }
+}
+
+//MARK: - Fetch user from the database
+extension ProfileVC {
+  func fetchUserFromTheDatabase() {
+    guard UserDefaultsService.userID != nil else { return }
+    UserRequest<User>(resourcePath: NetworkPath.saveUser.rawValue, userID: UserDefaultsService.userID!).get { [weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loginError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.user = user
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Delete user inside user defaults
+extension ProfileVC {
+  func deleteUserFromUserDefaults() {
+    UserDefaultsService.token = nil
+    UserDefaultsService.userID = nil
+  }
+}
+
+//MARK: - Delete all labels when user disconnect
+extension ProfileVC {
+  func deleteAllLabels() {
+    firstNameLabel.text = nil
+    emailLabel.text = nil
+    passwordLabel.text = nil
+  }
+}
+
+//MARK: - Update User profile after being connected
+extension ProfileVC {
+  func updateUserProfile() {
+    firstNameLabel.text = user?.firstName
   }
 }

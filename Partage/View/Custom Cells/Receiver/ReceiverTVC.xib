@@ -129,6 +129,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-e7-p7l">
+                                <rect key="frame" x="20" y="92.5" width="240" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="jtC-O5-7Vc"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -153,10 +159,12 @@
                             <constraint firstItem="Jbo-wb-Jib" firstAttribute="top" secondItem="OZA-pH-wOO" secondAttribute="bottom" constant="15" id="I3s-gC-nNm">
                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
+                            <constraint firstItem="bUc-e7-p7l" firstAttribute="centerY" secondItem="QtP-ss-A72" secondAttribute="centerY" id="IPw-3l-CdW"/>
                             <constraint firstAttribute="trailing" secondItem="Jbo-wb-Jib" secondAttribute="trailing" constant="10" id="IdV-KM-znw">
                                 <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                             </constraint>
                             <constraint firstItem="Jbo-wb-Jib" firstAttribute="centerY" secondItem="hzr-bC-z0m" secondAttribute="centerY" id="O02-Sk-TPt"/>
+                            <constraint firstItem="bUc-e7-p7l" firstAttribute="leading" secondItem="QtP-ss-A72" secondAttribute="leading" constant="20" id="VFF-Kv-odJ"/>
                             <constraint firstItem="Znq-Nq-lwE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NgB-5R-Axg" secondAttribute="trailing" constant="10" id="WKd-7s-pew">
                                 <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                             </constraint>
@@ -168,6 +176,7 @@
                             <constraint firstItem="NgB-5R-Axg" firstAttribute="leading" secondItem="QtP-ss-A72" secondAttribute="leading" constant="10" id="iVP-Lh-mfw">
                                 <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                             </constraint>
+                            <constraint firstAttribute="trailing" secondItem="bUc-e7-p7l" secondAttribute="trailing" constant="20" id="jy1-WO-pDB"/>
                             <constraint firstItem="bSa-Rm-gz1" firstAttribute="leading" secondItem="BN6-fa-3YA" secondAttribute="leading" id="lAI-bf-Rag"/>
                             <constraint firstItem="OZA-pH-wOO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Znq-Nq-lwE" secondAttribute="trailing" constant="10" id="pCD-UA-2JR">
                                 <variation key="heightClass=regular-widthClass=regular" constant="15"/>
@@ -175,6 +184,7 @@
                             <constraint firstItem="bSa-Rm-gz1" firstAttribute="trailing" secondItem="BN6-fa-3YA" secondAttribute="trailing" id="sN2-Gg-XOL"/>
                             <constraint firstItem="OZA-pH-wOO" firstAttribute="centerY" secondItem="NgB-5R-Axg" secondAttribute="centerY" id="sti-4F-sjb"/>
                             <constraint firstItem="Znq-Nq-lwE" firstAttribute="centerY" secondItem="NgB-5R-Axg" secondAttribute="centerY" id="vd0-iq-voO"/>
+                            <constraint firstItem="bUc-e7-p7l" firstAttribute="centerX" secondItem="QtP-ss-A72" secondAttribute="centerX" id="xxT-F1-DB2"/>
                             <constraint firstAttribute="bottom" secondItem="bSa-Rm-gz1" secondAttribute="bottom" constant="5" id="y1W-cd-Nix">
                                 <variation key="heightClass=regular-widthClass=regular" constant="10"/>
                             </constraint>
@@ -199,6 +209,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="bUc-e7-p7l" id="IbZ-fR-xI1"/>
                 <outlet property="dateLabel" destination="br4-fI-dO5" id="1Pp-yJ-A3q"/>
                 <outlet property="favoriteButton" destination="OZA-pH-wOO" id="jK8-qV-xdr"/>
                 <outlet property="itemDistanceLabel" destination="ZWL-TF-jQf" id="Ade-dq-doD"/>

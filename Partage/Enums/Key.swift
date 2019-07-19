@@ -10,4 +10,6 @@ import Foundation
 
 enum Key: String {
   case pickerTextColor = "textColor"
+  case partageAPIKey = "PARTAGE-API-KEY"
+  case partageUserID = "partage-user-id"
 }

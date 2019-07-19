@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - Custom cell name
 enum CustomCell: String {
   case receiverCellIdentifier = "ReceiverTVC"
   case messageCellIdentifier = "MessageTVC"

@@ -28,8 +28,8 @@ extension UIButton {
 
 //MARK: - Opening display sign in sign up button design
 extension UIButton {
-  func signInSignUpDesign(title: ButtonName) {
-    self.setTitle(title.rawValue, for: .normal)
+  func signInSignUpDesign(title: String) {
+    self.setTitle(title, for: .normal)
     self.setTitleColor(.typoBlue, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
     

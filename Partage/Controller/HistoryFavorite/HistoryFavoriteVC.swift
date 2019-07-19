@@ -19,7 +19,7 @@ class HistoryFavoriteVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    setupLastUserHistoryOrFavoriteChoice()
+    checkIfAnUserIsConnected()
   }
   
   override func viewDidLoad() {
@@ -206,6 +206,18 @@ extension HistoryFavoriteVC {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToItemDetailsVC.rawValue {
+    }
+  }
+}
+
+//MARK: - Check if an user is connected, else send him to SignInVC
+extension HistoryFavoriteVC {
+  func checkIfAnUserIsConnected() {
+    guard UserDefaultsService.token != nil else {
+      showAlert(title: .restricted, message: .notConnected) { (true) in
+        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      }
+      return
     }
   }
 }
