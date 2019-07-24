@@ -289,7 +289,7 @@ extension SignUpVC {
       )
       resignAllResponder()
       triggerActivityIndicator(true)
-      UserRequest<CreateUser>(resourcePath: NetworkPath.saveUser.rawValue).save(user) { [weak self] result in
+      UserRequest<CreateUser>(resourcePath: NetworkPath.users.rawValue).save(user) { [weak self] result in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in

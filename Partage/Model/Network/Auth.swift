@@ -8,17 +8,18 @@
 
 import UIKit
 
-enum AuthResult {
-  case success
-  case failure
-}
-
 //MARK: - To handle user authentification
-class Auth {
+class Auth {}
+
+//MARK: - Logout Method
+extension Auth {
   func logout() {
     UserDefaultsService.token = nil
   }
-  
+}
+
+//MARK: - Login method
+extension Auth {
   func login(email: String, password: String, completion: @escaping (AuthResult) -> Void) {
     let path = NetworkPath.login.rawValue
     guard let url = URL(string: path) else {

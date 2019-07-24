@@ -28,6 +28,12 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet var staticLabels: [UILabel]!
   
   var donatedItem: DonatedItem!
+  var receiversOnItem: Int?
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    countUserReceiver()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -67,7 +73,7 @@ extension ItemSelectedVC {
       }
       return
     }
-    
+
   }
   
   //MARK: Receive this donation button action
@@ -78,7 +84,7 @@ extension ItemSelectedVC {
       }
       return
     }
-    
+    userReceivesDonatedItem()
   }
 }
 
@@ -199,19 +205,19 @@ extension ItemSelectedVC {
 
 //MARK: - Populate donated item info
 extension ItemSelectedVC {
-  func setupVCInfofrom(_ donatorItem: DonatedItem) {
-    let isoDateString = donatorItem.pickUpDateTime
+  func setupVCInfofrom(_ donorItem: DonatedItem) {
+    let isoDateString = donorItem.pickUpDateTime
     let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
-
-    itemTypeLabel.text = donatorItem.selectedType
-    itemNameLabel.text = donatorItem.name
+    
+    itemTypeLabel.text = donorItem.selectedType
+    itemNameLabel.text = donorItem.name
     dateLabel.text = date
     timeLabel.text = time
-    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItem.latitude, longitude: donatorItem.longitude)
-    itemDescriptionTextView.text = donatorItem.description
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItem.latitude, longitude: donorItem.longitude)
+    itemDescriptionTextView.text = donorItem.description
   }
 }
 
@@ -223,6 +229,78 @@ extension ItemSelectedVC {
       destinationVC.donatorItemLatitude = donatedItem.latitude
       destinationVC.donatorItemLongitude = donatedItem.longitude
       destinationVC.buttonName = .openMapApp
+    }
+  }
+}
+
+//MARK: - Count number of user that have selected a donated item
+extension ItemSelectedVC {
+  func countUserReceiver() {
+    DonatedItemRequest(donatedItemID: donatedItem.id!).populateUserReceiver { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loadItemError, completion: { (true) in
+            self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          })
+        }
+      case .success(let users):
+          self.receiversOnItem = users.count
+      }
+    }
+  }
+}
+
+//MARK: - Set the user as the receiver to the selected donated item
+extension ItemSelectedVC {
+  func userReceivesDonatedItem() {
+    guard let countReceivers = receiversOnItem else { return }
+    guard let donatedItemID = donatedItem.id else { return }
+    countUserReceiver()
+    if countReceivers < 1 {
+      showAlert(title: .confirmSelection, message: .confirmSelection, buttonName: .confirm) { (true) in
+        self.updateDonatedItemToIsPicked()
+        DonatedItemRequest(donatedItemID: donatedItemID).linkUserReceiver(UserDefaultsService.userID!) { [weak self] (result) in
+          switch result {
+          case .failure:
+            DispatchQueue.main.async { [weak self] in
+              self?.showAlert(title: .error, message: .loadItemError, completion: { (true) in
+                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+              })
+            }
+          case .success:
+            DispatchQueue.main.async { [weak self] in
+              self?.showAlert(title: .donatedItemSelected, message: .donatedItemSelected, completion: { (true) in
+                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+              })
+            }
+          }
+        }
+      }
+    }
+    else {
+      self.showAlert(title: .donatedItemUnselectable, message: .itemSelected) { (true) in
+        self.navigationController?.popViewController(animated: true)
+      }
+    }
+  }
+}
+
+//MARK: - Update isPicked to true on donatedItem
+extension ItemSelectedVC {
+  func updateDonatedItemToIsPicked() {
+    var updatedDonatedItem = donatedItem
+    updatedDonatedItem?.isPicked = true
+    guard let donatedItemID = donatedItem.id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem!) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .saveItemError)
+        }
+      case .success(let donatedItem):
+        updatedDonatedItem = donatedItem
+      }
     }
   }
 }

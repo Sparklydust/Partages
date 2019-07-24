@@ -9,12 +9,12 @@
 import UIKit
 import CoreLocation
 
-//MARK: - Protocol to send item address data from MapViewVC to DonatorVC
+//MARK: - Protocol to send item address data from MapViewVC to DonorVC
 protocol CanReceiveItemAddressDelegate {
   func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String)
 }
 
-//MARK: - Protocol to send images data from ItemImagesVC to DonatorVC
+//MARK: - Protocol to send images data from ItemImagesVC to DonorVC
 protocol CanReceiveItemImagesDelegate {
   func imagesReceived(image: [UIImage])
 }

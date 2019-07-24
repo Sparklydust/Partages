@@ -115,7 +115,6 @@ extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToReceiverVC.rawValue {
       let destinationVC = segue.destination as! ReceiverVC
-      
       destinationVC.donatedItems = donatedItems
     }
   }
@@ -138,7 +137,7 @@ extension SharingVC {
   }
 }
 
-//MARK: - Fetch donors item from database and perform segue to ReceiverVC
+//MARK: - Fetch all donors items from database and perform segue to ReceiverVC
 extension SharingVC {
   func fetchDonorsItemsFromDatabase() {
     triggerActivityIndicator(true)
@@ -163,7 +162,7 @@ extension SharingVC {
 extension SharingVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
-    UserRequest<User>(resourcePath: NetworkPath.saveUser.rawValue, userID: UserDefaultsService.userID!).get { [weak self] (result) in
+    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).get { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in

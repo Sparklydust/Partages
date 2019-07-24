@@ -48,4 +48,8 @@ enum AlertMessage: String {
   case signUpError = "Cet email est enregistrer dans notre base de donnée."
   case saveItemError = "Il y a eu un problème pour sauvegarder votre don."
   case loadItemError = "Il y a eu un problème pour télécharger les dons."
+  case userDeleted = "Confirmez-vous la supression totale de votre compte?"
+  case itemSelected = "Cette donation a déjà été sélectionnée. N'hésitez pas à en sélectionner une autre."
+  case donatedItemSelected = "Vous avez bien sélectionner ce don. Merci d'être présent au rendez-vous. N'hésitez pas à contacter le donateur pour de plus amples informations."
+  case confirmSelection = "Êtes-vous certain de vouloir recevoir don?"
 }

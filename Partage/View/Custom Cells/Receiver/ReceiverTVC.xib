@@ -223,7 +223,7 @@
                 <outletCollection property="staticLabels" destination="ZWr-Vw-hLJ" collectionClass="NSMutableArray" id="aNK-lp-5c5"/>
                 <outletCollection property="staticLabels" destination="BAw-9Z-LBT" collectionClass="NSMutableArray" id="fgd-2c-GUc"/>
             </connections>
-            <point key="canvasLocation" x="166.66666666666669" y="220.64732142857142"/>
+            <point key="canvasLocation" x="166.66666666666669" y="220.3125"/>
         </tableViewCell>
     </objects>
     <resources>

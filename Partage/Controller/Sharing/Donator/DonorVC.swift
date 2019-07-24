@@ -1,5 +1,5 @@
 //
-//  DonatorVC.swift
+//  DonorVC.swift
 //  Partage
 //
 //  Created by Roland Lariotte on 10/06/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DonatorVC: UIViewController {
+class DonorVC: UIViewController {
   
   @IBOutlet weak var itemTypePickerView: UIPickerView!
   @IBOutlet weak var itemDatePicker: UIDatePicker!
@@ -58,7 +58,7 @@ class DonatorVC: UIViewController {
 }
 
 //MARK: - Buttons actions
-extension DonatorVC {
+extension DonorVC {
   //MARK: Add item image button action
   @IBAction func addItemImageButtonAction(_ sender: Any) {
     dismissKeyboard()
@@ -89,7 +89,7 @@ extension DonatorVC {
 }
 
 //MARK: - Main setup
-extension DonatorVC {
+extension DonorVC {
   //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
@@ -123,7 +123,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup item type picker view design data
-extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
     itemTypePickerView.backgroundColor = .iceBackground
   }
@@ -150,7 +150,7 @@ extension DonatorVC: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 //MARK: - Setup date picker design
-extension DonatorVC {
+extension DonorVC {
   func setupDatePicker() {
     itemDatePicker.backgroundColor = .iceBackground
     itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.rawValue)
@@ -158,7 +158,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup item name text field design
-extension DonatorVC {
+extension DonorVC {
   func setupItemNameTextField() {
     itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
     itemNameTextField.setupMainBackgroundColor()
@@ -166,21 +166,21 @@ extension DonatorVC {
 }
 
 //MARK: - Setup item text field placeholder
-extension DonatorVC {
+extension DonorVC {
   func setupItemNameTextFieldPlaceholder() {
     itemNameTextField.setupPlaceholderDesign(title: .enterYourDonationName, color: .middleBlue)
   }
 }
 
 //MARK: - Setup underline view design
-extension DonatorVC {
+extension DonorVC {
   func setupUnderlineView() {
     underlineView.backgroundColor = .mainBlue
   }
 }
 
 //MARK: - Setup item description background view design
-extension DonatorVC {
+extension DonorVC {
   func setupItemDescriptionBackgroundView() {
     itemDescriptionBackgroundView.backgroundColor = .iceBackground
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
@@ -190,7 +190,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup map kit view design
-extension DonatorVC {
+extension DonorVC {
   func setupMapView() {
     mapView.layer.cornerRadius = 10
     mapView.isHidden = true
@@ -206,7 +206,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup reset and make donation button design
-extension DonatorVC {
+extension DonorVC {
   func setupResetAndDonateButton() {
     resetButton.commonDesign(title: .reset)
     makeDonationButton.commonDesign(title: .makeADonation)
@@ -214,21 +214,21 @@ extension DonatorVC {
 }
 
 //MARK: - Setup item image design
-extension DonatorVC {
+extension DonorVC {
   func setupItemImage() {
     itemImage.layer.cornerRadius = 3
   }
 }
 
 //MARK: - Setup navigation controller design
-extension DonatorVC {
+extension DonorVC {
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
 }
 
 //MARK: - Setup item name text field design and actions
-extension DonatorVC: UITextFieldDelegate {
+extension DonorVC: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
     actionsAreEnable(false)
   }
@@ -244,7 +244,7 @@ extension DonatorVC: UITextFieldDelegate {
 }
 
 //MARK: - Setup item description text view design with a placeholder and actions
-extension DonatorVC: UITextViewDelegate {
+extension DonorVC: UITextViewDelegate {
   func setupItemDescriptionTextViewPlacehoder() {
     itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
   }
@@ -267,7 +267,7 @@ extension DonatorVC: UITextViewDelegate {
 }
 
 //MARK: - Setup Tap gesture recognizer to dismiss keyboard
-extension DonatorVC {
+extension DonorVC {
   func hideKeyboardOnTapGesture() {
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardOnTap))
     view.addGestureRecognizer(tap)
@@ -279,7 +279,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup swipe gesture to dismiss keyboard
-extension DonatorVC {
+extension DonorVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     dismissKeyboard()
   }
@@ -296,7 +296,7 @@ extension DonatorVC {
 }
 
 //MARK: - Setup all entries back to their origin state
-extension DonatorVC {
+extension DonorVC {
   func allEntriesBackToOriginStateWithAlert() {
     showAlert(title: .reset, message: .resetDonation, buttonName: .reset) { (true) in
       self.clearAllEntries()
@@ -318,7 +318,7 @@ extension DonatorVC {
 }
 
 //MARK: - Handler to show hidden text view
-extension DonatorVC {
+extension DonorVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
     center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -352,7 +352,7 @@ extension DonatorVC {
 }
 
 //MARK: - Enable or disable actions when tap gesture is enabled
-extension DonatorVC {
+extension DonorVC {
   func actionsAreEnable(_ action: Bool) {
     resetButton.isEnabled = action
     mapKitButton.isEnabled = action
@@ -362,7 +362,7 @@ extension DonatorVC {
 }
 
 //MARK: - Prepare for segue methods
-extension DonatorVC {
+extension DonorVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToItemImagesVC.rawValue {
       let secondVC = segue.destination as! ItemImagesVC
@@ -376,7 +376,7 @@ extension DonatorVC {
 }
 
 //MARK: - Item address receiver from MapViewVC
-extension DonatorVC: CanReceiveItemAddressDelegate {
+extension DonorVC: CanReceiveItemAddressDelegate {
   func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String) {
     address = Address(
       latitude: coordinates.coordinate.latitude,
@@ -393,7 +393,7 @@ extension DonatorVC: CanReceiveItemAddressDelegate {
 }
 
 //MARK: - Item images receiver from ItemImagesVC
-extension DonatorVC: CanReceiveItemImagesDelegate {
+extension DonorVC: CanReceiveItemImagesDelegate {
   func imagesReceived(image: [UIImage]) {
     images = image
     itemImage.image = image[0]
@@ -401,7 +401,7 @@ extension DonatorVC: CanReceiveItemImagesDelegate {
 }
 
 //MARK: - Unwind to VCs methods
-extension DonatorVC {
+extension DonorVC {
   func unwindToSharingVC() {
     self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
@@ -412,12 +412,13 @@ extension DonatorVC {
 }
 
 //MARK: - Creation of the donator item and saving it into database if all fields are filled
-extension DonatorVC {
+extension DonorVC {
   func createDonatorItemAndSaveItIntoDatabase() {
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
     
     let donatedItem = DonatedItem(
+      isPicked: false,
       selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
       name: itemNameTextField.text!,
       pickUpDateTime: dateAndTime,
@@ -429,7 +430,7 @@ extension DonatorVC {
     case donatedItem.selectedType == DonorItemType.selectItem.rawValue:
       showAlert(title: .emptyCase, message: .noItemTypeSelected)
       break
-    case donatedItem.name == "":
+    case donatedItem.name.isEmpty:
       showAlert(title: .emptyCase, message: .noItemName)
       break
 //    case donatorItem.image == [UIImage]():
@@ -438,7 +439,7 @@ extension DonatorVC {
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
-    case donatedItem.latitude == .zero:
+    case donatedItem.latitude == .zero && donatedItem.longitude == .zero:
       showAlert(title: .emptyCase, message: .noMeetingPoint)
       break
     case donatedItem.description == StaticLabel.enterItemDescription.rawValue || donatedItem.description == "":
@@ -447,7 +448,7 @@ extension DonatorVC {
     default:
       showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        ResourceRequest<DonatedItem>(resourcePath: "donatedItems").save(donatedItem, completion: { [weak self] (result) in
+        ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).save(donatedItem, completion: { [weak self] (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in

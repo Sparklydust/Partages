@@ -29,4 +29,8 @@ enum AlertTitle: String {
   case emailError = "Email invalide"
   case passwordError = "Mot de passe invalide"
   case loginError = "Erreur d'authentification"
+  case userDeleted = "Effacer compte"
+  case donatedItemUnselectable = "Don inaccessible"
+  case donatedItemSelected = "Don à votre disposition"
+  case confirmSelection = "Confirmer sélection"
 }

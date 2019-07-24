@@ -13,11 +13,13 @@ class ReceiverVC: UIViewController {
   @IBOutlet weak var receiverTableView: UITableView!
   
   var donatedItems = [DonatedItem]()
+  var itemsNotPicked = [DonatedItem]()
   var oneDonatedItem: DonatedItem?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
+    itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
   }
   
   override func viewDidLoad() {
@@ -93,7 +95,7 @@ extension ReceiverVC {
 //MARK: - Setup ReceiverVC table view and its action when a cell is clicked
 extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return donatedItems.count
+    return itemsNotPicked.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,20 +114,22 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
 extension ReceiverVC {
   func setupDonatorItemFromSelectedCell(at indexPath: IndexPath) {
     oneDonatedItem = DonatedItem(
-      selectedType: donatedItems[indexPath.row].selectedType,
-      name: donatedItems[indexPath.row].name,
-      pickUpDateTime: donatedItems[indexPath.row].pickUpDateTime,
-      description: donatedItems[indexPath.row].description,
-      latitude: donatedItems[indexPath.row].latitude,
-      longitude: donatedItems[indexPath.row].longitude
+      isPicked: itemsNotPicked[indexPath.row].isPicked,
+      selectedType: itemsNotPicked[indexPath.row].selectedType,
+      name: itemsNotPicked[indexPath.row].name,
+      pickUpDateTime: itemsNotPicked[indexPath.row].pickUpDateTime,
+      description: itemsNotPicked[indexPath.row].description,
+      latitude: itemsNotPicked[indexPath.row].latitude,
+      longitude: itemsNotPicked[indexPath.row].longitude
     )
+    oneDonatedItem?.id = itemsNotPicked[indexPath.row].id
   }
 }
 
-//MARK: - Populate cells with donators Items from database
+//MARK: - Populate cells with donators Items from database that is not picked by receiver
 extension ReceiverVC {
   func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
-    let donorItem = donatedItems[indexPath.row]
+    let donorItem = itemsNotPicked[indexPath.row]
     
     let isoDateString = donorItem.pickUpDateTime
     let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)

@@ -11,6 +11,9 @@ import Foundation
 enum NetworkPath: String {
   case mainPath = "http://localhost:8080/api/"
   case login = "http://localhost:8080/api/users/login"
-  case saveUser = "users/"
+  case users = "users/"
+  case deleteUser = "users/delete/"
   case donatedItems = "donatedItems/"
+  case receivedItems = "/receivedItems"
+  case userReceiver = "userReceiver"
 }

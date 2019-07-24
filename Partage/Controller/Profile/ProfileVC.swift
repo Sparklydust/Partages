@@ -45,8 +45,7 @@ class ProfileVC: UIViewController {
 //MARK: - Buttons actions
 extension ProfileVC {
   //MARK: Edit profile button action
-  @IBAction func editProfileButtonAction(_ sender: Any) {
-  }
+  @IBAction func editProfileButtonAction(_ sender: Any) {}
   
   //MARK: Edit profile picture button action
   @IBAction func editProfilePictureButtonAction(_ sender: Any) {
@@ -71,6 +70,7 @@ extension ProfileVC {
   
   //MARK: Delete profile button action
   @IBAction func deleteProfileButtonAction(_ sender: Any) {
+    deleteUserFromTheDatabase()
   }
 }
 
@@ -195,7 +195,7 @@ extension ProfileVC {
 extension ProfileVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
-    UserRequest<User>(resourcePath: NetworkPath.saveUser.rawValue, userID: UserDefaultsService.userID!).get { [weak self] (result) in
+    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).get { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -206,6 +206,19 @@ extension ProfileVC {
           self?.user = user
         }
       }
+    }
+  }
+}
+
+//MARK: - Delete user account method
+extension ProfileVC {
+  func deleteUserFromTheDatabase() {
+    guard UserDefaultsService.userID != nil else { return }
+    showAlert(title: .userDeleted, message: .userDeleted, buttonName: .confirm) { (true) in
+      UserRequest<User>(resourcePath: .deleteUser, userID: UserDefaultsService.userID!).delete()
+      self.deleteAllLabels()
+      self.deleteUserFromUserDefaults()
+      self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
     }
   }
 }

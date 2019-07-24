@@ -17,9 +17,9 @@ struct UserRequest<ResourceType> where ResourceType: Codable {
     self.resourceURL = resourceURL.appendingPathComponent(resourcePath)
   }
   
-  init(resourcePath: String, userID: String) {
+  init(resourcePath: NetworkPath, userID: String) {
     guard let resourceURL = URL(string: baseURL) else { fatalError() }
-    self.resourceURL = resourceURL.appendingPathComponent(resourcePath + userID)
+    self.resourceURL = resourceURL.appendingPathComponent(resourcePath.rawValue + userID)
   }
 }
 
@@ -40,7 +40,8 @@ extension UserRequest {
         completion(.success(resourceToSave))
       }
       dataTask.resume()
-    } catch {
+    }
+    catch {
       completion(.failure)
     }
   }
@@ -48,7 +49,7 @@ extension UserRequest {
 
 //MARK: - Retrieve one user with his userID number
 extension UserRequest {
-  func get(completion: @escaping (DonatedItemUserRequestResult) -> Void) {
+  func get(completion: @escaping (UserRequestResult) -> Void) {
     let urlRequest = URLRequest(url: resourceURL)
     let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
       guard let jsonData = data else {
@@ -59,10 +60,22 @@ extension UserRequest {
         let decoder = JSONDecoder()
         let user = try decoder.decode(User.self, from: jsonData)
         completion(.success(user))
-      } catch {
+      }
+      catch {
         completion(.failure)
       }
     }
+    dataTask.resume()
+  }
+}
+
+//MARK: - Delete a user and all related items in cascade
+extension UserRequest {
+  func delete() {
+    var urlRequest = URLRequest(url: resourceURL)
+    urlRequest.httpMethod = "DELETE"
+    urlRequest.addValue("Bearer \(UserDefaultsService.token!)", forHTTPHeaderField: "Authorization")
+    let dataTask = URLSession.shared.dataTask(with: urlRequest)
     dataTask.resume()
   }
 }

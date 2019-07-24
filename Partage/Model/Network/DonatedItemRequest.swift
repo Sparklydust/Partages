@@ -8,17 +8,7 @@
 
 import Foundation
 
-enum DonatedItemUserRequestResult {
-  case success(User)
-  case failure
-}
-
-enum CategoryAddResult {
-  case success
-  case failure
-}
-
-struct AcronymRequest {
+struct DonatedItemRequest {
   let resource: URL
   
   init(donatedItemID: Int) {
@@ -28,8 +18,11 @@ struct AcronymRequest {
     }
     self.resource = resourceURL
   }
-  
-  func getUser(completion: @escaping (DonatedItemUserRequestResult) -> Void) {
+}
+
+//MARK: - Get user attached to the donated item
+extension DonatedItemRequest {
+  func getUser(completion: @escaping (UserRequestResult) -> Void) {
     let url = resource.appendingPathComponent("user")
     let dataTask = URLSession.shared.dataTask(with: url) { data, _, _ in
       guard let jsonData = data else {
@@ -46,7 +39,10 @@ struct AcronymRequest {
     }
     dataTask.resume()
   }
-  
+}
+
+//MARK: - Update changes of a donated item
+extension DonatedItemRequest {
   func update(with updateData: DonatedItem, completion: @escaping (SaveResult<DonatedItem>) -> Void) {
     do {
       guard let token = UserDefaultsService.token else {
@@ -82,7 +78,10 @@ struct AcronymRequest {
       completion(.failure)
     }
   }
-  
+}
+
+//MARK: - Delete a donated item
+extension DonatedItemRequest {
   func delete() {
     guard let token = UserDefaultsService.token else {
       Auth().logout()
@@ -92,6 +91,58 @@ struct AcronymRequest {
     urlRequest.httpMethod = "DELETE"
     urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     let dataTask = URLSession.shared.dataTask(with: urlRequest)
+    dataTask.resume()
+  }
+}
+
+//MARK: - Create a sibling relationship between a donated item and an user receiver
+extension DonatedItemRequest {
+  func linkUserReceiver(_ receiverID: String, completion: @escaping (AuthResult) -> Void) {
+    guard let token = UserDefaultsService.token else {
+      Auth().logout()
+      return
+    }
+    let url = resource.appendingPathComponent(NetworkPath.userReceiver.rawValue).appendingPathComponent("\(receiverID)")
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = "POST"
+    urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data , response, _ in
+      guard let httpResponse = response as? HTTPURLResponse,
+        httpResponse.statusCode == 201  else {
+          completion(.failure)
+          return
+      }
+      completion(.success)
+    }
+    dataTask.resume()
+  }
+}
+
+//MARK: - Populate the user Receiver from an item
+extension DonatedItemRequest {
+  func populateUserReceiver(completion: @escaping (GetResourcesRequest<User>) -> Void) {
+    guard let token = UserDefaultsService.token else {
+      Auth().logout()
+      return
+    }
+    let url = resource.appendingPathComponent(NetworkPath.userReceiver.rawValue)
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = "GET"
+    urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
+      guard let jsonData = data else {
+        completion(.failure)
+        return
+      }
+
+      do {
+        let decoder = JSONDecoder()
+        let users = try decoder.decode([User].self, from: jsonData)
+        completion(.success(users))
+      } catch {
+        completion(.failure)
+      }
+    }
     dataTask.resume()
   }
 }
