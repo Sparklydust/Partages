@@ -20,15 +20,15 @@ class ReceiverVC: UIViewController {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
     itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
+    DispatchQueue.main.async {
+      self.receiverTableView.reloadData()
+    }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
-    DispatchQueue.main.async {
-      self.receiverTableView.reloadData()
-    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -101,6 +101,7 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.receiverCellIdentifier.rawValue, for: indexPath) as! ReceiverTVC
     populateDonatorsItems(into: cell, at: indexPath)
+    checkIfAnUserFavoritedItem(into: cell, at: indexPath)
     return cell
   }
   
@@ -132,7 +133,7 @@ extension ReceiverVC {
     let donorItem = itemsNotPicked[indexPath.row]
     
     let isoDateString = donorItem.pickUpDateTime
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
@@ -142,6 +143,7 @@ extension ReceiverVC {
     cell.dateLabel.text = date
     cell.timeLabel.text = time
     cell.addMeetingPointOnMap(latitude: donorItem.latitude, longitude: donorItem.longitude)
+    
   }
 }
 
@@ -150,5 +152,28 @@ extension ReceiverVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let destinationVC = segue.destination as? ItemSelectedVC else { return }
     destinationVC.donatedItem = oneDonatedItem
+  }
+}
+
+//MARK: - Check if an user favorited the donated item
+extension ReceiverVC {
+  func checkIfAnUserFavoritedItem(into cell: ReceiverTVC, at indexPath: IndexPath) {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let donatedItemID = donatedItems[indexPath.row].id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).populateUserThatFavoritedItem { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let users):
+        DispatchQueue.main.async {
+          for user in users {
+            guard user.id?.uuidString == UserDefaultsService.userID  else { return }
+            cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+          }
+        }
+      }
+    }
   }
 }

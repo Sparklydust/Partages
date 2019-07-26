@@ -48,6 +48,7 @@ extension ReceiverTVC {
     setupMapView()
     setupItemImage()
     setupOutletsCollectionsOrder()
+    setupFavoriteButton()
   }
 }
 
@@ -56,6 +57,14 @@ extension ReceiverTVC {
   func setupMainContentView() {
     contentView.setupMainBackgroundColor()
     squareBackgroundView.setupMainBackgroundColor()
+  }
+}
+
+//MARK: - Setup favorite button
+extension ReceiverTVC {
+  func setupFavoriteButton() {
+    favoriteButton.isEnabled = false
+    favoriteButton.adjustsImageWhenDisabled = false
   }
 }
 

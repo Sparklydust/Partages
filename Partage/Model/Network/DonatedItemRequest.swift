@@ -95,14 +95,14 @@ extension DonatedItemRequest {
   }
 }
 
-//MARK: - Create a sibling relationship between a donated item and an user receiver
+//MARK: - Create a sibling relationship between a donated item and an user that favorites it
 extension DonatedItemRequest {
-  func linkUserReceiver(_ receiverID: String, completion: @escaping (AuthResult) -> Void) {
+  func linkUserToItemFavorited(_ receiverID: String, completion: @escaping (AuthResult) -> Void) {
     guard let token = UserDefaultsService.token else {
       Auth().logout()
       return
     }
-    let url = resource.appendingPathComponent(NetworkPath.userReceiver.rawValue).appendingPathComponent("\(receiverID)")
+    let url = resource.appendingPathComponent(NetworkPath.favoritedByUser.rawValue).appendingPathComponent("\(receiverID)")
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = "POST"
     urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -118,14 +118,14 @@ extension DonatedItemRequest {
   }
 }
 
-//MARK: - Populate the user Receiver from an item
+//MARK: - Populate the user from an item favorited
 extension DonatedItemRequest {
-  func populateUserReceiver(completion: @escaping (GetResourcesRequest<User>) -> Void) {
+  func populateUserThatFavoritedItem(completion: @escaping (GetResourcesRequest<User>) -> Void) {
     guard let token = UserDefaultsService.token else {
       Auth().logout()
       return
     }
-    let url = resource.appendingPathComponent(NetworkPath.userReceiver.rawValue)
+    let url = resource.appendingPathComponent(NetworkPath.favoritedByUser.rawValue)
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = "GET"
     urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -134,7 +134,7 @@ extension DonatedItemRequest {
         completion(.failure)
         return
       }
-
+      
       do {
         let decoder = JSONDecoder()
         let users = try decoder.decode([User].self, from: jsonData)
@@ -142,6 +142,29 @@ extension DonatedItemRequest {
       } catch {
         completion(.failure)
       }
+    }
+    dataTask.resume()
+  }
+}
+
+//MARK: - Delete a link between an user and his favorited item
+extension DonatedItemRequest {
+  func deleteLinkBetweenUserAndItemFavorited(_ receiverID: String, completion: @escaping (AuthResult) -> Void) {
+    guard let token = UserDefaultsService.token else {
+      Auth().logout()
+      return
+    }
+    let url = resource.appendingPathComponent(NetworkPath.favoritedByUser.rawValue).appendingPathComponent("\(receiverID)")
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = "DELETE"
+    urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data , response, _ in
+      guard let httpResponse = response as? HTTPURLResponse,
+        httpResponse.statusCode == 204  else {
+          completion(.failure)
+          return
+      }
+      completion(.success)
     }
     dataTask.resume()
   }

@@ -18,10 +18,16 @@ class SharingVC: UIViewController {
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
   var donatedItems = [DonatedItem]()
-  var user: User?
+  var user: User? {
+    didSet {
+      guard let firstName = user?.firstName else { return }
+      let helloUser = ButtonName.afterSignedIn.rawValue + firstName
+      signInSignUpButton.setTitle(helloUser , for: .normal)
+    }
+  }
   
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
+    super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
     triggerActivityIndicator(false)
     populateSignInSignUpButtonDesign()
@@ -125,9 +131,7 @@ extension SharingVC {
   func populateSignInSignUpButtonDesign() {
     if UserDefaultsService.token != nil {
       fetchUserFromTheDatabase()
-      let hello = ButtonName.afterSignedIn.rawValue
-      signInSignUpButton.signInSignUpDesign(title: hello)
-      signInSignUpButton.setTitle(hello , for: .normal)
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.rawValue)
       signInSignUpButton.isEnabled = false
     }
     else {
@@ -146,6 +150,7 @@ extension SharingVC {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
+          self?.triggerActivityIndicator(false)
         }
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in

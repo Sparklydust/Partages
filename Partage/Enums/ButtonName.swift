@@ -32,7 +32,7 @@ enum ButtonName: String {
   case history = "Historique"
   case favorite = "Favoris"
   case signInSignUp = "se connecter / s'inscrire"
-  case afterSignedIn = "Bonjour"
+  case afterSignedIn = "Bonjour "
   case donationMade = "Merci pour votre don"
   case edit = "Edit"
   case done = "Done"

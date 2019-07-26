@@ -29,16 +29,22 @@ class ItemSelectedVC: UIViewController {
   
   var donatedItem: DonatedItem!
   var receiversOnItem: Int?
+  var isFavorited = false
   
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    countUserReceiver()
+    super.viewWillAppear(animated)
+    wasRecipeFavorited()
+    updateFavoriteButton(isFavorited)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupVCInfofrom(donatedItem)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
   }
 }
 
@@ -52,7 +58,6 @@ extension ItemSelectedVC {
       }
       return
     }
-    
   }
   
   //MARK: Item image button action
@@ -84,7 +89,6 @@ extension ItemSelectedVC {
       }
       return
     }
-    userReceivesDonatedItem()
   }
 }
 
@@ -207,7 +211,7 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupVCInfofrom(_ donorItem: DonatedItem) {
     let isoDateString = donorItem.pickUpDateTime
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
@@ -233,59 +237,6 @@ extension ItemSelectedVC {
   }
 }
 
-//MARK: - Count number of user that have selected a donated item
-extension ItemSelectedVC {
-  func countUserReceiver() {
-    DonatedItemRequest(donatedItemID: donatedItem.id!).populateUserReceiver { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loadItemError, completion: { (true) in
-            self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
-          })
-        }
-      case .success(let users):
-          self.receiversOnItem = users.count
-      }
-    }
-  }
-}
-
-//MARK: - Set the user as the receiver to the selected donated item
-extension ItemSelectedVC {
-  func userReceivesDonatedItem() {
-    guard let countReceivers = receiversOnItem else { return }
-    guard let donatedItemID = donatedItem.id else { return }
-    countUserReceiver()
-    if countReceivers < 1 {
-      showAlert(title: .confirmSelection, message: .confirmSelection, buttonName: .confirm) { (true) in
-        self.updateDonatedItemToIsPicked()
-        DonatedItemRequest(donatedItemID: donatedItemID).linkUserReceiver(UserDefaultsService.userID!) { [weak self] (result) in
-          switch result {
-          case .failure:
-            DispatchQueue.main.async { [weak self] in
-              self?.showAlert(title: .error, message: .loadItemError, completion: { (true) in
-                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
-              })
-            }
-          case .success:
-            DispatchQueue.main.async { [weak self] in
-              self?.showAlert(title: .donatedItemSelected, message: .donatedItemSelected, completion: { (true) in
-                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
-              })
-            }
-          }
-        }
-      }
-    }
-    else {
-      self.showAlert(title: .donatedItemUnselectable, message: .itemSelected) { (true) in
-        self.navigationController?.popViewController(animated: true)
-      }
-    }
-  }
-}
-
 //MARK: - Update isPicked to true on donatedItem
 extension ItemSelectedVC {
   func updateDonatedItemToIsPicked() {
@@ -300,6 +251,100 @@ extension ItemSelectedVC {
         }
       case .success(let donatedItem):
         updatedDonatedItem = donatedItem
+      }
+    }
+  }
+}
+
+//MARK: - Setup favorite button when an user favorites an donated item or not
+extension ItemSelectedVC {
+  func updateFavoriteButton(_ isFavorite: Bool) {
+    favoriteButton.addTarget(self, action: #selector(favoriteDidTap), for: .touchUpInside)
+    if isFavorite {
+      favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+    }
+    else {
+      favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
+    }
+  }
+  
+  // Actions for when the heart is clicked
+  @objc func favoriteDidTap() {
+    isFavorited = !isFavorited
+    if self.isFavorited {
+      saveDonatedItemToUserFavorite()
+    }
+    else {
+      deleteDonatedItemFromUserFavorite()
+    }
+    updateFavoriteButton(isFavorited)
+  }
+  
+  //Check if the donated item was once favorited and saved
+  func wasRecipeFavorited() {
+    isFavorited = false
+    checkIfAnUserFavoritedItem()
+  }
+}
+
+//MARK: - Save item to user favorite
+extension ItemSelectedVC {
+  func saveDonatedItemToUserFavorite() {
+    guard UserDefaultsService.userID != nil else {
+      showAlert(title: .loginError, message: .notConnected)
+      return
+    }
+    guard let donatedItemID = donatedItem.id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).linkUserToItemFavorited(UserDefaultsService.userID!) { [weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        return
+      }
+    }
+  }
+}
+
+//MARK: - Check if an user favorited the donated item
+extension ItemSelectedVC {
+  func checkIfAnUserFavoritedItem() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let donatedItemID = donatedItem.id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).populateUserThatFavoritedItem { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let users):
+        DispatchQueue.main.async { [weak self] in
+          for user in users {
+            guard user.id?.uuidString == UserDefaultsService.userID  else { return }
+            self?.isFavorited = true
+            self?.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+          }
+        }
+      }
+    }
+  }
+}
+
+//MARK: - An user delete his favorited item
+extension ItemSelectedVC {
+  func deleteDonatedItemFromUserFavorite() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let donatedItemID = donatedItem.id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).deleteLinkBetweenUserAndItemFavorited(UserDefaultsService.userID!) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        return
       }
     }
   }

@@ -12,4 +12,6 @@ import UIKit
 enum ImageName: String {
   case noImage
   case noPicture
+  case emptyHeart
+  case fullHeart
 }

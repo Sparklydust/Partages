@@ -16,14 +16,15 @@ class HistoryFavoriteVC: UIViewController {
   @IBOutlet weak var favoriteButton: UIButton!
   
   var itemsHistory = [DonatedItem]()
-  var favoriteItems = [DonatedItem]()
+  var itemsFavorited = [DonatedItem]()
   var isHistoryButtonClicked = true
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
+    setupLastUserHistoryOrFavoriteChoice()
     checkIfAnUserIsConnected()
     fetchUserItemsHitstory()
-    HistoryFavoriteTableView.reloadData()
+    fetchFavoritedItems()
   }
   
   override func viewDidLoad() {
@@ -65,10 +66,16 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      
-      
-      
-      tableView.deleteRows(at: [indexPath], with: .automatic)
+      if isHistoryButtonClicked {
+        
+        itemsHistory.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
+      else {
+        deleteDonatedItemFrom(itemsFavorited[indexPath.row])
+        itemsFavorited.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+      }
     }
   }
   
@@ -108,21 +115,19 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
       return itemsHistory.count
     }
     else {
-      return favoriteItems.count
+      return itemsFavorited.count
     }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if isHistoryButtonClicked {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.historyCellIdentifier.rawValue, for: indexPath) as! HistoryTVC
-      
       populateItemsHistory(into: cell, at: indexPath)
-      
       return cell
     }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.favoriteCellIdentifier.rawValue, for: indexPath) as! FavoriteTVC
-      
+      populateItemsFavorited(into: cell, at: indexPath)
       return cell
     }
   }
@@ -239,6 +244,8 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user items history
 extension HistoryFavoriteVC {
   func fetchUserItemsHitstory() {
+    guard UserDefaultsService.userID != nil else { return }
+    itemsHistory = [DonatedItem]()
     fetchAllDonatedItemsHistory()
     fetchAllReceivedItemsHistory()
   }
@@ -247,11 +254,9 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user's donated items
 extension HistoryFavoriteVC {
   func fetchAllDonatedItemsHistory() {
-    guard UserDefaultsService.userID != nil else { return }
     guard let userID = UserDefaultsService.userID else { return }
     
     let resourcePath = NetworkPath.users.rawValue + userID + "/\(NetworkPath.donatedItems.rawValue)"
-    
     ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
       switch result {
       case .failure:
@@ -262,6 +267,7 @@ extension HistoryFavoriteVC {
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.itemsHistory.append(contentsOf: donatedItems)
+          self.HistoryFavoriteTableView.reloadData()
         }
       }
     }
@@ -271,24 +277,23 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user's received items
 extension HistoryFavoriteVC {
   func fetchAllReceivedItemsHistory() {
-    guard UserDefaultsService.userID != nil else { return }
-    guard let userID = UserDefaultsService.userID else { return }
-    
-    let resourcePath = NetworkPath.users.rawValue + userID + NetworkPath.receivedItems.rawValue
-    
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loadItemError)
-        }
-      case .success(let receivedItems):
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.itemsHistory.append(contentsOf: receivedItems)
-        }
-      }
-    }
+//    guard let userID = UserDefaultsService.userID else { return }
+//
+//    let resourcePath = NetworkPath.users.rawValue + userID + NetworkPath.receivedItems.rawValue
+//    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
+//      switch result {
+//      case .failure:
+//        DispatchQueue.main.async { [weak self] in
+//          self?.showAlert(title: .error, message: .loadItemError)
+//        }
+//      case .success(let receivedItems):
+//        DispatchQueue.main.async { [weak self] in
+//          guard let self = self else { return }
+//          self.itemsHistory.append(contentsOf: receivedItems)
+//          self.HistoryFavoriteTableView.reloadData()
+//        }
+//      }
+//    }
   }
 }
 
@@ -300,13 +305,75 @@ extension HistoryFavoriteVC {
     let donorItem = itemsHistory[indexPath.row]
 
     let isoDateString = donorItem.pickUpDateTime
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     guard let date = dateAndTime?.asString(style: .short) else { return }
     guard let time = dateAndTime?.asString() else { return }
     
-    cell.topLabel.text = "\(StaticItemDetail.the.rawValue): \(date)  \(StaticItemDetail.at.rawValue): \(time)"
+    cell.topLabel.text = "\(date)  \(StaticItemDetail.at.rawValue): \(time)"
     cell.middleLabel.text = donorItem.selectedType
     cell.bottomLabel.text = donorItem.name
+  }
+}
+
+//MARK: - Fetch all user favorited items
+extension HistoryFavoriteVC {
+  func fetchFavoritedItems() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let userID = UserDefaultsService.userID else { return }
+    itemsFavorited = [DonatedItem]()
+    
+    let resourcePath = "\(NetworkPath.users.rawValue)\(userID)/\(NetworkPath.itemsFavorited.rawValue)"
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loadItemError)
+        }
+      case .success(let itemsFavorited):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.itemsFavorited.append(contentsOf: itemsFavorited)
+          self.HistoryFavoriteTableView.reloadData()
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Populate cells with favorited Items from database sorted by date
+extension HistoryFavoriteVC {
+  func populateItemsFavorited(into cell: FavoriteTVC, at indexPath: IndexPath) {
+    itemsFavorited.sort(by: { $0.pickUpDateTime > $1.pickUpDateTime})
+    let donorItem = itemsFavorited[indexPath.row]
+    
+    let isoDateString = donorItem.pickUpDateTime
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    guard let date = dateAndTime?.asString(style: .short) else { return }
+    guard let time = dateAndTime?.asString() else { return }
+    
+    cell.topLabel.text = "\(date)  \(StaticItemDetail.at.rawValue): \(time)"
+    cell.middleLabel.text = donorItem.selectedType
+    cell.bottomLabel.text = donorItem.name
+  }
+}
+
+//MARK: - An user delete his favorited item
+extension HistoryFavoriteVC {
+  func deleteDonatedItemFrom(_ itemsFavorited: DonatedItem) {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let donatedItemID = itemsFavorited.id else { return }
+    
+    DonatedItemRequest(donatedItemID: donatedItemID).deleteLinkBetweenUserAndItemFavorited(UserDefaultsService.userID!) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        return
+      }
+    }
   }
 }

@@ -14,6 +14,7 @@ enum NetworkPath: String {
   case users = "users/"
   case deleteUser = "users/delete/"
   case donatedItems = "donatedItems/"
-  case receivedItems = "/receivedItems"
-  case userReceiver = "userReceiver"
+  case favoritedItemID = "/favoritedItemID"
+  case favoritedByUser = "favoritedByUser"
+  case itemsFavorited = "itemsFavorited"
 }

@@ -23,4 +23,5 @@ enum StaticLabel: String {
   case meetingPoint = "Lieu de rendez-vous"
   case userPosition = "Votre position"
   case emptyString = ""
+  case dateOccurence = "\\.\\d+"
 }
