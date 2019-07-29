@@ -17,4 +17,6 @@ enum NetworkPath: String {
   case favoritedItemID = "/favoritedItemID"
   case favoritedByUser = "favoritedByUser"
   case itemsFavorited = "itemsFavorited"
+  case isReceivedBy = "isReceivedBy/"
+  case isPickedUp = "isPickedUp"
 }

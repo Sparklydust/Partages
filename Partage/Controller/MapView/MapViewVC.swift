@@ -21,8 +21,8 @@ class MapViewVC: UIViewController {
   let aroundUserLocation: CLLocationDistance = 500
   
   var delegate: CanReceiveItemAddressDelegate?
-  var donatorItemLatitude: Double = .zero
-  var donatorItemLongitude: Double = .zero
+  var donorItemLatitude: Double = .zero
+  var donorItemLongitude: Double = .zero
   var buttonName: ButtonName = .saveMeetingPoint
   
   override func viewDidLoad() {
@@ -30,9 +30,9 @@ class MapViewVC: UIViewController {
     setupMainDesign()
     setupAllDelegates()
     
-    guard donatorItemLatitude != .zero else { return }
-    LocationHandler.shared.getDirectionFromUserToPinnedLocation(on: mapView, latitude: donatorItemLatitude, longitude: donatorItemLongitude, vc: self)
-    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donatorItemLatitude, longitude: donatorItemLongitude)
+    guard donorItemLatitude != .zero && donorItemLongitude != .zero else { return }
+    LocationHandler.shared.getDirectionFromUserToPinnedLocation(on: mapView, latitude: donorItemLatitude, longitude: donorItemLongitude, vc: self)
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItemLatitude, longitude: donorItemLongitude)
   }
 }
 
@@ -41,7 +41,7 @@ extension MapViewVC {
   //MARK: Save location button action
   @IBAction func saveLocationButtonAction(_ sender: Any) {
     guard buttonName == .saveMeetingPoint else {
-      LocationHandler.shared.openAppleMapApp(itemLatitude: donatorItemLatitude, itemLongitude: donatorItemLongitude)
+      LocationHandler.shared.openAppleMapApp(itemLatitude: donorItemLatitude, itemLongitude: donorItemLongitude)
       return
     }
     LocationHandler.shared.convertLatLonToAnAdress(vc: self)

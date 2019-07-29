@@ -17,6 +17,7 @@ class HistoryFavoriteVC: UIViewController {
   
   var itemsHistory = [DonatedItem]()
   var itemsFavorited = [DonatedItem]()
+  var oneDonatedItem: DonatedItem?
   var isHistoryButtonClicked = true
   
   override func viewWillAppear(_ animated: Bool) {
@@ -66,16 +67,7 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      if isHistoryButtonClicked {
-        
-        itemsHistory.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-      }
-      else {
-        deleteDonatedItemFrom(itemsFavorited[indexPath.row])
-        itemsFavorited.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-      }
+      removeUserChosenItem(at: indexPath, on: tableView)
     }
   }
   
@@ -130,6 +122,11 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
       populateItemsFavorited(into: cell, at: indexPath)
       return cell
     }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    setupItemFromSelectedCell(at: indexPath)
+    performSegue(withIdentifier: Segue.goesToItemDetailsVC.rawValue, sender: oneDonatedItem)
   }
 }
 
@@ -217,18 +214,6 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Perform history or favorite segue when row is selected
-extension HistoryFavoriteVC {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: Segue.goesToItemDetailsVC.rawValue, sender: self)
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToItemDetailsVC.rawValue {
-    }
-  }
-}
-
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension HistoryFavoriteVC {
   func checkIfAnUserIsConnected() {
@@ -255,7 +240,7 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func fetchAllDonatedItemsHistory() {
     guard let userID = UserDefaultsService.userID else { return }
-    
+
     let resourcePath = NetworkPath.users.rawValue + userID + "/\(NetworkPath.donatedItems.rawValue)"
     ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
       switch result {
@@ -267,7 +252,6 @@ extension HistoryFavoriteVC {
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.itemsHistory.append(contentsOf: donatedItems)
-          self.HistoryFavoriteTableView.reloadData()
         }
       }
     }
@@ -277,23 +261,24 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user's received items
 extension HistoryFavoriteVC {
   func fetchAllReceivedItemsHistory() {
-//    guard let userID = UserDefaultsService.userID else { return }
-//
-//    let resourcePath = NetworkPath.users.rawValue + userID + NetworkPath.receivedItems.rawValue
-//    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
-//      switch result {
-//      case .failure:
-//        DispatchQueue.main.async { [weak self] in
-//          self?.showAlert(title: .error, message: .loadItemError)
-//        }
-//      case .success(let receivedItems):
-//        DispatchQueue.main.async { [weak self] in
-//          guard let self = self else { return }
-//          self.itemsHistory.append(contentsOf: receivedItems)
-//          self.HistoryFavoriteTableView.reloadData()
-//        }
-//      }
-//    }
+    guard let userID = UserDefaultsService.userID else { return }
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + NetworkPath.isReceivedBy.rawValue + userID
+    
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAllWithToken { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loadItemError)
+        }
+      case .success(let receivedItems):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.itemsHistory.append(contentsOf: receivedItems)
+          self.HistoryFavoriteTableView.reloadData()
+        }
+      }
+    }
   }
 }
 
@@ -375,5 +360,100 @@ extension HistoryFavoriteVC {
         return
       }
     }
+  }
+}
+
+//MARK: - Setup one donator item from selected cell to send to ItemSelectedVC
+extension HistoryFavoriteVC {
+  func setupItemFromSelectedCell(at indexPath: IndexPath) {
+    if isHistoryButtonClicked {
+      oneDonatedItem = DonatedItem(
+        isPicked: itemsHistory[indexPath.row].isPicked,
+        selectedType: itemsHistory[indexPath.row].selectedType,
+        name: itemsHistory[indexPath.row].name,
+        pickUpDateTime: itemsHistory[indexPath.row].pickUpDateTime,
+        description: itemsHistory[indexPath.row].description,
+        latitude: itemsHistory[indexPath.row].latitude,
+        longitude: itemsHistory[indexPath.row].longitude,
+        receiverID: itemsHistory[indexPath.row].receiverID
+      )
+      oneDonatedItem?.id = itemsHistory[indexPath.row].id
+    }
+    else {
+      oneDonatedItem = DonatedItem(
+        isPicked: itemsFavorited[indexPath.row].isPicked,
+        selectedType: itemsFavorited[indexPath.row].selectedType,
+        name: itemsFavorited[indexPath.row].name,
+        pickUpDateTime: itemsFavorited[indexPath.row].pickUpDateTime,
+        description: itemsFavorited[indexPath.row].description,
+        latitude: itemsFavorited[indexPath.row].latitude,
+        longitude: itemsFavorited[indexPath.row].longitude,
+        receiverID: itemsFavorited[indexPath.row].receiverID
+      )
+      oneDonatedItem?.id = itemsFavorited[indexPath.row].id
+    }
+  }
+}
+
+//MARK: - Prepare for segue
+extension HistoryFavoriteVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let destinationVC = segue.destination as? ItemDetailsVC else { return }
+    destinationVC.itemDetails = oneDonatedItem
+    guard !isHistoryButtonClicked else { return }
+  }
+}
+
+//MARK: - Manage deletion action from donor or receveiver in history or favorite side
+extension HistoryFavoriteVC {
+  func removeUserChosenItem(at indexPath: IndexPath, on tableView: UITableView) {
+    if isHistoryButtonClicked {
+      if itemsHistory[indexPath.row].receiverID == UserDefaultsService.userID {
+        receiverUnselect(itemsHistory[indexPath.row])
+      }
+      else {
+        donorDeleteOffTheDatabase(itemsHistory[indexPath.row])
+      }
+      itemsHistory.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    else {
+      deleteDonatedItemFrom(itemsFavorited[indexPath.row])
+      itemsFavorited.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+  }
+}
+
+//MARK: - Receiver remove the item from history and unselect it
+extension HistoryFavoriteVC {
+  func receiverUnselect(_ donatedItem: DonatedItem?) {
+    guard let donatedItemID = donatedItem!.id else { return }
+    guard var updatedDonatedItem = donatedItem else { return }
+    
+    updatedDonatedItem.receiverID = StaticLabel.emptyString.rawValue
+    updatedDonatedItem.isPicked = false
+    
+    DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let pickedUpItem):
+        DispatchQueue.main.async { [weak self] in
+          updatedDonatedItem = pickedUpItem
+          self?.showAlert(title: .success, message: .confirmDonatedItemRemoved)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Donor remove the item from history and from the database
+extension HistoryFavoriteVC {
+  func donorDeleteOffTheDatabase(_ donatedItem: DonatedItem) {
+    guard let donatedItemID = donatedItem.id else { return }
+    DonatedItemRequest(donatedItemID: donatedItemID).delete()
   }
 }

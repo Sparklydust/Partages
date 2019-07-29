@@ -134,12 +134,12 @@ extension DonatedItemRequest {
         completion(.failure)
         return
       }
-      
       do {
         let decoder = JSONDecoder()
         let users = try decoder.decode([User].self, from: jsonData)
         completion(.success(users))
-      } catch {
+      }
+      catch {
         completion(.failure)
       }
     }

@@ -26,7 +26,7 @@ enum ButtonName: String {
   case message = "Message"
   case receiveThisDonation = "Recevoir ce don"
   case messageToReceiver = "Message au receveur"
-  case messageToDonator = "Message au donateur"
+  case messageToDonor = "Message au donateur"
   case modify = "Modifier"
   case addToCalendar = "Ajouter au calendrier"
   case history = "Historique"

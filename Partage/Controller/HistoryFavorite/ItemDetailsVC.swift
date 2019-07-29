@@ -12,13 +12,13 @@ import MapKit
 class ItemDetailsVC: UIViewController {
   
   @IBOutlet weak var itemNameLabel: UILabel!
-  @IBOutlet weak var donatorReceiverNameLabel: UILabel!
+  @IBOutlet weak var donorReceiverNameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionBackgroudView: UIView!
   @IBOutlet weak var itemDescriptionTextView: UITextView!
-  @IBOutlet weak var donatorReceiverProfileImage: UIImageView!
+  @IBOutlet weak var donorReceiverProfileImage: UIImageView!
   @IBOutlet weak var itemImage: UIImageView!
   @IBOutlet weak var addToCalendarButton: UIButton!
   @IBOutlet weak var messageToButton: UIButton!
@@ -28,14 +28,34 @@ class ItemDetailsVC: UIViewController {
   
   @IBOutlet var staticItemDetailsLabels: [UILabel]!
   
+  var itemDetails: DonatedItem!
+  var calendarTitle = String()
+  var address = String()
+  
+  var receiver: User? {
+    didSet {
+      populateReceiver()
+    }
+  }
+  
+  var donor: User? {
+    didSet {
+      populateDonor()
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
+    setupVCInfoFrom(itemDetails)
+    getTheMeetingPointAddress(latitude: itemDetails.latitude, longitude: itemDetails.longitude)
+    populateIfNeededDonorOrReceiverInfo()
+    fetchDonorIDFromSelectedItem()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(true)
-    donatorReceiverProfileImage.roundedWithMainBlueBorder()
+    donorReceiverProfileImage.roundedWithMainBlueBorder()
   }
 }
 
@@ -51,8 +71,13 @@ extension ItemDetailsVC {
     performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
   }
   
-  //MARK: Add to calendar or modify button action
+  //MARK: Add to calendar button action
   @IBAction func addToCalendarButtonAction(_ sender: Any) {
+    guard itemDetails.isPicked else {
+      userPicksUpADonatedItem()
+      return
+    }
+    addItemToCalendar()
   }
   
   //MARK: Message to receiver or donator button action
@@ -92,7 +117,7 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func setupMainLabels() {
     itemNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
-    donatorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    donorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
   }
@@ -108,7 +133,7 @@ extension ItemDetailsVC {
 //MARK: - Setup all static Labels design
 extension ItemDetailsVC {
   func setupStaticItemDetailsLabels() {
-    staticLabelReceiverOrDonator()
+    staticLabelReceiverOrDonor()
     staticItemDetailsLabels[1].text = StaticItemDetail.the.rawValue
     staticItemDetailsLabels[2].text = StaticItemDetail.at.rawValue
     staticItemDetailsLabels[3].text = StaticItemDetail.address.rawValue
@@ -171,22 +196,247 @@ extension ItemDetailsVC {
 //MARK: - Setup add to Calendar and message button design
 extension ItemDetailsVC {
   func setupAddToCalendarAndMessageButton() {
-    buttonsNameReceiverOrDonator()
+    buttonsNameReceiverOrDonor()
+    addToCalendarButtonDesignIfItemPickedOrNot()
+  }
+  
+  func addToCalendarButtonDesignIfItemPickedOrNot() {
+    guard itemDetails.isPicked else {
+      addToCalendarButton.commonDesign(title: .receiveThisDonation)
+      return
+    }
     addToCalendarButton.commonDesign(title: .addToCalendar)
   }
 }
 
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
-  func buttonsNameReceiverOrDonator() {
-    messageToButton.commonDesign(title: .messageToReceiver)
+  func buttonsNameReceiverOrDonor() {
+    guard UserDefaultsService.userID == itemDetails.receiverID || !itemDetails.isPicked else {
+      messageToButton.commonDesign(title: .messageToReceiver)
+      return
+    }
+    messageToButton.commonDesign(title: .messageToDonor)
   }
   
-  func staticLabelReceiverOrDonator() {
-    staticItemDetailsLabels[0].text = StaticItemDetail.receiveDonation.rawValue
+  func staticLabelReceiverOrDonor() {
+    guard UserDefaultsService.userID == itemDetails.receiverID else {
+      staticItemDetailsLabels[0].text = StaticItemDetail.receiveDonation.rawValue
+      return
+    }
+    staticItemDetailsLabels[0].text = StaticItemDetail.giveDonation.rawValue
   }
   
-  func mapKitReceiverOrDonator() {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goesToMapViewVC.rawValue {
+      let destinationVC = segue.destination as! MapViewVC
+      destinationVC.donorItemLatitude = itemDetails.latitude
+      destinationVC.donorItemLongitude = itemDetails.longitude
+      destinationVC.buttonName = .openMapApp
+    }
+  }
+}
+
+//MARK: - Populate donated item info
+extension ItemDetailsVC {
+  func setupVCInfoFrom(_ donorItem: DonatedItem) {
+    let isoDateString = donorItem.pickUpDateTime
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    let date = dateAndTime?.asString(style: .short)
+    let time = dateAndTime?.asString()
     
+    itemNameLabel.text = donorItem.name
+    dateLabel.text = date
+    timeLabel.text = time
+    LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItem.latitude, longitude: donorItem.longitude)
+    itemDescriptionTextView.text = donorItem.description
+  }
+}
+
+//MARK: - Get the meeting point address for add to calendar button
+extension ItemDetailsVC {
+  func getTheMeetingPointAddress(latitude: Double , longitude: Double) {
+    let meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
+    
+    let geocoder = CLGeocoder()
+    geocoder.reverseGeocodeLocation(meetingPoint) { [weak self]
+      (placemarks, error) in
+      guard self != nil else { return }
+      if let _ =  error {
+        self?.showAlert(title: .error, message: .locationIssue)
+        return
+      }
+      guard let placemark = placemarks?.first else {
+        self?.showAlert(title: .error, message: .locationIssue)
+        return
+      }
+      let streetNumber = placemark.subThoroughfare ?? ""
+      let streetName = placemark.thoroughfare ?? ""
+      let postalCode = placemark.postalCode ?? ""
+      let cityName = placemark.locality ?? ""
+      let countryName = placemark.country ?? ""
+      
+      DispatchQueue.main.async { [weak self] in
+        self?.address = "\(streetNumber) \(streetName) \(postalCode) \(cityName), \(countryName.uppercased())"
+      }
+    }
+  }
+}
+
+//MARK: - Method to add the detailed item in the user calendar as en event
+extension ItemDetailsVC {
+  func addItemToCalendar() {
+    let isoDateString = itemDetails.pickUpDateTime
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    if UserDefaultsService.userID == itemDetails.receiverID {
+      calendarTitle = StaticLabel.receiverCalendarTitle.rawValue + itemDetails.name
+    }
+    else {
+      calendarTitle = StaticLabel.donorCalendarTitle.rawValue + itemDetails.name
+    }
+    guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
+    EventHandler.shared.addEventToCalendar(vc: self, title: calendarTitle, location: address, startDate: dateAndTime, notes: itemDetails.description)
+  }
+}
+
+//MARK: - Populate or not the donor or receiver name and profile picture
+extension ItemDetailsVC {
+  func populateIfNeededDonorOrReceiverInfo() {
+    guard itemDetails.isPicked else {
+      hideUserInfoAndStaticLabel()
+      showEditButton()
+      return
+    }
+    if UserDefaultsService.userID != itemDetails.receiverID {
+      fetchReceiverFromTheDatabase()
+    }
+    else {
+      hideEditButton()
+      fetchDonorIDFromSelectedItem()
+      fetchDonorFromTheDatabase()
+    }
+  }
+  
+  func populateReceiver() {
+    guard let firstName = receiver?.firstName else { return }
+    donorReceiverNameLabel.text = firstName
+  }
+  
+  func populateDonor() {
+    guard let firstName = donor?.firstName else { return }
+    donorReceiverNameLabel.text = firstName
+    guard donor?.id?.uuidString == UserDefaultsService.userID && !itemDetails.isPicked else { return }
+    addToCalendarButton.isHidden = true
+    messageToButton.isHidden = true
+  }
+}
+
+//MARK: - Show or hide edit button methods
+extension ItemDetailsVC {
+  func showEditButton() {
+    editButton.title = ButtonName.edit.rawValue
+    editButton.isEnabled = true
+  }
+  
+  func hideEditButton() {
+    editButton.title = StaticLabel.emptyString.rawValue
+    editButton.isEnabled = false
+  }
+}
+
+//MARK: - Hide user info and a specific static label when needed
+extension ItemDetailsVC {
+  func hideUserInfoAndStaticLabel() {
+    donorReceiverNameLabel.isHidden = true
+    donorReceiverProfileImage.isHidden = true
+    staticItemDetailsLabels[0].isHidden = true
+  }
+}
+
+//MARK: - Fetch the receiver or donor from the database to populate donorReceiverNameLabel and picture
+extension ItemDetailsVC {
+  func fetchReceiverFromTheDatabase() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let receiverID = itemDetails.receiverID else { return }
+    UserRequest<User>(resourcePath: .users, userID: receiverID).get { [weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loginError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.receiver = user
+        }
+      }
+    }
+  }
+  
+  func fetchDonorFromTheDatabase() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let donorID = donor?.id?.uuidString else { return }
+    UserRequest<User>(resourcePath: .users, userID: donorID).get { [weak self] (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loginError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.donor = user
+        }
+      }
+    }
+  }
+  
+  func fetchDonorIDFromSelectedItem() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let itemID = itemDetails.id else { return }
+    DonatedItemRequest(donatedItemID: itemID).getUser { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.donor = user
+        }
+      }
+    }
+  }
+}
+
+//MARK: - User pick up the donation method and save it in the database
+extension ItemDetailsVC {
+  func userPicksUpADonatedItem() {
+    guard let donatedItemID = itemDetails.id else { return }
+    guard let receiverID = UserDefaultsService.userID else { return }
+    guard var updatedDonatedItem = itemDetails else { return }
+    guard !updatedDonatedItem.isPicked else {
+      showAlert(title: .donatedItemUnselectable, message: .itemAlreadySelected)
+      return
+    }
+    updatedDonatedItem.receiverID = receiverID
+    updatedDonatedItem.isPicked = true
+    
+    showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
+      DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+        switch result {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+          }
+        case .success(let pickedUpItem):
+          DispatchQueue.main.async { [weak self] in
+            updatedDonatedItem = pickedUpItem
+            self?.showAlert(title: .success, message: .donatedItemSelected, completion: { (true) in
+              self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+            })
+          }
+        }
+      }
+    })
   }
 }

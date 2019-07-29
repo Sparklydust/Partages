@@ -372,8 +372,8 @@
                     <connections>
                         <outlet property="addToCalendarButton" destination="cHl-rP-eeo" id="L8a-HB-QyZ"/>
                         <outlet property="dateLabel" destination="6FY-Y2-gZa" id="RrA-4i-pDp"/>
-                        <outlet property="donatorReceiverNameLabel" destination="21D-p1-lcz" id="Zc5-sd-uPH"/>
-                        <outlet property="donatorReceiverProfileImage" destination="bsv-Ul-dIc" id="tR0-wE-6MM"/>
+                        <outlet property="donorReceiverNameLabel" destination="21D-p1-lcz" id="Zc5-sd-uPH"/>
+                        <outlet property="donorReceiverProfileImage" destination="bsv-Ul-dIc" id="tR0-wE-6MM"/>
                         <outlet property="editButton" destination="k5o-Fp-MXB" id="Teb-Np-cie"/>
                         <outlet property="itemDescriptionBackgroudView" destination="hdV-AE-B3d" id="0q9-nj-2xJ"/>
                         <outlet property="itemDescriptionTextView" destination="Dke-Un-nut" id="Ngy-Z8-t7v"/>
@@ -391,9 +391,11 @@
                         <segue destination="49U-bg-lyr" kind="show" identifier="goToMapViewVC" id="p7s-Jw-mZv"/>
                         <segue destination="feA-tQ-uke" kind="show" identifier="goToItemImagesVC" id="cun-cM-8Ev"/>
                         <segue destination="DXn-1t-jOw" kind="show" identifier="goToDonatorVC" id="P3D-ys-vj3"/>
+                        <segue destination="lV3-bq-cQ4" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="6U9-hu-PpC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyh-31-vuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lV3-bq-cQ4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="243" y="-796"/>
         </scene>

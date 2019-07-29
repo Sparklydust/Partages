@@ -77,7 +77,7 @@ extension LocationHandler {
       let countryName = placemark.country ?? ""
       
       DispatchQueue.main.async {
-        // Sending the address and coordinates to Donator VC
+        // Sending the address and coordinates to Donor VC
         vc.delegate?.addressReceived(coordinates: coordinates!, streetNumber: streetNumber, streetName: streetName, postalCode: postalCode, cityName: cityName, countryName: countryName)
       }
     }

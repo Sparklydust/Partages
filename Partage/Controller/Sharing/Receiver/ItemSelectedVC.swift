@@ -28,7 +28,6 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet var staticLabels: [UILabel]!
   
   var donatedItem: DonatedItem!
-  var receiversOnItem: Int?
   var isFavorited = false
   
   override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +39,7 @@ class ItemSelectedVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    setupVCInfofrom(donatedItem)
+    setupVCInfoFrom(donatedItem)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -89,6 +88,7 @@ extension ItemSelectedVC {
       }
       return
     }
+    userPicksUpADonatedItem()
   }
 }
 
@@ -188,7 +188,7 @@ extension ItemSelectedVC {
 //MARK: - Setup cancel and save buttons design
 extension ItemSelectedVC {
   func setupMessageAndReceiveButtons() {
-    messageToDonatorButton.commonDesign(title: .messageToDonator)
+    messageToDonatorButton.commonDesign(title: .messageToDonor)
     receiveDonationButton.commonDesign(title: .receiveThisDonation)
   }
 }
@@ -209,7 +209,7 @@ extension ItemSelectedVC {
 
 //MARK: - Populate donated item info
 extension ItemSelectedVC {
-  func setupVCInfofrom(_ donorItem: DonatedItem) {
+  func setupVCInfoFrom(_ donorItem: DonatedItem) {
     let isoDateString = donorItem.pickUpDateTime
     let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
@@ -230,28 +230,9 @@ extension ItemSelectedVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToMapViewVC.rawValue {
       let destinationVC = segue.destination as! MapViewVC
-      destinationVC.donatorItemLatitude = donatedItem.latitude
-      destinationVC.donatorItemLongitude = donatedItem.longitude
+      destinationVC.donorItemLatitude = donatedItem.latitude
+      destinationVC.donorItemLongitude = donatedItem.longitude
       destinationVC.buttonName = .openMapApp
-    }
-  }
-}
-
-//MARK: - Update isPicked to true on donatedItem
-extension ItemSelectedVC {
-  func updateDonatedItemToIsPicked() {
-    var updatedDonatedItem = donatedItem
-    updatedDonatedItem?.isPicked = true
-    guard let donatedItemID = donatedItem.id else { return }
-    DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem!) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .saveItemError)
-        }
-      case .success(let donatedItem):
-        updatedDonatedItem = donatedItem
-      }
     }
   }
 }
@@ -347,5 +328,38 @@ extension ItemSelectedVC {
         return
       }
     }
+  }
+}
+
+//MARK: - User pick up the donated item method and save it in the database
+extension ItemSelectedVC {
+  func userPicksUpADonatedItem() {
+    guard let donatedItemID = donatedItem.id else { return }
+    guard let receiverID = UserDefaultsService.userID else { return }
+    guard var updatedDonatedItem = donatedItem else { return }
+    guard !updatedDonatedItem.isPicked else {
+      showAlert(title: .donatedItemUnselectable, message: .itemAlreadySelected)
+      return
+    }
+    updatedDonatedItem.receiverID = receiverID
+    updatedDonatedItem.isPicked = true
+    
+    showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
+      DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+        switch result {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+          }
+        case .success(let pickedUpItem):
+          DispatchQueue.main.async { [weak self] in
+            updatedDonatedItem = pickedUpItem
+            self?.showAlert(title: .success, message: .donatedItemSelected, completion: { (true) in
+              self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+            })
+          }
+        }
+      }
+    })
   }
 }

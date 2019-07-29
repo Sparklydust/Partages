@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum GetResourcesRequest<ResourceType> {
-  case success([ResourceType])
-  case failure
-}
-
 struct ResourceRequest<ResourceType> where ResourceType: Codable {
   
   let baseURL = "http://localhost:8080/api/"
@@ -24,7 +19,10 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
     }
     self.resourceURL = resourceURL.appendingPathComponent(resourcePath)
   }
-  
+}
+
+//MARK: - Get all items with no token needed
+extension ResourceRequest {
   func getAll(completion: @escaping (GetResourcesRequest<ResourceType>) -> Void) {
     let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
       guard let jsonData = data else {
@@ -41,13 +39,13 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
     }
     dataTask.resume()
   }
-  
+}
+
+//MARK: - Save to database with token needed
+extension ResourceRequest {
   func save(_ resourceToSave: ResourceType, completion: @escaping (SaveResult<ResourceType>) -> Void) {
     do {
-      guard let token = UserDefaultsService.token else {
-        Auth().logout()
-        return
-      }
+      guard let token = UserDefaultsService.token else { return }
       var urlRequest = URLRequest(url: resourceURL)
       urlRequest.httpMethod = "POST"
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -69,13 +67,41 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
         do {
           let resource = try JSONDecoder().decode(ResourceType.self, from: jsonData)
           completion(.success(resource))
-        } catch {
+        }
+        catch {
           completion(.failure)
         }
       }
       dataTask.resume()
-    } catch {
+    }
+    catch {
       completion(.failure)
     }
+  }
+}
+
+//MARK: - Get all items with token needed
+extension ResourceRequest {
+  func getAllWithToken(completion: @escaping (GetResourcesRequest<ResourceType>) -> Void) {
+    guard let token = UserDefaultsService.token else { return }
+    var urlRequest = URLRequest(url: resourceURL)
+    urlRequest.httpMethod = "GET"
+    urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
+      guard let jsonData = data else {
+        completion(.failure)
+        return
+      }
+      do {
+        let decoder = JSONDecoder()
+        let resources = try decoder.decode([ResourceType].self, from: jsonData)
+        completion(.success(resources))
+      }
+      catch {
+        completion(.failure)
+      }
+    }
+    dataTask.resume()
   }
 }

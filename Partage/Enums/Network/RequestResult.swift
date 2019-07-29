@@ -19,3 +19,9 @@ enum DonatedItemRequestResult {
   case success(DonatedItem)
   case failure
 }
+
+//MARK: - Return the result of an array result
+enum GetResourcesRequest<ResourceType> {
+  case success([ResourceType])
+  case failure
+}

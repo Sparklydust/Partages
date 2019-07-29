@@ -24,4 +24,6 @@ enum StaticLabel: String {
   case userPosition = "Votre position"
   case emptyString = ""
   case dateOccurence = "\\.\\d+"
+  case receiverCalendarTitle = "Don à recevoir: "
+  case donorCalendarTitle = "Don à remettre: "
 }
