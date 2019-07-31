@@ -18,6 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Bgv-eq-M9H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
+                    </activityIndicatorView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="Gct-bd-Tih">
                         <rect key="frame" x="230" y="15" width="80" height="80"/>
                         <constraints>
@@ -79,21 +82,26 @@
                     <constraint firstAttribute="trailing" secondItem="4qv-CD-WgB" secondAttribute="trailing" constant="10" id="Vo2-e6-bmz">
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
+                    <constraint firstItem="Bgv-eq-M9H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cdk-q2-Ucm"/>
                     <constraint firstAttribute="trailing" secondItem="Gct-bd-Tih" secondAttribute="trailing" constant="10" id="dUD-ga-9sQ">
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
+                    <constraint firstItem="Bgv-eq-M9H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="i4f-pW-Lef"/>
                     <constraint firstItem="4qv-CD-WgB" firstAttribute="top" secondItem="Gct-bd-Tih" secondAttribute="bottom" constant="5" id="j9b-zI-kbA">
                         <variation key="heightClass=regular-widthClass=regular" constant="10"/>
                     </constraint>
                     <constraint firstItem="UQz-IL-V3K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="nPY-rz-IJC">
                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                     </constraint>
+                    <constraint firstAttribute="trailing" secondItem="Bgv-eq-M9H" secondAttribute="trailing" id="smK-Kt-jwJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Bgv-eq-M9H" secondAttribute="bottom" id="xLh-j9-wTr"/>
                     <constraint firstItem="Gct-bd-Tih" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ybz-25-KBM"/>
                     <constraint firstItem="Gct-bd-Tih" firstAttribute="centerY" secondItem="UQz-IL-V3K" secondAttribute="centerY" id="zyq-nX-E6c"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="Bgv-eq-M9H" id="GN1-68-Mc5"/>
                 <outlet property="bottomLabel" destination="RNv-57-zDo" id="omb-Tw-I52"/>
                 <outlet property="itemImage" destination="Gct-bd-Tih" id="1PJ-k7-Gnb"/>
                 <outlet property="middleLabel" destination="zjl-Kc-YfN" id="aoq-DF-oeW"/>
@@ -104,6 +112,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="noImage" width="40" height="40"/>
+        <image name="noImage" width="1080" height="1080"/>
     </resources>
 </document>

@@ -18,6 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="105.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nSu-d6-4tz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="105.5"/>
+                    </activityIndicatorView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="UQq-LP-cdS">
                         <rect key="frame" x="10" y="13" width="80" height="80"/>
                         <constraints>
@@ -77,13 +80,17 @@
                     <constraint firstItem="WPW-WZ-Tb3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="9h5-h1-x4O">
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
+                    <constraint firstItem="nSu-d6-4tz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Nof-nz-Zwr"/>
+                    <constraint firstAttribute="bottom" secondItem="nSu-d6-4tz" secondAttribute="bottom" id="Uyh-3i-Lwx"/>
                     <constraint firstItem="3AT-Kr-a9e" firstAttribute="centerY" secondItem="UQq-LP-cdS" secondAttribute="centerY" id="YS3-xG-2Vn"/>
                     <constraint firstAttribute="trailing" secondItem="3AT-Kr-a9e" secondAttribute="trailing" constant="20" id="aMT-mv-09Y">
                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                     </constraint>
+                    <constraint firstAttribute="trailing" secondItem="nSu-d6-4tz" secondAttribute="trailing" id="bkZ-ki-SeZ"/>
                     <constraint firstAttribute="trailing" secondItem="WPW-WZ-Tb3" secondAttribute="trailing" constant="10" id="iXx-0K-duA">
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
+                    <constraint firstItem="nSu-d6-4tz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ogj-GS-ABB"/>
                     <constraint firstItem="UQq-LP-cdS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="uOc-dC-2JP">
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
@@ -94,6 +101,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="nSu-d6-4tz" id="kdl-kx-pO5"/>
                 <outlet property="bottomLabel" destination="HcC-cc-SVJ" id="hIQ-4d-zrb"/>
                 <outlet property="itemImage" destination="UQq-LP-cdS" id="WHs-CO-yfs"/>
                 <outlet property="middleLabel" destination="VIy-U0-w4P" id="uS1-kU-n7x"/>
@@ -104,6 +112,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="noImage" width="40" height="40"/>
+        <image name="noImage" width="1080" height="1080"/>
     </resources>
 </document>

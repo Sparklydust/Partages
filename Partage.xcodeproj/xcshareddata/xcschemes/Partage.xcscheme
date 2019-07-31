@@ -29,6 +29,26 @@
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2A72B7F022F17FA100D8A2E1"
+               BuildableName = "PartageUITests.xctest"
+               BlueprintName = "PartageUITests"
+               ReferencedContainer = "container:Partage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2A72B7FE22F17FAF00D8A2E1"
+               BuildableName = "PartageTests.xctest"
+               BlueprintName = "PartageTests"
+               ReferencedContainer = "container:Partage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

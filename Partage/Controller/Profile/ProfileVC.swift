@@ -45,7 +45,9 @@ class ProfileVC: UIViewController {
 //MARK: - Buttons actions
 extension ProfileVC {
   //MARK: Edit profile button action
-  @IBAction func editProfileButtonAction(_ sender: Any) {}
+  @IBAction func editProfileButtonAction(_ sender: Any) {
+    performSegue(withIdentifier: Segue.goesToEditProfile.rawValue, sender: self)
+  }
   
   //MARK: Edit profile picture button action
   @IBAction func editProfilePictureButtonAction(_ sender: Any) {
@@ -149,7 +151,10 @@ extension ProfileVC {
 //MARK: - Open mail app to contact us
 extension ProfileVC: MFMailComposeViewControllerDelegate {
   func sendEmail() {
-    guard MFMailComposeViewController.canSendMail() else { return }
+    guard MFMailComposeViewController.canSendMail() else {
+      showAlert(title: .contactUs, message: .contactUs)
+      return
+    }
     let mail = MFMailComposeViewController()
     mail.mailComposeDelegate = self
     mail.setToRecipients([ContactUs.partageEmail.rawValue])
@@ -244,5 +249,14 @@ extension ProfileVC {
 extension ProfileVC {
   func updateUserProfile() {
     firstNameLabel.text = user?.firstName
+  }
+}
+
+extension ProfileVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goesToEditProfile.rawValue {
+      let destinationVC = segue.destination as! EditProfileVC
+      destinationVC.user = user
+    }
   }
 }

@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ygz-4A-PoC">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="33U-0i-Fxz">
                                 <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,8 +55,12 @@
                         <constraints>
                             <constraint firstItem="33U-0i-Fxz" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="C2A-RB-KDv"/>
                             <constraint firstItem="Iko-Xi-eoO" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="D2o-gC-FHf"/>
+                            <constraint firstItem="ygz-4A-PoC" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="Ddh-Sk-iFu"/>
                             <constraint firstItem="9n1-bt-e8e" firstAttribute="trailing" secondItem="33U-0i-Fxz" secondAttribute="trailing" id="Mkj-HS-Ind"/>
+                            <constraint firstItem="ygz-4A-PoC" firstAttribute="trailing" secondItem="9n1-bt-e8e" secondAttribute="trailing" id="R7l-xt-LHt"/>
                             <constraint firstItem="9n1-bt-e8e" firstAttribute="bottom" secondItem="33U-0i-Fxz" secondAttribute="bottom" id="ZSs-TS-Xgi"/>
+                            <constraint firstItem="9n1-bt-e8e" firstAttribute="bottom" secondItem="ygz-4A-PoC" secondAttribute="bottom" id="cb0-LS-5UZ"/>
+                            <constraint firstItem="ygz-4A-PoC" firstAttribute="top" secondItem="9n1-bt-e8e" secondAttribute="top" id="cpO-n6-rPw"/>
                             <constraint firstItem="Iko-Xi-eoO" firstAttribute="top" secondItem="9n1-bt-e8e" secondAttribute="top" id="lcb-Ed-5w9"/>
                             <constraint firstItem="33U-0i-Fxz" firstAttribute="top" secondItem="Iko-Xi-eoO" secondAttribute="bottom" constant="10" id="nlH-U7-awt">
                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
@@ -71,6 +78,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="HistoryFavoriteTableView" destination="33U-0i-Fxz" id="PP5-CC-Xi0"/>
+                        <outlet property="activityIndicator" destination="ygz-4A-PoC" id="qRD-Lh-GGm"/>
                         <outlet property="editButton" destination="xgs-pZ-j6N" id="E5u-xA-ylo"/>
                         <outlet property="favoriteButton" destination="r7i-ke-RLG" id="BFp-J4-QPE"/>
                         <outlet property="historyButton" destination="Puk-s8-dHr" id="iTm-O3-6Qj"/>

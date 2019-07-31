@@ -41,8 +41,10 @@ enum ButtonName: String {
   case reset = "Réinitialiser"
   case makeADonation = "Faire un don"
   case saveMeetingPoint = "Enregistrer lieu de rdv"
-  case setupMeetingPoint = "Cliquer ici pour ajouter le lieu de RDV"
+  case setupMeetingPoint = "Cliquez ici pour ajouter le lieu de RDV"
+  case changeMeetingPoint = "cliquez ici pour changer de lieu de RDV"
   case confirm = "Confirmer"
   case emptyString = ""
   case openMapApp = "Ouvrir dans Plans"
+  case modifyDonation = "Modifier le don"
 }

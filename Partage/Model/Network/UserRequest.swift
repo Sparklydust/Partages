@@ -79,3 +79,39 @@ extension UserRequest {
     dataTask.resume()
   }
 }
+
+//MARK: - Update changes of a donated item
+extension UserRequest {
+  func update(with updateData: User, completion: @escaping (SaveResult<User>) -> Void) {
+    do {
+      guard let token = UserDefaultsService.token else { return }
+      var urlRequest = URLRequest(url: resourceURL)
+      urlRequest.httpMethod = "PUT"
+      urlRequest.httpBody = try JSONEncoder().encode(updateData)
+      urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+      let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
+        guard let httpResponse = response as? HTTPURLResponse else {
+          completion(.failure)
+          return
+        }
+        guard httpResponse.statusCode == 200, let jsonData = data else {
+          if httpResponse.statusCode == 401 {
+            Auth().logout()
+          }
+          completion(.failure)
+          return
+        }
+        do {
+          let user = try JSONDecoder().decode(User.self, from: jsonData)
+          completion(.success(user))
+        } catch {
+          completion(.failure)
+        }
+      }
+      dataTask.resume()
+    } catch {
+      completion(.failure)
+    }
+  }
+}

@@ -14,6 +14,7 @@ class HistoryFavoriteVC: UIViewController {
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var historyButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var itemsHistory = [DonatedItem]()
   var itemsFavorited = [DonatedItem]()
@@ -204,6 +205,29 @@ extension HistoryFavoriteVC {
   }
 }
 
+//MARK: - Activity Indicator action and setup
+extension HistoryFavoriteVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .mainBlue
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
+  }
+}
+
 //MARK: - Track the user choice of cell between history and favorite
 extension HistoryFavoriteVC {
   func showHistoryCustomCell(_ bool: Bool) {
@@ -240,18 +264,20 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func fetchAllDonatedItemsHistory() {
     guard let userID = UserDefaultsService.userID else { return }
-
+    triggerActivityIndicator(true)
     let resourcePath = NetworkPath.users.rawValue + userID + "/\(NetworkPath.donatedItems.rawValue)"
     ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
+          self?.triggerActivityIndicator(false)
         }
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.itemsHistory.append(contentsOf: donatedItems)
+          self.triggerActivityIndicator(false)
         }
       }
     }
@@ -262,20 +288,21 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func fetchAllReceivedItemsHistory() {
     guard let userID = UserDefaultsService.userID else { return }
-    
     let resourcePath = NetworkPath.donatedItems.rawValue + NetworkPath.isReceivedBy.rawValue + userID
-    
+    triggerActivityIndicator(true)
     ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAllWithToken { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
+          self?.triggerActivityIndicator(false)
         }
       case .success(let receivedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.itemsHistory.append(contentsOf: receivedItems)
           self.HistoryFavoriteTableView.reloadData()
+          self.triggerActivityIndicator(false)
         }
       }
     }
@@ -296,8 +323,12 @@ extension HistoryFavoriteVC {
     guard let time = dateAndTime?.asString() else { return }
     
     cell.topLabel.text = "\(date)  \(StaticItemDetail.at.rawValue): \(time)"
-    cell.middleLabel.text = donorItem.selectedType
     cell.bottomLabel.text = donorItem.name
+    guard donorItem.isPicked else {
+      cell.middleLabel.text = StaticLabel.donationNotSelected.rawValue
+      return
+    }
+    cell.middleLabel.text = StaticLabel.donationIsSelected.rawValue
   }
 }
 
@@ -307,19 +338,21 @@ extension HistoryFavoriteVC {
     guard UserDefaultsService.userID != nil else { return }
     guard let userID = UserDefaultsService.userID else { return }
     itemsFavorited = [DonatedItem]()
-    
+    triggerActivityIndicator(true)
     let resourcePath = "\(NetworkPath.users.rawValue)\(userID)/\(NetworkPath.itemsFavorited.rawValue)"
     ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
+          self?.triggerActivityIndicator(false)
         }
       case .success(let itemsFavorited):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.itemsFavorited.append(contentsOf: itemsFavorited)
           self.HistoryFavoriteTableView.reloadData()
+          self.triggerActivityIndicator(false)
         }
       }
     }
@@ -339,8 +372,12 @@ extension HistoryFavoriteVC {
     guard let time = dateAndTime?.asString() else { return }
     
     cell.topLabel.text = "\(date)  \(StaticItemDetail.at.rawValue): \(time)"
-    cell.middleLabel.text = donorItem.selectedType
     cell.bottomLabel.text = donorItem.name
+    guard donorItem.isPicked else {
+      cell.middleLabel.text = StaticLabel.donationNotSelected.rawValue
+      return
+    }
+    cell.middleLabel.text = StaticLabel.donationIsSelected.rawValue
   }
 }
 
@@ -349,15 +386,19 @@ extension HistoryFavoriteVC {
   func deleteDonatedItemFrom(_ itemsFavorited: DonatedItem) {
     guard UserDefaultsService.userID != nil else { return }
     guard let donatedItemID = itemsFavorited.id else { return }
-    
+    triggerActivityIndicator(true)
     DonatedItemRequest(donatedItemID: donatedItemID).deleteLinkBetweenUserAndItemFavorited(UserDefaultsService.userID!) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
         }
       case .success:
-        return
+        DispatchQueue.main.async { [weak self] in
+          self?.triggerActivityIndicator(false)
+          return
+        }
       }
     }
   }
@@ -433,17 +474,19 @@ extension HistoryFavoriteVC {
     
     updatedDonatedItem.receiverID = StaticLabel.emptyString.rawValue
     updatedDonatedItem.isPicked = false
-    
+    triggerActivityIndicator(true)
     DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
         }
       case .success(let pickedUpItem):
         DispatchQueue.main.async { [weak self] in
           updatedDonatedItem = pickedUpItem
           self?.showAlert(title: .success, message: .confirmDonatedItemRemoved)
+          self?.triggerActivityIndicator(false)
         }
       }
     }
@@ -454,6 +497,8 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func donorDeleteOffTheDatabase(_ donatedItem: DonatedItem) {
     guard let donatedItemID = donatedItem.id else { return }
+    triggerActivityIndicator(true)
     DonatedItemRequest(donatedItemID: donatedItemID).delete()
+    triggerActivityIndicator(false)
   }
 }

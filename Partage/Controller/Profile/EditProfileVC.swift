@@ -22,10 +22,14 @@ class EditProfileVC: UIViewController {
   @IBOutlet var spaceBetweenViewsConstraints: [NSLayoutConstraint]!
   @IBOutlet var underlineViews: [UIView]!
   
+  var user: User?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     observeKeyboardNotification()
+    hidePasswordFields()
+    populateUserInfo()
   }
   
   deinit {
@@ -105,6 +109,18 @@ extension EditProfileVC {
   }
 }
 
+//MARK: - Setup to hide password modifcation text fields
+extension EditProfileVC {
+  func hidePasswordFields() {
+    oldPasswordTextField.isHidden = true
+    newPasswordTextField.isHidden = true
+    confirmPasswordTextField.isHidden = true
+    underlineViews[3].isHidden = true
+    underlineViews[4].isHidden = true
+    underlineViews[5].isHidden = true
+  }
+}
+
 //MARK: - Setup spaces between view on iPhoneSE
 extension EditProfileVC {
   func setupViewsSpacingForUIDevices() {
@@ -161,6 +177,13 @@ extension EditProfileVC {
   }
 }
 
+//MARK: - Populate user info from ProfileVC
+extension EditProfileVC {
+  func populateUserInfo() {
+    firstNameTextField.text = user?.firstName
+  }
+}
+
 //MARK: - All text field resign first responder method
 extension EditProfileVC {
   func resignTextFieldResponders() {
@@ -207,3 +230,22 @@ extension EditProfileVC {
     }
   }
 }
+
+//extension EditProfileVC {
+//  func updateUserProfile() {
+//    let userToUpdate = User(firstName: <#T##String#>)
+//    
+//    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).update(with: userToUpdate) { (success) in
+//      switch success {
+//      case .failure:
+//        DispatchQueue.main.async { [weak self] in
+//          self?.showAlert(title: .error, message: .networkRequestError)
+//        }
+//      case .success(let updatesUser):
+//        DispatchQueue.main.async { [weak self] in
+//          
+//        }
+//      }
+//    }
+//  }
+//}

@@ -234,6 +234,11 @@ extension ItemDetailsVC {
       destinationVC.donorItemLongitude = itemDetails.longitude
       destinationVC.buttonName = .openMapApp
     }
+    else if segue.identifier == Segue.goesToDonatorVC.rawValue {
+      let destinationVC = segue.destination as? DonorVC
+      destinationVC?.itemToEdit = itemDetails
+      destinationVC?.buttonName = .modifyDonation
+    }
   }
 }
 
@@ -362,9 +367,7 @@ extension ItemDetailsVC {
     UserRequest<User>(resourcePath: .users, userID: receiverID).get { [weak self] (result) in
       switch result {
       case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loginError)
-        }
+        return
       case .success(let user):
         DispatchQueue.main.async { [weak self] in
           self?.receiver = user

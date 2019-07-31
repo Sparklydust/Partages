@@ -14,6 +14,6 @@ enum StaticItemDetail: String {
   case receiveDonation = "recevra votre don:"
   case the = "le"
   case at = "à"
-  case address = "adresse:"
+  case address = "localisation"
   case type = "type:"
 }

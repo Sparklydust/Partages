@@ -423,7 +423,6 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" id="ru2-Is-uVu">
                             <connections>
                                 <action selector="editProfileButtonAction:" destination="VSA-tz-bYP" id="2MQ-50-e6Q"/>
-                                <segue destination="hxz-tZ-FBZ" kind="presentation" id="u57-70-YxL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -444,6 +443,7 @@
                         <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="k0p-go-eVK"/>
                         <segue destination="WB2-En-p39" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="wB6-5A-TFK"/>
                         <segue destination="wCe-Ot-49S" kind="presentation" identifier="goToSignInSignUpVC" id="HdU-fR-3b6"/>
+                        <segue destination="hxz-tZ-FBZ" kind="presentation" identifier="goToEditProfile" id="gnC-7G-s76"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJy-G0-1xI" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -25,3 +25,9 @@ enum GetResourcesRequest<ResourceType> {
   case success([ResourceType])
   case failure
 }
+
+//MARK: - Used to save user or donated item in the database
+enum SaveResult<ResourceType> {
+  case success(ResourceType)
+  case failure
+}

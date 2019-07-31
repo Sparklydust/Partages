@@ -152,15 +152,9 @@ extension ReceiverTVC {
 //MARK: - To add the meeting point shown on the map
 extension ReceiverTVC {
   func addMeetingPointOnMap(latitude: Double, longitude: Double) {
-    let annotation = MKPointAnnotation()
     let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    annotation.coordinate = locationCoordinates
-    mapView.removeAnnotations(mapView.annotations)
-    mapView.addAnnotation(annotation)
-    
-    let coordinate = locationCoordinates
-    let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-    let region = MKCoordinateRegion(center: coordinate, span: span)
+    let span = MKCoordinateSpan(latitudeDelta: 0.00085, longitudeDelta: 0.00099)
+    let region = MKCoordinateRegion(center: locationCoordinates, span: span)
     mapView.setRegion(region, animated: true)
   }
 }

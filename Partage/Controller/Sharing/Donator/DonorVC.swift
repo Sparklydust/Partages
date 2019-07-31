@@ -28,9 +28,15 @@ class DonorVC: UIViewController {
   
   var keyboardFrame: CGRect = .zero
   
-  var address: Address!
+  var address: Address?
   var images = [UIImage]()
   var pickupDateAndTime: Date!
+  
+  var itemToEdit: DonatedItem?
+  var latitudeToSet: Double?
+  var longitudeToSet: Double?
+  
+  var buttonName: ButtonName?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -43,11 +49,13 @@ class DonorVC: UIViewController {
     setupAllDelegates()
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
+    populateItemToEditFromItemDetailsVC()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(false)
     if self.isMovingFromParent {
+      guard self.navigationController?.viewControllers.previous is SharingVC else { return }
       navigationController?.setNavigationBarHidden(true, animated: true)
     }
   }
@@ -84,7 +92,11 @@ extension DonorVC {
       }
       return
     }
-    createDonatorItemAndSaveItIntoDatabase()
+    guard itemToEdit?.id == nil else {
+      updateDonatedItem()
+      return
+    }
+    createDonorItemAndSaveItIntoDatabase()
   }
 }
 
@@ -209,7 +221,7 @@ extension DonorVC {
 extension DonorVC {
   func setupResetAndDonateButton() {
     resetButton.commonDesign(title: .reset)
-    makeDonationButton.commonDesign(title: .makeADonation)
+    makeDonationButton.commonDesign(title: buttonName ?? .makeADonation)
   }
 }
 
@@ -411,21 +423,9 @@ extension DonorVC {
   }
 }
 
-//MARK: - Creation of the donator item and saving it into database if all fields are filled
+//MARK: - Mthod to check if all fields are filled when user makes or update his donation
 extension DonorVC {
-  func createDonatorItemAndSaveItIntoDatabase() {
-    pickupDateAndTime = itemDatePicker.date
-    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
-    
-    let donatedItem = DonatedItem(
-      isPicked: false,
-      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
-      name: itemNameTextField.text!,
-      pickUpDateTime: dateAndTime,
-      description: itemDescriptionTextView.text!,
-      latitude: address.latitude,
-      longitude: address.longitude
-    )
+  func checkAllFieldsAreFilledBeforeNetworking(_ donatedItem: DonatedItem, completion: @escaping () -> ()) {
     switch true {
     case donatedItem.selectedType == DonorItemType.selectItem.rawValue:
       showAlert(title: .emptyCase, message: .noItemTypeSelected)
@@ -433,9 +433,9 @@ extension DonorVC {
     case donatedItem.name.isEmpty:
       showAlert(title: .emptyCase, message: .noItemName)
       break
-//    case donatorItem.image == [UIImage]():
-//      showAlert(title: .emptyCase, message: .noImage)
-//      break
+      //    case donatorItem.image == [UIImage]():
+      //      showAlert(title: .emptyCase, message: .noImage)
+    //      break
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
@@ -446,7 +446,28 @@ extension DonorVC {
       showAlert(title: .emptyCase, message: .noDescription)
       break
     default:
-      showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
+      completion()
+    }
+  }
+}
+
+//MARK: - Creation of the donator item and saving it into database if all fields are filled
+extension DonorVC {
+  func createDonorItemAndSaveItIntoDatabase() {
+    pickupDateAndTime = itemDatePicker.date
+    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
+    
+    let donatedItem = DonatedItem(
+      isPicked: false,
+      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+      name: itemNameTextField.text!,
+      pickUpDateTime: dateAndTime,
+      description: itemDescriptionTextView.text!,
+      latitude: address?.latitude ?? .zero,
+      longitude: address?.longitude ?? .zero
+    )
+    checkAllFieldsAreFilledBeforeNetworking(donatedItem) {
+      self.showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
         ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).save(donatedItem, completion: { [weak self] (result) in
           switch result {
@@ -455,6 +476,84 @@ extension DonorVC {
               self?.showAlert(title: .error, message: .saveItemError)
             }
           case .success:
+            DispatchQueue.main.async { [weak self] in
+              self?.unwindToSharingVC()
+              self?.allEntriesBackToOriginStateWithoutAlert()
+            }
+          }
+        })
+      }
+    }
+  }
+}
+
+//MARK: - Populate item to update when donor wants to make changes from ItemDetailsVC
+extension DonorVC {
+  func populateItemToEditFromItemDetailsVC() {
+    guard itemToEdit?.id != nil else { return }
+    populateItemTypePicker()
+    populateItemDatePicker()
+    itemNameTextField.text = itemToEdit?.name
+    mapKitButton.setTitle(ButtonName.changeMeetingPoint.rawValue, for: .normal)
+    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    itemDescriptionTextView.text = itemToEdit?.description
+  }
+  
+  //Show the picker item type the way the item is
+  func populateItemTypePicker() {
+    for type in DonatedItem.type {
+      if type.rawValue == itemToEdit?.selectedType {
+        guard let index = DonatedItem.type.firstIndex(of: type) else { return }
+        itemTypePickerView.selectRow(index, inComponent: 0, animated: true)
+      }
+    }
+  }
+  
+  //Show the date picker from the item date
+  func populateItemDatePicker() {
+    guard let isoDateString = itemToEdit?.pickUpDateTime else { return }
+    let trimmedIsoString = (isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression))
+    guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
+    itemDatePicker.setDate(dateAndTime, animated: true)
+  }
+}
+
+extension DonorVC {
+  func updateDonatedItem() {
+    guard let donatedItemID = itemToEdit?.id else { return }
+    
+    pickupDateAndTime = itemDatePicker.date
+    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
+    
+    if address?.latitude == nil {
+      latitudeToSet = itemToEdit?.latitude
+      longitudeToSet = itemToEdit?.longitude
+    }
+    else {
+      latitudeToSet = address?.latitude
+      longitudeToSet = address?.longitude
+    }
+    
+    var updatedItem = DonatedItem(
+      isPicked: itemToEdit!.isPicked,
+      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+      name: itemNameTextField.text!,
+      pickUpDateTime: dateAndTime,
+      description: itemDescriptionTextView.text!,
+      latitude: latitudeToSet ?? .zero,
+      longitude: longitudeToSet ?? .zero
+    )
+    checkAllFieldsAreFilledBeforeNetworking(updatedItem) {
+      self.showAlert(title: .thankYou, message: .confirmChanges, buttonName: .confirm) {
+        (true) in
+        DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedItem, completion: { (result) in
+          switch result {
+          case .failure:
+            DispatchQueue.main.async { [weak self] in
+              self?.showAlert(title: .error, message: .networkRequestError)
+            }
+          case .success(let item):
+            updatedItem = item
             DispatchQueue.main.async { [weak self] in
               self?.unwindToSharingVC()
               self?.allEntriesBackToOriginStateWithoutAlert()

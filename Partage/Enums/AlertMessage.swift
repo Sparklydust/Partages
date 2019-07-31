@@ -55,4 +55,5 @@ enum AlertMessage: String {
   case confirmSelection = "Êtes-vous certain de vouloir recevoir ce don?"
   case confirmRemoveDonation = "Êtes-vous certain de ne plus vouloir recevoir ce don?"
   case confirmDonatedItemRemoved = "Le don ne vous est plus attribué."
+  case confirmChanges = "Veuillez confirmer les modifcations portées à votre don."
 }

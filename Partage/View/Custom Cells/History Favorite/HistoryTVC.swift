@@ -15,10 +15,12 @@ class HistoryTVC: UITableViewCell {
   @IBOutlet weak var middleLabel: UILabel!
   @IBOutlet weak var bottomLabel: UILabel!
   @IBOutlet weak var underlineView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
     setupMainDesign()
+    triggerActivityIndicator(false)
   }
 }
 
@@ -73,5 +75,28 @@ extension HistoryTVC {
 extension HistoryTVC {
   func setupItemImage() {
     itemImage.layer.cornerRadius = 2
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension HistoryTVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .mainBlue
+    contentView.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
   }
 }

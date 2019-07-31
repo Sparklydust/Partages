@@ -20,6 +20,7 @@ enum Segue: String {
   case goesToMapViewVC = "goToMapViewVC"
   case goesToSignUpVC = "goToSignUpVC"
   case goesToSignInVC = "goToSignInVC"
+  case goesToEditProfile = "goToEditProfile"
   case unwindsToSharingVC = "unwindToSharingVC"
   case unwindsToSignInVC = "unwindToSignInVC"
 }
