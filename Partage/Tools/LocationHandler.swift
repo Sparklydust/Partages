@@ -25,6 +25,11 @@ extension LocationHandler {
   func getUserLocationAccuracy() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
   }
+  
+  func userLocation() -> CLLocation {
+    let userLocation = locationManager.location
+    return userLocation ?? CLLocation(latitude: CLLocationDegrees(exactly: 0.0)!, longitude: CLLocationDegrees(exactly: 0.0)!)
+  }
 }
 
 //MARK: - #1 Use this method to setup user location on any Partage map view

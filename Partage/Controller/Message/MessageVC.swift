@@ -13,6 +13,8 @@ class MessageVC: UIViewController {
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   
+  let refreshControl = UIRefreshControl()
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     checkIfAnUserIsConnected()
@@ -59,6 +61,7 @@ extension MessageVC {
     setupNavigationController()
     setupTableViewDesign()
     setupCellHeightForIPad()
+    setupRefreshControl()
   }
   
   //MARK: Main view design
@@ -142,5 +145,22 @@ extension MessageVC {
       }
       return
     }
+  }
+}
+
+//MARK: - Refresh control method to reload data
+extension MessageVC {
+  func setupRefreshControl() {
+    refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
+    refreshControl.commonDesign(title: .downloadingMessages)
+    messageTableView.addSubview(refreshControl)
+  }
+  
+  @objc private func refreshDonatedItems(_ sender: Any) {
+    endRefreshing()
+  }
+  
+  func endRefreshing() {
+    refreshControl.endRefreshing()
   }
 }

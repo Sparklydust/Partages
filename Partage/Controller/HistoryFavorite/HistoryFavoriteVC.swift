@@ -21,6 +21,8 @@ class HistoryFavoriteVC: UIViewController {
   var oneDonatedItem: DonatedItem?
   var isHistoryButtonClicked = true
   
+  let refreshControl = UIRefreshControl()
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     setupLastUserHistoryOrFavoriteChoice()
@@ -87,6 +89,7 @@ extension HistoryFavoriteVC {
     setupNavigationController()
     setupTableViewDesign()
     setupCellSizeForIPad()
+    setupRefreshControl()
   }
   
   //MARK: Main view design
@@ -391,7 +394,6 @@ extension HistoryFavoriteVC {
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
           self?.triggerActivityIndicator(false)
         }
       case .success:
@@ -500,5 +502,28 @@ extension HistoryFavoriteVC {
     triggerActivityIndicator(true)
     DonatedItemRequest(donatedItemID: donatedItemID).delete()
     triggerActivityIndicator(false)
+  }
+}
+
+//MARK: - Refresh control method to reload data
+extension HistoryFavoriteVC {
+  func setupRefreshControl() {
+    refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
+    refreshControl.commonDesign(title: .downloadingDonatedItems)
+    HistoryFavoriteTableView.addSubview(refreshControl)
+  }
+  
+  @objc private func refreshDonatedItems(_ sender: Any) {
+    if isHistoryButtonClicked {
+      fetchUserItemsHitstory()
+    }
+    else {
+      fetchFavoritedItems()
+    }
+    endRefreshing()
+  }
+  
+  func endRefreshing() {
+    refreshControl.endRefreshing()
   }
 }

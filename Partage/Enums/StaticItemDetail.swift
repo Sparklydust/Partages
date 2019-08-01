@@ -16,4 +16,6 @@ enum StaticItemDetail: String {
   case at = "à"
   case address = "localisation"
   case type = "type:"
+  case distanceInKm = "km"
+  case distanceInM = "m"
 }

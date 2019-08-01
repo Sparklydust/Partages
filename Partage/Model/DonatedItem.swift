@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class DonatedItem: Codable {
   static let type: [DonorItemType] = [
@@ -36,5 +37,15 @@ final class DonatedItem: Codable {
     self.latitude = latitude
     self.longitude = longitude
     self.receiverID = receiverID
+  }
+}
+
+extension DonatedItem {
+  var location: CLLocation {
+    return CLLocation(latitude: self.latitude, longitude: self.longitude)
+  }
+  
+  func distance(to location: CLLocation) -> CLLocationDistance {
+    return location.distance(from: self.location)
   }
 }

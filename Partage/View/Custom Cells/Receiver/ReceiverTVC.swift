@@ -28,10 +28,13 @@ class ReceiverTVC: UITableViewCell {
     super.awakeFromNib()
     setupMainDesign()
     triggerActivityIndicator(false)
+    LocationHandler.shared.checkLocationAuthorization(for: mapView, vc: ReceiverVC.init())
   }
-  
-  @IBAction func favoriteButtonAction(_ sender: Any) {
-  }
+}
+
+//MARK: - Favorite Button action clicked
+extension ReceiverTVC {
+   @IBAction func favoriteButtonAction(_ sender: Any) {}
 }
 
 //MARK: - Setup developer main design

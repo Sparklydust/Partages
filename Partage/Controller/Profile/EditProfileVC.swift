@@ -234,7 +234,7 @@ extension EditProfileVC {
 //extension EditProfileVC {
 //  func updateUserProfile() {
 //    let userToUpdate = User(firstName: <#T##String#>)
-//    
+//
 //    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).update(with: userToUpdate) { (success) in
 //      switch success {
 //      case .failure:
@@ -243,7 +243,7 @@ extension EditProfileVC {
 //        }
 //      case .success(let updatesUser):
 //        DispatchQueue.main.async { [weak self] in
-//          
+//
 //        }
 //      }
 //    }

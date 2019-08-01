@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ReceiverVC: UIViewController {
   
@@ -15,6 +16,8 @@ class ReceiverVC: UIViewController {
   var donatedItems = [DonatedItem]()
   var itemsNotPicked = [DonatedItem]()
   var oneDonatedItem: DonatedItem?
+  
+  let refreshControl = UIRefreshControl()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -48,6 +51,7 @@ extension ReceiverVC {
     setupCustomCell()
     setupTableViewDesign()
     setupCellHeightForIPad()
+    setupRefreshControl()
   }
   
   //MARK: Main view design
@@ -130,6 +134,9 @@ extension ReceiverVC {
 //MARK: - Populate cells with donators Items from database that is not picked by receiver
 extension ReceiverVC {
   func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
+    let userLocation = LocationHandler.shared.userLocation()
+    itemsNotPicked.sort(by: userLocation)
+    
     let donorItem = itemsNotPicked[indexPath.row]
     
     let isoDateString = donorItem.pickUpDateTime
@@ -138,12 +145,22 @@ extension ReceiverVC {
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
     
+    let itemLocation = CLLocation(latitude: donorItem.latitude, longitude: donorItem.longitude)
+    var distance = userLocation.distance(from: itemLocation)
+    
     cell.itemTypeLabel.text = donorItem.selectedType
     cell.itemNameLabel.text = donorItem.name
     cell.dateLabel.text = date
     cell.timeLabel.text = time
     cell.addMeetingPointOnMap(latitude: donorItem.latitude, longitude: donorItem.longitude)
     
+    if distance > 1000 {
+      distance /= 1000
+      cell.itemDistanceLabel.text = "\(StaticItemDetail.at.rawValue) \(String(format: "%.2f", distance)) \(StaticItemDetail.distanceInKm.rawValue)"
+    }
+    else {
+      cell.itemDistanceLabel.text = "\(StaticItemDetail.at.rawValue) \(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.rawValue)"
+    }
   }
 }
 
@@ -175,5 +192,41 @@ extension ReceiverVC {
         }
       }
     }
+  }
+}
+
+//MARK: - Refresh control method to reload data
+extension ReceiverVC {
+  func setupRefreshControl() {
+    refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
+    refreshControl.commonDesign(title: .downloadingDonatedItems)
+    receiverTableView.addSubview(refreshControl)
+  }
+  
+  @objc private func refreshDonatedItems(_ sender: Any) {
+    fetchDonorsItemsFromDatabase()
+  }
+  
+  func fetchDonorsItemsFromDatabase() {
+    itemsNotPicked = [DonatedItem]()
+    ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).getAll { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .loadItemError)
+          self?.endRefreshing()
+        }
+      case .success(let donatedItems):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.itemsNotPicked = donatedItems
+          self.endRefreshing()
+        }
+      }
+    }
+  }
+  
+  func endRefreshing() {
+    refreshControl.endRefreshing()
   }
 }
