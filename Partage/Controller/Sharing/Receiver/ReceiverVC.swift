@@ -177,7 +177,9 @@ extension ReceiverVC {
   func checkIfAnUserFavoritedItem(into cell: ReceiverTVC, at indexPath: IndexPath) {
     guard UserDefaultsService.userID != nil else { return }
     guard let donatedItemID = donatedItems[indexPath.row].id else { return }
-    DonatedItemRequest(donatedItemID: donatedItemID).populateUserThatFavoritedItem { (result) in
+
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
+    ResourceRequest<User>(resourcePath: resourcePath).getAllWithToken { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -186,8 +188,9 @@ extension ReceiverVC {
       case .success(let users):
         DispatchQueue.main.async {
           for user in users {
-            guard user.id?.uuidString == UserDefaultsService.userID  else { return }
-            cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+            if user.id?.uuidString == UserDefaultsService.userID {
+              cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+            }
           }
         }
       }
@@ -199,7 +202,7 @@ extension ReceiverVC {
 extension ReceiverVC {
   func setupRefreshControl() {
     refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
-    refreshControl.commonDesign(title: .downloadingDonatedItems)
+    refreshControl.commonDesign(title: .emptyString)
     receiverTableView.addSubview(refreshControl)
   }
   

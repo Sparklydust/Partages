@@ -152,7 +152,7 @@ extension MessageVC {
 extension MessageVC {
   func setupRefreshControl() {
     refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
-    refreshControl.commonDesign(title: .downloadingMessages)
+    refreshControl.commonDesign(title: .emptyString)
     messageTableView.addSubview(refreshControl)
   }
   

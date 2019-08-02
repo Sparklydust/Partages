@@ -38,7 +38,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UNL-YX-QTd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="97.5"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ApW-yy-k8S">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ApW-yy-k8S">
                                                                                 <rect key="frame" x="0.0" y="34" width="267" height="30"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -280,6 +280,7 @@
                         <segue destination="b0h-Oq-N0Y" kind="show" identifier="goToMapViewVC" id="BQZ-o6-WxK"/>
                         <segue destination="31d-TN-Bjg" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="dVf-Jh-cHe"/>
                         <segue destination="ODw-Pk-RQL" kind="presentation" identifier="goToSignInSignUpVC" id="pym-XK-53L"/>
+                        <segue destination="31d-TN-Bjg" kind="unwind" identifier="unwindToHistoryFavoriteVC" unwindAction="unwindToHistoryFavoriteVCWithSegue:" id="seK-g8-vbF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5r-ou-YBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -318,7 +319,7 @@
                 <viewControllerPlaceholder storyboardName="SignInSignUp" id="ODw-Pk-RQL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NAP-io-JIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135" y="473"/>
+            <point key="canvasLocation" x="1135" y="477"/>
         </scene>
     </scenes>
     <resources>

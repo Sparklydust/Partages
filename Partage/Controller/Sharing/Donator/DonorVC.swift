@@ -418,6 +418,10 @@ extension DonorVC {
     self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   
+  func unwindToHistoryFavoriteVC() {
+    self.performSegue(withIdentifier: Segue.unwindToHistoryFavoriteVC.rawValue, sender: self)
+  }
+  
   func unwindToSignInVC() {
     performSegue(withIdentifier: Segue.unwindsToSignInVC.rawValue, sender: self)
   }
@@ -469,7 +473,7 @@ extension DonorVC {
     checkAllFieldsAreFilledBeforeNetworking(donatedItem) {
       self.showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).save(donatedItem, completion: { [weak self] (result) in
+        ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).saveWithToken(donatedItem, completion: { [weak self] (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in
@@ -518,6 +522,7 @@ extension DonorVC {
   }
 }
 
+//MARK: - Donor update item from itemDetailsVC edit button
 extension DonorVC {
   func updateDonatedItem() {
     guard let donatedItemID = itemToEdit?.id else { return }
@@ -546,16 +551,18 @@ extension DonorVC {
     checkAllFieldsAreFilledBeforeNetworking(updatedItem) {
       self.showAlert(title: .thankYou, message: .confirmChanges, buttonName: .confirm) {
         (true) in
-        DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedItem, completion: { (result) in
+        
+        let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+        ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedItem, completion: { (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in
               self?.showAlert(title: .error, message: .networkRequestError)
             }
           case .success(let item):
-            updatedItem = item
             DispatchQueue.main.async { [weak self] in
-              self?.unwindToSharingVC()
+              updatedItem = item
+              self?.unwindToHistoryFavoriteVC()
               self?.allEntriesBackToOriginStateWithoutAlert()
             }
           }

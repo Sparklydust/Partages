@@ -364,7 +364,9 @@ extension ItemDetailsVC {
   func fetchReceiverFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
     guard let receiverID = itemDetails.receiverID else { return }
-    UserRequest<User>(resourcePath: .users, userID: receiverID).get { [weak self] (result) in
+    
+    let resourcePath = NetworkPath.users.rawValue + receiverID
+    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
       switch result {
       case .failure:
         return
@@ -379,7 +381,9 @@ extension ItemDetailsVC {
   func fetchDonorFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
     guard let donorID = donor?.id?.uuidString else { return }
-    UserRequest<User>(resourcePath: .users, userID: donorID).get { [weak self] (result) in
+    
+    let resourcePath = NetworkPath.users.rawValue + donorID
+    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -396,7 +400,9 @@ extension ItemDetailsVC {
   func fetchDonorIDFromSelectedItem() {
     guard UserDefaultsService.userID != nil else { return }
     guard let itemID = itemDetails.id else { return }
-    DonatedItemRequest(donatedItemID: itemID).getUser { (result) in
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(itemID)/" + "user"
+    ResourceRequest<User>(resourcePath: resourcePath).get { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -411,7 +417,7 @@ extension ItemDetailsVC {
   }
 }
 
-//MARK: - User pick up the donation method and save it in the database
+//MARK: - User picks up a donated item and save it in the database
 extension ItemDetailsVC {
   func userPicksUpADonatedItem() {
     guard let donatedItemID = itemDetails.id else { return }
@@ -425,7 +431,9 @@ extension ItemDetailsVC {
     updatedDonatedItem.isPicked = true
     
     showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
-      DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+      
+      let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+      ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
@@ -439,7 +447,7 @@ extension ItemDetailsVC {
             })
           }
         }
-      }
+      })
     })
   }
 }

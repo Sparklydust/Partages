@@ -276,7 +276,9 @@ extension ItemSelectedVC {
       return
     }
     guard let donatedItemID = donatedItem.id else { return }
-    DonatedItemRequest(donatedItemID: donatedItemID).linkUserToItemFavorited(UserDefaultsService.userID!) { [weak self] (result) in
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).linkToPivot { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -294,7 +296,9 @@ extension ItemSelectedVC {
   func checkIfAnUserFavoritedItem() {
     guard UserDefaultsService.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
-    DonatedItemRequest(donatedItemID: donatedItemID).populateUserThatFavoritedItem { (result) in
+
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
+    ResourceRequest<User>(resourcePath: resourcePath).getAllWithToken { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -303,9 +307,10 @@ extension ItemSelectedVC {
       case .success(let users):
         DispatchQueue.main.async { [weak self] in
           for user in users {
-            guard user.id?.uuidString == UserDefaultsService.userID  else { return }
-            self?.isFavorited = true
-            self?.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+            if user.id?.uuidString == UserDefaultsService.userID {
+              self?.isFavorited = true
+              self?.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+            }
           }
         }
       }
@@ -318,7 +323,9 @@ extension ItemSelectedVC {
   func deleteDonatedItemFromUserFavorite() {
     guard UserDefaultsService.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
-    DonatedItemRequest(donatedItemID: donatedItemID).deleteLinkBetweenUserAndItemFavorited(UserDefaultsService.userID!) { (result) in
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -328,10 +335,11 @@ extension ItemSelectedVC {
         return
       }
     }
+    
   }
 }
 
-//MARK: - User pick up the donated item method and save it in the database
+//MARK: - User picks up the donated item method and save it in the database
 extension ItemSelectedVC {
   func userPicksUpADonatedItem() {
     guard let donatedItemID = donatedItem.id else { return }
@@ -345,7 +353,9 @@ extension ItemSelectedVC {
     updatedDonatedItem.isPicked = true
     
     showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
-      DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+      
+      let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+      ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
@@ -359,7 +369,7 @@ extension ItemSelectedVC {
             })
           }
         }
-      }
+      })
     })
   }
 }

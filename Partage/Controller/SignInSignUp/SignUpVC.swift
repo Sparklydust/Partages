@@ -265,9 +265,8 @@ extension SignUpVC {
   func createUserIntoDatabase() {
     guard let firstName = firstNameTextField.text,
       let email = emailTextField.text,
-      let password = confirmPasswordTextField.text else {
-        return
-    }
+      let password = confirmPasswordTextField.text else { return }
+    
     switch true {
     case firstName.isEmpty:
       showAlert(title: .firstNameError, message: .addFirstName)
@@ -289,7 +288,9 @@ extension SignUpVC {
       )
       resignAllResponder()
       triggerActivityIndicator(true)
-      UserRequest<CreateUser>(resourcePath: NetworkPath.users.rawValue).save(user) { [weak self] result in
+      
+      let resourcePath = NetworkPath.users.rawValue
+      ResourceRequest<CreateUser>(resourcePath: resourcePath).save(user) { [weak self] result in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in

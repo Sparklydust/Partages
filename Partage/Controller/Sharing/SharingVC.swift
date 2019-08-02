@@ -167,7 +167,9 @@ extension SharingVC {
 extension SharingVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
-    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).get { [weak self] (result) in
+    
+    let resourcePath = NetworkPath.users.rawValue + UserDefaultsService.userID!
+    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in

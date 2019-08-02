@@ -20,7 +20,7 @@ extension Auth {
 
 //MARK: - Login method
 extension Auth {
-  func login(email: String, password: String, completion: @escaping (AuthResult) -> Void) {
+  func login(email: String, password: String, completion: @escaping (RequestResult) -> Void) {
     let path = NetworkPath.login.rawValue
     guard let url = URL(string: path) else {
       fatalError()

@@ -13,23 +13,23 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
-  @IBOutlet weak var oldPasswordTextField: UITextField!
   @IBOutlet weak var newPasswordTextField: UITextField!
   @IBOutlet weak var confirmPasswordTextField: UITextField!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   @IBOutlet var spaceBetweenViewsConstraints: [NSLayoutConstraint]!
   @IBOutlet var underlineViews: [UIView]!
   
-  var user: User?
+  var user: FullUser?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    observeKeyboardNotification()
-    hidePasswordFields()
+    //observeKeyboardNotification()
     populateUserInfo()
+    triggerActivityIndicator(false)
   }
   
   deinit {
@@ -41,11 +41,12 @@ class EditProfileVC: UIViewController {
 extension EditProfileVC {
   //MARK: Cancel Button action
   @IBAction func cancelButtonAction(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    dismissView()
   }
   
   //MARK: Save Button action
   @IBAction func saveButtonAction(_ sender: Any) {
+    updateUserInfo()
   }
 }
 
@@ -83,7 +84,6 @@ extension EditProfileVC{
     firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     lastNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    oldPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     newPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
@@ -103,7 +103,6 @@ extension EditProfileVC {
     firstNameTextField.setupPlaceholderDesign(title: .firsName, color: .middleBlue)
     lastNameTextField.setupPlaceholderDesign(title: .lastName, color: .middleBlue)
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
-    oldPasswordTextField.setupPlaceholderDesign(title: .oldPassword, color: .middleBlue)
     newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: .middleBlue)
     confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .middleBlue)
   }
@@ -112,7 +111,6 @@ extension EditProfileVC {
 //MARK: - Setup to hide password modifcation text fields
 extension EditProfileVC {
   func hidePasswordFields() {
-    oldPasswordTextField.isHidden = true
     newPasswordTextField.isHidden = true
     confirmPasswordTextField.isHidden = true
     underlineViews[3].isHidden = true
@@ -161,7 +159,6 @@ extension EditProfileVC {
     guard firstNameTextField.isFirstResponder ||
       lastNameTextField.isFirstResponder ||
       emailTextField.isFirstResponder ||
-      oldPasswordTextField.isFirstResponder ||
       newPasswordTextField.isFirstResponder ||
       confirmPasswordTextField.isFirstResponder else {
         dismiss(animated: true, completion: nil)
@@ -177,10 +174,18 @@ extension EditProfileVC {
   }
 }
 
+extension EditProfileVC {
+  func dismissView() {
+    dismiss(animated: true, completion: nil)
+  }
+}
+
 //MARK: - Populate user info from ProfileVC
 extension EditProfileVC {
   func populateUserInfo() {
     firstNameTextField.text = user?.firstName
+    lastNameTextField.text = user?.lastName
+    emailTextField.text = user?.email
   }
 }
 
@@ -190,7 +195,6 @@ extension EditProfileVC {
     firstNameTextField.resignFirstResponder()
     lastNameTextField.resignFirstResponder()
     emailTextField.resignFirstResponder()
-    oldPasswordTextField.resignFirstResponder()
     newPasswordTextField.resignFirstResponder()
     confirmPasswordTextField.resignFirstResponder()
   }
@@ -201,6 +205,32 @@ extension EditProfileVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     resignTextFieldResponders()
     return true
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension EditProfileVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .iceBackground
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    saveButton.commonDesign(title: .emptyString)
+    saveButton.isHidden = false
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
+    saveButton.commonDesign(title: .save)
   }
 }
 
@@ -231,21 +261,120 @@ extension EditProfileVC {
   }
 }
 
-//extension EditProfileVC {
-//  func updateUserProfile() {
-//    let userToUpdate = User(firstName: <#T##String#>)
-//
-//    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).update(with: userToUpdate) { (success) in
-//      switch success {
-//      case .failure:
-//        DispatchQueue.main.async { [weak self] in
-//          self?.showAlert(title: .error, message: .networkRequestError)
-//        }
-//      case .success(let updatesUser):
-//        DispatchQueue.main.async { [weak self] in
-//
-//        }
-//      }
-//    }
-//  }
-//}
+//MARK: - User update his info with or without updading his password
+extension EditProfileVC {
+  func updateUserInfo() {
+    guard UserDefaultsService.userID != nil else { return }
+    guard let firstName = firstNameTextField.text,
+      let lastName = lastNameTextField.text,
+      let email = emailTextField.text,
+    let newPassword = newPasswordTextField.text,
+    let confirmPassword = confirmPasswordTextField.text else { return }
+    
+    if newPassword.isEmpty && confirmPassword.isEmpty {
+      updateUserProfileWith(firstName, lastName, email)
+    }
+    else {
+      updateUserProfileAndPasswordWith(firstName, lastName, email, confirmPassword)
+    }
+  }
+}
+
+//MARK: - User update his profile without password
+extension EditProfileVC {
+  func updateUserProfileWith(_ firstName: String, _ lastName: String, _ email: String) {
+    let updatedUser = FullUser(
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    )
+    let resourcePath = NetworkPath.editAccount.rawValue + UserDefaultsService.userID!
+    
+    checkIfEmptyFields(firstName, email) {
+      ResourceRequest<FullUser>(resourcePath: resourcePath).update(with: updatedUser) { (success) in
+        switch success {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.triggerActivityIndicator(false)
+          }
+        case .success(let user):
+          DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.user = user
+            self.dismissView()
+            self.triggerActivityIndicator(false)
+          }
+        }
+      }
+    }
+  }
+  
+  func checkIfEmptyFields(_ firstName: String, _ email: String, _ completion: @escaping () -> ()) {
+    switch true {
+    case firstName.isEmpty:
+      showAlert(title: .firstNameError, message: .addFirstName)
+      break
+    case email.isEmpty || !email.isValidEmail():
+      showAlert(title: .emailError, message: .addEmail)
+      break
+    default:
+      resignTextFieldResponders()
+      triggerActivityIndicator(true)
+      completion()
+    }
+  }
+}
+
+//MARK: - User update his profile and password
+extension EditProfileVC {
+  func updateUserProfileAndPasswordWith(_ firstName: String, _ lastName: String, _ email: String, _ password: String) {
+    let updatedUser = FullUser(
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    )
+    let resourcePath = NetworkPath.editAccountAndPassord.rawValue + UserDefaultsService.userID!
+    
+    checkForEmptyFieldsAndPassword(firstName, email, password) {
+      ResourceRequest<FullUser>(resourcePath: resourcePath).update(with: updatedUser) { (success) in
+        switch success {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.triggerActivityIndicator(false)
+          }
+        case .success(let user):
+          DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.user = user
+            self.dismissView()
+            self.triggerActivityIndicator(false)
+          }
+        }
+      }
+    }
+  }
+  
+  func checkForEmptyFieldsAndPassword(_ firstName: String, _ email: String, _ password: String, completion: @escaping () -> ()) {
+    switch true {
+    case firstName.isEmpty:
+      showAlert(title: .firstNameError, message: .addFirstName)
+      break
+    case email.isEmpty || !email.isValidEmail():
+      showAlert(title: .emailError, message: .addEmail)
+      break
+    case password.isEmpty || password != newPasswordTextField.text:
+      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      break
+    case password.count < 5:
+      showAlert(title: .passwordError, message: .passwordTooShort)
+      break
+    default:
+      resignTextFieldResponders()
+      triggerActivityIndicator(true)
+      completion()
+    }
+  }
+}

@@ -17,6 +17,27 @@ final class User: Codable {
   }
 }
 
+final class FullUser: Codable {
+  var id: UUID?
+  var firstName: String
+  var lastName: String
+  var email: String
+  var password: String?
+  
+  init(firstName: String, lastName: String, email: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+    self.email = email
+  }
+  
+  init(firstName: String, lastName: String, email: String, password: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+    self.email = email
+    self.password = password
+  }
+}
+
 final class CreateUser: Codable {
   var id: UUID?
   var firstName: String

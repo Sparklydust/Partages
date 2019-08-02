@@ -8,26 +8,20 @@
 
 import Foundation
 
-//MARK: - Check the donated user item request result
-enum UserRequestResult {
-  case success(User)
+//MARK: - Check if a result is success or not
+enum RequestResult {
+  case success
   case failure
 }
 
-//MARK: - Check the donated item request result
-enum DonatedItemRequestResult {
-  case success(DonatedItem)
+//MARK: - Check resource type request result
+enum RequestOneResult<ResourceType> {
+  case success(ResourceType)
   case failure
 }
 
 //MARK: - Return the result of an array result
-enum GetResourcesRequest<ResourceType> {
+enum RequestArrayResult<ResourceType> {
   case success([ResourceType])
-  case failure
-}
-
-//MARK: - Used to save user or donated item in the database
-enum SaveResult<ResourceType> {
-  case success(ResourceType)
   case failure
 }

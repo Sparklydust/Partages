@@ -10,6 +10,8 @@ import UIKit
 
 class HistoryFavoriteVC: UIViewController {
   
+  @IBAction func unwindToHistoryFavoriteVC(segue: UIStoryboardSegue) { }
+  
   @IBOutlet weak var HistoryFavoriteTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var historyButton: UIButton!
@@ -390,10 +392,13 @@ extension HistoryFavoriteVC {
     guard UserDefaultsService.userID != nil else { return }
     guard let donatedItemID = itemsFavorited.id else { return }
     triggerActivityIndicator(true)
-    DonatedItemRequest(donatedItemID: donatedItemID).deleteLinkBetweenUserAndItemFavorited(UserDefaultsService.userID!) { (result) in
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
           self?.triggerActivityIndicator(false)
         }
       case .success:
@@ -477,7 +482,9 @@ extension HistoryFavoriteVC {
     updatedDonatedItem.receiverID = StaticLabel.emptyString.rawValue
     updatedDonatedItem.isPicked = false
     triggerActivityIndicator(true)
-    DonatedItemRequest(donatedItemID: donatedItemID).update(with: updatedDonatedItem) { (result) in
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -491,17 +498,31 @@ extension HistoryFavoriteVC {
           self?.triggerActivityIndicator(false)
         }
       }
-    }
+    })
   }
 }
 
-//MARK: - Donor remove the item from history and from the database
+//MARK: - Donor remove the item from his history and from the database
 extension HistoryFavoriteVC {
   func donorDeleteOffTheDatabase(_ donatedItem: DonatedItem) {
     guard let donatedItemID = donatedItem.id else { return }
     triggerActivityIndicator(true)
-    DonatedItemRequest(donatedItemID: donatedItemID).delete()
-    triggerActivityIndicator(false)
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
+        }
+      case .success:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .success, message: .donatedItemDeleted)
+          self?.triggerActivityIndicator(false)
+        }
+      }
+    }
   }
 }
 
@@ -509,7 +530,7 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func setupRefreshControl() {
     refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
-    refreshControl.commonDesign(title: .downloadingDonatedItems)
+    refreshControl.commonDesign(title: .emptyString)
     HistoryFavoriteTableView.addSubview(refreshControl)
   }
   

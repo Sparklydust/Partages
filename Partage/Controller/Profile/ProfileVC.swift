@@ -14,7 +14,7 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
-  @IBOutlet weak var passwordLabel: UILabel!
+//  @IBOutlet weak var passwordLabel: UILabel!
   @IBOutlet weak var editProfileButton: UIBarButtonItem!
   @IBOutlet weak var editProfilePictureButton: UIButton!
   @IBOutlet weak var contactUsButton: UIButton!
@@ -23,7 +23,7 @@ class ProfileVC: UIViewController {
   
   @IBOutlet var backgroundViews: [UIView]!
   
-  var user: User? {
+  var user: FullUser? {
     didSet {
       updateUserProfile()
     }
@@ -107,10 +107,8 @@ extension ProfileVC {
   func setupMainLabels() {
     firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    passwordLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     firstNameLabel.textAlignment = .center
     emailLabel.textAlignment = .center
-    passwordLabel.textAlignment = .center
   }
 }
 
@@ -200,30 +198,44 @@ extension ProfileVC {
 extension ProfileVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
-    UserRequest<User>(resourcePath: .users, userID: UserDefaultsService.userID!).get { [weak self] (result) in
-      switch result {
+    
+    let resourcePath = NetworkPath.myAccount.rawValue + UserDefaultsService.userID!
+    ResourceRequest<FullUser>(resourcePath: resourcePath).get { (success) in
+      switch success {
       case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loginError)
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .loginError)
         }
-      case .success(let user):
+      case .success(let fullUser):
         DispatchQueue.main.async { [weak self] in
-          self?.user = user
+          self?.user = fullUser
         }
       }
     }
   }
 }
 
-//MARK: - Delete user account method
+//MARK: - Delete user account method in cascade
 extension ProfileVC {
   func deleteUserFromTheDatabase() {
     guard UserDefaultsService.userID != nil else { return }
     showAlert(title: .userDeleted, message: .userDeleted, buttonName: .confirm) { (true) in
-      UserRequest<User>(resourcePath: .deleteUser, userID: UserDefaultsService.userID!).delete()
-      self.deleteAllLabels()
-      self.deleteUserFromUserDefaults()
-      self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+      
+      let resourcePath = NetworkPath.deleteUser.rawValue + UserDefaultsService.userID!
+      ResourceRequest<User>(resourcePath: resourcePath).delete({ (result) in
+        switch result {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+          }
+        case .success:
+          DispatchQueue.main.async { [weak self] in
+            self?.deleteAllLabels()
+            self?.deleteUserFromUserDefaults()
+            self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          }
+        }
+      })
     }
   }
 }
@@ -241,14 +253,16 @@ extension ProfileVC {
   func deleteAllLabels() {
     firstNameLabel.text = nil
     emailLabel.text = nil
-    passwordLabel.text = nil
   }
 }
 
 //MARK: - Update User profile after being connected
 extension ProfileVC {
   func updateUserProfile() {
-    firstNameLabel.text = user?.firstName
+    if let firstName = user?.firstName, let lastName = user?.lastName {
+      firstNameLabel.text = "\(firstName) \(lastName)"
+    }
+    emailLabel.text = user?.email
   }
 }
 
