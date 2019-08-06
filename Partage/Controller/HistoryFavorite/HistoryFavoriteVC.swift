@@ -246,7 +246,7 @@ extension HistoryFavoriteVC {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension HistoryFavoriteVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -258,7 +258,7 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user items history
 extension HistoryFavoriteVC {
   func fetchUserItemsHitstory() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     itemsHistory = [DonatedItem]()
     fetchAllDonatedItemsHistory()
     fetchAllReceivedItemsHistory()
@@ -268,10 +268,10 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user's donated items
 extension HistoryFavoriteVC {
   func fetchAllDonatedItemsHistory() {
-    guard let userID = UserDefaultsService.userID else { return }
+    guard let userID = UserDefaultsService.shared.userID else { return }
     triggerActivityIndicator(true)
     let resourcePath = NetworkPath.users.rawValue + userID + "/\(NetworkPath.donatedItems.rawValue)"
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -292,10 +292,11 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user's received items
 extension HistoryFavoriteVC {
   func fetchAllReceivedItemsHistory() {
-    guard let userID = UserDefaultsService.userID else { return }
+    guard let userID = UserDefaultsService.shared.userID else { return }
     let resourcePath = NetworkPath.donatedItems.rawValue + NetworkPath.isReceivedBy.rawValue + userID
     triggerActivityIndicator(true)
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAllWithToken { (result) in
+    
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -340,12 +341,13 @@ extension HistoryFavoriteVC {
 //MARK: - Fetch all user favorited items
 extension HistoryFavoriteVC {
   func fetchFavoritedItems() {
-    guard UserDefaultsService.userID != nil else { return }
-    guard let userID = UserDefaultsService.userID else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let userID = UserDefaultsService.shared.userID else { return }
     itemsFavorited = [DonatedItem]()
     triggerActivityIndicator(true)
     let resourcePath = "\(NetworkPath.users.rawValue)\(userID)/\(NetworkPath.itemsFavorited.rawValue)"
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).getAll { (result) in
+    
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -389,12 +391,12 @@ extension HistoryFavoriteVC {
 //MARK: - An user delete his favorited item
 extension HistoryFavoriteVC {
   func deleteDonatedItemFrom(_ itemsFavorited: DonatedItem) {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = itemsFavorited.id else { return }
     triggerActivityIndicator(true)
     
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -456,7 +458,7 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func removeUserChosenItem(at indexPath: IndexPath, on tableView: UITableView) {
     if isHistoryButtonClicked {
-      if itemsHistory[indexPath.row].receiverID == UserDefaultsService.userID {
+      if itemsHistory[indexPath.row].receiverID == UserDefaultsService.shared.userID {
         receiverUnselect(itemsHistory[indexPath.row])
       }
       else {
@@ -484,7 +486,7 @@ extension HistoryFavoriteVC {
     triggerActivityIndicator(true)
     
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
+    ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -509,7 +511,7 @@ extension HistoryFavoriteVC {
     triggerActivityIndicator(true)
     
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in

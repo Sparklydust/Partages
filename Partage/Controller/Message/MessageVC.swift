@@ -139,7 +139,7 @@ extension MessageVC {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension MessageVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }

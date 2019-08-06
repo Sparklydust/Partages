@@ -175,11 +175,11 @@ extension ReceiverVC {
 //MARK: - Check if an user favorited the donated item
 extension ReceiverVC {
   func checkIfAnUserFavoritedItem(into cell: ReceiverTVC, at indexPath: IndexPath) {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItems[indexPath.row].id else { return }
 
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
-    ResourceRequest<User>(resourcePath: resourcePath).getAllWithToken { (result) in
+    ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -188,7 +188,7 @@ extension ReceiverVC {
       case .success(let users):
         DispatchQueue.main.async {
           for user in users {
-            if user.id?.uuidString == UserDefaultsService.userID {
+            if user.id?.uuidString == UserDefaultsService.shared.userID {
               cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
             }
           }
@@ -212,7 +212,8 @@ extension ReceiverVC {
   
   func fetchDonorsItemsFromDatabase() {
     itemsNotPicked = [DonatedItem]()
-    ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).getAll { (result) in
+    let resourcePath = NetworkPath.donatedItems.rawValue
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in

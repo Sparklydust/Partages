@@ -1,0 +1,38 @@
+[
+  {
+    "longitude": 4.8286895335585029,
+    "id": 7,
+    "pickUpDateTime": "2019-08-11T09:55:09+02:00",
+    "isPicked": false,
+    "receiverID": "",
+    "latitude": 45.068328488369275,
+    "description": "Oc Pizza Tournon",
+    "donorID": "6918D975-1366-4307-92E0-C7391E823BF0",
+    "selectedType": "Nourriture",
+    "name": "Pizza"
+  },
+  {
+    "longitude": 4.8751692685370358,
+    "id": 14,
+    "pickUpDateTime": "2019-08-01T22:05:04+02:00",
+    "isPicked": true,
+    "receiverID": "E7E30595-6DD0-4767-BB25-9139EB34518C",
+    "latitude": 44.937832946545825,
+    "description": "Levi’s pants",
+    "donorID": "6918D975-1366-4307-92E0-C7391E823BF0",
+    "selectedType": "Vêtement",
+    "name": "Pants"
+  },
+  {
+    "longitude": 4.8753775960867642,
+    "id": 17,
+    "pickUpDateTime": "2019-08-05T00:45:41+02:00",
+    "isPicked": false,
+    "receiverID": "",
+    "latitude": 44.936685063347653,
+    "description": "Volcom t-shirt size M",
+    "donorID": "E7E30595-6DD0-4767-BB25-9139EB34518C",
+    "selectedType": "Vêtement",
+    "name": "T-shirt Volcom"
+  }
+]

@@ -185,7 +185,7 @@ extension ProfileVC: MFMailComposeViewControllerDelegate {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension ProfileVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -197,10 +197,10 @@ extension ProfileVC {
 //MARK: - Fetch user from the database
 extension ProfileVC {
   func fetchUserFromTheDatabase() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     
-    let resourcePath = NetworkPath.myAccount.rawValue + UserDefaultsService.userID!
-    ResourceRequest<FullUser>(resourcePath: resourcePath).get { (success) in
+    let resourcePath = NetworkPath.myAccount.rawValue + UserDefaultsService.shared.userID!
+    ResourceRequest<FullUser>(resourcePath).get(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
           DispatchQueue.main.async { [weak self] in
@@ -218,11 +218,11 @@ extension ProfileVC {
 //MARK: - Delete user account method in cascade
 extension ProfileVC {
   func deleteUserFromTheDatabase() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     showAlert(title: .userDeleted, message: .userDeleted, buttonName: .confirm) { (true) in
       
-      let resourcePath = NetworkPath.deleteUser.rawValue + UserDefaultsService.userID!
-      ResourceRequest<User>(resourcePath: resourcePath).delete({ (result) in
+      let resourcePath = NetworkPath.deleteUser.rawValue + UserDefaultsService.shared.userID!
+      ResourceRequest<User>(resourcePath).delete(tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
@@ -243,8 +243,8 @@ extension ProfileVC {
 //MARK: - Delete user inside user defaults
 extension ProfileVC {
   func deleteUserFromUserDefaults() {
-    UserDefaultsService.token = nil
-    UserDefaultsService.userID = nil
+    UserDefaultsService.shared.token = nil
+    UserDefaultsService.shared.userID = nil
   }
 }
 

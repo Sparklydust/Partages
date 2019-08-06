@@ -86,7 +86,7 @@ extension DonorVC {
   
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -473,7 +473,8 @@ extension DonorVC {
     checkAllFieldsAreFilledBeforeNetworking(donatedItem) {
       self.showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).saveWithToken(donatedItem, completion: { [weak self] (result) in
+        let resourcePath = NetworkPath.donatedItems.rawValue
+        ResourceRequest<DonatedItem>(resourcePath).save(donatedItem, tokenNeeded: true, { [weak self] (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in
@@ -553,7 +554,7 @@ extension DonorVC {
         (true) in
         
         let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
-        ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedItem, completion: { (result) in
+        ResourceRequest<DonatedItem>(resourcePath).update(updatedItem, tokenNeeded: true, { (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in

@@ -212,7 +212,7 @@ extension ItemDetailsVC {
 //MARK: - Setup depending on receiver or donator
 extension ItemDetailsVC {
   func buttonsNameReceiverOrDonor() {
-    guard UserDefaultsService.userID == itemDetails.receiverID || !itemDetails.isPicked else {
+    guard UserDefaultsService.shared.userID == itemDetails.receiverID || !itemDetails.isPicked else {
       messageToButton.commonDesign(title: .messageToReceiver)
       return
     }
@@ -220,7 +220,7 @@ extension ItemDetailsVC {
   }
   
   func staticLabelReceiverOrDonor() {
-    guard UserDefaultsService.userID == itemDetails.receiverID else {
+    guard UserDefaultsService.shared.userID == itemDetails.receiverID else {
       staticItemDetailsLabels[0].text = StaticItemDetail.receiveDonation.rawValue
       return
     }
@@ -294,7 +294,7 @@ extension ItemDetailsVC {
   func addItemToCalendar() {
     let isoDateString = itemDetails.pickUpDateTime
     let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
-    if UserDefaultsService.userID == itemDetails.receiverID {
+    if UserDefaultsService.shared.userID == itemDetails.receiverID {
       calendarTitle = StaticLabel.receiverCalendarTitle.rawValue + itemDetails.name
     }
     else {
@@ -313,7 +313,7 @@ extension ItemDetailsVC {
       showEditButton()
       return
     }
-    if UserDefaultsService.userID != itemDetails.receiverID {
+    if UserDefaultsService.shared.userID != itemDetails.receiverID {
       fetchReceiverFromTheDatabase()
     }
     else {
@@ -331,7 +331,7 @@ extension ItemDetailsVC {
   func populateDonor() {
     guard let firstName = donor?.firstName else { return }
     donorReceiverNameLabel.text = firstName
-    guard donor?.id?.uuidString == UserDefaultsService.userID && !itemDetails.isPicked else { return }
+    guard donor?.id?.uuidString == UserDefaultsService.shared.userID && !itemDetails.isPicked else { return }
     addToCalendarButton.isHidden = true
     messageToButton.isHidden = true
   }
@@ -362,11 +362,11 @@ extension ItemDetailsVC {
 //MARK: - Fetch the receiver or donor from the database to populate donorReceiverNameLabel and picture
 extension ItemDetailsVC {
   func fetchReceiverFromTheDatabase() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let receiverID = itemDetails.receiverID else { return }
     
     let resourcePath = NetworkPath.users.rawValue + receiverID
-    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
       switch result {
       case .failure:
         return
@@ -379,11 +379,11 @@ extension ItemDetailsVC {
   }
   
   func fetchDonorFromTheDatabase() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let donorID = donor?.id?.uuidString else { return }
     
     let resourcePath = NetworkPath.users.rawValue + donorID
-    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -398,11 +398,11 @@ extension ItemDetailsVC {
   }
   
   func fetchDonorIDFromSelectedItem() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let itemID = itemDetails.id else { return }
     
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(itemID)/" + "user"
-    ResourceRequest<User>(resourcePath: resourcePath).get { (result) in
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -421,7 +421,7 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   func userPicksUpADonatedItem() {
     guard let donatedItemID = itemDetails.id else { return }
-    guard let receiverID = UserDefaultsService.userID else { return }
+    guard let receiverID = UserDefaultsService.shared.userID else { return }
     guard var updatedDonatedItem = itemDetails else { return }
     guard !updatedDonatedItem.isPicked else {
       showAlert(title: .donatedItemUnselectable, message: .itemAlreadySelected)
@@ -433,7 +433,7 @@ extension ItemDetailsVC {
     showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
       
       let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
-      ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
+      ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in

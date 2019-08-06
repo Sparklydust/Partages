@@ -51,7 +51,7 @@ class ItemSelectedVC: UIViewController {
 extension ItemSelectedVC {
   //MARK: Favorite button action
   @IBAction func favoriteButtonAction(_ sender: Any) {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -71,7 +71,7 @@ extension ItemSelectedVC {
   
   //MARK: Messagge to donator button action
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -82,7 +82,7 @@ extension ItemSelectedVC {
   
   //MARK: Receive this donation button action
   @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
-    guard UserDefaultsService.token != nil else {
+    guard UserDefaultsService.shared.token != nil else {
       showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
       }
@@ -271,14 +271,14 @@ extension ItemSelectedVC {
 //MARK: - Save item to user favorite
 extension ItemSelectedVC {
   func saveDonatedItemToUserFavorite() {
-    guard UserDefaultsService.userID != nil else {
+    guard UserDefaultsService.shared.userID != nil else {
       showAlert(title: .loginError, message: .notConnected)
       return
     }
     guard let donatedItemID = donatedItem.id else { return }
     
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).linkToPivot { (result) in
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
+    ResourceRequest<DonatedItem>(resourcePath).linkToPivot(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -294,11 +294,11 @@ extension ItemSelectedVC {
 //MARK: - Check if an user favorited the donated item
 extension ItemSelectedVC {
   func checkIfAnUserFavoritedItem() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
 
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
-    ResourceRequest<User>(resourcePath: resourcePath).getAllWithToken { (result) in
+    ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -307,7 +307,7 @@ extension ItemSelectedVC {
       case .success(let users):
         DispatchQueue.main.async { [weak self] in
           for user in users {
-            if user.id?.uuidString == UserDefaultsService.userID {
+            if user.id?.uuidString == UserDefaultsService.shared.userID {
               self?.isFavorited = true
               self?.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
             }
@@ -321,11 +321,11 @@ extension ItemSelectedVC {
 //MARK: - An user delete his favorited item
 extension ItemSelectedVC {
   func deleteDonatedItemFromUserFavorite() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
     
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.userID!
-    ResourceRequest<DonatedItem>(resourcePath: resourcePath).delete { (result) in
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -343,7 +343,7 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func userPicksUpADonatedItem() {
     guard let donatedItemID = donatedItem.id else { return }
-    guard let receiverID = UserDefaultsService.userID else { return }
+    guard let receiverID = UserDefaultsService.shared.userID else { return }
     guard var updatedDonatedItem = donatedItem else { return }
     guard !updatedDonatedItem.isPicked else {
       showAlert(title: .donatedItemUnselectable, message: .itemAlreadySelected)
@@ -355,7 +355,7 @@ extension ItemSelectedVC {
     showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
       
       let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
-      ResourceRequest<DonatedItem>(resourcePath: resourcePath).update(with: updatedDonatedItem, completion: { (result) in
+      ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in

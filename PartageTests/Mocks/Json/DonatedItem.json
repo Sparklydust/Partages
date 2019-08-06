@@ -1,0 +1,12 @@
+{
+  "longitude": 4.8286895335585029,
+  "id": 7,
+  "pickUpDateTime": "2019-08-11T09:55:09+02:00",
+  "isPicked": false,
+  "receiverID": "",
+  "latitude": 45.068328488369275,
+  "description": "Oc Pizza Tournon",
+  "donorID": "6918D975-1366-4307-92E0-C7391E823BF0",
+  "selectedType": "Nourriture",
+  "name": "Pizza"
+}

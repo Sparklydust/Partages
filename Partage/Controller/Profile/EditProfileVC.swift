@@ -264,7 +264,7 @@ extension EditProfileVC {
 //MARK: - User update his info with or without updading his password
 extension EditProfileVC {
   func updateUserInfo() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     guard let firstName = firstNameTextField.text,
       let lastName = lastNameTextField.text,
       let email = emailTextField.text,
@@ -288,10 +288,10 @@ extension EditProfileVC {
       lastName: lastName,
       email: email
     )
-    let resourcePath = NetworkPath.editAccount.rawValue + UserDefaultsService.userID!
+    let resourcePath = NetworkPath.editAccount.rawValue + UserDefaultsService.shared.userID!
     
     checkIfEmptyFields(firstName, email) {
-      ResourceRequest<FullUser>(resourcePath: resourcePath).update(with: updatedUser) { (success) in
+      ResourceRequest<FullUser>(resourcePath).update(updatedUser, tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in
@@ -335,10 +335,10 @@ extension EditProfileVC {
       email: email,
       password: password
     )
-    let resourcePath = NetworkPath.editAccountAndPassord.rawValue + UserDefaultsService.userID!
+    let resourcePath = NetworkPath.editAccountAndPassord.rawValue + UserDefaultsService.shared.userID!
     
     checkForEmptyFieldsAndPassword(firstName, email, password) {
-      ResourceRequest<FullUser>(resourcePath: resourcePath).update(with: updatedUser) { (success) in
+      ResourceRequest<FullUser>(resourcePath).update(updatedUser, tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in

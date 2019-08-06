@@ -290,7 +290,7 @@ extension SignUpVC {
       triggerActivityIndicator(true)
       
       let resourcePath = NetworkPath.users.rawValue
-      ResourceRequest<CreateUser>(resourcePath: resourcePath).save(user) { [weak self] result in
+      ResourceRequest<CreateUser>(resourcePath).save(user, tokenNeeded: false) { [weak self] result in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in

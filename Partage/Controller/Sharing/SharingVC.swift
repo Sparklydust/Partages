@@ -129,7 +129,7 @@ extension SharingVC {
 //MARK: - User sign in change SignInSignUp button
 extension SharingVC {
   func populateSignInSignUpButtonDesign() {
-    if UserDefaultsService.token != nil {
+    if UserDefaultsService.shared.token != nil {
       fetchUserFromTheDatabase()
       signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.rawValue)
       signInSignUpButton.isEnabled = false
@@ -145,7 +145,8 @@ extension SharingVC {
 extension SharingVC {
   func fetchDonorsItemsFromDatabase() {
     triggerActivityIndicator(true)
-    ResourceRequest<DonatedItem>(resourcePath: NetworkPath.donatedItems.rawValue).getAll { (result) in
+    let resourcePath = NetworkPath.donatedItems.rawValue
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
@@ -166,10 +167,10 @@ extension SharingVC {
 //MARK: - Fetch user from the database
 extension SharingVC {
   func fetchUserFromTheDatabase() {
-    guard UserDefaultsService.userID != nil else { return }
+    guard UserDefaultsService.shared.userID != nil else { return }
     
-    let resourcePath = NetworkPath.users.rawValue + UserDefaultsService.userID!
-    ResourceRequest<User>(resourcePath: resourcePath).get { [weak self] (result) in
+    let resourcePath = NetworkPath.users.rawValue + UserDefaultsService.shared.userID!
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
