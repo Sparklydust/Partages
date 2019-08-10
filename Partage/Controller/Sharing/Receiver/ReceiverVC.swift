@@ -225,6 +225,7 @@ extension ReceiverVC {
           guard let self = self else { return }
           self.itemsNotPicked = donatedItems
           self.endRefreshing()
+          self.receiverTableView.reloadData()
         }
       }
     }

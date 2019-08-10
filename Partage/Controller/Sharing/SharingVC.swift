@@ -10,7 +10,7 @@ import UIKit
 
 class SharingVC: UIViewController {
   
-  @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) { }
+  @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) {}
   
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var signInSignUpButton: UIButton!
@@ -18,6 +18,7 @@ class SharingVC: UIViewController {
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
   
   var donatedItems = [DonatedItem]()
+  
   var user: User? {
     didSet {
       guard let firstName = user?.firstName else { return }

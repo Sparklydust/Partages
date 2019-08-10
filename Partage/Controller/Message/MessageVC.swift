@@ -10,20 +10,47 @@ import UIKit
 
 class MessageVC: UIViewController {
   
+  @IBAction func unwindToMessageVC(segue: UIStoryboardSegue) {
+    if segue.source is ItemDetailsVC {
+      if let senderVC = segue.source as? ItemDetailsVC {
+        senderVC.firstUserID = firstUserID ?? ""
+        senderVC.secondUserID = secondUserID ?? ""
+        print(firstUserID)
+        print(secondUserID)
+      }
+    }
+    else if segue.source is ItemSelectedVC {
+      if let senderVC = segue.source as? ItemSelectedVC {
+        senderVC.firstUserID = firstUserID ?? ""
+        senderVC.secondUserID = secondUserID ?? ""
+        print(firstUserID)
+        print(secondUserID)
+      }
+    }
+  }
+  
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  
+  var messages = [Message]()
+  
+  var firstUserID: String?
+  var secondUserID: String?
   
   let refreshControl = UIRefreshControl()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     checkIfAnUserIsConnected()
+    getAllUserMessagesFromTheDatabase()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
+    triggerActivityIndicator(false)
   }
 }
 
@@ -86,11 +113,32 @@ extension MessageVC {
 //MARK: - Setup Table view to display messages
 extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return messages.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.messageCellIdentifier.rawValue, for: indexPath) as! MessageTVC
+    
+    var date: String
+    var time: String
+    var dateToShow: String
+    
+    let messageInfo = messages[indexPath.row]
+    
+    let isoDateString = messageInfo.date
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    date = dateAndTime!.asString(style: .short)
+    time = dateAndTime!.asString()
+    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
+      dateToShow = "\(date)"
+    }
+    else {
+      dateToShow = "\(time)"
+    }
+    
+    cell.dateLabel.text = dateToShow
+    
     return cell
   }
 }
@@ -151,16 +199,68 @@ extension MessageVC {
 //MARK: - Refresh control method to reload data
 extension MessageVC {
   func setupRefreshControl() {
-    refreshControl.addTarget(self, action: #selector(refreshDonatedItems), for: .valueChanged)
+    refreshControl.addTarget(self, action: #selector(refreshMessages), for: .valueChanged)
     refreshControl.commonDesign(title: .emptyString)
     messageTableView.addSubview(refreshControl)
   }
   
-  @objc private func refreshDonatedItems(_ sender: Any) {
+  @objc private func refreshMessages(_ sender: Any) {
+    getAllUserMessagesFromTheDatabase()
     endRefreshing()
   }
   
   func endRefreshing() {
     refreshControl.endRefreshing()
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension MessageVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .iceBackground
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
+  }
+}
+
+//MARK: - Fetch all user messages
+extension MessageVC {
+  func getAllUserMessagesFromTheDatabase() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    messages = [Message]()
+    let userID = UserDefaultsService.shared.userID
+    triggerActivityIndicator(true)
+    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
+    ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.endRefreshing()
+          self?.triggerActivityIndicator(false)
+        }
+      case .success(let messages):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.messages.append(contentsOf: messages)
+          self.triggerActivityIndicator(false)
+          self.messageTableView.reloadData()
+        }
+      }
+    }
   }
 }

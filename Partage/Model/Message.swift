@@ -10,21 +10,17 @@ import Foundation
 
 final class Message: Codable {
   var id: Int?
-  var itemID: Int
-  var isReadByDonor: Bool
-  var isReadByReceiver: Bool
-  var sendDateTime: [Date]
-  var body: [String]
-  var donorID: String?
-  var receiverID: String?
+  var senderID: String
+  var recipientID: String
+  var date: String
+  var isReadBySender: Bool
+  var isReadByRecipient: Bool
   
-  init(itemID: Int, isReadByDonor: Bool, isReadByReceiver: Bool, sendDateTime: [Date], body: [String], donorID: String? = String(), receiverID: String = String()) {
-    self.itemID = itemID
-    self.isReadByDonor = isReadByDonor
-    self.isReadByReceiver = isReadByReceiver
-    self.sendDateTime = sendDateTime
-    self.body = body
-    self.donorID = donorID
-    self.receiverID = receiverID
+  init(senderID: String, recipientID: String, date: String, isReadBySender: Bool, isReadByRecipient: Bool) {
+    self.senderID = senderID
+    self.recipientID = recipientID
+    self.date = date
+    self.isReadBySender = isReadBySender
+    self.isReadByRecipient = isReadByRecipient
   }
 }

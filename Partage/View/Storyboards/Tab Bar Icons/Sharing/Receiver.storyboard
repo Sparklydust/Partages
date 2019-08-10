@@ -311,13 +311,21 @@
                                     <action selector="ReceiveDonationButtonAction:" destination="gMS-Mx-z07" eventType="touchUpInside" id="NNx-F0-5ac"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ck2-Q8-vkj">
+                                <rect key="frame" x="40" y="693" width="334" height="40"/>
+                            </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pcq-an-3mv">
+                                <rect key="frame" x="40" y="753" width="334" height="40"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gt3-jN-JTE" firstAttribute="trailing" secondItem="qkL-vm-QbQ" secondAttribute="trailing" id="ETW-0s-fne"/>
+                            <constraint firstItem="pcq-an-3mv" firstAttribute="trailing" secondItem="gt3-jN-JTE" secondAttribute="trailing" id="EfN-eh-QfS"/>
                             <constraint firstItem="gt3-jN-JTE" firstAttribute="top" secondItem="myw-bf-D6c" secondAttribute="bottom" constant="20" id="EiL-ci-kWw">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="pcq-an-3mv" firstAttribute="leading" secondItem="gt3-jN-JTE" secondAttribute="leading" id="ID0-MR-grS"/>
                             <constraint firstItem="cCv-Rr-RDn" firstAttribute="trailing" secondItem="qkL-vm-QbQ" secondAttribute="trailing" constant="40" id="Ju2-qG-Fn9">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -328,13 +336,19 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
                             <constraint firstItem="myw-bf-D6c" firstAttribute="trailing" secondItem="qkL-vm-QbQ" secondAttribute="trailing" id="ShW-JY-eGw"/>
+                            <constraint firstItem="Ck2-Q8-vkj" firstAttribute="top" secondItem="myw-bf-D6c" secondAttribute="top" id="T1g-W2-kPt"/>
+                            <constraint firstItem="Ck2-Q8-vkj" firstAttribute="trailing" secondItem="myw-bf-D6c" secondAttribute="trailing" id="T6h-Sy-Cia"/>
+                            <constraint firstItem="Ck2-Q8-vkj" firstAttribute="leading" secondItem="myw-bf-D6c" secondAttribute="leading" id="Tx3-1h-wy7"/>
                             <constraint firstItem="myw-bf-D6c" firstAttribute="top" secondItem="qkL-vm-QbQ" secondAttribute="bottom" constant="20" id="V41-Mp-t2T">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="pcq-an-3mv" firstAttribute="bottom" secondItem="gt3-jN-JTE" secondAttribute="bottom" id="Z9Y-yu-QHQ"/>
                             <constraint firstItem="gt3-jN-JTE" firstAttribute="leading" secondItem="qkL-vm-QbQ" secondAttribute="leading" id="Zhn-5x-qNG"/>
                             <constraint firstItem="cCv-Rr-RDn" firstAttribute="bottom" secondItem="gt3-jN-JTE" secondAttribute="bottom" constant="20" id="dTG-va-Wza">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="pcq-an-3mv" firstAttribute="top" secondItem="gt3-jN-JTE" secondAttribute="top" id="i7n-vF-ivi"/>
+                            <constraint firstItem="Ck2-Q8-vkj" firstAttribute="bottom" secondItem="myw-bf-D6c" secondAttribute="bottom" id="mpw-ye-86b"/>
                             <constraint firstItem="myw-bf-D6c" firstAttribute="leading" secondItem="qkL-vm-QbQ" secondAttribute="leading" id="x2D-8Z-EFT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cCv-Rr-RDn"/>
@@ -353,7 +367,9 @@
                         <outlet property="itemTypeLabel" destination="QSS-kq-DgA" id="ZcJ-8W-JtY"/>
                         <outlet property="mapView" destination="jC6-vj-Bng" id="U5g-NS-RdJ"/>
                         <outlet property="mapViewButton" destination="LTE-H8-JDh" id="8RY-9l-IT0"/>
+                        <outlet property="messageActivityIndicator" destination="Ck2-Q8-vkj" id="VmP-JK-58N"/>
                         <outlet property="messageToDonatorButton" destination="myw-bf-D6c" id="cEx-ug-BOa"/>
+                        <outlet property="receiveActivityIndicator" destination="pcq-an-3mv" id="qCj-aa-0fM"/>
                         <outlet property="receiveDonationButton" destination="gt3-jN-JTE" id="t4j-tJ-3gO"/>
                         <outlet property="timeLabel" destination="gDk-BI-Dj7" id="7XQ-UG-eak"/>
                         <outlet property="underlineView" destination="g9Y-ft-Sgt" id="jJS-1H-AFq"/>
@@ -365,6 +381,7 @@
                         <segue destination="zdi-X6-Pp9" kind="show" identifier="goToItemImagesVC" id="edr-H1-K53"/>
                         <segue destination="26Q-4y-bdA" kind="presentation" identifier="goToSignInSignUpVC" id="ExJ-oD-cuo"/>
                         <segue destination="Al1-us-VNv" kind="unwind" identifier="unwindToSharingVC" unwindAction="unwindToSharingVCWithSegue:" id="MFp-sL-oR1"/>
+                        <segue destination="Al1-us-VNv" kind="unwind" identifier="unwindToMessageVC" unwindAction="unwindToMessageVCWithSegue:" id="A9J-9i-fRh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpl-Zc-FpR" userLabel="First Responder" sceneMemberID="firstResponder"/>

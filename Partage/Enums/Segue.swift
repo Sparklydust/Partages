@@ -24,4 +24,5 @@ enum Segue: String {
   case unwindsToSharingVC = "unwindToSharingVC"
   case unwindsToSignInVC = "unwindToSignInVC"
   case unwindToHistoryFavoriteVC = "unwindToHistoryFavoriteVC"
+  case unwindToMessageVC = "unwindToMessageVC"
 }

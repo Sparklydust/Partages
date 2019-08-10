@@ -10,12 +10,12 @@ import UIKit
 
 //MARK: - All application static label name
 enum StaticItemDetail: String {
-  case giveDonation = "vous remettra son don:"
-  case receiveDonation = "recevra votre don:"
+  case giveDonation = "vous remettra son don"
+  case receiveDonation = "recevra votre don"
   case the = "le"
   case at = "à"
   case address = "localisation"
-  case type = "type:"
+  case type = "type"
   case distanceInKm = "km"
   case distanceInM = "m"
 }

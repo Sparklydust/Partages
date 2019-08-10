@@ -277,6 +277,7 @@ extension HistoryFavoriteVC {
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
           self?.triggerActivityIndicator(false)
+          self?.endRefreshing()
         }
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
@@ -302,6 +303,7 @@ extension HistoryFavoriteVC {
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .loadItemError)
           self?.triggerActivityIndicator(false)
+          self?.endRefreshing()
         }
       case .success(let receivedItems):
         DispatchQueue.main.async { [weak self] in
@@ -319,7 +321,6 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func populateItemsHistory(into cell: HistoryTVC, at indexPath: IndexPath) {
     itemsHistory.sort(by: { $0.pickUpDateTime > $1.pickUpDateTime})
-    
     let donorItem = itemsHistory[indexPath.row]
 
     let isoDateString = donorItem.pickUpDateTime

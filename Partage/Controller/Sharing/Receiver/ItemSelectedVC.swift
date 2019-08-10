@@ -24,22 +24,45 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var itemDescriptionTextView: UITextView!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var messageActivityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var receiveActivityIndicator: UIActivityIndicatorView!
   
   @IBOutlet var staticLabels: [UILabel]!
   
   var donatedItem: DonatedItem!
   var isFavorited = false
   
+  var messages = [Message]()
+  var senderID = String()
+  
+  var firstUserID = String()
+  var secondUserID = String()
+  
+  var receiver: User? {
+    didSet {
+      populateReceiver()
+    }
+  }
+  
+  var donor: User? {
+    didSet {
+      populateDonor()
+    }
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     wasRecipeFavorited()
     updateFavoriteButton(isFavorited)
+    hideAllActivityIndicators()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupVCInfoFrom(donatedItem)
+    setupUserIDToSenderIDVariable()
+    fetchUsersFromTheDatabase()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -77,7 +100,11 @@ extension ItemSelectedVC {
       }
       return
     }
-
+    guard firstAndSecondUsersAreNotSamePerson() else {
+      showAlert(title: .error, message: .canNotSendMessage)
+      return
+    }
+    CheckUsersAlreadyCommunicateBeforeCreatingMessage()
   }
   
   //MARK: Receive this donation button action
@@ -207,6 +234,15 @@ extension ItemSelectedVC {
   }
 }
 
+//MARK: - Setup userID into senderID varirable
+extension ItemSelectedVC {
+  func setupUserIDToSenderIDVariable() {
+    if let id = UserDefaultsService.shared.userID {
+      senderID = id
+    }
+  }
+}
+
 //MARK: - Populate donated item info
 extension ItemSelectedVC {
   func setupVCInfoFrom(_ donorItem: DonatedItem) {
@@ -233,6 +269,11 @@ extension ItemSelectedVC {
       destinationVC.donorItemLatitude = donatedItem.latitude
       destinationVC.donorItemLongitude = donatedItem.longitude
       destinationVC.buttonName = .openMapApp
+    }
+    else if segue.identifier == Segue.unwindToMessageVC.rawValue {
+      let destinationVC = segue.destination as? MessageVC
+      destinationVC?.firstUserID = firstUserID
+      destinationVC?.secondUserID = secondUserID
     }
   }
 }
@@ -265,6 +306,60 @@ extension ItemSelectedVC {
   func wasRecipeFavorited() {
     isFavorited = false
     checkIfAnUserFavoritedItem()
+  }
+}
+
+//MARK: - Populate info depending of whom is the donor or receiver
+extension ItemSelectedVC {
+  func populateReceiver() {
+    if let anotherUserID = self.receiver?.id?.uuidString {
+      self.secondUserID = anotherUserID
+    }
+  }
+  
+  func populateDonor() {
+    if let oneUserID = self.donor?.id?.uuidString {
+      self.firstUserID = oneUserID
+    }
+  }
+}
+
+//MARK: - Activity Indicator action and setup
+extension ItemSelectedVC {
+  func triggerMessageActivityIndicator(_ action: Bool) {
+    triggerActivityIndicator(action, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
+  }
+  
+  func triggerReceiveDonationActivityIndicator(_ action: Bool) {
+    triggerActivityIndicator(action, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
+  }
+  
+  func triggerActivityIndicator(_ action: Bool, on activityIndicator: UIActivityIndicatorView, as button: UIButton, named name: ButtonName) {
+    guard action else {
+      hideActivityIndicator(activityIndicator, button, name)
+      return
+    }
+    showActivityIndicator(activityIndicator, button)
+  }
+  
+  func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton) {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .iceBackground
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    button.commonDesign(title: .emptyString)
+    button.isHidden = false
+  }
+  
+  func hideActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton, _ name: ButtonName) {
+    activityIndicator.isHidden = true
+    button.commonDesign(title: name)
+  }
+  
+  func hideAllActivityIndicators() {
+    triggerActivityIndicator(false, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
+    triggerActivityIndicator(false, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
   }
 }
 
@@ -355,15 +450,18 @@ extension ItemSelectedVC {
     showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
       
       let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+      self.triggerReceiveDonationActivityIndicator(true)
       ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
+            self?.triggerReceiveDonationActivityIndicator(false)
             self?.showAlert(title: .error, message: .networkRequestError)
           }
         case .success(let pickedUpItem):
           DispatchQueue.main.async { [weak self] in
             updatedDonatedItem = pickedUpItem
+            self?.triggerReceiveDonationActivityIndicator(false)
             self?.showAlert(title: .success, message: .donatedItemSelected, completion: { (true) in
               self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
             })
@@ -371,5 +469,131 @@ extension ItemSelectedVC {
         }
       })
     })
+  }
+}
+
+//MARK: - Fetch the receiver or/and donor from the database to get users info
+extension ItemSelectedVC {
+  func fetchUsersFromTheDatabase() {
+    fetchReceiverFromTheDatabase()
+    fetchDonorFromTheDatabase()
+  }
+  
+  func fetchReceiverFromTheDatabase() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let receiverID = UserDefaultsService.shared.userID else { return }
+    
+    let resourcePath = NetworkPath.users.rawValue + receiverID
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
+      switch result {
+      case .failure:
+        return
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.receiver = user
+        }
+      }
+    }
+  }
+  
+  func fetchDonorFromTheDatabase() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let itemID = donatedItem.id else { return }
+    
+    let resourcePath = NetworkPath.donatedItems.rawValue + "\(itemID)/" + "user"
+    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let user):
+        DispatchQueue.main.async { [weak self] in
+          self?.donor = user
+        }
+      }
+    }
+  }
+}
+
+//MARK: - User send a message to another user
+extension ItemSelectedVC {
+  func createMessageBetweenTwoUser() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let dateAndTime = ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
+    
+    var recipientID = String()
+    if senderID == donor?.id?.uuidString {
+      recipientID = (receiver?.id?.uuidString)!
+    }
+    else {
+      recipientID = (donor?.id?.uuidString)!
+    }
+    
+    let message = Message(senderID: senderID, recipientID: recipientID, date: dateAndTime, isReadBySender: true, isReadByRecipient: false)
+    
+    let resourcePath = NetworkPath.messages.rawValue
+    ResourceRequest<Message>(resourcePath).save(message, tokenNeeded: true) { [weak self] (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.triggerMessageActivityIndicator(false)
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        DispatchQueue.main.async { [weak self] in
+          self?.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Check if users has already communicated before creating chat or going to existing one
+extension ItemSelectedVC {
+  func CheckUsersAlreadyCommunicateBeforeCreatingMessage() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    messages = [Message]()
+    let userID = UserDefaultsService.shared.userID
+    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
+    triggerMessageActivityIndicator(true)
+    ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.triggerMessageActivityIndicator(false)
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let messages):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.messages.append(contentsOf: messages)
+          if messages.isEmpty {
+            self.createMessageBetweenTwoUser()
+          }
+          for message in messages {
+            if message.recipientID == self.senderID && message.senderID == self.firstUserID || message.senderID == self.secondUserID {
+              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+              break
+            }
+            else if message.senderID == self.senderID && message.recipientID == self.firstUserID || message.recipientID == self.secondUserID {
+              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+              break
+            }
+            else {
+              self.createMessageBetweenTwoUser()
+            }
+          }
+          self.triggerMessageActivityIndicator(false)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Check if firstUser is the same as secondUser to avoid user messaging to himself
+extension ItemSelectedVC {
+  func firstAndSecondUsersAreNotSamePerson() -> Bool {
+    return firstUserID != secondUserID
   }
 }

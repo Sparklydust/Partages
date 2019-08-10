@@ -14,7 +14,6 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
-//  @IBOutlet weak var passwordLabel: UILabel!
   @IBOutlet weak var editProfileButton: UIBarButtonItem!
   @IBOutlet weak var editProfilePictureButton: UIButton!
   @IBOutlet weak var contactUsButton: UIButton!
@@ -266,6 +265,7 @@ extension ProfileVC {
   }
 }
 
+//MARK: - Prepare for segue
 extension ProfileVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToEditProfile.rawValue {

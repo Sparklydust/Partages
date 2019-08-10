@@ -1,5 +1,5 @@
 //
-//  ConversationVC.swift
+//  ChatMessageVC.swift
 //  Partage
 //
 //  Created by Roland Lariotte on 03/06/2019.
@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ConversationVC: UIViewController {
+class ChatMessageVC: UIViewController {
+  
+   @IBAction func unwindToConversationVC(segue: UIStoryboardSegue) {}
   
   @IBOutlet weak var senderMessageView: UIView!
   @IBOutlet weak var senderMessageTextView: UITextView!
@@ -41,14 +43,14 @@ class ConversationVC: UIViewController {
 }
 
 //MARK: - Send message button action
-extension ConversationVC {
+extension ChatMessageVC {
   @IBAction func sendMessageButton(_ sender: Any) {
     senderMessageTextView.endEditing(true)
   }
 }
 
 //MARK: - Main setup
-extension ConversationVC {
+extension ChatMessageVC {
   //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
@@ -74,14 +76,14 @@ extension ConversationVC {
 }
 
 //MARK: - Setup table view design
-extension ConversationVC {
+extension ChatMessageVC {
   func setupTableViewDesign() {
     conversationTableView.setupMainBackgroundColor()
   }
 }
 
 //MARK: - Setup Table view cells to display messages
-extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
+extension ChatMessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return messageArray.count
   }
@@ -96,7 +98,7 @@ extension ConversationVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 //MARK: - Setup sender message view frame design
-extension ConversationVC {
+extension ChatMessageVC {
   func setupSenderMessageView() {
     senderMessageView.layer.cornerRadius = 13
     senderMessageView.layer.borderWidth = 1
@@ -106,7 +108,7 @@ extension ConversationVC {
 }
 
 //MARK: - Setup sender message view text field design
-extension ConversationVC {
+extension ChatMessageVC {
   func setupSenderMessageTextView() {
     senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
     senderMessageTextView.setupBackgroundColorIn(.iceBackground)
@@ -114,7 +116,7 @@ extension ConversationVC {
 }
 
 //MARK: - Setup all custom cells design
-extension ConversationVC {
+extension ChatMessageVC {
   func setupAllCustomCells() {
     conversationTableView.setupCustomCell(nibName: .conversationCellIdentifier, identifier: .conversationCellIdentifier)
     conversationTableView.setupCustomCell(nibName: .senderCellIdentifier, identifier: .senderCellIdentifier)
@@ -122,7 +124,7 @@ extension ConversationVC {
 }
 
 //MARK: - Setup tap gesture recognizer
-extension ConversationVC {
+extension ChatMessageVC {
   func setupTapGesture() {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     conversationTableView.addGestureRecognizer(tapGesture)
@@ -134,7 +136,7 @@ extension ConversationVC {
 }
 
 //MARK: - Setup swipe gesture to dismiss keyboard
-extension ConversationVC {
+extension ChatMessageVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     view.endEditing(true)
   }
@@ -147,7 +149,7 @@ extension ConversationVC {
 }
 
 //MARK: - Manage cell height depending of its message size
-extension ConversationVC {
+extension ChatMessageVC {
   func manageTableViewConversationCellSize() {
     conversationTableView.rowHeight = UITableView.automaticDimension
     conversationTableView.estimatedRowHeight = 120.0
@@ -155,7 +157,7 @@ extension ConversationVC {
 }
 
 //MARK: - Move View to handle keyboard when message is being edited
-extension ConversationVC: UITextViewDelegate {
+extension ChatMessageVC: UITextViewDelegate {
   func observeKeyboardNotification() {
     NotificationCenter.default.addObserver(
       self,
@@ -189,7 +191,7 @@ extension ConversationVC: UITextViewDelegate {
 }
 
 //MARK: - Method to manage text view height and enable its scrolling option
-extension ConversationVC {
+extension ChatMessageVC {
   func textViewDidChange(_ textView: UITextView) {
     if senderMessageTextView.contentSize.height >= textViewHeight {
       senderMessageTextView.isScrollEnabled = true
@@ -203,3 +205,6 @@ extension ConversationVC {
   }
 }
 
+extension ChatMessageVC {
+  
+}
