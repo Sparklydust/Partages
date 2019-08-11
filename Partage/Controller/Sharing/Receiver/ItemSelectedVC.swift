@@ -115,6 +115,10 @@ extension ItemSelectedVC {
       }
       return
     }
+    guard firstAndSecondUsersAreNotSamePerson() else {
+      showAlert(title: .error, message: .canNotSelectOwnDonation)
+      return
+    }
     userPicksUpADonatedItem()
   }
 }

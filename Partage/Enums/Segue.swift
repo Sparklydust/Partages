@@ -13,7 +13,7 @@ enum Segue: String {
   case goesToDonatorVC = "goToDonatorVC"
   case goesToSignInSignUpVC = "goToSignInSignUpVC"
   case goesToReceiverVC = "goToReceiverVC"
-  case goesToConversationVC = "goToConversationVC"
+  case goesToChatMessageVC = "goToChatMessageVC"
   case goesToItemDetailsVC = "goToItemDetailsVC"
   case goesToItemImagesVC = "goToItemImagesVC"
   case goesToItemSelectedVC = "goToItemSelectedVC"

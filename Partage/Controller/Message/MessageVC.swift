@@ -10,33 +10,19 @@ import UIKit
 
 class MessageVC: UIViewController {
   
-  @IBAction func unwindToMessageVC(segue: UIStoryboardSegue) {
-    if segue.source is ItemDetailsVC {
-      if let senderVC = segue.source as? ItemDetailsVC {
-        senderVC.firstUserID = firstUserID ?? ""
-        senderVC.secondUserID = secondUserID ?? ""
-        print(firstUserID)
-        print(secondUserID)
-      }
-    }
-    else if segue.source is ItemSelectedVC {
-      if let senderVC = segue.source as? ItemSelectedVC {
-        senderVC.firstUserID = firstUserID ?? ""
-        senderVC.secondUserID = secondUserID ?? ""
-        print(firstUserID)
-        print(secondUserID)
-      }
-    }
-  }
-  
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
+  let userID = UserDefaultsService.shared.userID
+  
   var messages = [Message]()
+  var chatMessages = [ChatMessage]()
   
   var firstUserID: String?
   var secondUserID: String?
+  var messageIDToOpen: Int?
+  var messageIndexPathToOpen: Int?
   
   let refreshControl = UIRefreshControl()
   
@@ -51,6 +37,24 @@ class MessageVC: UIViewController {
     setupMainDesign()
     setupAllDelegates()
     triggerActivityIndicator(false)
+  }
+}
+
+//MARK: - Unwind Segue retrieve data from ItemDetailsVC and ItemSelectedVC
+extension MessageVC {
+  @IBAction func unwindToMessageVC(segue: UIStoryboardSegue) {
+    if segue.source is ItemDetailsVC {
+      if let senderVC = segue.source as? ItemDetailsVC {
+        senderVC.firstUserID = firstUserID ?? ""
+        senderVC.secondUserID = secondUserID ?? ""
+      }
+    }
+    else if segue.source is ItemSelectedVC {
+      if let senderVC = segue.source as? ItemSelectedVC {
+        senderVC.firstUserID = firstUserID ?? ""
+        senderVC.secondUserID = secondUserID ?? ""
+      }
+    }
   }
 }
 
@@ -124,6 +128,7 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
     var dateToShow: String
     
     let messageInfo = messages[indexPath.row]
+    showBoldMessageIfIsNotRead(in: cell, search: messageInfo)
     
     let isoDateString = messageInfo.date
     let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
@@ -160,7 +165,9 @@ extension MessageVC {
 //MARK: - Segue action
 extension MessageVC {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: Segue.goesToConversationVC.rawValue, sender: self)
+    guard let messageID = messages[indexPath.row].id else { return }
+    messageIDToOpen = messageID
+    fetchChatMessagesFromSelectedCells(messageID)
   }
 }
 
@@ -227,7 +234,7 @@ extension MessageVC {
   func showActivityIndicator() {
     activityIndicator.isHidden = false
     activityIndicator.style = .whiteLarge
-    activityIndicator.color = .iceBackground
+    activityIndicator.color = .mainBlue
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()
   }
@@ -237,12 +244,65 @@ extension MessageVC {
   }
 }
 
+//MARK: - Found index path of message to be opened automaticlly after unwind segue
+extension MessageVC {
+  func getMessageIndexPathToOpen() {
+    if firstUserID != nil && secondUserID != nil {
+      for message in messages {
+        if (message.senderID == firstUserID || message.recipientID == firstUserID) &&
+          (message.senderID == secondUserID || message.recipientID == secondUserID) {
+          
+          messageIDToOpen = message.id
+          messageIndexPathToOpen = messages.firstIndex {$0 === message}
+          
+          print(messageIDToOpen)
+          print(messageIndexPathToOpen)
+          
+          guard let messageID = messageIDToOpen else { return }
+          fetchChatMessagesFromSelectedCells(messageID)
+          
+          firstUserID = nil
+          secondUserID = nil
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Prepare for segue
+extension MessageVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goesToChatMessageVC.rawValue {
+      guard let destinationVC = segue.destination as? ChatMessageVC else { return }
+      destinationVC.chatBubbles = chatMessages
+      guard let messageID = messageIDToOpen else { return }
+      destinationVC.conversationID = messageID
+    }
+  }
+}
+
+//MARK: - Show cell in bold if messages are not read
+extension MessageVC {
+  func showBoldMessageIfIsNotRead(in cell: MessageTVC, search message: Message) {
+    if (userID == message.senderID && message.isReadBySender == false) ||
+      (userID == message.recipientID && message.isReadByRecipient == false ) {
+      cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      cell.dateLabel.setupFont(as: .superclarendonBold, sized: .twelve, forIPad: .twenty, in: .middleBlue)
+      cell.conversationLabel.setupFont(as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    }
+    else {
+      cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      cell.dateLabel.setupFont(as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
+      cell.conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    }
+  }
+}
+
 //MARK: - Fetch all user messages
 extension MessageVC {
   func getAllUserMessagesFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     messages = [Message]()
-    let userID = UserDefaultsService.shared.userID
     triggerActivityIndicator(true)
     let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
@@ -259,6 +319,30 @@ extension MessageVC {
           self.messages.append(contentsOf: messages)
           self.triggerActivityIndicator(false)
           self.messageTableView.reloadData()
+          self.getMessageIndexPathToOpen()
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch chat messages to be displayed on ChatMessageVC
+extension MessageVC {
+  func fetchChatMessagesFromSelectedCells(_ messageID: Int) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    chatMessages = [ChatMessage]()
+    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    ResourceRequest<ChatMessage>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let allChatMessages):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.chatMessages.append(contentsOf: allChatMessages)
+          self.performSegue(withIdentifier: Segue.goesToChatMessageVC.rawValue, sender: allChatMessages)
         }
       }
     }

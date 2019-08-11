@@ -31,6 +31,7 @@ class HistoryFavoriteVC: UIViewController {
     checkIfAnUserIsConnected()
     fetchUserItemsHitstory()
     fetchFavoritedItems()
+    triggerActivityIndicator(false)
   }
   
   override func viewDidLoad() {

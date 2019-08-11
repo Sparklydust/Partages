@@ -223,7 +223,7 @@ extension ReceiverVC {
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
-          self.itemsNotPicked = donatedItems
+          self.itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
           self.endRefreshing()
           self.receiverTableView.reloadData()
         }

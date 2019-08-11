@@ -30,7 +30,19 @@ class ChatMessageVC: UIViewController {
     }
   }
   
-  let messageArray = ["first message", "second message", "Lorem ipsum dolor"]
+  var chatBubbles = [ChatMessage]()
+  var conversationID = Int()
+  var conversation: Message?
+  
+  var readLastBubble: Bool?
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    DispatchQueue.main.async {
+      self.conversationTableView.reloadData()
+    }
+    fetchConversationAttachedToChatBubbles()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +57,8 @@ class ChatMessageVC: UIViewController {
 //MARK: - Send message button action
 extension ChatMessageVC {
   @IBAction func sendMessageButton(_ sender: Any) {
+    createNewChatBubble()
+    senderMessageTextView.text = StaticLabel.emptyString.rawValue
     senderMessageTextView.endEditing(true)
   }
 }
@@ -85,15 +99,20 @@ extension ChatMessageVC {
 //MARK: - Setup Table view cells to display messages
 extension ChatMessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return messageArray.count
+    return chatBubbles.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.senderCellIdentifier.rawValue, for: indexPath) as! SenderTVC
-    
-    cell.senderConversationLabel.text = messageArray[indexPath.row]
-    
-    return cell
+    if chatBubbles[indexPath.row].user == UserDefaultsService.shared.userID {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.senderCellIdentifier.rawValue, for: indexPath) as! SenderTVC
+      populateSenderChatBubble(into: cell, at: indexPath)
+      return cell
+    }
+    else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.conversationCellIdentifier.rawValue, for: indexPath) as! ConversationTVC
+      populateConversationChatBubble(into: cell, at: indexPath)
+      return cell
+    }
   }
 }
 
@@ -205,6 +224,177 @@ extension ChatMessageVC {
   }
 }
 
+//MARK: - Method to populate the cells with specific bubble chat
 extension ChatMessageVC {
+  func populateSenderChatBubble(into cell: SenderTVC, at indexPath: IndexPath) {
+    let bubble = chatBubbles[indexPath.row]
+    
+    var date: String
+    var time: String
+    var dateToShow: String
+    
+    let isoDateString = bubble.date
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    date = dateAndTime!.asString(style: .short)
+    time = dateAndTime!.asString()
+    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
+      dateToShow = "\(date)  \(time)"
+    }
+    else {
+      dateToShow = "\(time)"
+    }
+    
+    cell.senderConversationLabel.text = bubble.content
+    if indexPath.row == chatBubbles.count - 1 {
+      cell.senderDateLabel.text = dateToShow
+    }
+  }
   
+  func populateConversationChatBubble(into cell: ConversationTVC, at indexPath: IndexPath) {
+    let bubble = chatBubbles[indexPath.row]
+    
+    var date: String
+    var time: String
+    var dateToShow: String
+    
+    let isoDateString = bubble.date
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    date = dateAndTime!.asString(style: .short)
+    time = dateAndTime!.asString()
+    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
+      dateToShow = "\(date)  \(time)"
+    }
+    else {
+      dateToShow = "\(time)"
+    }
+    
+    cell.conversationLabel.text = bubble.content
+    if indexPath.row == chatBubbles.count - 1 {
+      cell.dateLabel.text = dateToShow
+    }
+  }
+}
+
+//MARK: - Create a chat message and update Message in the database
+extension ChatMessageVC {
+  func createNewChatBubble() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let userID = UserDefaultsService.shared.userID else { return }
+    guard let chatMessage = senderMessageTextView.text else { return }
+    let dateAndTime = ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
+    
+    let newChatBubble = ChatMessage(
+      user: userID,
+      date: dateAndTime,
+      content: chatMessage,
+      messageID: conversationID)
+    
+    let resourcePath = NetworkPath.chatMessages.rawValue
+    ResourceRequest<ChatMessage>(resourcePath).save(newChatBubble, tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        self.updateConversationToNewMessageInfo()
+      }
+    }
+  }
+}
+
+//MARK: - Fetch the conversation message attached to chat bubbles
+extension ChatMessageVC {
+  func fetchConversationAttachedToChatBubbles() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let resourcePath = NetworkPath.messages.rawValue + "\(conversationID)"
+    ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success(let conversationFetch):
+        DispatchQueue.main.async { [weak self] in
+          self?.conversation = conversationFetch
+          self?.updateConversationMessagesToReadByUser()
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Update conversation message info to the latest chatMessage
+extension ChatMessageVC {
+  func updateConversationToNewMessageInfo() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let conversationToUpdate = conversation else { return }
+    
+    let dateAndTime = ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
+    
+    if conversationToUpdate.senderID == UserDefaultsService.shared.userID {
+      readLastBubble = true
+    }
+    else {
+      readLastBubble = false
+    }
+    
+    let newConversationInfo = Message(
+      senderID: conversationToUpdate.senderID,
+      recipientID: conversationToUpdate.recipientID,
+      date: dateAndTime,
+      isReadBySender: readLastBubble!,
+      isReadByRecipient: !readLastBubble!
+    )
+    
+    let resourcePath = NetworkPath.messages.rawValue + "\(conversationID)"
+    ResourceRequest<Message>(resourcePath).update(newConversationInfo, tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        break
+      }
+    }
+  }
+}
+
+//MARK: - Update conversation messages to read by user
+extension ChatMessageVC {
+  func updateConversationMessagesToReadByUser() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let conversationToUpdate = conversation else { return }
+    
+    let userID = UserDefaultsService.shared.userID
+    if userID == conversationToUpdate.senderID {
+      conversationToUpdate.isReadBySender = true
+    }
+    else {
+      conversationToUpdate.isReadByRecipient = true
+    }
+    
+    let messagesAreRead = Message(
+      senderID: conversationToUpdate.senderID,
+      recipientID: conversationToUpdate.recipientID,
+      date: conversationToUpdate.date,
+      isReadBySender: conversationToUpdate.isReadBySender,
+      isReadByRecipient: conversationToUpdate.isReadByRecipient
+    )
+    
+    let resourcePath = NetworkPath.messages.rawValue + "\(conversationID)"
+    ResourceRequest<Message>(resourcePath).update(messagesAreRead, tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+        }
+      case .success:
+        break
+      }
+    }
+  }
 }
