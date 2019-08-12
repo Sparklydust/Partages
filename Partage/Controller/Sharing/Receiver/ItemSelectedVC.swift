@@ -424,8 +424,8 @@ extension ItemSelectedVC {
     guard let donatedItemID = donatedItem.id else { return }
     
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
-    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
-      switch result {
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (success) in
+      switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .networkRequestError)
@@ -575,17 +575,21 @@ extension ItemSelectedVC {
           if messages.isEmpty {
             self.createMessageBetweenTwoUser()
           }
-          for message in messages {
-            if message.recipientID == self.senderID && message.senderID == self.firstUserID || message.senderID == self.secondUserID {
-              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
-              break
-            }
-            else if message.senderID == self.senderID && message.recipientID == self.firstUserID || message.recipientID == self.secondUserID {
-              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
-              break
-            }
-            else {
-              self.createMessageBetweenTwoUser()
+          else {
+            for message in messages {
+              if message.recipientID == self.senderID &&
+                (message.senderID == self.firstUserID || message.senderID == self.secondUserID) {
+                self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+                break
+              }
+              else if message.senderID == self.senderID &&
+                (message.recipientID == self.firstUserID || message.recipientID == self.secondUserID) {
+                self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+                break
+              }
+              else {
+                self.createMessageBetweenTwoUser()
+              }
             }
           }
           self.triggerMessageActivityIndicator(false)

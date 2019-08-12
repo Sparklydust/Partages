@@ -34,7 +34,11 @@ class ChatMessageVC: UIViewController {
   var conversationID = Int()
   var conversation: Message?
   
+  var date: String?
+  var time: String?
+  var dateToShow: String?
   var readLastBubble: Bool?
+  var oneUserLeft: Bool?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -72,8 +76,7 @@ extension ChatMessageVC {
     setupSenderMessageView()
     setupSenderMessageTextView()
     setupTableViewDesign()
-    setupTapGesture()
-    setupSwipeGesture()
+    setupTapAndSwipeGestures()
   }
   
   //MARK: Main view design
@@ -142,8 +145,13 @@ extension ChatMessageVC {
   }
 }
 
-//MARK: - Setup tap gesture recognizer
+//MARK: - Setup tap and swipe gestures recognizer
 extension ChatMessageVC {
+  func setupTapAndSwipeGestures() {
+    setupTapGesture()
+    setupSwipeGesture()
+  }
+  
   func setupTapGesture() {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     conversationTableView.addGestureRecognizer(tapGesture)
@@ -152,18 +160,15 @@ extension ChatMessageVC {
   @objc func tableViewTapped() {
     senderMessageTextView.endEditing(true)
   }
-}
-
-//MARK: - Setup swipe gesture to dismiss keyboard
-extension ChatMessageVC {
-  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-    view.endEditing(true)
-  }
   
   func setupSwipeGesture() {
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     swipeDown.direction = .down
     view.addGestureRecognizer(swipeDown)
+  }
+  
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    view.endEditing(true)
   }
 }
 
@@ -229,20 +234,16 @@ extension ChatMessageVC {
   func populateSenderChatBubble(into cell: SenderTVC, at indexPath: IndexPath) {
     let bubble = chatBubbles[indexPath.row]
     
-    var date: String
-    var time: String
-    var dateToShow: String
-    
     let isoDateString = bubble.date
     let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     date = dateAndTime!.asString(style: .short)
     time = dateAndTime!.asString()
     if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
-      dateToShow = "\(date)  \(time)"
+      dateToShow = "\(date!)  \(time!)"
     }
     else {
-      dateToShow = "\(time)"
+      dateToShow = "\(time!)"
     }
     
     cell.senderConversationLabel.text = bubble.content
@@ -254,26 +255,49 @@ extension ChatMessageVC {
   func populateConversationChatBubble(into cell: ConversationTVC, at indexPath: IndexPath) {
     let bubble = chatBubbles[indexPath.row]
     
-    var date: String
-    var time: String
-    var dateToShow: String
-    
     let isoDateString = bubble.date
     let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
-    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-    date = dateAndTime!.asString(style: .short)
-    time = dateAndTime!.asString()
-    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
-      dateToShow = "\(date)  \(time)"
+    if let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) {
+      date = dateAndTime.asString(style: .short)
+      time = dateAndTime.asString()
+      
+      if dateAndTime.isGreaterThanDate(dateToCompare: Date()) {
+        dateToShow = "\(date!)  \(time!)"
+      }
+      else {
+        dateToShow = "\(time!)"
+      }
     }
-    else {
-      dateToShow = "\(time)"
-    }
-    
     cell.conversationLabel.text = bubble.content
     if indexPath.row == chatBubbles.count - 1 {
       cell.dateLabel.text = dateToShow
     }
+  }
+}
+
+//MARK: - Boolean to check if one user left a conversation
+extension ChatMessageVC {
+  func oneUserLeftConversation(_ message: Message) -> Bool {
+    guard message.senderID == StaticLabel.emptyString.rawValue ||
+      message.recipientID == StaticLabel.emptyString.rawValue else { return false }
+    return true
+  }
+}
+
+//MARK: - Add one more cell with info that user left the conversation
+extension ChatMessageVC {
+  func showNewCellSayingUserLeft() {
+    let userLeftChat = ChatMessage(
+      user: StaticLabel.emptyString.rawValue,
+      date: StaticLabel.emptyString.rawValue,
+      content: StaticLabel.userLeftTheConversation.rawValue,
+      messageID: 0
+    )
+    chatBubbles.append(userLeftChat)
+    
+    conversationTableView.beginUpdates()
+    conversationTableView.insertRows(at: [IndexPath.init(row: chatBubbles.count - 1, section: 0)], with: .automatic)
+    conversationTableView.endUpdates()
   }
 }
 
@@ -319,7 +343,12 @@ extension ChatMessageVC {
       case .success(let conversationFetch):
         DispatchQueue.main.async { [weak self] in
           self?.conversation = conversationFetch
+          self?.oneUserLeft = self?.oneUserLeftConversation(conversationFetch)
           self?.updateConversationMessagesToReadByUser()
+          
+          if self!.oneUserLeft! {
+            self?.showNewCellSayingUserLeft()
+          }
         }
       }
     }

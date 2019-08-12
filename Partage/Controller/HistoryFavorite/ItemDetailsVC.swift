@@ -555,6 +555,7 @@ extension ItemDetailsVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     messages = [Message]()
     let userID = UserDefaultsService.shared.userID
+    
     let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
     triggerMessageToActivityIndicator(true)
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
@@ -571,17 +572,22 @@ extension ItemDetailsVC {
           if messages.isEmpty {
             self.createMessageBetweenTwoUser()
           }
-          for message in messages {
-            if message.recipientID == self.senderID && message.senderID == self.firstUserID || message.senderID == self.secondUserID {
-              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
-              break
-            }
-            else if message.senderID == self.senderID && message.recipientID == self.firstUserID || message.recipientID == self.secondUserID {
-              self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
-              break
-            }
-            else {
-              self.createMessageBetweenTwoUser()
+          else {
+            //Check if users are already connected
+            for message in messages {
+              if message.recipientID == self.senderID &&
+                (message.senderID == self.firstUserID || message.senderID == self.secondUserID) {
+                self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+                break
+              }
+              else if message.senderID == self.senderID &&
+                (message.recipientID == self.firstUserID || message.recipientID == self.secondUserID) {
+                self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
+                break
+              }
+              else {
+                self.createMessageBetweenTwoUser()
+              }
             }
           }
           self.triggerMessageToActivityIndicator(false)

@@ -30,4 +30,5 @@ enum StaticLabel: String {
   case donationNotSelected = "don non sélectionné"
   case downloadingDonatedItems = "Chargement des dons"
   case downloadingMessages = "Chargement des messages"
+  case userLeftTheConversation = "a quitté la conversation."
 }

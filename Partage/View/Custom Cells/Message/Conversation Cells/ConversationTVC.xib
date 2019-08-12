@@ -82,7 +82,7 @@
                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                     </constraint>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DM6-8b-wMU" secondAttribute="trailing" constant="100" id="xdJ-ic-cj3">
-                        <variation key="heightClass=regular-widthClass=regular" constant="125"/>
+                        <variation key="heightClass=regular-widthClass=regular" constant="120"/>
                     </constraint>
                 </constraints>
             </tableViewCellContentView>

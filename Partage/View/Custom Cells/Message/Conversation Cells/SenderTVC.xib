@@ -82,7 +82,7 @@
                     <constraint firstItem="tRU-QJ-f7k" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UtF-ey-5Zx"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pNN-M2-7Ot" secondAttribute="bottom" id="iha-aB-7hE"/>
                     <constraint firstItem="bhv-pU-kSK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="100" id="pds-Yb-rb2">
-                        <variation key="heightClass=regular-widthClass=regular" constant="125"/>
+                        <variation key="heightClass=regular-widthClass=regular" constant="120"/>
                     </constraint>
                 </constraints>
             </tableViewCellContentView>

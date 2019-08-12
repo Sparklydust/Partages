@@ -66,6 +66,7 @@ extension ProfileVC {
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
     deleteUserFromUserDefaults()
     deleteAllLabels()
+    allTabsToTheirFirstController()
     performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   
@@ -231,6 +232,7 @@ extension ProfileVC {
           DispatchQueue.main.async { [weak self] in
             self?.deleteAllLabels()
             self?.deleteUserFromUserDefaults()
+            self?.allTabsToTheirFirstController()
             self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
           }
         }
@@ -271,6 +273,17 @@ extension ProfileVC {
     if segue.identifier == Segue.goesToEditProfile.rawValue {
       let destinationVC = segue.destination as! EditProfileVC
       destinationVC.user = user
+    }
+  }
+}
+
+//MARK: - Put all tabs to their origin controller when user disconnect or delete his profile
+extension ProfileVC {
+  func allTabsToTheirFirstController() {
+    for viewController in tabBarController?.viewControllers ?? [] {
+      if let vc = viewController as? UINavigationController {
+        vc.popViewController(animated: true)
+      }
     }
   }
 }
