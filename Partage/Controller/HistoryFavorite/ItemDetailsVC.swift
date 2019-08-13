@@ -555,6 +555,7 @@ extension ItemDetailsVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     messages = [Message]()
     let userID = UserDefaultsService.shared.userID
+    var userAlreadyCommunicate = false
     
     let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
     triggerMessageToActivityIndicator(true)
@@ -577,17 +578,20 @@ extension ItemDetailsVC {
             for message in messages {
               if message.recipientID == self.senderID &&
                 (message.senderID == self.firstUserID || message.senderID == self.secondUserID) {
+                userAlreadyCommunicate = true
                 self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
                 break
               }
               else if message.senderID == self.senderID &&
                 (message.recipientID == self.firstUserID || message.recipientID == self.secondUserID) {
+                userAlreadyCommunicate = true
                 self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
                 break
               }
-              else {
-                self.createMessageBetweenTwoUser()
-              }
+            }
+            guard userAlreadyCommunicate else {
+              self.createMessageBetweenTwoUser()
+              return
             }
           }
           self.triggerMessageToActivityIndicator(false)

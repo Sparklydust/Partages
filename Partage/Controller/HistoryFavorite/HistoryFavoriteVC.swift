@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TableViewReloadAnimation
 
 class HistoryFavoriteVC: UIViewController {
   
@@ -238,8 +239,15 @@ extension HistoryFavoriteVC {
 extension HistoryFavoriteVC {
   func showHistoryCustomCell(_ bool: Bool) {
     isHistoryButtonClicked = bool
-    DispatchQueue.main.async {
-      self.HistoryFavoriteTableView.reloadData()
+    if isHistoryButtonClicked {
+      DispatchQueue.main.async {
+        self.reloadHistoryItems()
+      }
+    }
+    else {
+      DispatchQueue.main.async {
+        self.reloadFavoritedItems()
+      }
     }
   }
 }
@@ -309,8 +317,8 @@ extension HistoryFavoriteVC {
       case .success(let receivedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
+          self.reloadHistoryItems()
           self.itemsHistory.append(contentsOf: receivedItems)
-          self.HistoryFavoriteTableView.reloadData()
           self.triggerActivityIndicator(false)
         }
       }
@@ -359,8 +367,8 @@ extension HistoryFavoriteVC {
       case .success(let itemsFavorited):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
+          self.reloadFavoritedItems()
           self.itemsFavorited.append(contentsOf: itemsFavorited)
-          self.HistoryFavoriteTableView.reloadData()
           self.triggerActivityIndicator(false)
         }
       }
@@ -550,5 +558,16 @@ extension HistoryFavoriteVC {
   
   func endRefreshing() {
     refreshControl.endRefreshing()
+  }
+}
+
+//MARK: - Reload data with an animation
+extension HistoryFavoriteVC {
+  func reloadHistoryItems() {
+    HistoryFavoriteTableView.reloadData(with: .simple(duration: 0.45, direction: .rotation3D(type: .spiderMan), constantDelay: 0))
+  }
+  
+  func reloadFavoritedItems() {
+    HistoryFavoriteTableView.reloadData(with: .simple(duration: 0.45, direction: .rotation3D(type: .captainMarvel), constantDelay: 0))
   }
 }

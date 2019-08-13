@@ -139,19 +139,13 @@ extension ReceiverVC {
     
     let donorItem = itemsNotPicked[indexPath.row]
     
-    let isoDateString = donorItem.pickUpDateTime
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
-    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-    let date = dateAndTime?.asString(style: .short)
-    let time = dateAndTime?.asString()
+    populateDateAndTime(in: cell, with: donorItem.pickUpDateTime)
     
     let itemLocation = CLLocation(latitude: donorItem.latitude, longitude: donorItem.longitude)
     var distance = userLocation.distance(from: itemLocation)
     
     cell.itemTypeLabel.text = donorItem.selectedType
     cell.itemNameLabel.text = donorItem.name
-    cell.dateLabel.text = date
-    cell.timeLabel.text = time
     cell.addMeetingPointOnMap(latitude: donorItem.latitude, longitude: donorItem.longitude)
     
     if distance > 1000 {
@@ -161,6 +155,19 @@ extension ReceiverVC {
     else {
       cell.itemDistanceLabel.text = "\(StaticItemDetail.at.rawValue) \(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.rawValue)"
     }
+  }
+}
+
+//MARK: - To populate date and time in cell
+extension ReceiverVC {
+  func populateDateAndTime(in cell: ReceiverTVC, with isoDateString: String) {
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    let date = dateAndTime?.asString(style: .short)
+    let time = dateAndTime?.asString()
+    
+    cell.dateLabel.text = date
+    cell.timeLabel.text = time
   }
 }
 

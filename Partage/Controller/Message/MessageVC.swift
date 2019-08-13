@@ -123,64 +123,14 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.messageCellIdentifier.rawValue, for: indexPath) as! MessageTVC
     
-    var date: String
-    var time: String
-    var dateToShow: String
-    
     let messageInfo = messages[indexPath.row]
     showMessageInBoldIfNotRead(in: cell, search: messageInfo)
     
-    let isoDateString = messageInfo.date
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
-    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-    date = dateAndTime!.asString(style: .short)
-    time = dateAndTime!.asString()
-    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
-      dateToShow = "\(date)"
-    }
-    else {
-      dateToShow = "\(time)"
-    }
-    cell.dateLabel.text = dateToShow
-    
-    
-    let userToFetch: String
-    if userID == messageInfo.senderID {
-      userToFetch = messageInfo.recipientID
-    }
-    else {
-      userToFetch = messageInfo.senderID
-    }
-
-    let resourcePathToUser = NetworkPath.users.rawValue + userToFetch
-    ResourceRequest<User>(resourcePathToUser).get(tokenNeeded: true) { (success) in
-      switch success {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
-        }
-      case .success(let userFetch):
-        DispatchQueue.main.async {
-          cell.nameLabel.text = userFetch.firstName
-        }
-      }
-    }
-    
+    populateUserFirstName(in: cell, from: messageInfo)
+    populateDateOrTime(in: cell, with: messageInfo.date)
     
     if let messageID = messageInfo.id {
-      let resourcePathToLastChat = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
-      ResourceRequest<ChatMessage>(resourcePathToLastChat).getAll(tokenNeeded: true) { (success) in
-        switch success {
-        case .failure:
-          DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .error, message: .networkRequestError)
-          }
-        case .success(let chatMessages):
-          DispatchQueue.main.async {
-            cell.conversationLabel.text = chatMessages.last?.content
-          }
-        }
-      }
+      populateConversationLabel(in: cell, search: messageID)
     }
     
     return cell
@@ -284,7 +234,7 @@ extension MessageVC {
   }
 }
 
-//MARK: - Found index path of message to be opened automaticlly after unwind segue
+//MARK: - Found index path of message to be opened automatically after unwind segue has performed
 extension MessageVC {
   func getMessageIndexPathToOpen() {
     if firstUserID != nil && secondUserID != nil {
@@ -294,16 +244,11 @@ extension MessageVC {
 
           messageIDToOpen = message.id
           messageIndexPathToOpen = messages.firstIndex {$0 === message}
-
-          print(messageIDToOpen)
-          print(messageIndexPathToOpen)
           
           if let indexPathToOpen = messageIndexPathToOpen {
             let indexPath = IndexPath.init(row: indexPathToOpen, section: 0)
             messageTableView.scrollToRow(at: indexPath, at: .none, animated: true)
-            print(indexPath)
           }
-          
           guard let messageID = messageIDToOpen else { return }
           fetchChatMessagesFromSelectedCells(messageID)
 
@@ -335,12 +280,22 @@ extension MessageVC {
       cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
       cell.dateLabel.setupFont(as: .superclarendonBold, sized: .twelve, forIPad: .twenty, in: .mainBlue)
       cell.conversationLabel.setupFont(as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+      cell.profileImage.roundedWithMainBlueBorder()
     }
     else {
       cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
       cell.dateLabel.setupFont(as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
       cell.conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+      cell.profileImage.roundedWithMiddleBlueBorder()
     }
+  }
+}
+
+//MARK: - Set info cell if one user left the conversation to close
+extension MessageVC {
+  func setConversationIsClosed(in cell: MessageTVC) {
+    cell.nameLabel.setupFont(as: .superclarendonLight, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+    cell.nameLabel.text = StaticLabel.closedConversation.rawValue
   }
 }
 
@@ -463,32 +418,74 @@ extension MessageVC {
   }
 }
 
-//MARK: - Fetch user linked to message to populate cell username
+//MARK: - To populate user first name linked to the message
 extension MessageVC {
-  func fetchUserLinkedTo(_ message: Message) -> String {
-    let recipientID: String
-    var userFirstName = String()
-    
-    if userID == message.senderID {
-      recipientID = message.recipientID
+  func populateUserFirstName(in cell: MessageTVC, from messageInfo: Message) {
+    let userToFetch: String
+    if userID == messageInfo.senderID {
+      userToFetch = messageInfo.recipientID
     }
     else {
-      recipientID = message.senderID
+      userToFetch = messageInfo.senderID
     }
     
-    let resourcePath = NetworkPath.users.rawValue + recipientID
-    ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { (success) in
+    if userToFetch != StaticLabel.emptyString.rawValue {
+      let resourcePathToUser = NetworkPath.users.rawValue + userToFetch
+      ResourceRequest<User>(resourcePathToUser).get(tokenNeeded: true) { (success) in
+        switch success {
+        case .failure:
+          DispatchQueue.main.async { [weak self] in
+            self?.showAlert(title: .error, message: .networkRequestError)
+          }
+        case .success(let userFetch):
+          DispatchQueue.main.async {
+            cell.nameLabel.text = userFetch.firstName
+          }
+        }
+      }
+    }
+    else {
+      setConversationIsClosed(in: cell)
+    }
+  }
+}
+
+//MARK: - To populate a cell with the last chat bubble message
+extension MessageVC {
+  func populateConversationLabel(in cell: MessageTVC, search messageID: Int) {
+    let resourcePathToLastChat = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    ResourceRequest<ChatMessage>(resourcePathToLastChat).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .networkRequestError)
         }
-      case .success(let userFetch):
+      case .success(let chatMessages):
         DispatchQueue.main.async {
-          userFirstName = userFetch.firstName
+          cell.conversationLabel.text = chatMessages.last?.content
         }
       }
     }
-    return userFirstName
+  }
+}
+
+//MARK: - To populate date or time in each message cell
+extension MessageVC {
+  func populateDateOrTime(in cell: MessageTVC, with isoDateString: String) {
+    var date: String
+    var time: String
+    var dateToShow: String
+    
+    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
+    date = dateAndTime!.asString(style: .short)
+    time = dateAndTime!.asString()
+    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
+      dateToShow = "\(date)"
+    }
+    else {
+      dateToShow = "\(time)"
+    }
+    cell.dateLabel.text = dateToShow
   }
 }

@@ -526,13 +526,7 @@ extension ItemSelectedVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     let dateAndTime = ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
     
-    var recipientID = String()
-    if senderID == donor?.id?.uuidString {
-      recipientID = (receiver?.id?.uuidString)!
-    }
-    else {
-      recipientID = (donor?.id?.uuidString)!
-    }
+    guard let recipientID = donor?.id?.uuidString else { return }
     
     let message = Message(senderID: senderID, recipientID: recipientID, date: dateAndTime, isReadBySender: true, isReadByRecipient: false)
     
@@ -559,6 +553,8 @@ extension ItemSelectedVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     messages = [Message]()
     let userID = UserDefaultsService.shared.userID
+    var userAlreadyCommunicate = false
+    
     let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
     triggerMessageActivityIndicator(true)
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
@@ -576,20 +572,24 @@ extension ItemSelectedVC {
             self.createMessageBetweenTwoUser()
           }
           else {
+            //Check if users are already connected
             for message in messages {
               if message.recipientID == self.senderID &&
                 (message.senderID == self.firstUserID || message.senderID == self.secondUserID) {
+                userAlreadyCommunicate = true
                 self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
                 break
               }
               else if message.senderID == self.senderID &&
                 (message.recipientID == self.firstUserID || message.recipientID == self.secondUserID) {
+                userAlreadyCommunicate = true
                 self.performSegue(withIdentifier: Segue.unwindToMessageVC.rawValue, sender: self)
                 break
               }
-              else {
-                self.createMessageBetweenTwoUser()
-              }
+            }
+            guard userAlreadyCommunicate else {
+              self.createMessageBetweenTwoUser()
+              return
             }
           }
           self.triggerMessageActivityIndicator(false)

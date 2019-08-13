@@ -7,51 +7,122 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0DAA9E8A0D48E0FD5C266479ED7FF8E /* Pods-Partage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DE328B209F2D2DB9DCFEE65636728D /* Pods-Partage-dummy.m */; };
-		E0AAB0874FC354EBE01A425C54BD722B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		F40CBEFDFA884F589E21D63795EA0EB4 /* Pods-Partage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BAC4E3351F7EFBBDC858437A214F5893 /* Pods-Partage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04318DDAAD9F976CC6502A3FB9E3F359 /* TableViewReloadAnimation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6116DA26B696940A5155CF4590E50B /* TableViewReloadAnimation-dummy.m */; };
+		1E34CF6120991DCE10AF5FE21C58DB2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		2E7676F4F56AEB806007ED9AEAED443E /* Pods-Partage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E60E56D4D72835CABFCDC8A9F8B6C0 /* Pods-Partage-dummy.m */; };
+		3EB6750F4D4A1092564DBE933DB52C0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		4D3812E892D2EA41DD72DAADEAF93EB5 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA78634E0B8E7727315AAF9ABC0FC0 /* UITableView+Extension.swift */; };
+		645C84FAA14776C1197E2AAB75AD3603 /* TableViewReloadAnimation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13A9BF0191F8A0811DC94EB196FA2A0E /* TableViewReloadAnimation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89339238767EED26F90FFADCA9FB1A2D /* Pods-Partage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E20CF070138F34CDDC698B7DC60D4C /* Pods-Partage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		31E36C8F8F665528638307659DD6861D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFDA17564FD7ADDA690BAEE77EC378E2;
+			remoteInfo = TableViewReloadAnimation;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		012DEC4437B3BFBD2358C198B3D5FDB2 /* Pods-Partage-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Partage-acknowledgements.markdown"; sourceTree = "<group>"; };
-		0D0E79B842FB9836D03F895443D9639C /* Pods-Partage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Partage.release.xcconfig"; sourceTree = "<group>"; };
+		0AAA78634E0B8E7727315AAF9ABC0FC0 /* UITableView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView+Extension.swift"; path = "TableViewReloadAnimation/UITableView+Extension.swift"; sourceTree = "<group>"; };
+		1311ECDC8E8151DD48FCD04D495BE4A8 /* TableViewReloadAnimation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TableViewReloadAnimation.xcconfig; sourceTree = "<group>"; };
+		13A9BF0191F8A0811DC94EB196FA2A0E /* TableViewReloadAnimation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TableViewReloadAnimation-umbrella.h"; sourceTree = "<group>"; };
+		2350631B3B986A81B04C0119B4B699DD /* Pods-Partage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Partage.debug.xcconfig"; sourceTree = "<group>"; };
+		2DB4F52E56D6875FAF8BAB274AF663CA /* Pods-Partage-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Partage-frameworks.sh"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		44D314AC39DDA985EE3C23262BFCB52F /* TableViewReloadAnimation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TableViewReloadAnimation-Info.plist"; sourceTree = "<group>"; };
+		4F0E4B88501DD4D3F95B73B80E3BC961 /* Pods-Partage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Partage.release.xcconfig"; sourceTree = "<group>"; };
+		79DE3C56ED6178E7BFD24AE8FDC2C413 /* TableViewReloadAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TableViewReloadAnimation.framework; path = TableViewReloadAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D748907185A967FFED5F6D4F4D93C3B /* TableViewReloadAnimation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TableViewReloadAnimation.modulemap; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A1526C7FD5BEC04D02E698BEFC0CD7BE /* Pods-Partage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Partage.modulemap"; sourceTree = "<group>"; };
-		A6673B73DAD18A9DC3CC0EEFB9583294 /* Pods-Partage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Partage.debug.xcconfig"; sourceTree = "<group>"; };
-		BAC4E3351F7EFBBDC858437A214F5893 /* Pods-Partage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Partage-umbrella.h"; sourceTree = "<group>"; };
-		BB978E0B285B5AC97E54879866D432FF /* Pods-Partage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Partage-Info.plist"; sourceTree = "<group>"; };
-		E5CF8E484C59F5165C7F33CFCC73504C /* Pods-Partage-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Partage-acknowledgements.plist"; sourceTree = "<group>"; };
-		F3DE328B209F2D2DB9DCFEE65636728D /* Pods-Partage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Partage-dummy.m"; sourceTree = "<group>"; };
+		9E96E7D4E46A894A6363B6CD9742B36B /* Pods-Partage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Partage.modulemap"; sourceTree = "<group>"; };
+		A9E20CF070138F34CDDC698B7DC60D4C /* Pods-Partage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Partage-umbrella.h"; sourceTree = "<group>"; };
+		B8853C3844DCE577FF9DD5DBBB8C5656 /* Pods-Partage-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Partage-acknowledgements.plist"; sourceTree = "<group>"; };
+		D22A2430B2F0D7A2385C92C0FC21B53A /* Pods-Partage-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Partage-acknowledgements.markdown"; sourceTree = "<group>"; };
+		EE70D83A8F1C9D6759146C0AE7BA7A88 /* TableViewReloadAnimation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TableViewReloadAnimation-prefix.pch"; sourceTree = "<group>"; };
+		F11D83C43063709615AE04B87349883A /* Pods-Partage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Partage-Info.plist"; sourceTree = "<group>"; };
+		F2E60E56D4D72835CABFCDC8A9F8B6C0 /* Pods-Partage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Partage-dummy.m"; sourceTree = "<group>"; };
 		F4A8A1D7707DE6D12BE9006C4BE62A7F /* Pods_Partage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Partage.framework; path = "Pods-Partage.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD6116DA26B696940A5155CF4590E50B /* TableViewReloadAnimation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TableViewReloadAnimation-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FCCB382FC397045D5F006FBD4F7DAA68 /* Frameworks */ = {
+		231B39FBA5C4F6F88CCCFE60A92B4A36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0AAB0874FC354EBE01A425C54BD722B /* Foundation.framework in Frameworks */,
+				3EB6750F4D4A1092564DBE933DB52C0D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58824F95838041950A3C9A54526F9049 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E34CF6120991DCE10AF5FE21C58DB2D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14C3CBD6A9A741DAE220287ABA8523F7 /* Products */ = {
+		3B541B7368107A48B11EF0F1CF988498 /* Pods-Partage */ = {
+			isa = PBXGroup;
+			children = (
+				9E96E7D4E46A894A6363B6CD9742B36B /* Pods-Partage.modulemap */,
+				D22A2430B2F0D7A2385C92C0FC21B53A /* Pods-Partage-acknowledgements.markdown */,
+				B8853C3844DCE577FF9DD5DBBB8C5656 /* Pods-Partage-acknowledgements.plist */,
+				F2E60E56D4D72835CABFCDC8A9F8B6C0 /* Pods-Partage-dummy.m */,
+				2DB4F52E56D6875FAF8BAB274AF663CA /* Pods-Partage-frameworks.sh */,
+				F11D83C43063709615AE04B87349883A /* Pods-Partage-Info.plist */,
+				A9E20CF070138F34CDDC698B7DC60D4C /* Pods-Partage-umbrella.h */,
+				2350631B3B986A81B04C0119B4B699DD /* Pods-Partage.debug.xcconfig */,
+				4F0E4B88501DD4D3F95B73B80E3BC961 /* Pods-Partage.release.xcconfig */,
+			);
+			name = "Pods-Partage";
+			path = "Target Support Files/Pods-Partage";
+			sourceTree = "<group>";
+		};
+		5813F0643CC73CD34EA648760E90362A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B541B7368107A48B11EF0F1CF988498 /* Pods-Partage */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		71ED7AD5B9A30E7F00B3DCBE34C98C97 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9D748907185A967FFED5F6D4F4D93C3B /* TableViewReloadAnimation.modulemap */,
+				1311ECDC8E8151DD48FCD04D495BE4A8 /* TableViewReloadAnimation.xcconfig */,
+				FD6116DA26B696940A5155CF4590E50B /* TableViewReloadAnimation-dummy.m */,
+				44D314AC39DDA985EE3C23262BFCB52F /* TableViewReloadAnimation-Info.plist */,
+				EE70D83A8F1C9D6759146C0AE7BA7A88 /* TableViewReloadAnimation-prefix.pch */,
+				13A9BF0191F8A0811DC94EB196FA2A0E /* TableViewReloadAnimation-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TableViewReloadAnimation";
+			sourceTree = "<group>";
+		};
+		A3B32C039A34669CCD3456F5AD8BB570 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				F4A8A1D7707DE6D12BE9006C4BE62A7F /* Pods_Partage.framework */,
+				79DE3C56ED6178E7BFD24AE8FDC2C413 /* TableViewReloadAnimation.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		63896897F5A30B68C147539B11CE5899 /* Targets Support Files */ = {
+		BF1EBF61DE2CD2A4975D79D6F0969FB9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C49685AFFB5E38F114C714638CE78B3E /* Pods-Partage */,
+				E7845D9F6CA16DA73716A0206BBB96CD /* TableViewReloadAnimation */,
 			);
-			name = "Targets Support Files";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -62,29 +133,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		C49685AFFB5E38F114C714638CE78B3E /* Pods-Partage */ = {
-			isa = PBXGroup;
-			children = (
-				A1526C7FD5BEC04D02E698BEFC0CD7BE /* Pods-Partage.modulemap */,
-				012DEC4437B3BFBD2358C198B3D5FDB2 /* Pods-Partage-acknowledgements.markdown */,
-				E5CF8E484C59F5165C7F33CFCC73504C /* Pods-Partage-acknowledgements.plist */,
-				F3DE328B209F2D2DB9DCFEE65636728D /* Pods-Partage-dummy.m */,
-				BB978E0B285B5AC97E54879866D432FF /* Pods-Partage-Info.plist */,
-				BAC4E3351F7EFBBDC858437A214F5893 /* Pods-Partage-umbrella.h */,
-				A6673B73DAD18A9DC3CC0EEFB9583294 /* Pods-Partage.debug.xcconfig */,
-				0D0E79B842FB9836D03F895443D9639C /* Pods-Partage.release.xcconfig */,
-			);
-			name = "Pods-Partage";
-			path = "Target Support Files/Pods-Partage";
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				14C3CBD6A9A741DAE220287ABA8523F7 /* Products */,
-				63896897F5A30B68C147539B11CE5899 /* Targets Support Files */,
+				BF1EBF61DE2CD2A4975D79D6F0969FB9 /* Pods */,
+				A3B32C039A34669CCD3456F5AD8BB570 /* Products */,
+				5813F0643CC73CD34EA648760E90362A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,14 +152,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E7845D9F6CA16DA73716A0206BBB96CD /* TableViewReloadAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				0AAA78634E0B8E7727315AAF9ABC0FC0 /* UITableView+Extension.swift */,
+				71ED7AD5B9A30E7F00B3DCBE34C98C97 /* Support Files */,
+			);
+			name = TableViewReloadAnimation;
+			path = TableViewReloadAnimation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		260616EA4F6EF2F8F768EE221E16F29A /* Headers */ = {
+		B02EF2DEA6F384CF76EE7B8C4A932A32 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40CBEFDFA884F589E21D63795EA0EB4 /* Pods-Partage-umbrella.h in Headers */,
+				89339238767EED26F90FFADCA9FB1A2D /* Pods-Partage-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBDB7781AE52D144E63A95565E2DF448 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				645C84FAA14776C1197E2AAB75AD3603 /* TableViewReloadAnimation-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,20 +186,39 @@
 /* Begin PBXNativeTarget section */
 		9D08BD20E2A73A962AEAAC771B9D8DE6 /* Pods-Partage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB68C4AC6BE54E5F8151F6E53CD15D79 /* Build configuration list for PBXNativeTarget "Pods-Partage" */;
+			buildConfigurationList = AC5D9962D67DEB5B73EAA56A47E9CFFA /* Build configuration list for PBXNativeTarget "Pods-Partage" */;
 			buildPhases = (
-				260616EA4F6EF2F8F768EE221E16F29A /* Headers */,
-				A4DBCAF9E5E87E66A82F70CC7A37DAB5 /* Sources */,
-				FCCB382FC397045D5F006FBD4F7DAA68 /* Frameworks */,
-				6F3902B87B036C8656E02C37AF2ACC67 /* Resources */,
+				B02EF2DEA6F384CF76EE7B8C4A932A32 /* Headers */,
+				87E4F9BAF092F2D3BD6F60FBB8DCE651 /* Sources */,
+				58824F95838041950A3C9A54526F9049 /* Frameworks */,
+				F69143DDB70C59D8E4CE91DE181BDEAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7FE54C70C122AC8114C1AED54F3679E /* PBXTargetDependency */,
+			);
+			name = "Pods-Partage";
+			productName = "Pods-Partage";
+			productReference = F4A8A1D7707DE6D12BE9006C4BE62A7F /* Pods_Partage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CFDA17564FD7ADDA690BAEE77EC378E2 /* TableViewReloadAnimation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D445DC51AEABC37B6DD9AB0D561D46E4 /* Build configuration list for PBXNativeTarget "TableViewReloadAnimation" */;
+			buildPhases = (
+				CBDB7781AE52D144E63A95565E2DF448 /* Headers */,
+				C3B9727E8BA7F8544449B109D4BEFFE4 /* Sources */,
+				231B39FBA5C4F6F88CCCFE60A92B4A36 /* Frameworks */,
+				75B9D5B2CA6E54D789985BA84BB133FB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-Partage";
-			productName = "Pods-Partage";
-			productReference = F4A8A1D7707DE6D12BE9006C4BE62A7F /* Pods_Partage.framework */;
+			name = TableViewReloadAnimation;
+			productName = TableViewReloadAnimation;
+			productReference = 79DE3C56ED6178E7BFD24AE8FDC2C413 /* TableViewReloadAnimation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -145,17 +238,25 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 14C3CBD6A9A741DAE220287ABA8523F7 /* Products */;
+			productRefGroup = A3B32C039A34669CCD3456F5AD8BB570 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				9D08BD20E2A73A962AEAAC771B9D8DE6 /* Pods-Partage */,
+				CFDA17564FD7ADDA690BAEE77EC378E2 /* TableViewReloadAnimation */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6F3902B87B036C8656E02C37AF2ACC67 /* Resources */ = {
+		75B9D5B2CA6E54D789985BA84BB133FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F69143DDB70C59D8E4CE91DE181BDEAD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -165,23 +266,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A4DBCAF9E5E87E66A82F70CC7A37DAB5 /* Sources */ = {
+		87E4F9BAF092F2D3BD6F60FBB8DCE651 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0DAA9E8A0D48E0FD5C266479ED7FF8E /* Pods-Partage-dummy.m in Sources */,
+				2E7676F4F56AEB806007ED9AEAED443E /* Pods-Partage-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3B9727E8BA7F8544449B109D4BEFFE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04318DDAAD9F976CC6502A3FB9E3F359 /* TableViewReloadAnimation-dummy.m in Sources */,
+				4D3812E892D2EA41DD72DAADEAF93EB5 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C7FE54C70C122AC8114C1AED54F3679E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TableViewReloadAnimation;
+			target = CFDA17564FD7ADDA690BAEE77EC378E2 /* TableViewReloadAnimation */;
+			targetProxy = 31E36C8F8F665528638307659DD6861D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		0FA4D1A8B732798F40BB16ACF72DF13D /* Debug */ = {
+		0D62C46B33A5C0B9F9A38A64BEDD1746 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6673B73DAD18A9DC3CC0EEFB9583294 /* Pods-Partage.debug.xcconfig */;
+			baseConfigurationReference = 1311ECDC8E8151DD48FCD04D495BE4A8 /* TableViewReloadAnimation.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -191,28 +308,28 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Partage/Pods-Partage-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Partage/Pods-Partage.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation.modulemap";
+				PRODUCT_MODULE_NAME = TableViewReloadAnimation;
+				PRODUCT_NAME = TableViewReloadAnimation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		131356BE54884448CA49C07BEDF4BB2A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -278,9 +395,47 @@
 			};
 			name = Debug;
 		};
-		1D9D05B7A8F4FB08F3D25140956CDA97 /* Release */ = {
+		3549AFB05831C1A3CF1B0AF748C066DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D0E79B842FB9836D03F895443D9639C /* Pods-Partage.release.xcconfig */;
+			baseConfigurationReference = 2350631B3B986A81B04C0119B4B699DD /* Pods-Partage.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Partage/Pods-Partage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Partage/Pods-Partage.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5C1C1E764F418DD886527A83AD310FF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F0E4B88501DD4D3F95B73B80E3BC961 /* Pods-Partage.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -316,6 +471,41 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		BA6F71A41B02E6EF7D7ACB8A90B7C187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1311ECDC8E8151DD48FCD04D495BE4A8 /* TableViewReloadAnimation.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TableViewReloadAnimation/TableViewReloadAnimation.modulemap";
+				PRODUCT_MODULE_NAME = TableViewReloadAnimation;
+				PRODUCT_NAME = TableViewReloadAnimation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		F090CD07A80273D5A73C8EA19224ADDB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -389,11 +579,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB68C4AC6BE54E5F8151F6E53CD15D79 /* Build configuration list for PBXNativeTarget "Pods-Partage" */ = {
+		AC5D9962D67DEB5B73EAA56A47E9CFFA /* Build configuration list for PBXNativeTarget "Pods-Partage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0FA4D1A8B732798F40BB16ACF72DF13D /* Debug */,
-				1D9D05B7A8F4FB08F3D25140956CDA97 /* Release */,
+				3549AFB05831C1A3CF1B0AF748C066DD /* Debug */,
+				5C1C1E764F418DD886527A83AD310FF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D445DC51AEABC37B6DD9AB0D561D46E4 /* Build configuration list for PBXNativeTarget "TableViewReloadAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA6F71A41B02E6EF7D7ACB8A90B7C187 /* Debug */,
+				0D62C46B33A5C0B9F9A38A64BEDD1746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
