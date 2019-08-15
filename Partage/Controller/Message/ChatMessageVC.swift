@@ -18,6 +18,8 @@ class ChatMessageVC: UIViewController {
   @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var sendMessageButton: UIButton!
   
+  var delegate: CanReceiveInfoMessageIsReadDelegate?
+  
   var keyboardHeight: CGFloat = .zero
   
   // Match textViewHeight with its height in attribute inspector
@@ -40,13 +42,7 @@ class ChatMessageVC: UIViewController {
   var readLastBubble: Bool?
   var oneUserLeft: Bool?
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    DispatchQueue.main.async {
-      self.conversationTableView.reloadData()
-    }
-    fetchConversationAttachedToChatBubbles()
-  }
+  var timer: Timer?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +51,20 @@ class ChatMessageVC: UIViewController {
     observeKeyboardNotification()
     manageTableViewConversationCellSize()
     conversationTableView.scrollToBottomRow()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    conversationTableView.reloadData()
+    fetchConversationAttachedToChatBubbles()
+    fetchLastChatBubblesIfAnyUsingTimeInterval()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    timer?.invalidate()
+    delegate?.confirmMessageIsReadReceived(of: conversationID)
+    navigationController?.popToRootViewController(animated: true)
   }
 }
 
@@ -115,6 +125,11 @@ extension ChatMessageVC: UITableViewDataSource, UITableViewDelegate {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.conversationCellIdentifier.rawValue, for: indexPath) as! ConversationTVC
       populateConversationChatBubble(into: cell, at: indexPath)
       return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if tableView.isLast(for: indexPath) {
     }
   }
 }
@@ -245,11 +260,7 @@ extension ChatMessageVC {
     else {
       dateToShow = "\(time!)"
     }
-    
     cell.senderConversationLabel.text = bubble.content
-    if indexPath.row == chatBubbles.count - 1 {
-      cell.senderDateLabel.text = dateToShow
-    }
   }
   
   func populateConversationChatBubble(into cell: ConversationTVC, at indexPath: IndexPath) {
@@ -269,9 +280,6 @@ extension ChatMessageVC {
       }
     }
     cell.conversationLabel.text = bubble.content
-    if indexPath.row == chatBubbles.count - 1 {
-      cell.dateLabel.text = dateToShow
-    }
   }
 }
 
@@ -294,6 +302,7 @@ extension ChatMessageVC {
       messageID: 0
     )
     chatBubbles.append(userLeftChat)
+    timer?.invalidate()
     
     conversationTableView.beginUpdates()
     conversationTableView.insertRows(at: [IndexPath.init(row: chatBubbles.count - 1, section: 0)], with: .automatic)
@@ -425,5 +434,41 @@ extension ChatMessageVC {
         break
       }
     }
+  }
+}
+
+//MARK: - Fetch chat messages to be displayed on ChatMessageVC
+extension ChatMessageVC {
+  func fetchAllChatBubblesForTheTimerIntervalFrom(_ messageID: Int) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let countBubbles = chatBubbles.count
+
+    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    ResourceRequest<ChatMessage>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let allChatMessages):
+        DispatchQueue.main.async { [weak self] in
+          if countBubbles < allChatMessages.count {
+            self?.chatBubbles = [ChatMessage]()
+            self?.chatBubbles.append(contentsOf: allChatMessages)
+            self?.conversationTableView.reloadData()
+            self?.conversationTableView.scrollToBottomRow()
+          }
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Timer interval to fetch new chat bubbles
+extension ChatMessageVC {
+  func fetchLastChatBubblesIfAnyUsingTimeInterval() {
+    timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (_) in
+      DispatchQueue.main.async {
+        self.fetchAllChatBubblesForTheTimerIntervalFrom(self.conversationID)
+      }
+    })
   }
 }

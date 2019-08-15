@@ -90,14 +90,12 @@ extension ItemImagesVC {
 //MARK: - Setup for donator view design
 extension ItemImagesVC {
   func setupDonatorVCLook() {
-    
   }
 }
 
 //MARK: - Setup for receiver view design
 extension ItemImagesVC {
   func setupReceiverVCLook() {
-    
   }
 }
 

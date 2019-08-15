@@ -21,10 +21,13 @@ class SharingVC: UIViewController {
   
   var user: User? {
     didSet {
-      guard let firstName = user?.firstName else { return }
-      let helloUser = ButtonName.afterSignedIn.rawValue + firstName
-      signInSignUpButton.setTitle(helloUser , for: .normal)
+      populateUserInfoOnSignInButton()
     }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupMainDesign()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -32,11 +35,6 @@ class SharingVC: UIViewController {
     navigationController?.setNavigationBarHidden(true, animated: false)
     triggerActivityIndicator(false)
     populateSignInSignUpButtonDesign()
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupMainDesign()
   }
 }
 
@@ -127,21 +125,6 @@ extension SharingVC {
   }
 }
 
-//MARK: - User sign in change SignInSignUp button
-extension SharingVC {
-  func populateSignInSignUpButtonDesign() {
-    if UserDefaultsService.shared.token != nil {
-      fetchUserFromTheDatabase()
-      signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.rawValue)
-      signInSignUpButton.isEnabled = false
-    }
-    else {
-      signInSignUpButton.signInSignUpDesign(title: ButtonName.signInSignUp.rawValue)
-      signInSignUpButton.isEnabled = true
-    }
-  }
-}
-
 //MARK: - Fetch all donors items from database and perform segue to ReceiverVC
 extension SharingVC {
   func fetchDonorsItemsFromDatabase() {
@@ -183,5 +166,29 @@ extension SharingVC {
         }
       }
     }
+  }
+}
+
+//MARK: - User sign in change SignInSignUp button
+extension SharingVC {
+  func populateSignInSignUpButtonDesign() {
+    if UserDefaultsService.shared.token != nil {
+      fetchUserFromTheDatabase()
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.rawValue)
+      signInSignUpButton.isEnabled = false
+    }
+    else {
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.signInSignUp.rawValue)
+      signInSignUpButton.isEnabled = true
+    }
+  }
+}
+
+//MARK: - Populate user info after logged in
+extension SharingVC {
+  func populateUserInfoOnSignInButton() {
+    guard let firstName = user?.firstName else { return }
+    let helloUser = ButtonName.afterSignedIn.rawValue + firstName
+    signInSignUpButton.setTitle(helloUser , for: .normal)
   }
 }

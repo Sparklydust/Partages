@@ -361,10 +361,14 @@
                                     <action selector="contactUsButtonAction:" destination="VSA-tz-bYP" eventType="touchUpInside" id="TDc-0V-VJo"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="M5A-Dd-LAb">
+                                <rect key="frame" x="40" y="403" width="334" height="90"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OH9-W6-Eth" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="5vI-Sx-UAY"/>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="top" secondItem="JxU-Di-5BZ" secondAttribute="top" id="FBr-xU-tRW"/>
                             <constraint firstItem="BaT-Cg-a2w" firstAttribute="trailing" secondItem="JxU-Di-5BZ" secondAttribute="trailing" constant="40" id="IWY-uC-wW3">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -372,11 +376,14 @@
                             <constraint firstItem="bJt-md-kzl" firstAttribute="top" secondItem="OH9-W6-Eth" secondAttribute="bottom" constant="15" id="LV2-R0-2OU">
                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="bottom" secondItem="JxU-Di-5BZ" secondAttribute="bottom" id="OWy-VU-ahZ"/>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="leading" secondItem="JxU-Di-5BZ" secondAttribute="leading" id="V6O-mG-szx"/>
                             <constraint firstItem="OH9-W6-Eth" firstAttribute="top" secondItem="Wkd-OJ-UZM" secondAttribute="bottom" constant="15" id="YJ4-l1-1Ai">
                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="centerY" secondItem="BaT-Cg-a2w" secondAttribute="centerY" constant="-2.5" id="atz-rE-FMO"/>
                             <constraint firstItem="bJt-md-kzl" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="fy4-Pc-poD"/>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="centerY" secondItem="zM6-ce-0EZ" secondAttribute="centerY" id="hBG-57-tOh"/>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="leading" secondItem="BaT-Cg-a2w" secondAttribute="leading" constant="40" id="hh6-kq-I2q">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -387,6 +394,8 @@
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="top" secondItem="BR9-fP-p5g" secondAttribute="bottom" constant="20" id="kLW-bt-5GS">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="vxE-CF-m7S"/>
+                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="trailing" secondItem="JxU-Di-5BZ" secondAttribute="trailing" id="x1b-rD-qNM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BaT-Cg-a2w"/>
                     </view>
@@ -399,6 +408,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="M5A-Dd-LAb" id="8EZ-dv-rYr"/>
                         <outlet property="contactUsButton" destination="Wkd-OJ-UZM" id="xJ2-KN-AQL"/>
                         <outlet property="deleteProfileButton" destination="bJt-md-kzl" id="T5W-yd-Xhe"/>
                         <outlet property="disconnectProfileButton" destination="OH9-W6-Eth" id="zmG-dS-ZWb"/>

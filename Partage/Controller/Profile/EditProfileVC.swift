@@ -309,21 +309,6 @@ extension EditProfileVC {
       }
     }
   }
-  
-  func checkIfEmptyFields(_ firstName: String, _ email: String, _ completion: @escaping () -> ()) {
-    switch true {
-    case firstName.isEmpty:
-      showAlert(title: .firstNameError, message: .addFirstName)
-      break
-    case email.isEmpty || !email.isValidEmail():
-      showAlert(title: .emailError, message: .addEmail)
-      break
-    default:
-      resignTextFieldResponders()
-      triggerActivityIndicator(true)
-      completion()
-    }
-  }
 }
 
 //MARK: - User update his profile and password
@@ -356,7 +341,28 @@ extension EditProfileVC {
       }
     }
   }
-  
+}
+
+//MARK: - Switch to check if fields are is empty or not, password not included
+extension EditProfileVC {
+  func checkIfEmptyFields(_ firstName: String, _ email: String, _ completion: @escaping () -> ()) {
+    switch true {
+    case firstName.isEmpty:
+      showAlert(title: .firstNameError, message: .addFirstName)
+      break
+    case email.isEmpty || !email.isValidEmail():
+      showAlert(title: .emailError, message: .addEmail)
+      break
+    default:
+      resignTextFieldResponders()
+      triggerActivityIndicator(true)
+      completion()
+    }
+  }
+}
+
+//MARK: - Switch to check if all fields included password are empty or not
+extension EditProfileVC {
   func checkForEmptyFieldsAndPassword(_ firstName: String, _ email: String, _ password: String, completion: @escaping () -> ()) {
     switch true {
     case firstName.isEmpty:

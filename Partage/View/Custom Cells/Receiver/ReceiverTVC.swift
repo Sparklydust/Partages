@@ -143,9 +143,9 @@ extension ReceiverTVC {
 //MARK: - Setup static labels
 extension ReceiverTVC {
   func setupStaticLabels() {
-    staticLabels[0].text = StaticItemDetail.type.rawValue
-    staticLabels[1].text = StaticItemDetail.the.rawValue
-    staticLabels[2].text = StaticItemDetail.at.rawValue
+    staticLabels[0].text = StaticLabel.emptyString.rawValue
+    staticLabels[1].text = StaticLabel.emptyString.rawValue
+    staticLabels[2].text = StaticLabel.emptyString.rawValue
     for label in staticLabels {
       label.setupFont(as: .arial, sized: .seventeen, forIPad: .twentyThree, in: .typoBlue)
     }

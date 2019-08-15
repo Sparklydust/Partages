@@ -19,6 +19,12 @@ class ReceiverVC: UIViewController {
   
   let refreshControl = UIRefreshControl()
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupMainDesign()
+    setupAllDelegates()
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
@@ -26,12 +32,6 @@ class ReceiverVC: UIViewController {
     DispatchQueue.main.async {
       self.receiverTableView.reloadData()
     }
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupMainDesign()
-    setupAllDelegates()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -150,10 +150,10 @@ extension ReceiverVC {
     
     if distance > 1000 {
       distance /= 1000
-      cell.itemDistanceLabel.text = "\(StaticItemDetail.at.rawValue) \(String(format: "%.2f", distance)) \(StaticItemDetail.distanceInKm.rawValue)"
+      cell.itemDistanceLabel.text = "\(String(format: "%.2f", distance)) \(StaticItemDetail.distanceInKm.rawValue)"
     }
     else {
-      cell.itemDistanceLabel.text = "\(StaticItemDetail.at.rawValue) \(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.rawValue)"
+      cell.itemDistanceLabel.text = "\(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.rawValue)"
     }
   }
 }
@@ -189,16 +189,42 @@ extension ReceiverVC {
     ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
-        }
+        break
       case .success(let users):
         DispatchQueue.main.async {
           for user in users {
             if user.id?.uuidString == UserDefaultsService.shared.userID {
               cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
             }
+            else {
+              cell.favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
+            }
           }
+          self.receiverTableView.reloadData()
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch all donated items from database for refresh control
+extension ReceiverVC {
+  func fetchDonorsItemsFromDatabase() {
+    let resourcePath = NetworkPath.donatedItems.rawValue
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.endRefreshing()
+        }
+      case .success(let donatedItems):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.itemsNotPicked = [DonatedItem]()
+          self.itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
+          self.endRefreshing()
+          self.receiverTableView.reloadData()
         }
       }
     }
@@ -215,27 +241,6 @@ extension ReceiverVC {
   
   @objc private func refreshDonatedItems(_ sender: Any) {
     fetchDonorsItemsFromDatabase()
-  }
-  
-  func fetchDonorsItemsFromDatabase() {
-    itemsNotPicked = [DonatedItem]()
-    let resourcePath = NetworkPath.donatedItems.rawValue
-    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loadItemError)
-          self?.endRefreshing()
-        }
-      case .success(let donatedItems):
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
-          self.endRefreshing()
-          self.receiverTableView.reloadData()
-        }
-      }
-    }
   }
   
   func endRefreshing() {

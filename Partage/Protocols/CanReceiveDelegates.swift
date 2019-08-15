@@ -23,3 +23,8 @@ protocol CanReceiveItemImagesDelegate {
 protocol CanReceiveUserAuthDelegate {
   func userAuthReceived(_ firstName: String)
 }
+
+//MARK: - Protocol to send info that message is read from ChatMessageVC to MessageVC
+protocol CanReceiveInfoMessageIsReadDelegate {
+  func confirmMessageIsReadReceived(of messageID: Int)
+}

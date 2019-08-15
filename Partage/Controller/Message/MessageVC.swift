@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TableViewReloadAnimation
 
 class MessageVC: UIViewController {
   
@@ -18,25 +19,34 @@ class MessageVC: UIViewController {
   
   var messages = [Message]()
   var chatMessages = [ChatMessage]()
+  var lastChatBubbleID = Int()
+  var newChatBubbleArrived = Bool()
   
   var firstUserID: String?
   var secondUserID: String?
   var messageIDToOpen: Int?
   var messageIndexPathToOpen: Int?
   
-  let refreshControl = UIRefreshControl()
+  var timer: Timer?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
     triggerActivityIndicator(false)
+    checkIfAnUserIsConnected()
+    getAllUserMessagesFromTheDatabase()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    checkIfAnUserIsConnected()
-    getAllUserMessagesFromTheDatabase()
+    super.viewWillAppear(animated)
+    getAllUserMessagesBeforeTimerStarts()
+    fetchLastMessagesIfAnyUsingTimeInterval()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    timer?.invalidate()
   }
 }
 
@@ -92,7 +102,6 @@ extension MessageVC {
     setupNavigationController()
     setupTableViewDesign()
     setupCellHeightForIPad()
-    setupRefreshControl()
   }
   
   //MARK: Main view design
@@ -193,24 +202,6 @@ extension MessageVC {
   }
 }
 
-//MARK: - Refresh control method to reload data
-extension MessageVC {
-  func setupRefreshControl() {
-    refreshControl.addTarget(self, action: #selector(refreshMessages), for: .valueChanged)
-    refreshControl.commonDesign(title: .emptyString)
-    messageTableView.addSubview(refreshControl)
-  }
-  
-  @objc private func refreshMessages(_ sender: Any) {
-    getAllUserMessagesFromTheDatabase()
-    endRefreshing()
-  }
-  
-  func endRefreshing() {
-    refreshControl.endRefreshing()
-  }
-}
-
 //MARK: - Activity Indicator action and setup
 extension MessageVC {
   func triggerActivityIndicator(_ action: Bool) {
@@ -265,6 +256,7 @@ extension MessageVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goesToChatMessageVC.rawValue {
       guard let destinationVC = segue.destination as? ChatMessageVC else { return }
+      destinationVC.delegate = self
       destinationVC.chatBubbles = chatMessages
       guard let messageID = messageIDToOpen else { return }
       destinationVC.conversationID = messageID
@@ -312,7 +304,7 @@ extension MessageVC {
 extension MessageVC {
   func getAllUserMessagesFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    messages = [Message]()
+    
     triggerActivityIndicator(true)
     let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
@@ -320,13 +312,38 @@ extension MessageVC {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .error, message: .networkRequestError)
-          self?.endRefreshing()
           self?.triggerActivityIndicator(false)
         }
-      case .success(let messages):
+      case .success(let uncomingMessages):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
-          self.messages.append(contentsOf: messages)
+          self.messages = [Message]()
+          self.messages.append(contentsOf: uncomingMessages)
+          self.triggerActivityIndicator(false)
+          self.reloadDataWithAnimation()
+          self.getMessageIndexPathToOpen()
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch all user messages
+extension MessageVC {
+  func getAllUserMessagesBeforeTimerStarts() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    
+    triggerActivityIndicator(true)
+    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
+    ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let uncomingMessages):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.messages = [Message]()
+          self.messages.append(contentsOf: uncomingMessages)
           self.triggerActivityIndicator(false)
           self.messageTableView.reloadData()
           self.getMessageIndexPathToOpen()
@@ -392,6 +409,58 @@ extension MessageVC {
           guard updatedMessage.recipientID == StaticLabel.emptyString.rawValue &&
             updatedMessage.senderID == StaticLabel.emptyString.rawValue else { return }
           self?.delete(updatedMessage)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch all user messages when the timer trigger
+extension MessageVC {
+  func getAllUserMessagesForTheTimerInterval() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let countMessages = messages.count
+    let lastMessageID = messages.last?.id
+    
+    if let conversation = lastMessageID {
+      fetchChatMessagesToTrackNewBubble(of: conversation)
+    }
+    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
+    ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let incomingMessages):
+        DispatchQueue.main.async { [weak self] in
+          if countMessages < incomingMessages.count || lastMessageID != incomingMessages.last?.id || self!.newChatBubbleArrived {
+            self?.messages = [Message]()
+            self?.messages.append(contentsOf: incomingMessages)
+            self?.messageTableView.reloadData()
+          }
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch chat messages to tack if new message need to be reloaded
+extension MessageVC {
+  func fetchChatMessagesToTrackNewBubble(of messageID: Int) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    
+    if let id = chatMessages.last?.id {
+      lastChatBubbleID = id
+    }
+    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    ResourceRequest<ChatMessage>(resourcePath).getAll(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let allChatMessages):
+        DispatchQueue.main.async { [weak self] in
+          self?.chatMessages = [ChatMessage]()
+          self?.chatMessages.append(contentsOf: allChatMessages)
+          self?.trackNewChatBubbleArrived(from: allChatMessages)
         }
       }
     }
@@ -487,5 +556,94 @@ extension MessageVC {
       dateToShow = "\(time)"
     }
     cell.dateLabel.text = dateToShow
+  }
+}
+
+//MARK: - Timer interval to fetch new user messages
+extension MessageVC {
+  func fetchLastMessagesIfAnyUsingTimeInterval() {
+    timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (_) in
+      DispatchQueue.main.async {
+        self.getAllUserMessagesForTheTimerInterval()
+      }
+    })
+  }
+}
+
+//MARK: - Check if last message chat bubble has changed for a new bubble
+extension MessageVC {
+  func trackNewChatBubbleArrived(from allChatMessages: [ChatMessage]) {
+    if self.lastChatBubbleID == allChatMessages.last?.id {
+      self.newChatBubbleArrived = true
+    }
+    else {
+      self.newChatBubbleArrived = false
+    }
+  }
+}
+
+//MARK: - Receive info from protocol that last message was read in ChatMessageVC
+extension MessageVC: CanReceiveInfoMessageIsReadDelegate {
+  func confirmMessageIsReadReceived(of messageID: Int) {
+    fetchOneMessageTobeUpdateAsRead(messageID)
+  }
+}
+
+//MARK: - Fetch last read message before being update to read by user
+extension MessageVC {
+  func fetchOneMessageTobeUpdateAsRead(_ messageID: Int) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    
+    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+    ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let message):
+        DispatchQueue.main.async {
+          self.updateToReadByUser(this: message)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Update conversation messages to read by user
+extension MessageVC {
+  func updateToReadByUser(this message: Message) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let messageID = message.id else { return }
+    
+    let userID = UserDefaultsService.shared.userID
+    if userID == message.senderID {
+      message.isReadBySender = true
+    }
+    else {
+      message.isReadByRecipient = true
+    }
+    let messagesAreRead = Message(
+      senderID: message.senderID,
+      recipientID: message.recipientID,
+      date: message.date,
+      isReadBySender: message.isReadBySender,
+      isReadByRecipient: message.isReadByRecipient
+    )
+    
+    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+    ResourceRequest<Message>(resourcePath).update(messagesAreRead, tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success:
+        break
+      }
+    }
+  }
+}
+
+//MARK: - Reload data with an animation
+extension MessageVC {
+  func reloadDataWithAnimation() {
+    messageTableView.reloadData(with: .simple(duration: 0.45, direction: .rotation3D(type: .ironMan), constantDelay: 0))
   }
 }

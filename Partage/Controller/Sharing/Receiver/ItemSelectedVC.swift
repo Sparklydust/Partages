@@ -50,13 +50,6 @@ class ItemSelectedVC: UIViewController {
     }
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    wasRecipeFavorited()
-    updateFavoriteButton(isFavorited)
-    hideAllActivityIndicators()
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -65,8 +58,11 @@ class ItemSelectedVC: UIViewController {
     fetchUsersFromTheDatabase()
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    wasRecipeFavorited()
+    updateFavoriteButton(isFavorited)
+    hideAllActivityIndicators()
   }
 }
 
@@ -551,7 +547,6 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func CheckUsersAlreadyCommunicateBeforeCreatingMessage() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    messages = [Message]()
     let userID = UserDefaultsService.shared.userID
     var userAlreadyCommunicate = false
     
@@ -564,16 +559,17 @@ extension ItemSelectedVC {
           self?.triggerMessageActivityIndicator(false)
           self?.showAlert(title: .error, message: .networkRequestError)
         }
-      case .success(let messages):
+      case .success(let fetchedMessages):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
-          self.messages.append(contentsOf: messages)
-          if messages.isEmpty {
+          self.messages = [Message]()
+          self.messages.append(contentsOf: fetchedMessages)
+          if self.messages.isEmpty {
             self.createMessageBetweenTwoUser()
           }
           else {
             //Check if users are already connected
-            for message in messages {
+            for message in self.messages {
               if message.recipientID == self.senderID &&
                 (message.senderID == self.firstUserID || message.senderID == self.secondUserID) {
                 userAlreadyCommunicate = true

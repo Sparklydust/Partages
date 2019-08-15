@@ -38,11 +38,6 @@ class DonorVC: UIViewController {
   
   var buttonName: ButtonName?
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    navigationController?.setNavigationBarHidden(false, animated: true)
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -50,6 +45,11 @@ class DonorVC: UIViewController {
     observeKeyboardNotification()
     hideKeyboardOnTapGesture()
     populateItemToEditFromItemDetailsVC()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    navigationController?.setNavigationBarHidden(false, animated: true)
   }
   
   override func viewWillDisappear(_ animated: Bool) {

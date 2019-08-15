@@ -19,6 +19,7 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var contactUsButton: UIButton!
   @IBOutlet weak var disconnectProfileButton: UIButton!
   @IBOutlet weak var deleteProfileButton: UIButton!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   @IBOutlet var backgroundViews: [UIView]!
   
@@ -28,16 +29,17 @@ class ProfileVC: UIViewController {
     }
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-    checkIfAnUserIsConnected()
-    fetchUserFromTheDatabase()
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupProfileImage()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    triggerActivityIndicator(false)
+    checkIfAnUserIsConnected()
+    fetchUserFromTheDatabase()
   }
 }
 
@@ -146,6 +148,45 @@ extension ProfileVC {
   }
 }
 
+//MARK: - Activity Indicator action and setup
+extension ProfileVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+  
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .mainBlue
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    disableButtons()
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
+    enableButtons()
+  }
+  
+  func disableButtons() {
+    editProfilePictureButton.isEnabled = false
+    editProfileButton.isEnabled = false
+    disconnectProfileButton.isEnabled = false
+    deleteProfileButton.isEnabled = false
+  }
+  
+  func enableButtons() {
+    editProfilePictureButton.isEnabled = true
+    editProfileButton.isEnabled = true
+    disconnectProfileButton.isEnabled = true
+    deleteProfileButton.isEnabled = true
+  }
+}
+
 //MARK: - Open mail app to contact us
 extension ProfileVC: MFMailComposeViewControllerDelegate {
   func sendEmail() {
@@ -198,17 +239,20 @@ extension ProfileVC {
 extension ProfileVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
+    triggerActivityIndicator(true)
     
     let resourcePath = NetworkPath.myAccount.rawValue + UserDefaultsService.shared.userID!
     ResourceRequest<FullUser>(resourcePath).get(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
           DispatchQueue.main.async { [weak self] in
+            self?.triggerActivityIndicator(false)
             self?.showAlert(title: .error, message: .loginError)
         }
       case .success(let fullUser):
         DispatchQueue.main.async { [weak self] in
           self?.user = fullUser
+          self?.triggerActivityIndicator(false)
         }
       }
     }
@@ -220,12 +264,13 @@ extension ProfileVC {
   func deleteUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     showAlert(title: .userDeleted, message: .userDeleted, buttonName: .confirm) { (true) in
-      
+      self.triggerActivityIndicator(true)
       let resourcePath = NetworkPath.deleteUser.rawValue + UserDefaultsService.shared.userID!
       ResourceRequest<User>(resourcePath).delete(tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
+            self?.triggerActivityIndicator(false)
             self?.showAlert(title: .error, message: .networkRequestError)
           }
         case .success:
@@ -233,6 +278,7 @@ extension ProfileVC {
             self?.deleteAllLabels()
             self?.deleteUserFromUserDefaults()
             self?.allTabsToTheirFirstController()
+            self?.triggerActivityIndicator(false)
             self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
           }
         }

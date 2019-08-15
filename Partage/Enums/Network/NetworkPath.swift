@@ -10,8 +10,8 @@ import Foundation
 
 //MARK: - Network path to reach API requests
 enum NetworkPath: String {
-  case mainPath = "http://localhost:8080/api/"
-  case login = "http://localhost:8080/api/users/login"
+  case mainPath = "http://192.168.1.61:8080/api/"
+  case login = "login/"
   case users = "users/"
   case user = "user/"
   case myAccount = "users/myAccount/"

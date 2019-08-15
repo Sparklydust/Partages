@@ -52,3 +52,12 @@ extension UITableView {
     return section < self.numberOfSections && row < self.numberOfRows(inSection: section)
   }
 }
+
+//MARK: - To check if the cell is the last one of a table view
+extension UITableView {
+  func isLast(for indexPath: IndexPath) -> Bool {
+    let indexOfLastSection = numberOfSections > 0 ? numberOfSections - 1 : 0
+    let indexOfLastRowInLastSection = numberOfRows(inSection: indexOfLastSection) - 1
+    return indexPath.section == indexOfLastSection && indexPath.row == indexOfLastRowInLastSection
+  }
+}
