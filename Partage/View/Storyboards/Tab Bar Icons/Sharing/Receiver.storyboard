@@ -104,7 +104,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2m-TQ-9Ru">
                                                                 <rect key="frame" x="242" y="0.0" width="92" height="92.5"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="rZQ-Oi-6gn">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rZQ-Oi-6gn">
                                                                         <rect key="frame" x="0.0" y="0.0" width="92" height="92.5"/>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZ3-BI-3DG">
@@ -416,7 +416,6 @@
     </scenes>
     <resources>
         <image name="emptyHeart" width="40" height="40"/>
-        <image name="noImage" width="1080" height="1080"/>
         <image name="sharing" width="29" height="29"/>
     </resources>
 </document>

@@ -256,6 +256,7 @@ extension ItemSelectedVC {
     itemNameLabel.text = donorItem.name
     dateLabel.text = date
     timeLabel.text = time
+    FirebaseStorageHandler.shared.downloadItemImage(of: donorItem, into: itemImage)
     LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItem.latitude, longitude: donorItem.longitude)
     itemDescriptionTextView.text = donorItem.description
   }
@@ -274,6 +275,11 @@ extension ItemSelectedVC {
       let destinationVC = segue.destination as? MessageVC
       destinationVC?.firstUserID = firstUserID
       destinationVC?.secondUserID = secondUserID
+    }
+    else if segue.identifier == Segue.goesToItemImagesVC.rawValue {
+      let destinationVC = segue.destination as? ItemImagesVC
+      destinationVC?.isReceiver = true
+      destinationVC?.donorItem = donatedItem
     }
   }
 }

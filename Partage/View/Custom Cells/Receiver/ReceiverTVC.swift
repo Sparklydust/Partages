@@ -154,7 +154,7 @@ extension ReceiverTVC {
 
 //MARK: - To add the meeting point shown on the map
 extension ReceiverTVC {
-  func addMeetingPointOnMap(latitude: Double, longitude: Double) {
+  func showLocationSurrounding(latitude: Double, longitude: Double) {
     let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     let span = MKCoordinateSpan(latitudeDelta: 0.00085, longitudeDelta: 0.00099)
     let region = MKCoordinateRegion(center: locationCoordinates, span: span)

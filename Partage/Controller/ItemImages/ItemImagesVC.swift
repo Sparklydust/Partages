@@ -17,15 +17,21 @@ class ItemImagesVC: UIViewController {
   @IBOutlet var littleSquareViews: [UIView]!
   @IBOutlet var littleSquareImages: [UIImageView]!
   @IBOutlet var littleSquareButtons: [UIButton]!
-  @IBOutlet var cancelAndSaveButton: [UIButton]!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
   
   var images = [UIImage]()
+  var donorItem: DonatedItem?
   
   var delegate: CanReceiveItemImagesDelegate?
+  
+  var isReceiver = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
+    setupOnePictureLoaded()
+    populateDonatedItemImageIfNeeded()
   }
 }
 
@@ -75,9 +81,10 @@ extension ItemImagesVC {
     setupMainView()
     setupMainSquare()
     setupLittleSquareViews()
+    setupReceiverVCLook()
     setupLittleSquareImages()
     setupResetAndSaveButton()
-    setupUserGuideLabel()
+    //setupUserGuideLabel()
     setupNavigationController()
   }
   
@@ -87,15 +94,22 @@ extension ItemImagesVC {
   }
 }
 
-//MARK: - Setup for donator view design
-extension ItemImagesVC {
-  func setupDonatorVCLook() {
-  }
-}
-
 //MARK: - Setup for receiver view design
 extension ItemImagesVC {
   func setupReceiverVCLook() {
+    guard isReceiver else {
+      cancelButton.isHidden = false
+      saveButton.isHidden = false
+      for button in littleSquareButtons {
+        button.isEnabled = true
+      }
+      return
+    }
+    cancelButton.isHidden = true
+    saveButton.isHidden = true
+    for button in littleSquareButtons {
+      button.isEnabled = false
+    }
   }
 }
 
@@ -140,15 +154,14 @@ extension ItemImagesVC {
     littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
     littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
     littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
-    cancelAndSaveButton = cancelAndSaveButton.sorted(by: { $0.tag < $1.tag })
   }
 }
 
 //MARK: - Setup reset and save button design
 extension ItemImagesVC {
   func setupResetAndSaveButton() {
-    cancelAndSaveButton[0].commonDesign(title: .reset)
-    cancelAndSaveButton[1].commonDesign(title: .save)
+    cancelButton.commonDesign(title: .reset)
+    saveButton.commonDesign(title: .save)
   }
 }
 
@@ -232,6 +245,9 @@ extension ItemImagesVC {
         showAlert(title: .reset, message: .resetImage, buttonName: .reset) {
           (true) in
           for square in self.littleSquareImages {
+            if let item = self.donorItem {
+              FirebaseStorageHandler.shared.deleteItemImage(of: item)
+            }
             square.image = nil
           }
         }
@@ -247,6 +263,15 @@ extension ItemImagesVC {
       if let image = image.image {
         images.append(image)
       }
+    }
+  }
+}
+
+//MARK: - Populate item image if needed
+extension ItemImagesVC {
+  func populateDonatedItemImageIfNeeded() {
+    if let donatedItem = donorItem {
+      FirebaseStorageHandler.shared.downloadItemImage(of: donatedItem, into: littleSquareImages[0])
     }
   }
 }

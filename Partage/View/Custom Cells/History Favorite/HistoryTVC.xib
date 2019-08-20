@@ -21,7 +21,7 @@
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nSu-d6-4tz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="105.5"/>
                     </activityIndicatorView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="UQq-LP-cdS">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UQq-LP-cdS">
                         <rect key="frame" x="10" y="13" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="Xu0-ml-j1E">
@@ -111,7 +111,4 @@
             <point key="canvasLocation" x="86.956521739130437" y="107.14285714285714"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="noImage" width="1080" height="1080"/>
-    </resources>
 </document>

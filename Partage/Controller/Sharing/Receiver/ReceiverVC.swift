@@ -106,6 +106,7 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.receiverCellIdentifier.rawValue, for: indexPath) as! ReceiverTVC
     populateDonatorsItems(into: cell, at: indexPath)
     checkIfAnUserFavoritedItem(into: cell, at: indexPath)
+    FirebaseStorageHandler.shared.downloadItemImage(of: itemsNotPicked[indexPath.row], into: cell.itemImage)
     return cell
   }
   
@@ -146,7 +147,7 @@ extension ReceiverVC {
     
     cell.itemTypeLabel.text = donorItem.selectedType
     cell.itemNameLabel.text = donorItem.name
-    cell.addMeetingPointOnMap(latitude: donorItem.latitude, longitude: donorItem.longitude)
+    cell.showLocationSurrounding(latitude: donorItem.latitude, longitude: donorItem.longitude)
     
     if distance > 1000 {
       distance /= 1000

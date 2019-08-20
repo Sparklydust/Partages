@@ -118,6 +118,7 @@ extension ItemDetailsVC {
     setupEditButton()
     setupItemImage()
     setupNavigationController()
+    populateItemImageFromFirebaseStorage()
   }
   
   //MARK: Main view design
@@ -129,7 +130,7 @@ extension ItemDetailsVC {
 //MARK: - Setup main labels design
 extension ItemDetailsVC {
   func setupMainLabels() {
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
     donorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
     timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
@@ -258,6 +259,11 @@ extension ItemDetailsVC {
       let destinationVC = segue.destination as? MessageVC
       destinationVC?.firstUserID = firstUserID
       destinationVC?.secondUserID = secondUserID
+    }
+    else if segue.identifier == Segue.goesToItemImagesVC.rawValue {
+      let destinationVC = segue.destination as? ItemImagesVC
+      destinationVC?.isReceiver = true
+      destinationVC?.donorItem = itemDetails
     }
   }
 }
@@ -602,5 +608,12 @@ extension ItemDetailsVC {
         }
       }
     }
+  }
+}
+
+//MARK: - Populate item image from Firebase storage
+extension ItemDetailsVC {
+  func populateItemImageFromFirebaseStorage() {
+    FirebaseStorageHandler.shared.downloadItemImage(of: itemDetails, into: itemImage)
   }
 }

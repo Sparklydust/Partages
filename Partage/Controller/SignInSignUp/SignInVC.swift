@@ -200,7 +200,6 @@ extension SignInVC {
     ConnectionActivityIndicator.startAnimating()
     connectionButton.commonDesign(title: .emptyString)
     connectionButton.isHidden = false
-    cancelButton.isEnabled = false
     signUpButton.isEnabled = false
     swipeGestureRecognizer.isEnabled = false
   }
@@ -208,7 +207,6 @@ extension SignInVC {
   func hideActivityIndicator() {
     ConnectionActivityIndicator.isHidden = true
     connectionButton.commonDesign(title: .signIn)
-    cancelButton.isEnabled = true
     signUpButton.isEnabled = true
     swipeGestureRecognizer.isEnabled = true
   }

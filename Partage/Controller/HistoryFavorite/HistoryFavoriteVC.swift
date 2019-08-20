@@ -125,11 +125,13 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
     if isHistoryButtonClicked {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.historyCellIdentifier.rawValue, for: indexPath) as! HistoryTVC
       populateItemsHistory(into: cell, at: indexPath)
+      FirebaseStorageHandler.shared.downloadItemImage(of: itemsHistory[indexPath.row], into: cell.itemImage)
       return cell
     }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.favoriteCellIdentifier.rawValue, for: indexPath) as! FavoriteTVC
       populateItemsFavorited(into: cell, at: indexPath)
+      FirebaseStorageHandler.shared.downloadItemImage(of: itemsFavorited[indexPath.row], into: cell.itemImage)
       return cell
     }
   }
@@ -439,6 +441,7 @@ extension HistoryFavoriteVC {
     triggerActivityIndicator(true)
     
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+    FirebaseStorageHandler.shared.deleteItemImage(of: donatedItem)
     ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
       switch result {
       case .failure:

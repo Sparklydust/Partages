@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uxt-NW-oCF">
-                                <rect key="frame" x="40" y="84" width="334" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uxt-NW-oCF">
+                                <rect key="frame" x="40" y="84" width="334" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -309,7 +309,9 @@
                         <viewLayoutGuide key="safeArea" id="tN5-Mn-xr2"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="4vN-ho-bUC" id="BWA-fn-ntQ"/>
                         <outlet property="mainSquareView" destination="vll-af-lRw" id="dtP-Le-EGy"/>
+                        <outlet property="saveButton" destination="g50-Ni-fn3" id="oSz-CO-8ai"/>
                         <outlet property="userGuideLabel" destination="Uxt-NW-oCF" id="8NZ-Zb-7P8"/>
                         <outletCollection property="stackViews" destination="Lg9-hy-UEo" collectionClass="NSMutableArray" id="Pab-67-apC"/>
                         <outletCollection property="stackViews" destination="HwX-at-0pg" collectionClass="NSMutableArray" id="lFR-uF-1H6"/>
@@ -325,8 +327,6 @@
                         <outletCollection property="littleSquareButtons" destination="GgG-3H-lHl" collectionClass="NSMutableArray" id="ZPD-pv-UsH"/>
                         <outletCollection property="littleSquareButtons" destination="ngl-iB-35o" collectionClass="NSMutableArray" id="rnY-eK-waO"/>
                         <outletCollection property="littleSquareButtons" destination="W3d-fM-X2y" collectionClass="NSMutableArray" id="dzL-ea-uvb"/>
-                        <outletCollection property="CancelAndSaveButton" destination="4vN-ho-bUC" collectionClass="NSMutableArray" id="2OA-G5-HP4"/>
-                        <outletCollection property="CancelAndSaveButton" destination="g50-Ni-fn3" collectionClass="NSMutableArray" id="oaP-kg-oPi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5c-kw-t0T" userLabel="First Responder" sceneMemberID="firstResponder"/>

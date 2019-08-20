@@ -20,7 +20,7 @@ extension FirebaseStorageHandler {
     let profilePicturePath = "profilePicture/\(UserDefaultsService.shared.userID!).jpg"
     let profilePictureRef = Storage.storage().reference(withPath: profilePicturePath)
     
-    guard let imageData = profilePicture.jpegData(compressionQuality: 1) else { return }
+    guard let imageData = profilePicture.jpegData(compressionQuality: 0.75) else { return }
     let uploadMetadata = StorageMetadata.init()
     uploadMetadata.contentType = "image/jpeg"
     
@@ -127,6 +127,64 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(UserDefaultsService.shared.userID!).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
+    
+    storageRef.delete { error in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+    }
+  }
+}
+
+//MARK: - Upload the donated item image to Firebase storage
+extension FirebaseStorageHandler {
+  func upload(_ donatedItemImage: UIImage, of donatedItem: DonatedItem) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
+    let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
+    let itemImageRef = Storage.storage().reference(withPath: itemImagePath)
+    
+    guard let imageData = donatedItemImage.jpegData(compressionQuality: 0.75) else { return }
+    let uploadMetadata = StorageMetadata.init()
+    uploadMetadata.contentType = "image/jpeg"
+    
+    itemImageRef.putData(imageData, metadata: uploadMetadata, completion: { (downloadedMetadata, error) in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+    })
+  }
+}
+
+//MARK: - Download saved donated item image from Firebase storage
+extension FirebaseStorageHandler {
+  func downloadItemImage(of donatedItem: DonatedItem, into uiImageView: UIImageView) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
+    let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
+    let storageRef = Storage.storage().reference(withPath: itemImagePath)
+    
+    storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      if let data = data {
+        uiImageView.image = UIImage(data: data)
+      }
+    }
+  }
+}
+
+//MARK: - Delete donated item image off Firebase storage
+extension FirebaseStorageHandler {
+  func deleteItemImage(of donatedItem: DonatedItem) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
+    let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
+    let storageRef = Storage.storage().reference(withPath: itemImagePath)
     
     storageRef.delete { error in
       if let error = error {

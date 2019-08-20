@@ -19,18 +19,20 @@
 	<key>STORAGE_BUCKET</key>
 	<string>partage-firebase.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:982598492543:ios:c518fc2c74f25c3d</string>
 	<key>DATABASE_URL</key>
 	<string>https://partage-firebase.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-9212725032613792~4506239573</string>
 </dict>
 </plist>

@@ -380,6 +380,9 @@ extension DonorVC {
     if segue.identifier == Segue.goesToItemImagesVC.rawValue {
       let secondVC = segue.destination as! ItemImagesVC
       secondVC.delegate = self
+      if let item = itemToEdit {
+        secondVC.donorItem = item
+      }
     }
     else if segue.identifier == Segue.goesToMapViewVC.rawValue {
       let secondVC = segue.destination as! MapViewVC
@@ -438,9 +441,9 @@ extension DonorVC {
     case donatedItem.name.isEmpty:
       showAlert(title: .emptyCase, message: .noItemName)
       break
-      //    case donatorItem.image == [UIImage]():
-      //      showAlert(title: .emptyCase, message: .noImage)
-    //      break
+    case images == [UIImage]():
+      showAlert(title: .emptyCase, message: .noImage)
+      break
     case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
       showAlert(title: .emptyCase, message: .noItemDate)
       break
@@ -483,6 +486,9 @@ extension DonorVC {
             }
           case .success:
             DispatchQueue.main.async { [weak self] in
+              if let imageToSave = self?.images[0] {
+                FirebaseStorageHandler.shared.upload(imageToSave, of: donatedItem)
+              }
               self?.unwindToSharingVC()
               self?.allEntriesBackToOriginStateWithoutAlert()
             }
@@ -503,6 +509,7 @@ extension DonorVC {
     mapKitButton.setTitle(ButtonName.changeMeetingPoint.rawValue, for: .normal)
     itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
     itemDescriptionTextView.text = itemToEdit?.description
+    FirebaseStorageHandler.shared.downloadItemImage(of: itemToEdit!, into: itemImage)
   }
   
   //Show the picker item type the way the item is
@@ -564,6 +571,9 @@ extension DonorVC {
           case .success(let item):
             DispatchQueue.main.async { [weak self] in
               updatedItem = item
+              if let imageToSave = self?.images[0] {
+                FirebaseStorageHandler.shared.upload(imageToSave, of: updatedItem)
+              }
               self?.unwindToHistoryFavoriteVC()
               self?.allEntriesBackToOriginStateWithoutAlert()
             }

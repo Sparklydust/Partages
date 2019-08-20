@@ -177,14 +177,12 @@ extension ProfileVC {
   func disableButtons() {
     editProfilePictureButton.isEnabled = false
     editProfileButton.isEnabled = false
-    disconnectProfileButton.isEnabled = false
     deleteProfileButton.isEnabled = false
   }
   
   func enableButtons() {
     editProfilePictureButton.isEnabled = true
     editProfileButton.isEnabled = true
-    disconnectProfileButton.isEnabled = true
     deleteProfileButton.isEnabled = true
   }
 }
