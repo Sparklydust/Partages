@@ -383,7 +383,6 @@
                             </constraint>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="centerY" secondItem="BaT-Cg-a2w" secondAttribute="centerY" constant="-2.5" id="atz-rE-FMO"/>
                             <constraint firstItem="bJt-md-kzl" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="fy4-Pc-poD"/>
-                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="centerY" secondItem="zM6-ce-0EZ" secondAttribute="centerY" id="hBG-57-tOh"/>
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="leading" secondItem="BaT-Cg-a2w" secondAttribute="leading" constant="40" id="hh6-kq-I2q">
                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                             </constraint>
@@ -394,7 +393,6 @@
                             <constraint firstItem="JxU-Di-5BZ" firstAttribute="top" secondItem="BR9-fP-p5g" secondAttribute="bottom" constant="20" id="kLW-bt-5GS">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
-                            <constraint firstItem="M5A-Dd-LAb" firstAttribute="centerX" secondItem="zM6-ce-0EZ" secondAttribute="centerX" id="vxE-CF-m7S"/>
                             <constraint firstItem="M5A-Dd-LAb" firstAttribute="trailing" secondItem="JxU-Di-5BZ" secondAttribute="trailing" id="x1b-rD-qNM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BaT-Cg-a2w"/>

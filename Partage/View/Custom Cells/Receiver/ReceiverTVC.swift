@@ -86,7 +86,7 @@ extension ReceiverTVC {
 extension ReceiverTVC {
   func setupItemTypeLabel() {
     itemTypeLabel.textAlignment = .center
-    itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, forIPad: .twentySeven, in: .typoBlue)
+    itemTypeLabel.setupFont(as: .arialBold, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
   }
 }
 
@@ -100,7 +100,7 @@ extension ReceiverTVC {
 //MARK: - Setup item name label design
 extension ReceiverTVC {
   func setupItemNameLabel() {
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
+    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twentyTwo, forIPad: .twentyFive, in: .typoBlue)
   }
 }
 

@@ -10,10 +10,10 @@ import UIKit
 
 //MARK: - Application fonts
 enum CustomFont: String {
-  case superclarendonBold = "SuperclarendonRg-Bold"
-  case superclarendonLight = "SuperclarendonLt"
+  case superclarendonBold = "HelveticaNeue-Bold"
+  case superclarendonLight = "HelveticaNeue-Light"
   case arialBlack = "Arial-Black"
   case arialBold = "Arial-BoldMT"
   case arial = "ArialMT"
-  case georgiaBold = "Georgia-Bold"
+  case georgiaBold = "GeezaPro-Bold"
 }

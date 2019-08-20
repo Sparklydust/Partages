@@ -32,6 +32,8 @@ class ChatMessageVC: UIViewController {
     }
   }
   
+  var userRecipientID = String()
+  
   var chatBubbles = [ChatMessage]()
   var conversationID = Int()
   var conversation: Message?
@@ -280,6 +282,7 @@ extension ChatMessageVC {
       }
     }
     cell.conversationLabel.text = bubble.content
+    FirebaseStorageHandler.shared.downloadProfilePicture(of: userRecipientID, in: cell)
   }
 }
 

@@ -8,4 +8,8 @@ target 'Partage' do
   # Pods for Partage
 
   pod 'TableViewReloadAnimation'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
+  pod 'Google-Mobile-Ads-SDK'
+  
 end

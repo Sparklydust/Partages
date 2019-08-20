@@ -16,6 +16,7 @@ class MessageVC: UIViewController {
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var userID = String()
+  var userFetch = String()
   
   var messages = [Message]()
   var chatMessages = [ChatMessage]()
@@ -133,15 +134,13 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.messageCellIdentifier.rawValue, for: indexPath) as! MessageTVC
     
     let messageInfo = messages[indexPath.row]
+    
     showMessageInBoldIfNotRead(in: cell, search: messageInfo)
-    
-    populateUserFirstName(in: cell, from: messageInfo)
+    populateUser(in: cell, from: messageInfo)
     populateDateOrTime(in: cell, with: messageInfo.date)
-    
     if let messageID = messageInfo.id {
       populateConversationLabel(in: cell, search: messageID)
     }
-    
     return cell
   }
 }
@@ -260,6 +259,12 @@ extension MessageVC {
       destinationVC.chatBubbles = chatMessages
       guard let messageID = messageIDToOpen else { return }
       destinationVC.conversationID = messageID
+      if firstUserID == UserDefaultsService.shared.userID {
+        destinationVC.userRecipientID = userFetch
+      }
+      else {
+        destinationVC.userRecipientID = userFetch
+      }
     }
   }
 }
@@ -489,26 +494,27 @@ extension MessageVC {
 
 //MARK: - To populate user first name linked to the message
 extension MessageVC {
-  func populateUserFirstName(in cell: MessageTVC, from messageInfo: Message) {
-    let userToFetch: String
+  func populateUser(in cell: MessageTVC, from messageInfo: Message) {
+    
     if userID == messageInfo.senderID {
-      userToFetch = messageInfo.recipientID
+      userFetch = messageInfo.recipientID
     }
     else {
-      userToFetch = messageInfo.senderID
+      userFetch = messageInfo.senderID
     }
     
-    if userToFetch != StaticLabel.emptyString.rawValue {
-      let resourcePathToUser = NetworkPath.users.rawValue + userToFetch
+    if userFetch != StaticLabel.emptyString.rawValue {
+      let resourcePathToUser = NetworkPath.users.rawValue + userFetch
       ResourceRequest<User>(resourcePathToUser).get(tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in
             self?.showAlert(title: .error, message: .networkRequestError)
           }
-        case .success(let userFetch):
+        case .success(let userFetched):
           DispatchQueue.main.async {
-            cell.nameLabel.text = userFetch.firstName
+            cell.nameLabel.text = userFetched.firstName
+            FirebaseStorageHandler.shared.downloadProfilePicture(of: userFetched.id!.uuidString, into: cell)
           }
         }
       }

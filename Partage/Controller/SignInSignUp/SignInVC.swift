@@ -30,6 +30,8 @@ class SignInVC: UIViewController {
     setupMainDesign()
     setupAllDelegates()
     triggerActivityIndicator(false)
+    
+    lostPasswordButton.isHidden = true
   }
 }
 

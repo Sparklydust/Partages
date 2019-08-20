@@ -395,6 +395,8 @@ extension ItemDetailsVC {
     guard let firstName = receiver?.firstName else { return }
     if messageToButton.titleLabel?.text == ButtonName.messageToReceiver.rawValue {
       donorReceiverNameLabel.text = firstName
+      guard let receiverID = receiver?.id?.uuidString else { return }
+      FirebaseStorageHandler.shared.downloadProfilePicture(of: receiverID, into: donorReceiverProfileImage)
     }
     if let anotherUserID = self.receiver?.id?.uuidString {
       self.secondUserID = anotherUserID
@@ -405,6 +407,8 @@ extension ItemDetailsVC {
     guard let firstName = donor?.firstName else { return }
     if messageToButton.titleLabel?.text == ButtonName.messageToDonor.rawValue {
       donorReceiverNameLabel.text = firstName
+      guard let donorID = donor?.id?.uuidString else { return }
+      FirebaseStorageHandler.shared.downloadProfilePicture(of: donorID, into: donorReceiverProfileImage)
     }
     if let oneUserID = self.donor?.id?.uuidString {
       self.firstUserID = oneUserID

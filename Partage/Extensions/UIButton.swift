@@ -13,13 +13,13 @@ extension UIButton {
   func shareReceiveDesign(title: ButtonName) {
     self.setTitle(title.rawValue, for: .normal)
     self.setTitleColor(.iceBackground, for: .normal)
-    self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .twentyTwo)
+    self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .twentyThree)
     self.backgroundColor = .mainBlue
     self.layer.cornerRadius = 20
     
     // Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
-      self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .thirtyTwo)
+      self.titleLabel?.font = UIFont(customFont: .superclarendonBold, withSize: .twentyThree)
       self.heightAnchor.constraint(equalToConstant: 180).isActive = true
       self.widthAnchor.constraint(equalToConstant: 315).isActive = true
     }

@@ -183,7 +183,7 @@ extension ReceiverVC {
 extension ReceiverVC {
   func checkIfAnUserFavoritedItem(into cell: ReceiverTVC, at indexPath: IndexPath) {
     guard UserDefaultsService.shared.userID != nil else { return }
-    guard let donatedItemID = donatedItems[indexPath.row].id else { return }
+    guard let donatedItemID = itemsNotPicked[indexPath.row].id else { return }
 
     let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
     ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
@@ -221,10 +221,10 @@ extension ReceiverVC {
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
-          self.itemsNotPicked = [DonatedItem]()
+          self.donatedItems = [DonatedItem]()
           self.itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
-          self.endRefreshing()
           self.receiverTableView.reloadData()
+          self.endRefreshing()
         }
       }
     }

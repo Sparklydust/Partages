@@ -11,6 +11,7 @@
 		2A067280229EAE4000FFAECE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727F229EAE4000FFAECE /* UIColor.swift */; };
 		2A067282229EB94000FFAECE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067281229EB94000FFAECE /* UIViewController.swift */; };
 		2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067283229ED63E00FFAECE /* EditProfileVC.swift */; };
+		2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A185384230BDD180094CC32 /* GoogleService-Info.plist */; };
 		2A289F9F22A53E4200EB076A /* MessageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A289F9D22A53E4200EB076A /* MessageTVC.swift */; };
 		2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A289F9E22A53E4200EB076A /* MessageTVC.xib */; };
 		2A289FA222A5477E00EB076A /* superclarendon-lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A289FA122A5477E00EB076A /* superclarendon-lt.ttf */; };
@@ -103,6 +104,7 @@
 		2AE22FD822F9ABE800AB905A /* UserDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE22FD722F9ABE800AB905A /* UserDefaultsContainer.swift */; };
 		2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B222ADC5B600CF627C /* AlertTitle.swift */; };
 		2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE322B422ADC69400CF627C /* AlertMessage.swift */; };
+		2AF11C4B230B07A60016728D /* FirebaseStorageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF11C4A230B07A60016728D /* FirebaseStorageHandler.swift */; };
 		2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */; };
 		2AF66B2922AC0AA8005BAE31 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */; };
 		2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */; };
@@ -153,6 +155,7 @@
 		2A06727F229EAE4000FFAECE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2A067281229EB94000FFAECE /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		2A067283229ED63E00FFAECE /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		2A185384230BDD180094CC32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A289F9D22A53E4200EB076A /* MessageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTVC.swift; sourceTree = "<group>"; };
 		2A289F9E22A53E4200EB076A /* MessageTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTVC.xib; sourceTree = "<group>"; };
 		2A289FA122A5477E00EB076A /* superclarendon-lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "superclarendon-lt.ttf"; sourceTree = "<group>"; };
@@ -252,6 +255,7 @@
 		2AE22FD722F9ABE800AB905A /* UserDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsContainer.swift; sourceTree = "<group>"; };
 		2AE322B222ADC5B600CF627C /* AlertTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitle.swift; sourceTree = "<group>"; };
 		2AE322B422ADC69400CF627C /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		2AF11C4A230B07A60016728D /* FirebaseStorageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageHandler.swift; sourceTree = "<group>"; };
 		2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItemDetail.swift; sourceTree = "<group>"; };
 		2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		2AF66B2A22AC0D5B005BAE31 /* ActionSheetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetLabel.swift; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 				2AB4352F229E55FF007BFB93 /* Assets.xcassets */,
 				2AB43531229E55FF007BFB93 /* LaunchScreen.storyboard */,
 				2AB43534229E55FF007BFB93 /* Info.plist */,
+				2A185384230BDD180094CC32 /* GoogleService-Info.plist */,
 				2A067279229E8B6A00FFAECE /* Fonts */,
 			);
 			path = "Supporting Files";
@@ -730,6 +735,7 @@
 				2A90FB4122A05D40006C246B /* CameraHandler.swift */,
 				2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */,
 				2AD516AA22B13A5B0032F28F /* LocationHandler.swift */,
+				2AF11C4A230B07A60016728D /* FirebaseStorageHandler.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -932,6 +938,7 @@
 				2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */,
 				2AFA4EC522A8FCBB0039803E /* FavoriteTVC.xib in Resources */,
 				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
+				2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */,
 				2A901EAC22AFF9C000D3DD2A /* ReceiverTVC.xib in Resources */,
 				2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */,
 			);
@@ -1069,6 +1076,7 @@
 				2ADDE4FC22DF023500C568BB /* Message.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2ADDF13422E092AB00C568BB /* NetworkPath.swift in Sources */,
+				2AF11C4B230B07A60016728D /* FirebaseStorageHandler.swift in Sources */,
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2A401B3922F9D7A300C92D41 /* ChatMessage.swift in Sources */,
 				2A3469BA22C4C546009255C0 /* ContactUs.swift in Sources */,

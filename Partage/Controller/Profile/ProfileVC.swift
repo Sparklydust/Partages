@@ -32,7 +32,6 @@ class ProfileVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
-    setupProfileImage()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +55,7 @@ extension ProfileVC {
     CameraHandler.shared.imagePickedBlock = {
       (image) in
       self.profileImage.image = image
+      FirebaseStorageHandler.shared.upload(image, of: self.user!)
     }
   }
   
@@ -88,6 +88,7 @@ extension ProfileVC {
     setupEditProfileButton()
     setupDisconnectButtons()
     setupNavigationController()
+    setupProfileImage()
   }
   
   //MARK: Main view design
@@ -101,6 +102,7 @@ extension ProfileVC {
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
     profileImage.rounded()
+    FirebaseStorageHandler.shared.downloadProfilePicture(into: profileImage)
   }
 }
 
@@ -275,8 +277,10 @@ extension ProfileVC {
           }
         case .success:
           DispatchQueue.main.async { [weak self] in
+            FirebaseStorageHandler.shared.deleteProfilePicture()
             self?.deleteAllLabels()
             self?.deleteUserFromUserDefaults()
+            self?.setupProfileImage()
             self?.allTabsToTheirFirstController()
             self?.triggerActivityIndicator(false)
             self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
