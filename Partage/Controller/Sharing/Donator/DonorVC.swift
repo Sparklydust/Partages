@@ -116,7 +116,6 @@ extension DonorVC {
     setupItemImage()
     setupItemPicker()
     setupDatePicker()
-    setupNavigationController()
     setupSwipeGesture()
   }
   

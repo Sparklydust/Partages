@@ -175,7 +175,6 @@ extension MessageVC {
     navigationController?.navigationBar.tintColor = .typoBlue
     navigationController?.navigationBar.barTintColor = .iceBackground
     navigationController?.navigationBar.isTranslucent = false
-    navigationItem.setupNavBarProfileImage()
   }
 }
 

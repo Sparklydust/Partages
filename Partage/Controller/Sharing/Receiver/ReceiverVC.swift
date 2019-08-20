@@ -17,6 +17,8 @@ class ReceiverVC: UIViewController {
   var itemsNotPicked = [DonatedItem]()
   var oneDonatedItem: DonatedItem?
   
+  var isFavorited = false
+  
   let refreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
@@ -47,7 +49,6 @@ extension ReceiverVC {
   //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
-    setupNavigationController()
     setupCustomCell()
     setupTableViewDesign()
     setupCellHeightForIPad()
@@ -106,7 +107,9 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.receiverCellIdentifier.rawValue, for: indexPath) as! ReceiverTVC
     populateDonatorsItems(into: cell, at: indexPath)
     checkIfAnUserFavoritedItem(into: cell, at: indexPath)
+    updapteFavoritedButton(in: cell)
     FirebaseStorageHandler.shared.downloadItemImage(of: itemsNotPicked[indexPath.row], into: cell.itemImage)
+    
     return cell
   }
   
@@ -197,11 +200,7 @@ extension ReceiverVC {
             if user.id?.uuidString == UserDefaultsService.shared.userID {
               cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
             }
-            else {
-              cell.favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
-            }
           }
-          self.receiverTableView.reloadData()
         }
       }
     }
@@ -246,5 +245,17 @@ extension ReceiverVC {
   
   func endRefreshing() {
     refreshControl.endRefreshing()
+  }
+}
+
+//MARK: - Update cell favorited button
+extension ReceiverVC {
+  func updapteFavoritedButton(in cell: ReceiverTVC) {
+    if isFavorited {
+      cell.favoriteButton.setImage(UIImage(named: ImageName.fullHeart.rawValue), for: .normal)
+    }
+    else {
+      cell.favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
+    }
   }
 }

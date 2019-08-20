@@ -60,7 +60,6 @@ extension MapViewVC {
   //MARK: Developer main design
   func setupMainDesign() {
     setupMainView()
-    setupNavigationController()
     setupSaveLocationButton()
   }
   

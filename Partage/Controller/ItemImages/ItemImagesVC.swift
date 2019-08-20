@@ -84,8 +84,6 @@ extension ItemImagesVC {
     setupReceiverVCLook()
     setupLittleSquareImages()
     setupResetAndSaveButton()
-    //setupUserGuideLabel()
-    setupNavigationController()
   }
   
   //MARK: Main view design

@@ -117,7 +117,6 @@ extension ItemDetailsVC {
     setupMapView()
     setupEditButton()
     setupItemImage()
-    setupNavigationController()
     populateItemImageFromFirebaseStorage()
   }
   

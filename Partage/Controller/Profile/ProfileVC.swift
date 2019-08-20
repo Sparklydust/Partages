@@ -69,6 +69,7 @@ extension ProfileVC {
     deleteUserFromUserDefaults()
     deleteAllLabels()
     allTabsToTheirFirstController()
+    setupProfileImage()
     performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
   }
   

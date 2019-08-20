@@ -133,7 +133,6 @@ extension ItemSelectedVC {
     setupItemDescriptionTextView()
     setupItemImage()
     setupUnderlineView()
-    setupNavigationController()
   }
 
 //MARK: Main view design
