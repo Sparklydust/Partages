@@ -9,27 +9,27 @@
 import UIKit
 
 class SharingVC: UIViewController {
-  
+
   @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) {}
-  
+
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var signInSignUpButton: UIButton!
   @IBOutlet weak var receiveButton: UIButton!
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
-  
+
   var donatedItems = [DonatedItem]()
-  
+
   var user: User? {
     didSet {
       populateUserInfoOnSignInButton()
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
@@ -42,14 +42,14 @@ class SharingVC: UIViewController {
 extension SharingVC {
   //MARK: - Share Button action
   @IBAction func shareButtonAction(_ sender: Any) {
-    performSegue(withIdentifier: Segue.goesToDonatorVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToDonatorVC.rawValue, sender: self)
   }
-  
+
   //MARK: - SignInSignUp button action
   @IBAction func signInSignUpButtonAction(_ sender: Any) {
-    performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
   }
-  
+
   //MARK: - Receiver Button Action
   @IBAction func receiverButtonAction(_ sender: Any) {
     fetchDonorsItemsFromDatabase()
@@ -64,7 +64,7 @@ extension SharingVC {
     setupShareReceiveButtons()
     setupNavigationController()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
@@ -108,7 +108,7 @@ extension SharingVC {
     receiveButton.shareReceiveDesign(title: .emptyString)
     receiveButton.isHidden = false
   }
-  
+
   func hideActivityIndicator() {
     activityIndicatorReceive.isHidden = true
     receiveButton.shareReceiveDesign(title: .receiveMain)
@@ -118,7 +118,7 @@ extension SharingVC {
 //MARK: - Prepare for segue method
 extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToReceiverVC.rawValue {
+    if segue.identifier == Segue.goToReceiverVC.rawValue {
       let destinationVC = segue.destination as! ReceiverVC
       destinationVC.donatedItems = donatedItems
     }
@@ -129,19 +129,19 @@ extension SharingVC {
 extension SharingVC {
   func fetchDonorsItemsFromDatabase() {
     triggerActivityIndicator(true)
-    let resourcePath = NetworkPath.donatedItems.rawValue
+    let resourcePath = NetworkPath.donatedItems.description
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loadItemError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
           self?.triggerActivityIndicator(false)
         }
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.donatedItems = donatedItems
-          self.performSegue(withIdentifier: Segue.goesToReceiverVC.rawValue, sender: donatedItems)
+          self.performSegue(withIdentifier: Segue.goToReceiverVC.rawValue, sender: donatedItems)
         }
       }
     }
@@ -152,13 +152,13 @@ extension SharingVC {
 extension SharingVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    
-    let resourcePath = NetworkPath.users.rawValue + UserDefaultsService.shared.userID!
+
+    let resourcePath = NetworkPath.users.description + UserDefaultsService.shared.userID!
     ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .loginError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let user):
         DispatchQueue.main.async { [weak self] in
@@ -174,11 +174,11 @@ extension SharingVC {
   func populateSignInSignUpButtonDesign() {
     if UserDefaultsService.shared.token != nil {
       fetchUserFromTheDatabase()
-      signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.rawValue)
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.description)
       signInSignUpButton.isEnabled = false
     }
     else {
-      signInSignUpButton.signInSignUpDesign(title: ButtonName.signInSignUp.rawValue)
+      signInSignUpButton.signInSignUpDesign(title: ButtonName.signInSignUp.description)
       signInSignUpButton.isEnabled = true
     }
   }
@@ -188,7 +188,7 @@ extension SharingVC {
 extension SharingVC {
   func populateUserInfoOnSignInButton() {
     guard let firstName = user?.firstName else { return }
-    let helloUser = ButtonName.afterSignedIn.rawValue + firstName
+    let helloUser = ButtonName.afterSignedIn.description + firstName
     signInSignUpButton.setTitle(helloUser , for: .normal)
   }
 }

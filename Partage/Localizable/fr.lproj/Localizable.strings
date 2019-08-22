@@ -1,0 +1,161 @@
+/* 
+  Localizable.strings
+  Partage
+
+  Created by Roland Lariotte on 21/08/2019.
+  Copyright © 2019 Roland Lariotte. All rights reserved.
+*/
+
+
+//MARK: - All static label or placeholder name
+"firstName" = "prénom";
+"lastName" = "nom";
+"email" = "email";
+"password" = "mot de passe";
+"newPassword" = "nouveau mot de passe";
+"confirmPassword" = "confirmer mot de passe";
+"enterYourDonationName" = "nom de votre don";
+"enterItemDescription" = "description de votre donation";
+"imageLoaderGuide" = "Ajoutez de une à quatre images";
+"meetingPoint" = "Lieu de rendez-vous";
+"userPosition" = "Votre position";
+"receiverCalendarTitle" = "Don à recevoir: ";
+"donorCalendarTitle" = "Don à remettre: ";
+"donationIsSelected" = "don sélectionné";
+"donationNotSelected" = "don non sélectionné";
+"userLeftTheConversation" = "a quitté la conversation";
+"closedConversation" = "conversation fermée";
+
+
+//MARK: - Buttons name
+"shareMain" = "Je partage";
+"receiveMain" = "Je reçois";
+"cancel" = "Annuler";
+"save" = "Enregistrer";
+"signUp" = "S'inscrire";
+"signIn" = "Se connecter";
+"lowContactUs" = "contactez-nous";
+"lowSignUp" = "s'inscrire";
+"lowSignIn" = "se connecter";
+"lowSignOut" = "se déconnecter";
+"lowEraseAccount" = "effacer mon compte";
+"lowLostPassword" = "mot de passe oublié";
+"send" = "Envoyer";
+"receiveThisDonation" = "Recevoir ce don";
+"messageToReceiver" = "Message au receveur";
+"messageToDonor" = "Message au donateur";
+"addToCalendar" = "Ajouter au calendrier";
+"history" = "Historique";
+"favorite" = "Favoris";
+"signInSignUp" = "se connecter / s'inscrire";
+"afterSignedIn" = "Bonjour ";
+"donationMade" = "Merci pour votre don";
+"edit" = "Edit";
+"done" = "Done";
+"ok" = "Ok";
+"settings" = "Paramètres";
+"reset" = "Réinitialiser";
+"makeADonation" = "Faire un don";
+"saveMeetingPoint" = "Enregistrer lieu de rdv";
+"setupMeetingPoint" = "Ajoutez le lieu de RDV";
+"changeMeetingPoint" = "Changement du lieu de RDV";
+"confirm" = "Confirmer";
+"openMapApp" = "Ouvrir dans Plans";
+"modifyDonation" = "Modifier le don";
+
+
+//MARK: - Static item detail name
+"giveDonation" = "vous remettra son don";
+"receiveDonation" = "recevra votre don";
+"the" = "le";
+"at" = "à";
+"address" = "localisation";
+"type" = "type";
+"distanceInKm" = "km";
+"distanceInM" = "m";
+
+
+//MARK: - UIAlert action sheet title
+"camera" = "Caméra";
+"photoLibrary" = "Album";
+
+
+//MARK: - UIAlert title
+"locationOffTitle" = "Localisation désactivée";
+"errorTitle" = "Erreur";
+"successTitle" = "Succès";
+"cameraUseTitle" = "Accès à votre caméra et album";
+"restrictedTitle" = "Accès restreint";
+"contactUsTitle" = "Email de contact";
+"contactUsCanceledTitle" = "Envoi annulé";
+"contactUsFailedTitle" = "Erreur de Mail app";
+"contactUsSavedTitle" = "Email sauvegardé";
+"contactUsSentTitle" = "Merci de votre envoi";
+"emptyCaseTitle" = "Élément manquant";
+"thankYouTitle" = "Merci";
+"firstNameErrorTitle" = "Prénom invalide";
+"emailErrorTitle" = "Email invalide";
+"passwordErrorTitle" = "Mot de passe invalide";
+"loginErrorTitle" = "Erreur d'authentification";
+"userDeletedTitle" = "Effacer compte";
+"itemUnselectableTitle" = "Don inaccessible";
+"itemSelectedTitle" = "Don à votre disposition";
+
+
+//MARK: - Donator item type to be chosen on DonationItem
+"selectItem" = "- sélectionner un type -";
+"food" = "Nourriture";
+"clothes" = "Vêtement";
+"hygiene" = "Hygiène";
+"other" = "Autre";
+
+
+//MARK: - Contact us email sender from Mail app attributes
+"partageEmail" = "partage@contact.com";
+"subject" = "- [courier des utilisateurs] Partage -";
+"messageBody" = "Bonjour! N'hésitez pas à nous faire parvenir toutes suggestions, nous vous répondrons dans les plus brefs délais.";
+
+
+//MARK: - Alert message to be displayed on an UIAlert
+"needAccessToCalendar" = "L'accès au calendrier n'a pas été autorisé. Changer vos réglages dans les paramètres pour accéder à cette fonctionnalité.";
+"addedToCalendar" = "L'évènement a été ajouté avec succès à votre calendrier.";
+"resetImage" = "Voulez-vous supprimer cette image?";
+"locationOff" = "L'accès à la localisation n'a pas été autorisé. Changer vos réglages dans les paramètres et accéder à cette fonctionnalité.";
+"noPictureloaded" = "Partage n'a pas pu télécharger votre image. Merci de vérifier vos paramètres.";
+"cameraUse" = "Les accès à votre caméra et album ne sont pas autorisés. Changer vos réglages dans les paramètres pour accéder à cette fonctionnalité.";
+"locationIssue" = "Il y a eu un problème de connection lors de la localisation du lieu de rendez-vous.";
+"getDirectionIssue" = "Il y a eu un problème pour déterminer l'itinéraire jusqu'au lieu de rendez-vous.";
+"noDirectionsCalculated" = "Nous n'avons pas pu calculer le temps de trajet.";
+"restricted" = "L'accès à ce service ne vous est pas autorisé. Veuillez-vous rapprocher de la personne succeptible de lever la restriction.";
+"contactUs" = "partage@contact.com";
+"contactUsCanceled" = "N'hésitez pas à nous contacter ultérieurement, nous serrons à votre écoute.";
+"contactUsFailed" = "Contactez-nous à: \n\npartage@contact.com";
+"contactUsSaved" = "N'hésitez pas à nous contacter, nous serrons à votre écoute.";
+"contactUsSent" = "Nous vous répondrons dans les plus brefs délais.";
+"noImageSelected" = "Vous n'avez pas ajoutez d'image.";
+"noItemTypeSelected" = "Veuillez sélectionner un type de don.";
+"noItemName" = "Veuillez donner un nom à votre don.";
+"noItemDate" = "Veuillez choisir une date et une heure pour la remise de votre don.";
+"noMeetingPoint" = "Veuillez choisir un lieu de rendez-vous.";
+"noDescription" = "Veuillez donner une description de votre don.";
+"noImage" = "Veuillez choisir une image de votre don en cliquant sur la croix bleue.";
+"confirmDonation" = "Veuillez confirmer votre don.";
+"resetDonation" = "Êtes-vous sûr de réinitialiser votre don?";
+"emailAlreadyInUse" = "Cette adresse email est déjà utilisé par un autre compte.";
+"passwordDoesntMatch" = "Votre mot de passe ne correspond pas.";
+"addFirstName" = "Veuillez ajouter un prénom.";
+"addEmail" = "Veuillez ajouter un email.";
+"passwordTooShort" = "Votre mot de passe doit comporter un minimum de six caractères.";
+"loginError" = "Vérifiez votre email et votre mot de passe.";
+"notConnected" = "Merci de vous authentifier pour accéder à cette fonctionnalité.";
+"signUpError" = "Cet email est déjà enregistré dans notre base de données.";
+"networkRequestError" = "Il y a eu un problème lors da la requête réseau.";
+"userDeleted" = "Confirmez-vous la supression totale de votre compte?";
+"itemAlreadySelected" = "Cette donation a déjà été sélectionnée par un autre utilisateur.";
+"donatedItemSelected" = "Vous avez bien sélectionné ce don. Merci d'être présent au rendez-vous. N'hésitez pas à contacter le donateur pour de plus amples informations.";
+"confirmSelection" = "Êtes-vous certain de vouloir recevoir ce don?";
+"confirmDonatedItemRemoved" = "Ce don ne vous est plus attribué.";
+"confirmChanges" = "Veuillez confirmer les modifcations portées à votre don.";
+"donatedItemDeleted" = "Votre don a bien été effacé.";
+"canNotSendMessage" = "Ce don est le vôtre. Vous ne pouvez donc pas vous envoyer un message.";
+"canNotSelectOwnDonation" = "Ce don est le vôtre. Vous ne pouvez donc pas le sélectionner.";

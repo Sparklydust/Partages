@@ -11,9 +11,9 @@ import UIKit
 //MARK: - To handle user authentification
 class Auth {
   private var authSession = URLSession(configuration: .default)
-  
+
   init() {}
-  
+
   //Initializer for testing purposes
   init(authSession: URLSession) {
     self.authSession = authSession
@@ -23,7 +23,7 @@ class Auth {
 //MARK: - Login method
 extension Auth {
   func login(email: String, password: String, completion: @escaping (RequestResult) -> Void) {
-    let path = NetworkPath.mainPath.rawValue + NetworkPath.users.rawValue + NetworkPath.login.rawValue
+    let path = NetworkPath.mainPath.description + NetworkPath.users.description + NetworkPath.login.description
     guard let url = URL(string: path) else { fatalError() }
     guard let loginString = "\(email):\(password)".data(using: .utf8)?.base64EncodedString() else { fatalError() }
     var loginRequest = URLRequest(url: url)

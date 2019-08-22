@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //MARK: - Round up a square image
 extension UIImageView {
   func rounded() {
@@ -17,6 +16,7 @@ extension UIImageView {
     self.clipsToBounds = true
   }
 }
+
 //MARK: - Round up a square image with a main blue border
 extension UIImageView {
   func roundedWithMainBlueBorder() {
@@ -27,6 +27,7 @@ extension UIImageView {
     self.layer.borderWidth = 1
   }
 }
+
 //MARK: - Round up a square image with a middle blue border
 extension UIImageView {
   func roundedWithMiddleBlueBorder() {

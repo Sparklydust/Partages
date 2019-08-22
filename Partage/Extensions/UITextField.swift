@@ -14,7 +14,7 @@ extension UITextField {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
     self.tintColor = color
-    
+
     //Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.font = UIFont(customFont: font, withSize: .thirtyTwo)
@@ -26,16 +26,16 @@ extension UITextField {
 extension UITextField {
   func setupPlaceholderDesign(title: StaticLabel, color: UIColor) {
     self.attributedPlaceholder = NSAttributedString(
-      string: title.rawValue,
+      string: title.description,
       attributes: [
         NSAttributedString.Key.foregroundColor: color,
         NSAttributedString.Key.font: UIFont(
           customFont: .arial, withSize: .fifteen)!])
-    
+
     //Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.attributedPlaceholder = NSAttributedString(
-        string: title.rawValue,
+        string: title.description,
         attributes: [
           NSAttributedString.Key.foregroundColor: color,
           NSAttributedString.Key.font: UIFont(

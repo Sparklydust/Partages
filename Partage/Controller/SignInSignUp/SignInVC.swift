@@ -9,9 +9,9 @@
 import UIKit
 
 class SignInVC: UIViewController {
-  
+
   @IBAction func unwindToSignInVC(segue: UIStoryboardSegue) { }
-  
+
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var dotLabel: UILabel!
@@ -22,15 +22,15 @@ class SignInVC: UIViewController {
   @IBOutlet weak var connectionButton: UIButton!
   @IBOutlet weak var ConnectionActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
-  
+
   @IBOutlet var underlineViews: [UIView]!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
     triggerActivityIndicator(false)
-    
+
     lostPasswordButton.isHidden = true
   }
 }
@@ -58,12 +58,12 @@ extension SignInVC {
     setupDotLabel()
     setupSwipeGesture()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     emailTextField.delegate = self
@@ -145,17 +145,17 @@ extension SignInVC {
 extension SignInVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .left {
-      performSegue(withIdentifier: Segue.goesToSignUpVC.rawValue, sender: self)
+      performSegue(withIdentifier: Segue.goToSignUpVC.rawValue, sender: self)
     }
     if sender.direction == .down {
       guard emailTextField.isFirstResponder || passwordTextField.isFirstResponder else {
-        performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+        performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
         return
       }
       view.endEditing(true)
     }
   }
-  
+
   func setupSwipeGesture() {
     let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -191,7 +191,7 @@ extension SignInVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     ConnectionActivityIndicator.isHidden = false
     ConnectionActivityIndicator.style = .whiteLarge
@@ -203,7 +203,7 @@ extension SignInVC {
     signUpButton.isEnabled = false
     swipeGestureRecognizer.isEnabled = false
   }
-  
+
   func hideActivityIndicator() {
     ConnectionActivityIndicator.isHidden = true
     connectionButton.commonDesign(title: .signIn)
@@ -216,11 +216,11 @@ extension SignInVC {
 extension SignInVC {
   func userLogin() {
     guard let email = emailTextField.text, !email.isEmpty else {
-      showAlert(title: .emailError, message: .addEmail)
+      showAlert(title: .emailErrorTitle, message: .addEmail)
       return
     }
     guard let password = passwordTextField.text, !password.isEmpty else {
-      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      showAlert(title: .passwordErrorTitle, message: .passwordDoesntMatch)
       return
     }
     resignAllResponder()
@@ -229,12 +229,12 @@ extension SignInVC {
       switch result {
       case .success:
         DispatchQueue.main.async {
-          self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+          self.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
           self.triggerActivityIndicator(false)
         }
       case .failure:
         DispatchQueue.main.async {
-          self.showAlert(title: .loginError, message: .loginError)
+          self.showAlert(title: .loginErrorTitle, message: .loginError)
           self.triggerActivityIndicator(false)
         }
       }

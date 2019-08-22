@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class FirebaseStorageHandler {
+final class FirebaseStorageHandler {
   static let shared = FirebaseStorageHandler()
 }
 
@@ -19,23 +19,23 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(UserDefaultsService.shared.userID!).jpg"
     let profilePictureRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     guard let imageData = profilePicture.jpegData(compressionQuality: 0.75) else { return }
     let uploadMetadata = StorageMetadata.init()
     uploadMetadata.contentType = "image/jpeg"
-    
+
     profilePictureRef.putData(imageData, metadata: uploadMetadata, completion: { (downloadedMetadata, error) in
       if let error = error {
         print(error.localizedDescription)
         return
       }
-      
+
       profilePictureRef.downloadURL(completion: { (url, error) in
         if let error = error {
           print(error.localizedDescription)
           return
         }
-//        //MARK: - User this url.absoluteString to save path in Vapor User profile picture
+//        //MARK: - Use this url.absoluteString to save path in Vapor User profile picture
 //        if let url = url {
 //          print("Here is your download URL: \(url.absoluteString)")
 //
@@ -51,7 +51,7 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(UserDefaultsService.shared.userID!).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -70,7 +70,7 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(user).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -89,7 +89,7 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(user).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -108,7 +108,7 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(user).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -127,7 +127,7 @@ extension FirebaseStorageHandler {
     guard UserDefaultsService.shared.userID != nil else { return }
     let profilePicturePath = "profilePicture/\(UserDefaultsService.shared.userID!).jpg"
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
-    
+
     storageRef.delete { error in
       if let error = error {
         print(error.localizedDescription)
@@ -144,11 +144,11 @@ extension FirebaseStorageHandler {
     let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
     let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
     let itemImageRef = Storage.storage().reference(withPath: itemImagePath)
-    
+
     guard let imageData = donatedItemImage.jpegData(compressionQuality: 0.75) else { return }
     let uploadMetadata = StorageMetadata.init()
     uploadMetadata.contentType = "image/jpeg"
-    
+
     itemImageRef.putData(imageData, metadata: uploadMetadata, completion: { (downloadedMetadata, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -165,7 +165,7 @@ extension FirebaseStorageHandler {
     let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
     let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
     let storageRef = Storage.storage().reference(withPath: itemImagePath)
-    
+
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
       if let error = error {
         print(error.localizedDescription)
@@ -185,7 +185,7 @@ extension FirebaseStorageHandler {
     let firebaseImagePath = donatedItem.pickUpDateTime + String(donatedItem.latitude) + String(donatedItem.longitude)
     let itemImagePath = "donatedItemImage/\(firebaseImagePath).jpg"
     let storageRef = Storage.storage().reference(withPath: itemImagePath)
-    
+
     storageRef.delete { error in
       if let error = error {
         print(error.localizedDescription)

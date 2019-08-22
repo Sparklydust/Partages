@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 
 class ProfileVC: UIViewController {
-  
+
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var firstNameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
@@ -20,20 +20,20 @@ class ProfileVC: UIViewController {
   @IBOutlet weak var disconnectProfileButton: UIButton!
   @IBOutlet weak var deleteProfileButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
+
   @IBOutlet var backgroundViews: [UIView]!
-  
+
   var user: FullUser? {
     didSet {
       updateUserProfile()
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     triggerActivityIndicator(false)
@@ -46,9 +46,9 @@ class ProfileVC: UIViewController {
 extension ProfileVC {
   //MARK: Edit profile button action
   @IBAction func editProfileButtonAction(_ sender: Any) {
-    performSegue(withIdentifier: Segue.goesToEditProfile.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToEditProfile.rawValue, sender: self)
   }
-  
+
   //MARK: Edit profile picture button action
   @IBAction func editProfilePictureButtonAction(_ sender: Any) {
     CameraHandler.shared.goesToUserLibraryOrCamera(vc: self)
@@ -58,21 +58,21 @@ extension ProfileVC {
       FirebaseStorageHandler.shared.upload(image, of: self.user!)
     }
   }
-  
+
   //MARK: Contact Us button action
   @IBAction func contactUsButtonAction(_ sender: Any) {
     sendEmail()
   }
-  
+
   //MARK: Disconnect profile button action
   @IBAction func disconnectProfileButtonAction(_ sender: Any) {
     deleteUserFromUserDefaults()
     deleteAllLabels()
     allTabsToTheirFirstController()
     setupProfileImage()
-    performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
   }
-  
+
   //MARK: Delete profile button action
   @IBAction func deleteProfileButtonAction(_ sender: Any) {
     deleteUserFromTheDatabase()
@@ -91,7 +91,7 @@ extension ProfileVC {
     setupNavigationController()
     setupProfileImage()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
@@ -120,7 +120,7 @@ extension ProfileVC {
 //MARK: - Setup edit button design
 extension ProfileVC {
   func setupEditProfilePictureButton() {
-    editProfilePictureButton.signInSignUpDesign(title: ButtonName.edit.rawValue)
+    editProfilePictureButton.signInSignUpDesign(title: ButtonName.edit.description)
   }
 }
 
@@ -160,7 +160,7 @@ extension ProfileVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     activityIndicator.isHidden = false
     activityIndicator.style = .whiteLarge
@@ -169,18 +169,18 @@ extension ProfileVC {
     activityIndicator.startAnimating()
     disableButtons()
   }
-  
+
   func hideActivityIndicator() {
     activityIndicator.isHidden = true
     enableButtons()
   }
-  
+
   func disableButtons() {
     editProfilePictureButton.isEnabled = false
     editProfileButton.isEnabled = false
     deleteProfileButton.isEnabled = false
   }
-  
+
   func enableButtons() {
     editProfilePictureButton.isEnabled = true
     editProfileButton.isEnabled = true
@@ -192,18 +192,18 @@ extension ProfileVC {
 extension ProfileVC: MFMailComposeViewControllerDelegate {
   func sendEmail() {
     guard MFMailComposeViewController.canSendMail() else {
-      showAlert(title: .contactUs, message: .contactUs)
+      showAlert(title: .contactUsTitle, message: .contactUs)
       return
     }
     let mail = MFMailComposeViewController()
     mail.mailComposeDelegate = self
-    mail.setToRecipients([ContactUs.partageEmail.rawValue])
-    mail.setSubject(ContactUs.subject.rawValue)
-    mail.setMessageBody(ContactUs.messageBody.rawValue, isHTML: true)
+    mail.setToRecipients([ContactUs.partageEmail.description])
+    mail.setSubject(ContactUs.subject.description)
+    mail.setMessageBody(ContactUs.messageBody.description, isHTML: true)
     
     present(mail, animated: true)
   }
-  
+
   func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
     if let _ = error {
       controller.dismiss(animated: true)
@@ -211,13 +211,13 @@ extension ProfileVC: MFMailComposeViewControllerDelegate {
     controller.dismiss(animated: true)
     switch result {
     case .cancelled:
-      showAlert(title: .contactUsCanceled, message: .contactUsCanceled)
+      showAlert(title: .contactUsCanceledTitle, message: .contactUsCanceled)
     case .failed:
-      showAlert(title: .contactUsFailed, message: .contactUsFailed)
+      showAlert(title: .contactUsFailedTitle, message: .contactUsFailed)
     case .saved:
-      showAlert(title: .contactUsSaved, message: .contactUsSaved)
+      showAlert(title: .contactUsSavedTitle, message: .contactUsSaved)
     case .sent:
-      showAlert(title: .contactUsSent, message: .contactUsSent)
+      showAlert(title: .contactUsSentTitle, message: .contactUsSent)
     @unknown default:
       fatalError()
     }
@@ -228,8 +228,8 @@ extension ProfileVC: MFMailComposeViewControllerDelegate {
 extension ProfileVC {
   func checkIfAnUserIsConnected() {
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
@@ -241,14 +241,14 @@ extension ProfileVC {
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     triggerActivityIndicator(true)
-    
-    let resourcePath = NetworkPath.myAccount.rawValue + UserDefaultsService.shared.userID!
+
+    let resourcePath = NetworkPath.myAccount.description + UserDefaultsService.shared.userID!
     ResourceRequest<FullUser>(resourcePath).get(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
           DispatchQueue.main.async { [weak self] in
             self?.triggerActivityIndicator(false)
-            self?.showAlert(title: .error, message: .loginError)
+            self?.showAlert(title: .errorTitle, message: .loginError)
         }
       case .success(let fullUser):
         DispatchQueue.main.async { [weak self] in
@@ -264,15 +264,15 @@ extension ProfileVC {
 extension ProfileVC {
   func deleteUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    showAlert(title: .userDeleted, message: .userDeleted, buttonName: .confirm) { (true) in
+    showAlert(title: .userDeletedTitle, message: .userDeleted, buttonName: .confirm) { (true) in
       self.triggerActivityIndicator(true)
-      let resourcePath = NetworkPath.deleteUser.rawValue + UserDefaultsService.shared.userID!
+      let resourcePath = NetworkPath.deleteUser.description + UserDefaultsService.shared.userID!
       ResourceRequest<User>(resourcePath).delete(tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
             self?.triggerActivityIndicator(false)
-            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
           }
         case .success:
           DispatchQueue.main.async { [weak self] in
@@ -282,7 +282,7 @@ extension ProfileVC {
             self?.setupProfileImage()
             self?.allTabsToTheirFirstController()
             self?.triggerActivityIndicator(false)
-            self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+            self?.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
           }
         }
       })
@@ -319,7 +319,7 @@ extension ProfileVC {
 //MARK: - Prepare for segue
 extension ProfileVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToEditProfile.rawValue {
+    if segue.identifier == Segue.goToEditProfile.rawValue {
       let destinationVC = segue.destination as! EditProfileVC
       destinationVC.user = user
     }

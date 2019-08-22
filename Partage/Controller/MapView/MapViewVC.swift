@@ -11,25 +11,25 @@ import MapKit
 import CoreLocation
 
 class MapViewVC: UIViewController {
-  
+
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var saveLocationButton: UIButton!
-  
+
   let locationManager = CLLocationManager()
-  
+
   let generator = UIImpactFeedbackGenerator(style: .light)
   let aroundUserLocation: CLLocationDistance = 500
-  
+
   var delegate: CanReceiveItemAddressDelegate?
   var donorItemLatitude: Double = .zero
   var donorItemLongitude: Double = .zero
   var buttonName: ButtonName = .saveMeetingPoint
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
-    
+
     guard donorItemLatitude != .zero && donorItemLongitude != .zero else { return }
     LocationHandler.shared.getDirectionFromUserToPinnedLocation(on: mapView, latitude: donorItemLatitude, longitude: donorItemLongitude, vc: self)
     LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItemLatitude, longitude: donorItemLongitude)
@@ -47,7 +47,7 @@ extension MapViewVC {
     LocationHandler.shared.convertLatLonToAnAdress(vc: self)
     navigationController?.popViewController(animated: true)
   }
-  
+
   //MARK: Long press gesture recognizer add pin with a vibration
   @IBAction func addPinLongPressGesture(_ sender: UILongPressGestureRecognizer) {
     LocationHandler.shared.userPinAndGetCoordinates(of: .meetingPoint, on: mapView, sender: sender)
@@ -62,12 +62,12 @@ extension MapViewVC {
     setupMainView()
     setupSaveLocationButton()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     mapView.delegate = self

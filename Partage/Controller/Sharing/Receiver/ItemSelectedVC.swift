@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class ItemSelectedVC: UIViewController {
-  
+
   @IBOutlet weak var itemTypeLabel: UILabel!
   @IBOutlet weak var itemNameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
@@ -26,30 +26,30 @@ class ItemSelectedVC: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var messageActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var receiveActivityIndicator: UIActivityIndicatorView!
-  
+
   @IBOutlet var staticLabels: [UILabel]!
-  
+
   var donatedItem: DonatedItem!
   var isFavorited = false
-  
+
   var messages = [Message]()
   var senderID = String()
-  
+
   var firstUserID = String()
   var secondUserID = String()
-  
+
   var receiver: User? {
     didSet {
       populateReceiver()
     }
   }
-  
+
   var donor: User? {
     didSet {
       populateDonor()
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -57,7 +57,7 @@ class ItemSelectedVC: UIViewController {
     setupUserIDToSenderIDVariable()
     fetchUsersFromTheDatabase()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     wasRecipeFavorited()
@@ -71,48 +71,48 @@ extension ItemSelectedVC {
   //MARK: Favorite button action
   @IBAction func favoriteButtonAction(_ sender: Any) {
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
   }
-  
+
   //MARK: Item image button action
   @IBAction func itemImageButtonAction(_ sender: Any) {
-    performSegue(withIdentifier: Segue.goesToItemImagesVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToItemImagesVC.rawValue, sender: self)
   }
-  
+
   //MARK: Map view button action
   @IBAction func mapViewButtonAction(_ sender: Any) {
-    performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToMapViewVC.rawValue, sender: self)
   }
-  
+
   //MARK: Messagge to donator button action
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
     guard firstAndSecondUsersAreNotSamePerson() else {
-      showAlert(title: .error, message: .canNotSendMessage)
+      showAlert(title: .errorTitle, message: .canNotSendMessage)
       return
     }
     CheckUsersAlreadyCommunicateBeforeCreatingMessage()
   }
-  
+
   //MARK: Receive this donation button action
   @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
     guard firstAndSecondUsersAreNotSamePerson() else {
-      showAlert(title: .error, message: .canNotSelectOwnDonation)
+      showAlert(title: .errorTitle, message: .canNotSelectOwnDonation)
       return
     }
     userPicksUpADonatedItem()
@@ -135,7 +135,7 @@ extension ItemSelectedVC {
     setupUnderlineView()
   }
 
-//MARK: Main view design
+  //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
@@ -202,9 +202,9 @@ extension ItemSelectedVC {
 //MARK: - Setup static labels design
 extension ItemSelectedVC {
   func setupStaticLabels() {
-    staticLabels[0].text = StaticItemDetail.type.rawValue
-    staticLabels[1].text = StaticItemDetail.the.rawValue
-    staticLabels[2].text = StaticItemDetail.at.rawValue
+    staticLabels[0].text = StaticItemDetail.type.description
+    staticLabels[1].text = StaticItemDetail.the.description
+    staticLabels[2].text = StaticItemDetail.at.description
     for label in staticLabels {
       label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
     }
@@ -246,11 +246,13 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func setupVCInfoFrom(_ donorItem: DonatedItem) {
     let isoDateString = donorItem.pickUpDateTime
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let trimmedIsoString = isoDateString.replacingOccurrences(
+      of: StaticLabel.dateOccurence.description,
+      with: StaticLabel.emptyString.description, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
-    
+
     itemTypeLabel.text = donorItem.selectedType
     itemNameLabel.text = donorItem.name
     dateLabel.text = date
@@ -264,7 +266,7 @@ extension ItemSelectedVC {
 //MARK: - Prepare for segue methods
 extension ItemSelectedVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToMapViewVC.rawValue {
+    if segue.identifier == Segue.goToMapViewVC.rawValue {
       let destinationVC = segue.destination as! MapViewVC
       destinationVC.donorItemLatitude = donatedItem.latitude
       destinationVC.donorItemLongitude = donatedItem.longitude
@@ -275,7 +277,7 @@ extension ItemSelectedVC {
       destinationVC?.firstUserID = firstUserID
       destinationVC?.secondUserID = secondUserID
     }
-    else if segue.identifier == Segue.goesToItemImagesVC.rawValue {
+    else if segue.identifier == Segue.goToItemImagesVC.rawValue {
       let destinationVC = segue.destination as? ItemImagesVC
       destinationVC?.isReceiver = true
       destinationVC?.donorItem = donatedItem
@@ -294,7 +296,7 @@ extension ItemSelectedVC {
       favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
     }
   }
-  
+
   // Actions for when the heart is clicked
   @objc func favoriteDidTap() {
     isFavorited = !isFavorited
@@ -306,7 +308,7 @@ extension ItemSelectedVC {
     }
     updateFavoriteButton(isFavorited)
   }
-  
+
   //Check if the donated item was once favorited and saved
   func wasRecipeFavorited() {
     isFavorited = false
@@ -321,7 +323,7 @@ extension ItemSelectedVC {
       self.secondUserID = anotherUserID
     }
   }
-  
+
   func populateDonor() {
     if let oneUserID = self.donor?.id?.uuidString {
       self.firstUserID = oneUserID
@@ -332,21 +334,24 @@ extension ItemSelectedVC {
 //MARK: - Activity Indicator action and setup
 extension ItemSelectedVC {
   func triggerMessageActivityIndicator(_ action: Bool) {
-    triggerActivityIndicator(action, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
+    triggerActivityIndicator(
+      action, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
   }
   
   func triggerReceiveDonationActivityIndicator(_ action: Bool) {
-    triggerActivityIndicator(action, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
+    triggerActivityIndicator(
+      action, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
   }
   
-  func triggerActivityIndicator(_ action: Bool, on activityIndicator: UIActivityIndicatorView, as button: UIButton, named name: ButtonName) {
+  func triggerActivityIndicator(
+    _ action: Bool, on activityIndicator: UIActivityIndicatorView, as button: UIButton, named name: ButtonName) {
     guard action else {
       hideActivityIndicator(activityIndicator, button, name)
       return
     }
     showActivityIndicator(activityIndicator, button)
   }
-  
+
   func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton) {
     activityIndicator.isHidden = false
     activityIndicator.style = .whiteLarge
@@ -356,15 +361,18 @@ extension ItemSelectedVC {
     button.commonDesign(title: .emptyString)
     button.isHidden = false
   }
-  
-  func hideActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton, _ name: ButtonName) {
+
+  func hideActivityIndicator(
+    _ activityIndicator: UIActivityIndicatorView, _ button: UIButton, _ name: ButtonName) {
     activityIndicator.isHidden = true
     button.commonDesign(title: name)
   }
-  
+
   func hideAllActivityIndicators() {
-    triggerActivityIndicator(false, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
-    triggerActivityIndicator(false, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
+    triggerActivityIndicator(
+      false, on: messageActivityIndicator, as: messageToDonatorButton, named: .messageToDonor)
+    triggerActivityIndicator(
+      false, on: receiveActivityIndicator, as: receiveDonationButton, named: .receiveThisDonation)
   }
 }
 
@@ -372,17 +380,19 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func saveDonatedItemToUserFavorite() {
     guard UserDefaultsService.shared.userID != nil else {
-      showAlert(title: .loginError, message: .notConnected)
+      showAlert(title: .loginErrorTitle, message: .notConnected)
       return
     }
     guard let donatedItemID = donatedItem.id else { return }
-    
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
+
+    let resourcePath =
+      NetworkPath.donatedItems.description + "\(donatedItemID)/" +
+        NetworkPath.favoritedByUser.description + UserDefaultsService.shared.userID!
     ResourceRequest<DonatedItem>(resourcePath).linkToPivot(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success:
         return
@@ -397,12 +407,14 @@ extension ItemSelectedVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
 
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
+    let resourcePath =
+      NetworkPath.donatedItems.description + "\(donatedItemID)/" +
+        NetworkPath.favoritedByUser.description
     ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let users):
         DispatchQueue.main.async { [weak self] in
@@ -423,13 +435,15 @@ extension ItemSelectedVC {
   func deleteDonatedItemFromUserFavorite() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
-    
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue + UserDefaultsService.shared.userID!
+
+    let resourcePath =
+      NetworkPath.donatedItems.description + "\(donatedItemID)/" +
+        NetworkPath.favoritedByUser.description + UserDefaultsService.shared.userID!
     ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success:
         return
@@ -446,29 +460,29 @@ extension ItemSelectedVC {
     guard let receiverID = UserDefaultsService.shared.userID else { return }
     guard var updatedDonatedItem = donatedItem else { return }
     guard !updatedDonatedItem.isPicked else {
-      showAlert(title: .donatedItemUnselectable, message: .itemAlreadySelected)
+      showAlert(title: .itemUnselectableTitle, message: .itemAlreadySelected)
       return
     }
     updatedDonatedItem.receiverID = receiverID
     updatedDonatedItem.isPicked = true
-    
-    showAlert(title: .donatedItemSelected, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
-      
-      let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+
+    showAlert(title: .itemSelectedTitle, message: .confirmSelection, buttonName: .confirm, completion: { (true) in
+
+      let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
       self.triggerReceiveDonationActivityIndicator(true)
       ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
             self?.triggerReceiveDonationActivityIndicator(false)
-            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
           }
         case .success(let pickedUpItem):
           DispatchQueue.main.async { [weak self] in
             updatedDonatedItem = pickedUpItem
             self?.triggerReceiveDonationActivityIndicator(false)
-            self?.showAlert(title: .success, message: .donatedItemSelected, completion: { (true) in
-              self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+            self?.showAlert(title: .successTitle, message: .donatedItemSelected, completion: { (true) in
+              self?.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
             })
           }
         }
@@ -483,12 +497,12 @@ extension ItemSelectedVC {
     fetchReceiverFromTheDatabase()
     fetchDonorFromTheDatabase()
   }
-  
+
   func fetchReceiverFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let receiverID = UserDefaultsService.shared.userID else { return }
-    
-    let resourcePath = NetworkPath.users.rawValue + receiverID
+
+    let resourcePath = NetworkPath.users.description + receiverID
     ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { [weak self] (result) in
       switch result {
       case .failure:
@@ -504,13 +518,13 @@ extension ItemSelectedVC {
   func fetchDonorFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let itemID = donatedItem.id else { return }
-    
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(itemID)/" + "user"
+
+    let resourcePath = NetworkPath.donatedItems.description + "\(itemID)/" + "user"
     ResourceRequest<User>(resourcePath).get(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let user):
         DispatchQueue.main.async { [weak self] in
@@ -525,19 +539,24 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func createMessageBetweenTwoUser() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    let dateAndTime = ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
-    
+    let dateAndTime = ISO8601DateFormatter.string(
+      from: Date(), timeZone: .current, formatOptions: .withInternetDateTime)
+
     guard let recipientID = donor?.id?.uuidString else { return }
-    
-    let message = Message(senderID: senderID, recipientID: recipientID, date: dateAndTime, isReadBySender: true, isReadByRecipient: false)
-    
-    let resourcePath = NetworkPath.messages.rawValue
+
+    let message = Message(senderID: senderID,
+                          recipientID: recipientID,
+                          date: dateAndTime,
+                          isReadBySender: true,
+                          isReadByRecipient: false)
+
+    let resourcePath = NetworkPath.messages.description
     ResourceRequest<Message>(resourcePath).save(message, tokenNeeded: true) { [weak self] (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.triggerMessageActivityIndicator(false)
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success:
         DispatchQueue.main.async { [weak self] in
@@ -554,15 +573,16 @@ extension ItemSelectedVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     let userID = UserDefaultsService.shared.userID
     var userAlreadyCommunicate = false
-    
-    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID!
+
+    let resourcePath =
+      NetworkPath.messages.description + NetworkPath.ofUser.description + userID!
     triggerMessageActivityIndicator(true)
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.triggerMessageActivityIndicator(false)
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let fetchedMessages):
         DispatchQueue.main.async { [weak self] in

@@ -15,8 +15,12 @@ final class Message: Codable {
   var date: String
   var isReadBySender: Bool
   var isReadByRecipient: Bool
-  
-  init(senderID: String, recipientID: String, date: String, isReadBySender: Bool, isReadByRecipient: Bool) {
+
+  init(senderID: String,
+       recipientID: String,
+       date: String,
+       isReadBySender: Bool,
+       isReadByRecipient: Bool) {
     self.senderID = senderID
     self.recipientID = recipientID
     self.date = date

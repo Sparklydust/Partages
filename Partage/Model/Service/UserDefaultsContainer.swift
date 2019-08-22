@@ -11,8 +11,8 @@ import Foundation
 //MARK: - To hold UserDefaults computed porperties and keys
 class UserDefaultsContainer {
   private struct Keys {
-    static let token = Key.partageAPIKey.rawValue
-    static let userID = Key.partageUserID.rawValue
+    static let token = Key.partageTokenKey.description
+    static let userID = Key.partageUserID.description
   }
 }
 
@@ -29,7 +29,7 @@ extension UserDefaultsContainer: SettingsContainer {
         newValue, forKey: Keys.token)
     }
   }
-  
+
   //MARK: - Save or retrieve the user ID
   var userID: String? {
     get {

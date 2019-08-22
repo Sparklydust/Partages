@@ -19,7 +19,7 @@ extension UINavigationItem {
     button.isEnabled = false
     self.titleView = button
   }
-  
+
   // Action if button is enable and clicked on
   @objc func clickedOnProfileImage() {
   }

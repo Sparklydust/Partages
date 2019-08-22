@@ -16,8 +16,14 @@ final class Address {
   var postalCode: String
   var cityName: String
   var countryName: String
-  
-  init(latitude: Double, longitude: Double, streetNumber: String, streetName: String, postalCode: String, city: String, country: String) {
+
+  init(latitude: Double,
+       longitude: Double,
+       streetNumber: String,
+       streetName: String,
+       postalCode: String,
+       city: String,
+       country: String) {
     self.latitude = latitude
     self.longitude = longitude
     self.streetNumber = streetNumber

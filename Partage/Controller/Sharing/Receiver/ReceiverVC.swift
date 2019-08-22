@@ -10,32 +10,30 @@ import UIKit
 import CoreLocation
 
 class ReceiverVC: UIViewController {
-  
+
   @IBOutlet weak var receiverTableView: UITableView!
-  
+
   var donatedItems = [DonatedItem]()
   var itemsNotPicked = [DonatedItem]()
   var oneDonatedItem: DonatedItem?
-  
+
   var isFavorited = false
-  
+
   let refreshControl = UIRefreshControl()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
     itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
-    DispatchQueue.main.async {
-      self.receiverTableView.reloadData()
-    }
+    fetchDonorsItemsFromDatabase()
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(false)
     if self.isMovingFromParent {
@@ -54,12 +52,12 @@ extension ReceiverVC {
     setupCellHeightForIPad()
     setupRefreshControl()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     receiverTableView.delegate = self
@@ -84,7 +82,7 @@ extension ReceiverVC {
 //MARK: - Setup all custom cells
 extension ReceiverVC {
   func setupCustomCell() {
-    receiverTableView.setupCustomCell(nibName: .receiverCellIdentifier, identifier: .receiverCellIdentifier)
+    receiverTableView.setupCustomCell(nibName: .ReceiverTVC, identifier: .ReceiverTVC)
   }
 }
 
@@ -102,20 +100,21 @@ extension ReceiverVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return itemsNotPicked.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.receiverCellIdentifier.rawValue, for: indexPath) as! ReceiverTVC
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: CustomCell.ReceiverTVC.rawValue, for: indexPath) as! ReceiverTVC
     populateDonatorsItems(into: cell, at: indexPath)
     checkIfAnUserFavoritedItem(into: cell, at: indexPath)
     updapteFavoritedButton(in: cell)
     FirebaseStorageHandler.shared.downloadItemImage(of: itemsNotPicked[indexPath.row], into: cell.itemImage)
-    
+
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     setupDonatorItemFromSelectedCell(at: indexPath)
-    performSegue(withIdentifier: Segue.goesToItemSelectedVC.rawValue, sender: oneDonatedItem)
+    performSegue(withIdentifier: Segue.goToItemSelectedVC.rawValue, sender: oneDonatedItem)
   }
 }
 
@@ -140,24 +139,26 @@ extension ReceiverVC {
   func populateDonatorsItems(into cell: ReceiverTVC, at indexPath: IndexPath) {
     let userLocation = LocationHandler.shared.userLocation()
     itemsNotPicked.sort(by: userLocation)
-    
+
     let donorItem = itemsNotPicked[indexPath.row]
-    
+
     populateDateAndTime(in: cell, with: donorItem.pickUpDateTime)
-    
+
     let itemLocation = CLLocation(latitude: donorItem.latitude, longitude: donorItem.longitude)
     var distance = userLocation.distance(from: itemLocation)
-    
+
     cell.itemTypeLabel.text = donorItem.selectedType
     cell.itemNameLabel.text = donorItem.name
     cell.showLocationSurrounding(latitude: donorItem.latitude, longitude: donorItem.longitude)
-    
+
     if distance > 1000 {
       distance /= 1000
-      cell.itemDistanceLabel.text = "\(String(format: "%.2f", distance)) \(StaticItemDetail.distanceInKm.rawValue)"
+      cell.itemDistanceLabel.text =
+      "\(String(format: "%.2f", distance)) \(StaticItemDetail.distanceInKm.description)"
     }
     else {
-      cell.itemDistanceLabel.text = "\(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.rawValue)"
+      cell.itemDistanceLabel.text =
+      "\(String(format: "%.0f", distance)) \(StaticItemDetail.distanceInM.description)"
     }
   }
 }
@@ -165,11 +166,13 @@ extension ReceiverVC {
 //MARK: - To populate date and time in cell
 extension ReceiverVC {
   func populateDateAndTime(in cell: ReceiverTVC, with isoDateString: String) {
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+    let trimmedIsoString = isoDateString.replacingOccurrences(
+      of: StaticLabel.dateOccurence.description,
+      with: StaticLabel.emptyString.description, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     let date = dateAndTime?.asString(style: .short)
     let time = dateAndTime?.asString()
-    
+
     cell.dateLabel.text = date
     cell.timeLabel.text = time
   }
@@ -189,7 +192,8 @@ extension ReceiverVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = itemsNotPicked[indexPath.row].id else { return }
 
-    let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)/" + NetworkPath.favoritedByUser.rawValue
+    let resourcePath =
+      NetworkPath.donatedItems.description + "\(donatedItemID)/" + NetworkPath.favoritedByUser.description
     ResourceRequest<User>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
       case .failure:
@@ -210,12 +214,12 @@ extension ReceiverVC {
 //MARK: - Fetch all donated items from database for refresh control
 extension ReceiverVC {
   func fetchDonorsItemsFromDatabase() {
-    let resourcePath = NetworkPath.donatedItems.rawValue
+    let resourcePath = NetworkPath.donatedItems.description
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
           self?.endRefreshing()
         }
       case .success(let donatedItems):
@@ -238,11 +242,11 @@ extension ReceiverVC {
     refreshControl.commonDesign(title: .emptyString)
     receiverTableView.addSubview(refreshControl)
   }
-  
+
   @objc private func refreshDonatedItems(_ sender: Any) {
     fetchDonorsItemsFromDatabase()
   }
-  
+
   func endRefreshing() {
     refreshControl.endRefreshing()
   }

@@ -17,7 +17,7 @@ final class DonatedItem: Codable {
     .hygiene,
     .other
   ]
-  
+
   var id: Int?
   var isPicked: Bool
   var selectedType: String
@@ -27,8 +27,15 @@ final class DonatedItem: Codable {
   var latitude: Double
   var longitude: Double
   var receiverID: String?
-  
-  init(isPicked: Bool, selectedType: String, name: String, pickUpDateTime: String, description: String, latitude: Double, longitude: Double, receiverID: String? = String()) {
+
+  init(isPicked: Bool,
+       selectedType: String,
+       name: String,
+       pickUpDateTime: String,
+       description: String,
+       latitude: Double,
+       longitude: Double,
+       receiverID: String? = String()) {
     self.isPicked = isPicked
     self.selectedType = selectedType
     self.name = name
@@ -44,7 +51,7 @@ extension DonatedItem {
   var location: CLLocation {
     return CLLocation(latitude: self.latitude, longitude: self.longitude)
   }
-  
+
   func distance(to location: CLLocation) -> CLLocationDistance {
     return location.distance(from: self.location)
   }

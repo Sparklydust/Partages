@@ -8,29 +8,36 @@
 
 import Foundation
 
+//MARK: - Public user class
 final class User: Codable {
   var id: UUID?
   var firstName: String
-  
+
   init(firstName: String) {
     self.firstName = firstName
   }
 }
 
+//MARK: - Full user access class
 final class FullUser: Codable {
   var id: UUID?
   var firstName: String
   var lastName: String
   var email: String
   var password: String?
-  
-  init(firstName: String, lastName: String, email: String) {
+
+  init(firstName: String,
+       lastName: String,
+       email: String) {
     self.firstName = firstName
     self.lastName = lastName
     self.email = email
   }
-  
-  init(firstName: String, lastName: String, email: String, password: String) {
+
+  init(firstName: String,
+       lastName: String,
+       email: String,
+       password: String) {
     self.firstName = firstName
     self.lastName = lastName
     self.email = email
@@ -38,14 +45,18 @@ final class FullUser: Codable {
   }
 }
 
+//MARK: - Use to create or update an user
 final class CreateUser: Codable {
   var id: UUID?
   var firstName: String
   var lastName: String
   var email: String
   var password: String
-  
-  init(firstName: String, lastName: String, email: String, password: String) {
+
+  init(firstName: String,
+       lastName: String,
+       email: String,
+       password: String) {
     self.firstName = firstName
     self.lastName = lastName
     self.email = email

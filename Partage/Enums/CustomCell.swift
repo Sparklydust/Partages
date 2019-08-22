@@ -10,10 +10,10 @@ import UIKit
 
 //MARK: - Custom cell name
 enum CustomCell: String {
-  case receiverCellIdentifier = "ReceiverTVC"
-  case messageCellIdentifier = "MessageTVC"
-  case conversationCellIdentifier = "ConversationTVC"
-  case senderCellIdentifier = "SenderTVC"
-  case historyCellIdentifier = "HistoryTVC"
-  case favoriteCellIdentifier = "FavoriteTVC"
+  case ReceiverTVC
+  case MessageTVC
+  case ConversationTVC
+  case SenderTVC
+  case HistoryTVC
+  case FavoriteTVC
 }

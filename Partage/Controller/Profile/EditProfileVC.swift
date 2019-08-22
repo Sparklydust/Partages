@@ -9,7 +9,7 @@
 import UIKit
 
 class EditProfileVC: UIViewController {
-  
+
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
@@ -18,12 +18,12 @@ class EditProfileVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
+
   @IBOutlet var spaceBetweenViewsConstraints: [NSLayoutConstraint]!
   @IBOutlet var underlineViews: [UIView]!
-  
+
   var user: FullUser?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -31,7 +31,7 @@ class EditProfileVC: UIViewController {
     populateUserInfo()
     triggerActivityIndicator(false)
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
@@ -43,7 +43,7 @@ extension EditProfileVC {
   @IBAction func cancelButtonAction(_ sender: Any) {
     dismissView()
   }
-  
+
   //MARK: Save Button action
   @IBAction func saveButtonAction(_ sender: Any) {
     updateUserInfo()
@@ -62,7 +62,7 @@ extension EditProfileVC {
     setupSwipeGesture()
     setupViewsSpacingForUIDevices()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
@@ -124,21 +124,21 @@ extension EditProfileVC {
   func setupViewsSpacingForUIDevices() {
     for constraint in spaceBetweenViewsConstraints {
       switch UIDevice.current.name {
-      case DeviceName.iPhoneFiveS.rawValue,
-           DeviceName.iPhoneSE.rawValue:
+      case DeviceName.iPhoneFiveS.description,
+           DeviceName.iPhoneSE.description:
         constraint.constant = 60
-      case DeviceName.iPadFithGeneration.rawValue,
-           DeviceName.iPadSixthGeneration.rawValue,
-           DeviceName.iPadAir.rawValue,
-           DeviceName.iPadAirThirdGeneration.rawValue,
-           DeviceName.iPadAirTwo.rawValue,
-           DeviceName.iPadProNineSevenInch.rawValue,
-           DeviceName.iPadProTenFiveInch.rawValue:
+      case DeviceName.iPadFithGeneration.description,
+           DeviceName.iPadSixthGeneration.description,
+           DeviceName.iPadAir.description,
+           DeviceName.iPadAirThirdGeneration.description,
+           DeviceName.iPadAirTwo.description,
+           DeviceName.iPadProNineSevenInch.description,
+           DeviceName.iPadProTenFiveInch.description:
         constraint.constant = 105
-      case DeviceName.iPadProElevenInch.rawValue,
-           DeviceName.iPadProTwelveNineInch.rawValue,
-           DeviceName.iPadProSecondGeneration.rawValue,
-           DeviceName.iPadProThirdGeneration.rawValue:
+      case DeviceName.iPadProElevenInch.description,
+           DeviceName.iPadProTwelveNineInch.description,
+           DeviceName.iPadProSecondGeneration.description,
+           DeviceName.iPadProThirdGeneration.description:
         constraint.constant = 140
       default: ()
       }
@@ -166,7 +166,7 @@ extension EditProfileVC {
     }
     view.endEditing(true)
   }
-  
+
   func setupSwipeGesture() {
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     swipeDown.direction = .down
@@ -217,7 +217,7 @@ extension EditProfileVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     activityIndicator.isHidden = false
     activityIndicator.style = .whiteLarge
@@ -227,7 +227,7 @@ extension EditProfileVC {
     saveButton.commonDesign(title: .emptyString)
     saveButton.isHidden = false
   }
-  
+
   func hideActivityIndicator() {
     activityIndicator.isHidden = true
     saveButton.commonDesign(title: .save)
@@ -238,21 +238,25 @@ extension EditProfileVC {
 extension EditProfileVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
-    center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    center.addObserver(
+      self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    center.addObserver(
+      self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-  
+
   @objc func keyboardWillShow(notification: NSNotification) {
-    guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+    guard let keyboardSize =
+      notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
-    guard UIDevice.current.name == DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
+    guard UIDevice.current.name ==
+      DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
     guard confirmPasswordTextField.isEditing || newPasswordTextField.isEditing else { return }
     guard view.frame.origin.y == .zero else { return }
     UIView.animate(withDuration: 0.4) {
       self.view.frame.origin.y -= (keyboardFrame.height / 3)
     }
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
     guard view.frame.origin.y != .zero else { return }
     UIView.animate(withDuration: 0.4) {
@@ -270,7 +274,7 @@ extension EditProfileVC {
       let email = emailTextField.text,
     let newPassword = newPasswordTextField.text,
     let confirmPassword = confirmPasswordTextField.text else { return }
-    
+
     if newPassword.isEmpty && confirmPassword.isEmpty {
       updateUserProfileWith(firstName, lastName, email)
     }
@@ -288,14 +292,14 @@ extension EditProfileVC {
       lastName: lastName,
       email: email
     )
-    let resourcePath = NetworkPath.editAccount.rawValue + UserDefaultsService.shared.userID!
-    
+    let resourcePath = NetworkPath.editAccount.description + UserDefaultsService.shared.userID!
+
     checkIfEmptyFields(firstName, email) {
       ResourceRequest<FullUser>(resourcePath).update(updatedUser, tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
             self?.triggerActivityIndicator(false)
           }
         case .success(let user):
@@ -320,14 +324,14 @@ extension EditProfileVC {
       email: email,
       password: password
     )
-    let resourcePath = NetworkPath.editAccountAndPassord.rawValue + UserDefaultsService.shared.userID!
-    
+    let resourcePath = NetworkPath.editAccountAndPassord.description + UserDefaultsService.shared.userID!
+
     checkForEmptyFieldsAndPassword(firstName, email, password) {
       ResourceRequest<FullUser>(resourcePath).update(updatedUser, tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
             self?.triggerActivityIndicator(false)
           }
         case .success(let user):
@@ -348,10 +352,10 @@ extension EditProfileVC {
   func checkIfEmptyFields(_ firstName: String, _ email: String, _ completion: @escaping () -> ()) {
     switch true {
     case firstName.isEmpty:
-      showAlert(title: .firstNameError, message: .addFirstName)
+      showAlert(title: .firstNameErrorTitle, message: .addFirstName)
       break
     case email.isEmpty || !email.isValidEmail():
-      showAlert(title: .emailError, message: .addEmail)
+      showAlert(title: .emailErrorTitle, message: .addEmail)
       break
     default:
       resignTextFieldResponders()
@@ -366,16 +370,16 @@ extension EditProfileVC {
   func checkForEmptyFieldsAndPassword(_ firstName: String, _ email: String, _ password: String, completion: @escaping () -> ()) {
     switch true {
     case firstName.isEmpty:
-      showAlert(title: .firstNameError, message: .addFirstName)
+      showAlert(title: .firstNameErrorTitle, message: .addFirstName)
       break
     case email.isEmpty || !email.isValidEmail():
-      showAlert(title: .emailError, message: .addEmail)
+      showAlert(title: .emailErrorTitle, message: .addEmail)
       break
     case password.isEmpty || password != newPasswordTextField.text:
-      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      showAlert(title: .passwordErrorTitle, message: .passwordDoesntMatch)
       break
     case password.count < 5:
-      showAlert(title: .passwordError, message: .passwordTooShort)
+      showAlert(title: .passwordErrorTitle, message: .passwordTooShort)
       break
     default:
       resignTextFieldResponders()

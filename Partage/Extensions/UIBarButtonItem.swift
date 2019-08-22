@@ -11,13 +11,13 @@ import UIKit
 //MARK: - Edit button design in navigation bar
 extension UIBarButtonItem {
   func editButtonDesign() {
-    self.title = ButtonName.edit.rawValue
+    self.title = ButtonName.edit.description
     self.setTitleTextAttributes(
       [NSAttributedString.Key.font: UIFont(
         customFont: .arialBold, withSize: .fifteen)!,
        NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
       for: .normal)
-    
+
     //Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.setTitleTextAttributes(

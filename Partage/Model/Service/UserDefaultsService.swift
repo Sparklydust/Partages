@@ -12,11 +12,11 @@ import Foundation
 class UserDefaultsService {
   static let shared = UserDefaultsService()
   private var settingsContainer: SettingsContainer
-  
+
   init(settingsContainer: SettingsContainer = UserDefaultsContainer()) {
     self.settingsContainer = settingsContainer
   }
-  
+
   var token: String? {
     get {
       return settingsContainer.token
@@ -25,7 +25,7 @@ class UserDefaultsService {
       settingsContainer.token = newValue
     }
   }
-  
+
   var userID: String? {
     get {
       return settingsContainer.userID

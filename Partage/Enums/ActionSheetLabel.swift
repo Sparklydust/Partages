@@ -10,7 +10,20 @@ import UIKit
 
 //MARK: - UIAlert action sheet title
 enum ActionSheetLabel: String {
-  case camera = "Caméra"
-  case photoLibrary = "Album"
-  case cancel = "Annuler"
+  case camera
+  case photoLibrary
+  case cancel
+
+  var description: String {
+    get {
+      switch(self) {
+      case .camera:
+        return LocalizableStrings.camera
+      case .photoLibrary:
+        return LocalizableStrings.photoLibrary
+      case .cancel:
+        return LocalizableStrings.cancel
+      }
+    }
+  }
 }

@@ -9,24 +9,24 @@
 import UIKit
 
 class ItemImagesVC: UIViewController {
-  
+
   @IBOutlet weak var userGuideLabel: UILabel!
   @IBOutlet weak var mainSquareView: UIView!
-  
+
   @IBOutlet var stackViews: [UIStackView]!
   @IBOutlet var littleSquareViews: [UIView]!
   @IBOutlet var littleSquareImages: [UIImageView]!
   @IBOutlet var littleSquareButtons: [UIButton]!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
-  
+
   var images = [UIImage]()
   var donorItem: DonatedItem?
-  
+
   var delegate: CanReceiveItemImagesDelegate?
-  
+
   var isReceiver = false
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -41,31 +41,31 @@ extension ItemImagesVC {
   @IBAction func topLeftImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[0])
   }
-  
+
   //MARK: Load top right image button action
   @IBAction func topRightImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[1])
   }
-  
+
   //MARK: Load bottom left image button action
   @IBAction func bottomLeftImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[2])  }
-  
+
   //MARK: Load bottom right image button action
   @IBAction func bottomRightImageButtonAction(_ sender: Any) {
     loadImage(to: littleSquareImages[3])
   }
-  
+
   //MARK: Reset images Button action
   @IBAction func resetButtonAction(_ sender: Any) {
     deleteLittleSquareImages()
   }
-  
+
   //MARK: Save images button action
   @IBAction func saveButtonAction(_ sender: Any) {
     saveEachImageInImagesList()
     guard !images.isEmpty else {
-      showAlert(title: .error, message: .noImageSelected)
+      showAlert(title: .errorTitle, message: .noImageSelected)
       return
     }
     delegate?.imagesReceived(image: images)
@@ -85,7 +85,7 @@ extension ItemImagesVC {
     setupLittleSquareImages()
     setupResetAndSaveButton()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
@@ -167,7 +167,7 @@ extension ItemImagesVC {
 extension ItemImagesVC {
   func setupUserGuideLabel() {
     userGuideLabel.setupFont(as: .superclarendonBold, sized: .sixteen, in: .middleBlue)
-    userGuideLabel.text = StaticLabel.imageLoaderGuide.rawValue
+    userGuideLabel.text = StaticLabel.imageLoaderGuide.description
     userGuideLabel.textAlignment = .center
   }
 }
@@ -240,7 +240,7 @@ extension ItemImagesVC {
   func deleteLittleSquareImages() {
     for square in littleSquareImages {
       if square.image != nil {
-        showAlert(title: .reset, message: .resetImage, buttonName: .reset) {
+        showAlert(title: .resetTitle, message: .resetImage, buttonName: .reset) {
           (true) in
           for square in self.littleSquareImages {
             if let item = self.donorItem {

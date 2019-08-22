@@ -14,16 +14,16 @@ typealias BoolCompletion = (_ result: Bool) -> Void
 extension UIViewController {
   func showAlert(title: AlertTitle, message: AlertMessage, buttonName: ButtonName, completion: @escaping BoolCompletion) {
     let alert = UIAlertController(
-      title: title.rawValue,
-      message: message.rawValue,
+      title: title.description,
+      message: message.description,
       preferredStyle: .alert)
     alert.addAction(UIAlertAction(
-      title: buttonName.rawValue,
+      title: buttonName.description,
       style: .default, handler: { (action) in
         completion(true)
     }))
     alert.addAction(UIAlertAction(
-      title: ButtonName.cancel.rawValue,
+      title: ButtonName.cancel.description,
       style: .cancel, handler: nil))
     present(alert, animated: true, completion: nil)
   }
@@ -33,11 +33,11 @@ extension UIViewController {
 extension UIViewController {
   func showAlert(title: AlertTitle, message: AlertMessage) {
     let alert = UIAlertController(
-      title: title.rawValue,
-      message: message.rawValue,
+      title: title.description,
+      message: message.description,
       preferredStyle: .alert)
     alert.addAction(UIAlertAction(
-      title: ButtonName.ok.rawValue, style: .cancel, handler: nil))
+      title: ButtonName.ok.description, style: .cancel, handler: nil))
     present(alert, animated: true, completion: nil)
   }
 }
@@ -46,10 +46,10 @@ extension UIViewController {
 extension UIViewController {
   func showAlert(title: AlertTitle, message: AlertMessage, completion: @escaping BoolCompletion) {
     let alert = UIAlertController(
-      title: title.rawValue,
-      message: message.rawValue,
+      title: title.description,
+      message: message.description,
       preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: ButtonName.ok.rawValue, style: .cancel, handler: { (action) in
+    alert.addAction(UIAlertAction(title: ButtonName.ok.description, style: .cancel, handler: { (action) in
       completion(true)
     }))
     present(alert, animated: true, completion: nil)
@@ -74,11 +74,11 @@ extension UIViewController {
 extension UIViewController {
   typealias AlertAction = () -> ()
   typealias AlertButtonAction = (ActionSheetLabel, AlertAction)
-  
+
   func showActionSheetWithCancel(title: [AlertButtonAction]) {
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     for value in title {
-      actionSheet.addAction(UIAlertAction(title: value.0.rawValue, style: .default, handler: {
+      actionSheet.addAction(UIAlertAction(title: value.0.description, style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
         value.1()
     }))
@@ -89,7 +89,7 @@ extension UIViewController {
       popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: .zero, height: .zero)
       popoverController.permittedArrowDirections = []
     }
-    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.rawValue, style: .cancel, handler: nil))
+    actionSheet.addAction(UIAlertAction(title: ActionSheetLabel.cancel.description, style: .cancel, handler: nil))
     self.present(actionSheet, animated: true, completion: nil)
   }
 }

@@ -9,14 +9,14 @@
 import UIKit
 
 class LostPasswordVC: UIViewController {
-  
+
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var underlineView: UIView!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet weak var saveActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     emailTextField.delegate = self
@@ -30,7 +30,7 @@ extension LostPasswordVC {
   //MARK: Send password button action
   @IBAction func sendPasswordButtonAction(_ sender: Any) {
   }
-  
+
   //MARK: Cancel button action
   @IBAction func cancelButtonActions(_ sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -48,7 +48,7 @@ extension LostPasswordVC {
     setupEmailPlaceholder()
     setupSwipeGesture()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
@@ -68,7 +68,7 @@ extension LostPasswordVC {
   func setupEmailTextField() {
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
-  
+
   func setupUnderlineView() {
     underlineView.setupBackgroundColorIn(.mainBlue)
   }
@@ -102,7 +102,7 @@ extension LostPasswordVC {
       dismiss(animated: true, completion: nil)
     }
   }
-  
+
   func setupSwipeGesture() {
     let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -133,7 +133,7 @@ extension LostPasswordVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     saveActivityIndicator.isHidden = false
     saveActivityIndicator.style = .whiteLarge
@@ -145,7 +145,7 @@ extension LostPasswordVC {
     cancelButton.isEnabled = false
     swipeGestureRecognizer.isEnabled = false
   }
-  
+
   func hideActivityIndicator() {
     saveActivityIndicator.isHidden = true
     saveButton.commonDesign(title: .send)

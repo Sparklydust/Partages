@@ -1,0 +1,161 @@
+/* 
+  Localizable.strings
+  Partage
+
+  Created by Roland Lariotte on 21/08/2019.
+  Copyright © 2019 Roland Lariotte. All rights reserved.
+*/
+
+
+//MARK: - All static label or placeholder name
+"firstName" = "first name";
+"lastName" = "last name";
+"email" = "email";
+"password" = "password";
+"newPassword" = "new password";
+"confirmPassword" = "confirm password";
+"enterYourDonationName" = "donation name";
+"enterItemDescription" = "description of your donation";
+"imageLoaderGuide" = "Add one to four images";
+"meetingPoint" = "Meeting point";
+"userPosition" = "Your location";
+"receiverCalendarTitle" = "Donation to receive: ";
+"donorCalendarTitle" = "Donation to give: ";
+"donationIsSelected" = "donation selected";
+"donationNotSelected" = "donation not selected";
+"userLeftTheConversation" = "has left the conversation";
+"closedConversation" = "conversation closed";
+
+
+//MARK: - Buttons name
+"shareMain" = "Donate";
+"receiveMain" = "Receive";
+"cancel" = "Cancel";
+"save" = "Save";
+"signUp" = "Sign up";
+"signIn" = "Sign in";
+"lowContactUs" = "contact us";
+"lowSignUp" = "sign up";
+"lowSignIn" = "sign in";
+"lowSignOut" = "log out";
+"lowEraseAccount" = "delete my account";
+"lowLostPassword" = "lost password";
+"send" = "Send";
+"receiveThisDonation" = "receive this donation";
+"messageToReceiver" = "Message to receiver";
+"messageToDonor" = "Message to donor";
+"addToCalendar" = "Add to calendar";
+"history" = "History";
+"favorite" = "Favorite";
+"signInSignUp" = "sign in / sign up";
+"afterSignedIn" = "Hello ";
+"donationMade" = "Thanks for your donation";
+"edit" = "Edit";
+"done" = "Done";
+"ok" = "Ok";
+"settings" = "Settings";
+"reset" = "Reset";
+"makeADonation" = "Make a donation";
+"saveMeetingPoint" = "Save meeting point";
+"setupMeetingPoint" = "Add a meeting point";
+"changeMeetingPoint" = "Change meeting point";
+"confirm" = "Confirm";
+"openMapApp" = "Open in Maps";
+"modifyDonation" = "Modify donation";
+
+
+//MARK: - Static item detail name
+"giveDonation" = "will give you his donation";
+"receiveDonation" = "will receive your donation";
+"the" = "the";
+"at" = "at";
+"address" = "localisation";
+"type" = "type";
+"distanceInKm" = "km";
+"distanceInM" = "m";
+
+
+//MARK: - UIAlert action sheet title
+"camera" = "Camera";
+"photoLibrary" = "Album";
+
+
+//MARK: - UIAlert title
+"locationOffTitle" = "Location disabled";
+"errorTitle" = "Error";
+"successTitle" = "Success";
+"cameraUseTitle" = "Access to camera and album";
+"restrictedTitle" = "Restricted";
+"contactUsTitle" = "email contact";
+"contactUsCanceledTitle" = "Conatct us canceled";
+"contactUsFailedTitle" = "Mail app error";
+"contactUsSavedTitle" = "Saved email";
+"contactUsSentTitle" = "Email sent";
+"emptyCaseTitle" = "Missing item";
+"thankYouTitle" = "Thank you";
+"firstNameErrorTitle" = "Invalid first name";
+"emailErrorTitle" = "Invalid email";
+"passwordErrorTitle" = "Invalid password";
+"loginErrorTitle" = "Log in error";
+"userDeletedTitle" = "Delete account";
+"itemUnselectableTitle" = "Donation unvailable";
+"itemSelectedTitle" = "Donation at your disposal";
+
+
+//MARK: - Donator item type to be chosen on DonationItem
+"selectItem" = "- select a type -";
+"food" = "Food";
+"clothes" = "Clothes";
+"hygiene" = "Hygiene";
+"other" = "Other";
+
+
+//MARK: - Contact us email sender from Mail app attributes
+"partageEmail" = "partage@contact.com";
+"subject" = "- [users feedback] Partage -";
+"messageBody" = "Hello! Feel free to leave us any feedback, we will reply to you as soon as possible.";
+
+
+//MARK: - Alert message to be displayed on an UIAlert
+"needAccessToCalendar" = "Access to your calendar is disabled. Change your settings to use this functionality.";
+"addedToCalendar" = "This event was successfully added to your calendar.";
+"resetImage" = "Do you want to delete this image?";
+"locationOff" = "Access to your location is disabled. Change your settings to use this functionality.";
+"noPictureloaded" = "Partage could not load your image. Thanks to check on your settings.";
+"cameraUse" = "Access to your camera and album is unauthorized. Change your settings to use this functionality.";
+"locationIssue" = "There was an issue to locate the meeting point.";
+"getDirectionIssue" = "There was an issue to determine the route to the meeting point.";
+"noDirectionsCalculated" = "We could not calculate the route time.";
+"restricted" = "Unauthorized access. Thanks to refer to the legit person to lift the restriction.";
+"contactUs" = "partage@contact.com";
+"contactUsCanceled" = "Do not hesitate to contact us later if needed.";
+"contactUsFailed" = "Contact us at: \n\npartage@contact.com";
+"contactUsSaved" = "Do not hesitate to contact us later if needed.";
+"contactUsSent" = "We will reply to you as soon as possible.";
+"noImageSelected" = "No image has been added.";
+"noItemTypeSelected" = "You have to select a type for your donation.";
+"noItemName" = "You have to give a name to your donation.";
+"noItemDate" = "You have to select a date and time for when to deliver your donation.";
+"noMeetingPoint" = "You have to choose a meeting point for where to deliver your donation.";
+"noDescription" = "You have to give a description of your donation.";
+"noImage" = "You have to choose an image for your donation by clicking on the blue cross.";
+"confirmDonation" = "Thanks to confirm your donation.";
+"resetDonation" = "Are you sure to reset your donation?";
+"emailAlreadyInUse" = "This email address is already in use by another account.";
+"passwordDoesntMatch" = "Your password does not match.";
+"addFirstName" = "Please, add a first name.";
+"addEmail" = "Please, add an email.";
+"passwordTooShort" = "Password must be at least 6 characters long.";
+"loginError" = "Check on your email and password.";
+"notConnected" = "Thanks to be authenticated to use this functionality.";
+"signUpError" = "This email is already register in our database.";
+"networkRequestError" = "There was an issue when requesting the database.";
+"userDeleted" = "Do you confirm the deletion of your account?";
+"itemAlreadySelected" = "This donation has already been selected by another user.";
+"donatedItemSelected" = "You have selected this donation. Thank you for being present at the appointment. Do not hesitate to contact the donor for more information.";
+"confirmSelection" = "Are you sure that you wish to select this donation?";
+"confirmDonatedItemRemoved" = "This donation is no more attributed to you.";
+"confirmChanges" = "Thanks to confirm the changes made to your donation.";
+"donatedItemDeleted" = "Your donation has been deleted.";
+"canNotSendMessage" = "This donation is yours. You can then not send a message to yourself.";
+"canNotSelectOwnDonation" = "This donation is yours. You can then not select it.";

@@ -8,9 +8,22 @@
 
 import UIKit
 
-//MARK: - Contact us email sender attributes
+//MARK: - Contact us email sender from Mail app attributes
 enum ContactUs: String {
-  case partageEmail = "partage@contact.com"
-  case subject = "Partage et ses utilisateurs"
-  case messageBody = "Bonjour, \n\nn'hésitez pas à nous faire parvenir toutes suggestions, nous vous répondrons dans les plus brefs délais."
+  case partageEmail
+  case subject
+  case messageBody
+
+  var description: String {
+    get {
+      switch(self) {
+      case .partageEmail:
+        return LocalizableStrings.partageEmail
+      case .subject:
+        return LocalizableStrings.subject
+      case .messageBody:
+        return LocalizableStrings.messageBody
+      }
+    }
+  }
 }

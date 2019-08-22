@@ -13,7 +13,8 @@ extension Date {
   func isGreaterThanDate(dateToCompare: Date) -> Bool {
     var isGreater = false
     //Compare Values
-    if self.compare(dateToCompare as Date) == ComparisonResult.orderedDescending {
+    if self.compare(
+      dateToCompare as Date) == ComparisonResult.orderedDescending {
       isGreater = true
     }
     return isGreater
@@ -25,7 +26,8 @@ extension Date {
   func isLessThanDate(dateToCompare: Date) -> Bool {
     var isLess = false
     //Compare Values
-    if self.compare(dateToCompare as Date) == ComparisonResult.orderedAscending {
+    if self.compare(
+      dateToCompare as Date) == ComparisonResult.orderedAscending {
       isLess = true
     }
     return isLess
@@ -37,7 +39,8 @@ extension Date {
   func equalToDate(dateToCompare: Date) -> Bool {
     var isEqualTo = false
     //Compare Values
-    if self.compare(dateToCompare as Date) == ComparisonResult.orderedSame {
+    if self.compare(
+      dateToCompare as Date) == ComparisonResult.orderedSame {
       isEqualTo = true
     }
     return isEqualTo

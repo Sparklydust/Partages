@@ -10,26 +10,26 @@ import UIKit
 import TableViewReloadAnimation
 
 class MessageVC: UIViewController {
-  
+
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
+
   var userID = String()
   var userFetch = String()
-  
+
   var messages = [Message]()
   var chatMessages = [ChatMessage]()
   var lastChatBubbleID = Int()
   var newChatBubbleArrived = Bool()
-  
+
   var firstUserID: String?
   var secondUserID: String?
   var messageIDToOpen: Int?
   var messageIndexPathToOpen: Int?
-  
+
   var timer: Timer?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -38,13 +38,13 @@ class MessageVC: UIViewController {
     checkIfAnUserIsConnected()
     getAllUserMessagesFromTheDatabase()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     getAllUserMessagesBeforeTimerStarts()
     fetchLastMessagesIfAnyUsingTimeInterval()
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     timer?.invalidate()
@@ -75,20 +75,23 @@ extension MessageVC {
   @IBAction func editButton(_ sender: UIBarButtonItem) {
     UIView.animate(withDuration: 0.3) {
       self.messageTableView.isEditing = !self.messageTableView.isEditing
-      sender.title = (self.messageTableView.isEditing) ? ButtonName.done.rawValue : ButtonName.edit.rawValue
+      sender.title = (
+        self.messageTableView.isEditing) ? ButtonName.done.description : ButtonName.edit.description
     }
   }
 }
 
 //MARK: - Swap to delete cell action
 extension MessageVC {
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView,
+                 commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteMessageFromCell(at: indexPath, on: tableView)
     }
   }
   
-  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView,
+                 willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     cell.backgroundColor = UIColor.iceBackground
   }
 }
@@ -104,12 +107,12 @@ extension MessageVC {
     setupTableViewDesign()
     setupCellHeightForIPad()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     messageTableView.delegate = self
@@ -129,12 +132,13 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return messages.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.messageCellIdentifier.rawValue, for: indexPath) as! MessageTVC
-    
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: CustomCell.MessageTVC.rawValue, for: indexPath) as! MessageTVC
+
     let messageInfo = messages[indexPath.row]
-    
+
     showMessageInBoldIfNotRead(in: cell, search: messageInfo)
     populateUser(in: cell, from: messageInfo)
     populateDateOrTime(in: cell, with: messageInfo.date)
@@ -155,7 +159,7 @@ extension MessageVC {
 //MARK: - Setup all custom cells
 extension MessageVC {
   func setupCustomCell() {
-    messageTableView.setupCustomCell(nibName: .messageCellIdentifier, identifier: .messageCellIdentifier)
+    messageTableView.setupCustomCell(nibName: .MessageTVC, identifier: .MessageTVC)
   }
 }
 
@@ -191,8 +195,8 @@ extension MessageVC {
 extension MessageVC {
   func checkIfAnUserIsConnected() {
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
@@ -209,7 +213,7 @@ extension MessageVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     activityIndicator.isHidden = false
     activityIndicator.style = .whiteLarge
@@ -217,7 +221,7 @@ extension MessageVC {
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()
   }
-  
+
   func hideActivityIndicator() {
     activityIndicator.isHidden = true
   }
@@ -233,7 +237,7 @@ extension MessageVC {
 
           messageIDToOpen = message.id
           messageIndexPathToOpen = messages.firstIndex {$0 === message}
-          
+
           if let indexPathToOpen = messageIndexPathToOpen {
             let indexPath = IndexPath.init(row: indexPathToOpen, section: 0)
             messageTableView.scrollToRow(at: indexPath, at: .none, animated: true)
@@ -252,7 +256,7 @@ extension MessageVC {
 //MARK: - Prepare for segue
 extension MessageVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToChatMessageVC.rawValue {
+    if segue.identifier == Segue.goToChatMessageVC.rawValue {
       guard let destinationVC = segue.destination as? ChatMessageVC else { return }
       destinationVC.delegate = self
       destinationVC.chatBubbles = chatMessages
@@ -273,15 +277,21 @@ extension MessageVC {
   func showMessageInBoldIfNotRead(in cell: MessageTVC, search message: Message) {
     if (userID == message.senderID && message.isReadBySender == false) ||
       (userID == message.recipientID && message.isReadByRecipient == false ) {
-      cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
-      cell.dateLabel.setupFont(as: .superclarendonBold, sized: .twelve, forIPad: .twenty, in: .mainBlue)
-      cell.conversationLabel.setupFont(as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+      cell.nameLabel.setupFont(
+        as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      cell.dateLabel.setupFont(
+        as: .superclarendonBold, sized: .twelve, forIPad: .twenty, in: .mainBlue)
+      cell.conversationLabel.setupFont(
+        as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
       cell.profileImage.roundedWithMainBlueBorder()
     }
     else {
-      cell.nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
-      cell.dateLabel.setupFont(as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
-      cell.conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+      cell.nameLabel.setupFont(
+        as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      cell.dateLabel.setupFont(
+        as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
+      cell.conversationLabel.setupFont(
+        as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
       cell.profileImage.roundedWithMiddleBlueBorder()
     }
   }
@@ -290,8 +300,9 @@ extension MessageVC {
 //MARK: - Set info cell if one user left the conversation to close
 extension MessageVC {
   func setConversationIsClosed(in cell: MessageTVC) {
-    cell.nameLabel.setupFont(as: .superclarendonLight, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
-    cell.nameLabel.text = StaticLabel.closedConversation.rawValue
+    cell.nameLabel.setupFont(
+      as: .superclarendonLight, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+    cell.nameLabel.text = StaticLabel.closedConversation.description
   }
 }
 
@@ -308,14 +319,14 @@ extension MessageVC {
 extension MessageVC {
   func getAllUserMessagesFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    
+
     triggerActivityIndicator(true)
-    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
+    let resourcePath = NetworkPath.messages.description + NetworkPath.ofUser.description + userID
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
           self?.triggerActivityIndicator(false)
         }
       case .success(let uncomingMessages):
@@ -336,9 +347,9 @@ extension MessageVC {
 extension MessageVC {
   func getAllUserMessagesBeforeTimerStarts() {
     guard UserDefaultsService.shared.userID != nil else { return }
-    
+
     triggerActivityIndicator(true)
-    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
+    let resourcePath = NetworkPath.messages.description + NetworkPath.ofUser.description + userID
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
@@ -362,18 +373,19 @@ extension MessageVC {
   func fetchChatMessagesFromSelectedCells(_ messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
     chatMessages = [ChatMessage]()
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    let resourcePath =
+      NetworkPath.messages.description + "\(messageID)/" + NetworkPath.chatMessages.description
     ResourceRequest<ChatMessage>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let allChatMessages):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.chatMessages.append(contentsOf: allChatMessages)
-          self.performSegue(withIdentifier: Segue.goesToChatMessageVC.rawValue, sender: allChatMessages)
+          self.performSegue(withIdentifier: Segue.goToChatMessageVC.rawValue, sender: allChatMessages)
         }
       }
     }
@@ -385,14 +397,14 @@ extension MessageVC {
   func updateToDeleteUserLink(in message: Message) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let messageID = message.id else { return }
-    
+
     if userID == message.senderID {
-      message.senderID = StaticLabel.emptyString.rawValue
+      message.senderID = StaticLabel.emptyString.description
     }
     else {
-      message.recipientID = StaticLabel.emptyString.rawValue
+      message.recipientID = StaticLabel.emptyString.description
     }
-    
+
     let linkUserToMessage = Message(
       senderID: message.senderID,
       recipientID: message.recipientID,
@@ -400,18 +412,18 @@ extension MessageVC {
       isReadBySender: message.isReadBySender,
       isReadByRecipient: message.isReadByRecipient
     )
-    
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
     ResourceRequest<Message>(resourcePath).update(linkUserToMessage, tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let updatedMessage):
         DispatchQueue.main.async { [weak self] in
-          guard updatedMessage.recipientID == StaticLabel.emptyString.rawValue &&
-            updatedMessage.senderID == StaticLabel.emptyString.rawValue else { return }
+          guard updatedMessage.recipientID == StaticLabel.emptyString.description &&
+            updatedMessage.senderID == StaticLabel.emptyString.description else { return }
           self?.delete(updatedMessage)
         }
       }
@@ -425,18 +437,19 @@ extension MessageVC {
     guard UserDefaultsService.shared.userID != nil else { return }
     let countMessages = messages.count
     let lastMessageID = messages.last?.id
-    
+
     if let conversation = lastMessageID {
       fetchChatMessagesToTrackNewBubble(of: conversation)
     }
-    let resourcePath = NetworkPath.messages.rawValue + NetworkPath.ofUser.rawValue + userID
+    let resourcePath = NetworkPath.messages.description + NetworkPath.ofUser.description + userID
     ResourceRequest<Message>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         break
       case .success(let incomingMessages):
         DispatchQueue.main.async { [weak self] in
-          if countMessages < incomingMessages.count || lastMessageID != incomingMessages.last?.id || self!.newChatBubbleArrived {
+          if countMessages < incomingMessages.count ||
+            lastMessageID != incomingMessages.last?.id || self!.newChatBubbleArrived {
             self?.messages = [Message]()
             self?.messages.append(contentsOf: incomingMessages)
             self?.messageTableView.reloadData()
@@ -451,11 +464,12 @@ extension MessageVC {
 extension MessageVC {
   func fetchChatMessagesToTrackNewBubble(of messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
-    
+
     if let id = chatMessages.last?.id {
       lastChatBubbleID = id
     }
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    let resourcePath =
+      NetworkPath.messages.description + "\(messageID)/" + NetworkPath.chatMessages.description
     ResourceRequest<ChatMessage>(resourcePath).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
@@ -476,13 +490,13 @@ extension MessageVC {
   func delete(_ message: Message) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let messageID = message.id else { return }
-    
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
     ResourceRequest<Message>(resourcePath).delete(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success:
         return
@@ -494,21 +508,21 @@ extension MessageVC {
 //MARK: - To populate user first name linked to the message
 extension MessageVC {
   func populateUser(in cell: MessageTVC, from messageInfo: Message) {
-    
+
     if userID == messageInfo.senderID {
       userFetch = messageInfo.recipientID
     }
     else {
       userFetch = messageInfo.senderID
     }
-    
-    if userFetch != StaticLabel.emptyString.rawValue {
-      let resourcePathToUser = NetworkPath.users.rawValue + userFetch
+
+    if userFetch != StaticLabel.emptyString.description {
+      let resourcePathToUser = NetworkPath.users.description + userFetch
       ResourceRequest<User>(resourcePathToUser).get(tokenNeeded: true) { (success) in
         switch success {
         case .failure:
           DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .error, message: .networkRequestError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
           }
         case .success(let userFetched):
           DispatchQueue.main.async {
@@ -527,12 +541,13 @@ extension MessageVC {
 //MARK: - To populate a cell with the last chat bubble message
 extension MessageVC {
   func populateConversationLabel(in cell: MessageTVC, search messageID: Int) {
-    let resourcePathToLastChat = NetworkPath.messages.rawValue + "\(messageID)/" + NetworkPath.chatMessages.rawValue
+    let resourcePathToLastChat =
+      NetworkPath.messages.description + "\(messageID)/" + NetworkPath.chatMessages.description
     ResourceRequest<ChatMessage>(resourcePathToLastChat).getAll(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
         DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .error, message: .networkRequestError)
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let chatMessages):
         DispatchQueue.main.async {
@@ -549,8 +564,10 @@ extension MessageVC {
     var date: String
     var time: String
     var dateToShow: String
-    
-    let trimmedIsoString = isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression)
+
+    let trimmedIsoString = isoDateString.replacingOccurrences(
+      of: StaticLabel.dateOccurence.description,
+      with: StaticLabel.emptyString.description, options: .regularExpression)
     let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
     date = dateAndTime!.asString(style: .short)
     time = dateAndTime!.asString()
@@ -598,8 +615,8 @@ extension MessageVC: CanReceiveInfoMessageIsReadDelegate {
 extension MessageVC {
   func fetchOneMessageTobeUpdateAsRead(_ messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
-    
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
     ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
       switch success {
       case .failure:
@@ -618,7 +635,7 @@ extension MessageVC {
   func updateToReadByUser(this message: Message) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let messageID = message.id else { return }
-    
+
     let userID = UserDefaultsService.shared.userID
     if userID == message.senderID {
       message.isReadBySender = true
@@ -633,8 +650,8 @@ extension MessageVC {
       isReadBySender: message.isReadBySender,
       isReadByRecipient: message.isReadByRecipient
     )
-    
-    let resourcePath = NetworkPath.messages.rawValue + "\(messageID)"
+
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
     ResourceRequest<Message>(resourcePath).update(messagesAreRead, tokenNeeded: true) { (success) in
       switch success {
       case .failure:
@@ -649,6 +666,7 @@ extension MessageVC {
 //MARK: - Reload data with an animation
 extension MessageVC {
   func reloadDataWithAnimation() {
-    messageTableView.reloadData(with: .simple(duration: 0.45, direction: .rotation3D(type: .ironMan), constantDelay: 0))
+    messageTableView.reloadData(
+      with: .simple(duration: 0.45, direction: .rotation3D(type: .ironMan), constantDelay: 0))
   }
 }

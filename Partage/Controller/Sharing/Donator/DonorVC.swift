@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class DonorVC: UIViewController {
-  
+
   @IBOutlet weak var itemTypePickerView: UIPickerView!
   @IBOutlet weak var itemDatePicker: UIDatePicker!
   @IBOutlet weak var itemNameTextField: UITextField!
@@ -25,19 +25,19 @@ class DonorVC: UIViewController {
   @IBOutlet weak var itemDescriptionBackgroundView: UIView!
   @IBOutlet weak var viewForScrollView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
-  
+
   var keyboardFrame: CGRect = .zero
-  
+
   var address: Address?
   var images = [UIImage]()
   var pickupDateAndTime: Date!
-  
+
   var itemToEdit: DonatedItem?
   var latitudeToSet: Double?
   var longitudeToSet: Double?
-  
+
   var buttonName: ButtonName?
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -46,12 +46,12 @@ class DonorVC: UIViewController {
     hideKeyboardOnTapGesture()
     populateItemToEditFromItemDetailsVC()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: true)
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(false)
     if self.isMovingFromParent {
@@ -59,7 +59,7 @@ class DonorVC: UIViewController {
       navigationController?.setNavigationBarHidden(true, animated: true)
     }
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
@@ -70,26 +70,26 @@ extension DonorVC {
   //MARK: Add item image button action
   @IBAction func addItemImageButtonAction(_ sender: Any) {
     dismissKeyboard()
-    performSegue(withIdentifier: Segue.goesToItemImagesVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToItemImagesVC.rawValue, sender: self)
   }
-  
+
   //MARK: Map kit button action
   @IBAction func mapKitButtonAction(_ sender: Any) {
     dismissKeyboard()
-    performSegue(withIdentifier: Segue.goesToMapViewVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.goToMapViewVC.rawValue, sender: self)
   }
-  
+
   //MARK: Reset Button Action
   @IBAction func resetButtonAction(_ sender: Any) {
     allEntriesBackToOriginStateWithAlert()
   }
-  
+
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
     dismissKeyboard()
     guard UserDefaultsService.shared.token != nil else {
-      showAlert(title: .restricted, message: .notConnected, buttonName: .ok) { (true) in
-        self.performSegue(withIdentifier: Segue.goesToSignInSignUpVC.rawValue, sender: self)
+      showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
+        self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
       return
     }
@@ -118,13 +118,13 @@ extension DonorVC {
     setupDatePicker()
     setupSwipeGesture()
   }
-  
+
   //MARK: Main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
     viewForScrollView.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     itemTypePickerView.delegate = self
@@ -139,22 +139,26 @@ extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
     itemTypePickerView.backgroundColor = .iceBackground
   }
-  
+
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+  func pickerView(
+    _ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return DonatedItem.type.count
   }
-  
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return DonatedItem.type[row].rawValue
+
+  func pickerView(
+    _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return DonatedItem.type[row].description
   }
-  
+
   // Change picker view item text color
-  func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-    let titleData = DonatedItem.type[row].rawValue
+  func pickerView(
+    _ pickerView: UIPickerView,
+    attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    let titleData = DonatedItem.type[row].description
     let myTitles = NSAttributedString(string: titleData, attributes: [
       NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
     return myTitles
@@ -165,7 +169,7 @@ extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
 extension DonorVC {
   func setupDatePicker() {
     itemDatePicker.backgroundColor = .iceBackground
-    itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.rawValue)
+    itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.description)
   }
 }
 
@@ -208,7 +212,7 @@ extension DonorVC {
     mapView.isHidden = true
     mapKitButton.setupAddMeetingPointButton(named: .setupMeetingPoint)
   }
-  
+
   func mapViewActionsAreDisabled() {
     mapKitButton.setTitle(nil, for: .normal)
     mapView.isHidden = false
@@ -244,11 +248,11 @@ extension DonorVC: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
     actionsAreEnable(false)
   }
-  
+
   func textFieldDidEndEditing(_ textField: UITextField) {
     actionsAreEnable(true)
   }
-  
+
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     itemNameTextField.resignFirstResponder()
     return true
@@ -260,7 +264,7 @@ extension DonorVC: UITextViewDelegate {
   func setupItemDescriptionTextViewPlacehoder() {
     itemDescriptionTextView.setupPlaceholderDesign(placeholderText: .enterItemDescription)
   }
-  
+
   // Custom font shows up when user start editing
   func textViewDidBeginEditing(_ textView: UITextView) {
     if itemDescriptionTextView.textColor == .middleBlue {
@@ -271,7 +275,7 @@ extension DonorVC: UITextViewDelegate {
     actionsAreEnable(false)
     resizeViewWhenKeyboardShows()
   }
-  
+
   // Placeholder comes back when text view is empty
   func textViewDidEndEditing(_ textView: UITextView) {
     actionsAreEnable(true)
@@ -281,10 +285,11 @@ extension DonorVC: UITextViewDelegate {
 //MARK: - Setup Tap gesture recognizer to dismiss keyboard
 extension DonorVC {
   func hideKeyboardOnTapGesture() {
-    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardOnTap))
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+      target: self, action: #selector(dismissKeyboardOnTap))
     view.addGestureRecognizer(tap)
   }
-  
+
   @objc func dismissKeyboardOnTap() {
     dismissKeyboard()
   }
@@ -295,13 +300,13 @@ extension DonorVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     dismissKeyboard()
   }
-  
+
   func setupSwipeGesture() {
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     swipeDown.direction = .down
     view.addGestureRecognizer(swipeDown)
   }
-  
+
   func dismissKeyboard() {
     view.endEditing(true)
   }
@@ -310,15 +315,15 @@ extension DonorVC {
 //MARK: - Setup all entries back to their origin state
 extension DonorVC {
   func allEntriesBackToOriginStateWithAlert() {
-    showAlert(title: .reset, message: .resetDonation, buttonName: .reset) { (true) in
+    showAlert(title: .resetTitle, message: .resetDonation, buttonName: .reset) { (true) in
       self.clearAllEntries()
     }
   }
-  
+
   func allEntriesBackToOriginStateWithoutAlert() {
     clearAllEntries()
   }
-  
+
   func clearAllEntries() {
     itemTypePickerView.selectRow(0, inComponent: 0, animated: true)
     itemDatePicker.setDate(Date.init(), animated: true)
@@ -333,32 +338,38 @@ extension DonorVC {
 extension DonorVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
-    center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    center.addObserver(self, selector: #selector(keyboardWillShow),
+                       name: UIResponder.keyboardWillShowNotification, object: nil)
+    center.addObserver(self, selector: #selector(keyboardWillHide),
+                       name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-  
+
   @objc func keyboardWillShow(notification: NSNotification) {
-    guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
+    guard let keyboardSize = notification
+      .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     keyboardFrame = keyboardSize.cgRectValue
     resizeViewWhenKeyboardShows()
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
     keyboardFrame = .zero
     resizeViewWhenKeyboardHides()
   }
-  
+
   func resizeViewWhenKeyboardShows() {
     guard itemDescriptionTextView.isFirstResponder else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y -= (self.keyboardFrame.height / 2) - self.navigationController!.navigationBar.frame.size.height
+      self.view.frame.origin.y -= (
+        self.keyboardFrame.height / 2) - self.navigationController!.navigationBar.frame.size.height
     }
   }
-  
+
   func resizeViewWhenKeyboardHides() {
     guard view.frame.origin.y != .zero else { return }
     UIView.animate(withDuration: 0.4) {
-      self.view.frame.origin.y = (self.navigationController?.navigationBar.frame.size.height ?? 0.0) + UIApplication.shared.statusBarFrame.size.height
+      self.view.frame.origin.y = (
+        self.navigationController?.navigationBar.frame.size.height ?? 0.0) +
+        UIApplication.shared.statusBarFrame.size.height
     }
   }
 }
@@ -376,14 +387,14 @@ extension DonorVC {
 //MARK: - Prepare for segue methods
 extension DonorVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goesToItemImagesVC.rawValue {
+    if segue.identifier == Segue.goToItemImagesVC.rawValue {
       let secondVC = segue.destination as! ItemImagesVC
       secondVC.delegate = self
       if let item = itemToEdit {
         secondVC.donorItem = item
       }
     }
-    else if segue.identifier == Segue.goesToMapViewVC.rawValue {
+    else if segue.identifier == Segue.goToMapViewVC.rawValue {
       let secondVC = segue.destination as! MapViewVC
       secondVC.delegate = self
     }
@@ -392,7 +403,12 @@ extension DonorVC {
 
 //MARK: - Item address receiver from MapViewVC
 extension DonorVC: CanReceiveItemAddressDelegate {
-  func addressReceived(coordinates: CLLocation, streetNumber: String, streetName: String, postalCode: String, cityName: String, countryName: String) {
+  func addressReceived(coordinates: CLLocation,
+                       streetNumber: String,
+                       streetName: String,
+                       postalCode: String,
+                       cityName: String,
+                       countryName: String) {
     address = Address(
       latitude: coordinates.coordinate.latitude,
       longitude: coordinates.coordinate.longitude,
@@ -418,39 +434,42 @@ extension DonorVC: CanReceiveItemImagesDelegate {
 //MARK: - Unwind to VCs methods
 extension DonorVC {
   func unwindToSharingVC() {
-    self.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+    self.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
   }
-  
+
   func unwindToHistoryFavoriteVC() {
     self.performSegue(withIdentifier: Segue.unwindToHistoryFavoriteVC.rawValue, sender: self)
   }
-  
+
   func unwindToSignInVC() {
-    performSegue(withIdentifier: Segue.unwindsToSignInVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.unwindToSignInVC.rawValue, sender: self)
   }
 }
 
 //MARK: - Mthod to check if all fields are filled when user makes or update his donation
 extension DonorVC {
-  func checkAllFieldsAreFilledBeforeNetworking(_ donatedItem: DonatedItem, completion: @escaping () -> ()) {
+  func checkAllFieldsAreFilledBeforeNetworking(
+    _ donatedItem: DonatedItem, completion: @escaping () -> ()) {
     switch true {
-    case donatedItem.selectedType == DonorItemType.selectItem.rawValue:
-      showAlert(title: .emptyCase, message: .noItemTypeSelected)
+    case donatedItem.selectedType == DonorItemType.selectItem.description:
+      showAlert(title: .emptyCaseTitle, message: .noItemTypeSelected)
       break
     case donatedItem.name.isEmpty:
-      showAlert(title: .emptyCase, message: .noItemName)
+      showAlert(title: .emptyCaseTitle, message: .noItemName)
       break
     case images == [UIImage]():
-      showAlert(title: .emptyCase, message: .noImage)
+      showAlert(title: .emptyCaseTitle, message: .noImage)
       break
-    case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) || pickupDateAndTime.equalToDate(dateToCompare: Date()):
-      showAlert(title: .emptyCase, message: .noItemDate)
+    case pickupDateAndTime.isLessThanDate(dateToCompare: Date()) ||
+      pickupDateAndTime.equalToDate(dateToCompare: Date()):
+      showAlert(title: .emptyCaseTitle, message: .noItemDate)
       break
     case donatedItem.latitude == .zero && donatedItem.longitude == .zero:
-      showAlert(title: .emptyCase, message: .noMeetingPoint)
+      showAlert(title: .emptyCaseTitle, message: .noMeetingPoint)
       break
-    case donatedItem.description == StaticLabel.enterItemDescription.rawValue || donatedItem.description == "":
-      showAlert(title: .emptyCase, message: .noDescription)
+    case donatedItem.description == StaticLabel.enterItemDescription.description ||
+      donatedItem.description == "":
+      showAlert(title: .emptyCaseTitle, message: .noDescription)
       break
     default:
       completion()
@@ -462,11 +481,12 @@ extension DonorVC {
 extension DonorVC {
   func createDonorItemAndSaveItIntoDatabase() {
     pickupDateAndTime = itemDatePicker.date
-    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
-    
+    let dateAndTime = ISO8601DateFormatter.string(
+      from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
+
     let donatedItem = DonatedItem(
       isPicked: false,
-      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].description,
       name: itemNameTextField.text!,
       pickUpDateTime: dateAndTime,
       description: itemDescriptionTextView.text!,
@@ -474,14 +494,14 @@ extension DonorVC {
       longitude: address?.longitude ?? .zero
     )
     checkAllFieldsAreFilledBeforeNetworking(donatedItem) {
-      self.showAlert(title: .thankYou, message: .confirmDonation, buttonName: .confirm) {
+      self.showAlert(title: .thankYouTitle, message: .confirmDonation, buttonName: .confirm) {
         (true) in
-        let resourcePath = NetworkPath.donatedItems.rawValue
+        let resourcePath = NetworkPath.donatedItems.description
         ResourceRequest<DonatedItem>(resourcePath).save(donatedItem, tokenNeeded: true, { [weak self] (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in
-              self?.showAlert(title: .error, message: .saveItemError)
+              self?.showAlert(title: .errorTitle, message: .networkRequestError)
             }
           case .success:
             DispatchQueue.main.async { [weak self] in
@@ -505,12 +525,12 @@ extension DonorVC {
     populateItemTypePicker()
     populateItemDatePicker()
     itemNameTextField.text = itemToEdit?.name
-    mapKitButton.setTitle(ButtonName.changeMeetingPoint.rawValue, for: .normal)
+    mapKitButton.setTitle(ButtonName.changeMeetingPoint.description, for: .normal)
     itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
     itemDescriptionTextView.text = itemToEdit?.description
     FirebaseStorageHandler.shared.downloadItemImage(of: itemToEdit!, into: itemImage)
   }
-  
+
   //Show the picker item type the way the item is
   func populateItemTypePicker() {
     for type in DonatedItem.type {
@@ -520,11 +540,13 @@ extension DonorVC {
       }
     }
   }
-  
+
   //Show the date picker from the item date
   func populateItemDatePicker() {
     guard let isoDateString = itemToEdit?.pickUpDateTime else { return }
-    let trimmedIsoString = (isoDateString.replacingOccurrences(of: StaticLabel.dateOccurence.rawValue, with: StaticLabel.emptyString.rawValue, options: .regularExpression))
+    let trimmedIsoString = (isoDateString.replacingOccurrences(
+      of: StaticLabel.dateOccurence.description,
+      with: StaticLabel.emptyString.description, options: .regularExpression))
     guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
     itemDatePicker.setDate(dateAndTime, animated: true)
   }
@@ -534,10 +556,11 @@ extension DonorVC {
 extension DonorVC {
   func updateDonatedItem() {
     guard let donatedItemID = itemToEdit?.id else { return }
-    
+
     pickupDateAndTime = itemDatePicker.date
-    let dateAndTime = ISO8601DateFormatter.string(from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
-    
+    let dateAndTime = ISO8601DateFormatter.string(
+      from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
+
     if address?.latitude == nil {
       latitudeToSet = itemToEdit?.latitude
       longitudeToSet = itemToEdit?.longitude
@@ -546,10 +569,10 @@ extension DonorVC {
       latitudeToSet = address?.latitude
       longitudeToSet = address?.longitude
     }
-    
+
     var updatedItem = DonatedItem(
       isPicked: itemToEdit!.isPicked,
-      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].rawValue,
+      selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].description,
       name: itemNameTextField.text!,
       pickUpDateTime: dateAndTime,
       description: itemDescriptionTextView.text!,
@@ -557,15 +580,15 @@ extension DonorVC {
       longitude: longitudeToSet ?? .zero
     )
     checkAllFieldsAreFilledBeforeNetworking(updatedItem) {
-      self.showAlert(title: .thankYou, message: .confirmChanges, buttonName: .confirm) {
+      self.showAlert(title: .thankYouTitle, message: .confirmChanges, buttonName: .confirm) {
         (true) in
-        
-        let resourcePath = NetworkPath.donatedItems.rawValue + "\(donatedItemID)"
+
+        let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
         ResourceRequest<DonatedItem>(resourcePath).update(updatedItem, tokenNeeded: true, { (result) in
           switch result {
           case .failure:
             DispatchQueue.main.async { [weak self] in
-              self?.showAlert(title: .error, message: .networkRequestError)
+              self?.showAlert(title: .errorTitle, message: .networkRequestError)
             }
           case .success(let item):
             DispatchQueue.main.async { [weak self] in

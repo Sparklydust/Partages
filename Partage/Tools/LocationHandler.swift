@@ -9,13 +9,13 @@
 import CoreLocation
 import MapKit
 
-class LocationHandler: CLLocationManager {
+final class LocationHandler: CLLocationManager {
   static let shared = LocationHandler()
-  
+
   let locationManager = CLLocationManager()
   let annotation = MKPointAnnotation()
   var meetingPoint = CLLocation()
-  
+
   let metersAroundUser: CLLocationDistance = 500
   var distanceInMetersToItem: Double = .zero
 }
@@ -25,16 +25,18 @@ extension LocationHandler {
   func getUserLocationAccuracy() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
   }
-  
+
   func userLocation() -> CLLocation {
     let userLocation = locationManager.location
-    return userLocation ?? CLLocation(latitude: CLLocationDegrees(exactly: 0.0)!, longitude: CLLocationDegrees(exactly: 0.0)!)
+    return userLocation ?? CLLocation(
+      latitude: CLLocationDegrees(exactly: 0.0)!, longitude: CLLocationDegrees(exactly: 0.0)!)
   }
 }
 
 //MARK: - #1 Use this method to setup user location on any Partage map view
 extension LocationHandler {
-  func setupUserLocationAtBest(onto mapView: MKMapView, byMeters: CLLocationDistance, vc: UIViewController) {
+  func setupUserLocationAtBest(
+    onto mapView: MKMapView, byMeters: CLLocationDistance, vc: UIViewController) {
     setupLocationServices(on: mapView, vc: vc)
     centerViewOnUserLocation(onto: mapView, byMeters: byMeters)
   }
@@ -42,13 +44,14 @@ extension LocationHandler {
 
 //MARK - #2 Use this method in tap gesture to add a pin on map view and get that point coordinates
 extension LocationHandler {
-  func userPinAndGetCoordinates(of meetingPoint: StaticLabel ,on mapView: MKMapView, sender: UILongPressGestureRecognizer) {
+  func userPinAndGetCoordinates(
+    of meetingPoint: StaticLabel ,on mapView: MKMapView, sender: UILongPressGestureRecognizer) {
     let location = sender.location(in: mapView)
     let locationCoordinates = mapView.convert(location, toCoordinateFrom: mapView)
-    
+
     annotation.coordinate = locationCoordinates
-    annotation.title = meetingPoint.rawValue
-    
+    annotation.title = meetingPoint.description
+
     mapView.removeAnnotations(mapView.annotations)
     mapView.addAnnotation(annotation)
   }
@@ -59,19 +62,19 @@ extension LocationHandler {
   func convertLatLonToAnAdress(vc: MapViewVC) {
     let latitude = annotation.coordinate.latitude
     let longitude = annotation.coordinate.longitude
-    
+
     meetingPoint = CLLocation.init(latitude: latitude, longitude: longitude)
-    
+
     let geocoder = CLGeocoder()
     geocoder.reverseGeocodeLocation(meetingPoint) { [weak self]
       (placemarks, error) in
       guard self != nil else { return }
       if let _ =  error {
-        vc.showAlert(title: .error, message: .locationIssue)
+        vc.showAlert(title: .errorTitle, message: .locationIssue)
         return
       }
       guard let placemark = placemarks?.first else {
-        vc.showAlert(title: .error, message: .locationIssue)
+        vc.showAlert(title: .errorTitle, message: .locationIssue)
         return
       }
       let coordinates = placemark.location
@@ -80,10 +83,16 @@ extension LocationHandler {
       let postalCode = placemark.postalCode ?? ""
       let cityName = placemark.locality ?? ""
       let countryName = placemark.country ?? ""
-      
+
       DispatchQueue.main.async {
         // Sending the address and coordinates to Donor VC
-        vc.delegate?.addressReceived(coordinates: coordinates!, streetNumber: streetNumber, streetName: streetName, postalCode: postalCode, cityName: cityName, countryName: countryName)
+        vc.delegate?.addressReceived(
+          coordinates: coordinates!,
+          streetNumber: streetNumber,
+          streetName: streetName,
+          postalCode: postalCode,
+          cityName: cityName,
+          countryName: countryName)
       }
     }
   }
@@ -92,33 +101,38 @@ extension LocationHandler {
 //MARK - #4 Method to center map view around the meeting point
 extension LocationHandler {
   func centerView(around meetingPoint: CLLocationCoordinate2D, onto mapView: MKMapView) {
-    let region = MKCoordinateRegion.init(center: meetingPoint, latitudinalMeters: 25, longitudinalMeters: 50)
+    let region = MKCoordinateRegion.init(
+      center: meetingPoint, latitudinalMeters: 25, longitudinalMeters: 50)
     mapView.setRegion(region, animated: true)
   }
 }
 
 //MARK: - #5.1 Get user direction from user location to pinned location
 extension LocationHandler {
-  func getDirectionFromUserToPinnedLocation(on mapView: MKMapView, latitude: Double, longitude: Double, vc: UIViewController) {
+  func getDirectionFromUserToPinnedLocation(
+    on mapView: MKMapView, latitude: Double, longitude: Double, vc: UIViewController) {
     guard let location = locationManager.location?.coordinate else {
       DispatchQueue.main.async {
-        vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+        vc.goToUserSettings(
+          title: .locationOffTitle, message: .getDirectionIssue, buttonName: .settings)
       }
       return
     }
     let request = createDirectionRequest(from: location, to: latitude, and: longitude)
     let directions = MKDirections(request: request)
-    
+
     directions.calculate {
       (response, error) in
       guard let response = response else {
-        vc.showAlert(title: .error, message: .noDirectionsCalculated)
+        vc.showAlert(title: .errorTitle, message: .noDirectionsCalculated)
         return
       }
       for route in response.routes {
         mapView.addOverlay(route.polyline)
-        mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: .zero, left: 100, bottom: .zero, right: 100), animated: true)
-        
+        mapView.setVisibleMapRect(
+          route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(
+            top: .zero, left: 100, bottom: .zero, right: 100), animated: true)
+
         self.distanceInMetersToItem = route.distance
       }
     }
@@ -127,38 +141,40 @@ extension LocationHandler {
 
 //MARK: - #6 Method to add an annotation on any map
 extension LocationHandler {
-  func itemAnnotationShown(on mapView: MKMapView, located locationCoordinates: CLLocationCoordinate2D) {
+  func itemAnnotationShown(on mapView: MKMapView,
+                           located locationCoordinates: CLLocationCoordinate2D) {
     annotation.coordinate = locationCoordinates
-    annotation.title = StaticLabel.meetingPoint.rawValue
+    annotation.title = StaticLabel.meetingPoint.description
     mapView.removeAnnotations(mapView.annotations)
     mapView.addAnnotation(annotation)
-    
-    let coordinate = locationCoordinates
-    let span = MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
-    let region = MKCoordinateRegion(center: coordinate, span: span)
-    mapView.setRegion(region, animated: true)
-  }
-  
-  func itemAnnotationShown(on mapView: MKMapView, latitude: Double, longitude: Double) {
-    let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    annotation.coordinate = locationCoordinates
-    annotation.title = StaticLabel.meetingPoint.rawValue
-    mapView.removeAnnotations(mapView.annotations)
-    mapView.addAnnotation(annotation)
-    
+
     let coordinate = locationCoordinates
     let span = MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
     let region = MKCoordinateRegion(center: coordinate, span: span)
     mapView.setRegion(region, animated: true)
   }
 
+  func itemAnnotationShown(on mapView: MKMapView, latitude: Double, longitude: Double) {
+    let locationCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    annotation.coordinate = locationCoordinates
+    annotation.title = StaticLabel.meetingPoint.description
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.addAnnotation(annotation)
+
+    let coordinate = locationCoordinates
+    let span = MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    mapView.setRegion(region, animated: true)
+  }
 }
 
 //MARK - Method to center map view around the user location
 extension LocationHandler {
-  func centerViewOnUserLocation(onto mapView: MKMapView, byMeters distance: CLLocationDistance) {
+  func centerViewOnUserLocation(onto mapView: MKMapView,
+                                byMeters distance: CLLocationDistance) {
     if let location = locationManager.location?.coordinate {
-      let region = MKCoordinateRegion.init(center: location, latitudinalMeters: distance, longitudinalMeters: distance)
+      let region = MKCoordinateRegion.init(
+        center: location, latitudinalMeters: distance, longitudinalMeters: distance)
       mapView.setRegion(region, animated: true)
     }
   }
@@ -173,7 +189,8 @@ extension LocationHandler {
     }
     else {
       DispatchQueue.main.async {
-        vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+        vc.goToUserSettings(
+          title: .locationOffTitle, message: .locationOff, buttonName: .settings)
       }
     }
   }
@@ -182,10 +199,13 @@ extension LocationHandler {
 //MARK: - Center map view when the user move location
 extension LocationHandler {
   func userDidUpdateLocation(on mapView: MKMapView) {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(
+      _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
       guard let location = locations.last else { return }
-      let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-      let region = MKCoordinateRegion.init(center: center, latitudinalMeters: metersAroundUser, longitudinalMeters: metersAroundUser)
+      let center = CLLocationCoordinate2D(
+        latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+      let region = MKCoordinateRegion.init(
+        center: center, latitudinalMeters: metersAroundUser, longitudinalMeters: metersAroundUser)
       mapView.setRegion(region, animated: true)
     }
   }
@@ -199,10 +219,11 @@ extension LocationHandler {
       startTrackingUserLocation(on: mapView)
     case .denied:
       DispatchQueue.main.async {
-        vc.goToUserSettings(title: .locationOff, message: .locationOff, buttonName: .settings)
+        vc.goToUserSettings(
+          title: .locationOffTitle, message: .locationOff, buttonName: .settings)
       }
     case .restricted:
-      vc.showAlert(title: .restricted, message: .restricted)
+      vc.showAlert(title: .restrictedTitle, message: .restricted)
     case .notDetermined:
       DispatchQueue.main.async {
         self.locationManager.requestWhenInUseAuthorization()
@@ -226,9 +247,12 @@ extension LocationHandler {
 
 //MARK: - Method to create direction request
 extension LocationHandler {
-  func createDirectionRequest(from coordinate: CLLocationCoordinate2D, to meetingPointLat: CLLocationDegrees, and meetingPointLon: CLLocationDegrees) -> MKDirections.Request {
+  func createDirectionRequest(from coordinate: CLLocationCoordinate2D,
+                              to meetingPointLat: CLLocationDegrees,
+                              and meetingPointLon: CLLocationDegrees) -> MKDirections.Request {
     let startingLocation = MKPlacemark(coordinate: coordinate)
-    let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: meetingPointLat, longitude: meetingPointLon))
+    let destination = MKPlacemark(
+      coordinate: CLLocationCoordinate2D(latitude: meetingPointLat, longitude: meetingPointLon))
 
     let request = MKDirections.Request()
     request.source = MKMapItem(placemark: startingLocation)
@@ -243,25 +267,30 @@ extension LocationHandler {
 extension LocationHandler {
   func openAppleMapApp(itemLatitude: Double, itemLongitude: Double) {
     let source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.location!.coordinate))
-    source.name = StaticLabel.userPosition.rawValue
-    
-    let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: itemLatitude, longitude: itemLongitude)))
-    destination.name = StaticLabel.meetingPoint.rawValue
-    
-    MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
+    source.name = StaticLabel.userPosition.description
+
+    let destination = MKMapItem(placemark: MKPlacemark(
+      coordinate: CLLocationCoordinate2D(latitude: itemLatitude, longitude: itemLongitude)))
+    destination.name = StaticLabel.meetingPoint.description
+
+    MKMapItem.openMaps(
+      with: [source, destination],
+      launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
   }
 }
 
 //MARK: - Return user distance between its location to the meeting point
 extension LocationHandler {
-  func getDistanceFromUserToMeetingPoint(_ meetingPointLatitude: Double, _ meetingPointLongitude: Double, vc: UIViewController) -> Double {
+  func getDistanceFromUserToMeetingPoint(
+    _ meetingPointLatitude: Double, _ meetingPointLongitude: Double, vc: UIViewController) -> Double {
     if let location = locationManager.location?.coordinate {
-      let request = createDirectionRequest(from: location, to: meetingPointLatitude, and: meetingPointLongitude)
+      let request = createDirectionRequest(
+        from: location, to: meetingPointLatitude, and: meetingPointLongitude)
       let directions = MKDirections(request: request)
       directions.calculate {
         (response, error) in
         guard let response = response else {
-          vc.showAlert(title: .error, message: .noDirectionsCalculated)
+          vc.showAlert(title: .errorTitle, message: .noDirectionsCalculated)
           return
         }
         for route in response.routes {
@@ -271,7 +300,7 @@ extension LocationHandler {
     }
     else {
       DispatchQueue.main.async {
-        vc.goToUserSettings(title: .locationOff, message: .getDirectionIssue, buttonName: .settings)
+        vc.goToUserSettings(title: .locationOffTitle, message: .getDirectionIssue, buttonName: .settings)
       }
     }
     return distanceInMetersToItem

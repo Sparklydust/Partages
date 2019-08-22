@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpVC: UIViewController {
-  
+
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
@@ -21,9 +21,9 @@ class SignUpVC: UIViewController {
   @IBOutlet weak var registerButton: UIButton!
   @IBOutlet weak var registerActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
-  
+
   @IBOutlet var underlineViews: [UIView]!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
@@ -31,7 +31,7 @@ class SignUpVC: UIViewController {
     observeKeyboardNotification()
     triggerActivityIndicator(false)
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
@@ -59,12 +59,12 @@ extension SignUpVC {
     setupDotLabel()
     setupSwipeGesture()
   }
-  
+
   //MARK: Setup main view design
   func setupMainView() {
     view.setupMainBackgroundColor()
   }
-  
+
   //MARK: All delegates
   func setupAllDelegates() {
     firstNameTextField.delegate = self
@@ -145,7 +145,7 @@ extension SignUpVC {
 extension SignUpVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .right {
-      performSegue(withIdentifier: Segue.goesToSignInVC.rawValue, sender: self)
+      performSegue(withIdentifier: Segue.goToSignInVC.rawValue, sender: self)
     }
     if sender.direction == .down {
       guard firstNameTextField.isFirstResponder ||
@@ -158,7 +158,7 @@ extension SignUpVC {
       view.endEditing(true)
     }
   }
-  
+
   func setupSwipeGesture() {
     let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
     let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -172,7 +172,7 @@ extension SignUpVC {
 //MARK: - Unwind to sharingVC
 extension SignUpVC {
   func unwindToSharingVC() {
-    performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+    performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
   }
 }
 
@@ -198,18 +198,21 @@ extension SignUpVC: UITextFieldDelegate {
 extension SignUpVC {
   func observeKeyboardNotification() {
     let center: NotificationCenter = NotificationCenter.default
-    center.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    center.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    center.addObserver(
+      self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    center.addObserver(
+      self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
-  
+
   @objc func keyboardWillShow(notification: NSNotification) {
     guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
-    guard UIDevice.current.name == DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
-    
+    guard UIDevice.current.name ==
+      DeviceName.iPhoneSE.description || UIDevice.current.name == DeviceName.iPhoneFiveS.description else { return }
+
     guard signInButton.isEnabled else { return }
     guard !signUpButton.isEnabled else { return }
-    
+
     if confirmPasswordTextField.isEditing || passwordTextField.isEditing {
       if view.frame.origin.y == .zero {
         UIView.animate(withDuration: 0.4) {
@@ -218,7 +221,7 @@ extension SignUpVC {
       }
     }
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
     if view.frame.origin.y != .zero {
       UIView.animate(withDuration: 0.4) {
@@ -237,7 +240,7 @@ extension SignUpVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     registerActivityIndicator.isHidden = false
     registerActivityIndicator.style = .whiteLarge
@@ -250,7 +253,7 @@ extension SignUpVC {
     signInButton.isEnabled = false
     swipeGestureRecognizer.isEnabled = false
   }
-  
+
   func hideActivityIndicator() {
     registerActivityIndicator.isHidden = true
     registerButton.commonDesign(title: .signUp)
@@ -266,46 +269,46 @@ extension SignUpVC {
     guard let firstName = firstNameTextField.text,
       let email = emailTextField.text,
       let password = confirmPasswordTextField.text else { return }
-    
+
     switch true {
     case firstName.isEmpty:
-      showAlert(title: .firstNameError, message: .addFirstName)
+      showAlert(title: .firstNameErrorTitle, message: .addFirstName)
       break
     case email.isEmpty || !email.isValidEmail():
-      showAlert(title: .emailError, message: .addEmail)
+      showAlert(title: .emailErrorTitle, message: .addEmail)
       break
     case password.isEmpty || password != passwordTextField.text:
-      showAlert(title: .passwordError, message: .passwordDoesntMatch)
+      showAlert(title: .passwordErrorTitle, message: .passwordDoesntMatch)
       break
     case password.count < 5:
-      showAlert(title: .passwordError, message: .passwordTooShort)
+      showAlert(title: .passwordErrorTitle, message: .passwordTooShort)
       break
     default:
       let user = CreateUser(firstName: firstName,
-                            lastName: StaticLabel.emptyString.rawValue,
+                            lastName: StaticLabel.emptyString.description,
                             email: email,
                             password: password
       )
       resignAllResponder()
       triggerActivityIndicator(true)
-      
-      let resourcePath = NetworkPath.users.rawValue
+
+      let resourcePath = NetworkPath.users.description
       ResourceRequest<CreateUser>(resourcePath).save(user, tokenNeeded: false) { [weak self] result in
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .error, message: .signUpError)
+            self?.showAlert(title: .errorTitle, message: .signUpError)
           }
         case .success:
           Auth().login(email: email, password: password, completion: { (result) in
             switch result {
             case .success:
               DispatchQueue.main.async { [weak self] in
-                self?.performSegue(withIdentifier: Segue.unwindsToSharingVC.rawValue, sender: self)
+                self?.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
               }
             case .failure:
               DispatchQueue.main.async { [weak self] in
-                self?.showAlert(title: .loginError, message: .loginError)
+                self?.showAlert(title: .loginErrorTitle, message: .loginError)
               }
             }
           })

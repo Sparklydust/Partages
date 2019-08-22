@@ -13,7 +13,7 @@ extension UILabel {
   func setupFont(as font: CustomFont, sized size: FontSize, in color: UIColor) {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
-    
+
     //Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.font = UIFont(customFont: font, withSize: .thirtyTwo)
@@ -23,10 +23,11 @@ extension UILabel {
 
 //MARK: - Setup UILbel font type, font size and font color as well as for iPad
 extension UILabel {
-  func setupFont(as font: CustomFont, sized size: FontSize, forIPad iPadSize: FontSize, in color: UIColor) {
+  func setupFont(as font: CustomFont, sized size: FontSize,
+                 forIPad iPadSize: FontSize, in color: UIColor) {
     self.font = UIFont(customFont: font, withSize: size)
     self.textColor = color
-    
+
     //Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.font = UIFont(customFont: font, withSize: iPadSize)
@@ -40,7 +41,7 @@ extension UILabel {
     self.text = "●"
     self.textColor = .mainBlue
     self.font = UIFont(customFont: .arialBold, withSize: .seventeen)
-    
+
     // Settings for iPad
     if UIDevice.current.userInterfaceIdiom == .pad {
       self.font = UIFont(customFont: .arialBold, withSize: .twentyFive)

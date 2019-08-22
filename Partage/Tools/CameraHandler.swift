@@ -9,11 +9,11 @@
 import UIKit
 import Photos
 
-class CameraHandler: NSObject {
+final class CameraHandler: NSObject {
   static let shared = CameraHandler()
-  
+
   fileprivate var currentVC: UIViewController!
-  
+
   var imagePickedBlock: ((UIImage) -> Void)?
 }
 
@@ -57,17 +57,18 @@ extension CameraHandler {
 extension CameraHandler {
   func goesToUserLibraryOrCamera(vc: UIViewController){
     currentVC = vc
-    
+
     let libraryStatus = PHPhotoLibrary.authorizationStatus()
     let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
-    
+
     switch libraryStatus {
     case .denied, .notDetermined:
       PHPhotoLibrary.requestAuthorization {
         (access) in
         guard access == .authorized else {
           DispatchQueue.main.async {
-            vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+            vc.goToUserSettings(
+              title: .cameraUseTitle, message: .cameraUse, buttonName: .settings)
           }
           return
         }
@@ -77,7 +78,8 @@ extension CameraHandler {
             (access) in
             guard access else {
               DispatchQueue.main.async {
-                vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+                vc.goToUserSettings(
+                  title: .cameraUseTitle, message: .cameraUse, buttonName: .settings)
               }
               return
             }
@@ -87,12 +89,13 @@ extension CameraHandler {
           })
         case .restricted:
           DispatchQueue.main.async {
-            vc.showAlert(title: .restricted, message: .restricted)
+            vc.showAlert(title: .restrictedTitle, message: .restricted)
           }
         case .authorized:
           guard libraryStatus == .authorized else {
             DispatchQueue.main.async {
-              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              vc.goToUserSettings(
+                title: .cameraUseTitle, message: .cameraUse, buttonName: .settings)
             }
             return
           }
@@ -105,7 +108,7 @@ extension CameraHandler {
       }
     case .restricted:
       DispatchQueue.main.async {
-        vc.showAlert(title: .restricted, message: .restricted)
+        vc.showAlert(title: .restrictedTitle, message: .restricted)
       }
     case .authorized:
       guard cameraStatus == .authorized else {
@@ -113,7 +116,8 @@ extension CameraHandler {
           (access) in
           guard access else {
             DispatchQueue.main.async {
-              vc.goToUserSettings(title: .cameraUse, message: .cameraUse, buttonName: .settings)
+              vc.goToUserSettings(
+                title: .cameraUseTitle, message: .cameraUse, buttonName: .settings)
             }
             return
           }
@@ -137,13 +141,15 @@ extension CameraHandler: UIImagePickerControllerDelegate, UINavigationController
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     currentVC.dismiss(animated: true, completion: nil)
   }
-  
-  @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+  @objc func imagePickerController(
+    _ picker: UIImagePickerController,
+    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
       self.imagePickedBlock?(image)
     }
     else {
-      currentVC.showAlert(title: .error, message: .noPictureloaded)
+      currentVC.showAlert(title: .errorTitle, message: .noPictureloaded)
     }
     currentVC.dismiss(animated: true, completion: nil)
   }

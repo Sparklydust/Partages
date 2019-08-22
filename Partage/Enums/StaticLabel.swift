@@ -10,26 +10,68 @@ import UIKit
 
 //MARK: - All static label or placeholder name
 enum StaticLabel: String {
-  case firsName = "prénom"
-  case lastName = "nom"
-  case email = "email"
-  case password = "mot de passe"
-  case oldPassword = "ancien mot de passe"
-  case newPassword = "nouveau mot de passe"
-  case confirmPassword = "confirmer mot de passe"
-  case enterYourDonationName = "nom de votre don"
-  case enterItemDescription = "description de votre donation"
-  case imageLoaderGuide = "Ajoutez de une à quatre images"
-  case meetingPoint = "Lieu de rendez-vous"
-  case userPosition = "Votre position"
-  case emptyString = ""
-  case dateOccurence = "\\.\\d+"
-  case receiverCalendarTitle = "Don à recevoir: "
-  case donorCalendarTitle = "Don à remettre: "
-  case donationIsSelected = "don sélectionné"
-  case donationNotSelected = "don non sélectionné"
-  case downloadingDonatedItems = "Chargement des dons"
-  case downloadingMessages = "Chargement des messages"
-  case userLeftTheConversation = "a quitté la conversation."
-  case closedConversation = "conversation fermée"
+  case firsName
+  case lastName
+  case email
+  case password
+  case newPassword
+  case confirmPassword
+  case enterYourDonationName
+  case enterItemDescription
+  case imageLoaderGuide
+  case meetingPoint
+  case userPosition
+  case emptyString
+  case dateOccurence
+  case receiverCalendarTitle
+  case donorCalendarTitle
+  case donationIsSelected
+  case donationNotSelected
+  case userLeftTheConversation
+  case closedConversation
+
+  var description: String {
+    get {
+      switch(self) {
+      case .firsName:
+        return LocalizableStrings.firsName
+      case .lastName:
+        return LocalizableStrings.lastName
+      case .email:
+        return LocalizableStrings.email
+      case .password:
+        return LocalizableStrings.password
+      case .newPassword:
+        return LocalizableStrings.newPassword
+      case .confirmPassword:
+        return LocalizableStrings.confirmPassword
+      case .enterYourDonationName:
+        return LocalizableStrings.enterYourDonationName
+      case .enterItemDescription:
+        return LocalizableStrings.enterItemDescription
+      case .imageLoaderGuide:
+        return LocalizableStrings.imageLoaderGuide
+      case .meetingPoint:
+        return LocalizableStrings.meetingPoint
+      case .userPosition:
+        return LocalizableStrings.userPosition
+      case .emptyString:
+        return LocalizableStrings.emptyString
+      case .dateOccurence:
+        return LocalizableStrings.dateOccurence
+      case .receiverCalendarTitle:
+        return LocalizableStrings.receiverCalendarTitle
+      case .donorCalendarTitle:
+        return LocalizableStrings.donorCalendarTitle
+      case .donationIsSelected:
+        return LocalizableStrings.donationIsSelected
+      case .donationNotSelected:
+        return LocalizableStrings.donationNotSelected
+      case .userLeftTheConversation:
+        return LocalizableStrings.userLeftTheConversation
+      case .closedConversation:
+        return LocalizableStrings.closedConversation
+      }
+    }
+  }
 }

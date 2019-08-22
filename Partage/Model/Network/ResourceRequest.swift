@@ -10,20 +10,19 @@ import Foundation
 
 //MARK: - Responsible for making network request
 struct ResourceRequest<ResourceType> where ResourceType: Codable {
-  
-  private let baseURL = NetworkPath.mainPath.rawValue
+
+  private let baseURL = NetworkPath.mainPath.description
   private let resourceURL: URL
-  
+
   private var resourceSession = URLSession(configuration: .default)
-  //private var imageSession = URLSession(configuration: .default)
-  
+
   init(_ resourcePath: String) {
     guard let resourceURL = URL(string: baseURL) else {
       fatalError()
     }
     self.resourceURL = resourceURL.appendingPathComponent(resourcePath)
   }
-  
+
   //Init for fake resource session testing purposes
   init(resourcePath: String, resourceSession: URLSession) {
     guard let resourceURL = URL(string: baseURL) else {

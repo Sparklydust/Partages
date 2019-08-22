@@ -14,8 +14,11 @@ final class ChatMessage: Codable {
   var date: String
   var content: String
   var messageID: Int
-  
-  init(user: String, date: String, content: String, messageID: Int) {
+
+  init(user: String,
+       date: String,
+       content: String,
+       messageID: Int) {
     self.user = user
     self.date = date
     self.content = content
