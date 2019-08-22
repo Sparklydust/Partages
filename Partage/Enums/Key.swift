@@ -8,7 +8,7 @@
 
 import Foundation
 
-//MARK: - Keys for User Defaults and picker text color
+//MARK: - Keys for User Defaults, picker text color and device token dictionary value
 enum Key: String {
   case pickerTextColor
   case partageTokenKey

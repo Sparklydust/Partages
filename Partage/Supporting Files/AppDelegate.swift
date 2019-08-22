@@ -12,15 +12,20 @@ import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+  
   var window: UIWindow?
+  let notificationHandler = NotificationHandler()
+}
 
+//MARK: - First setup of the Partage app
+extension AppDelegate {
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     setupTabBar()
     FirebaseApp.configure()
     setupGoogleAdMob()
+    registerForPushNotifications(application: application)
     return true
   }
 }
@@ -41,5 +46,14 @@ extension AppDelegate {
   func setupGoogleAdMob() {
     GADMobileAds.sharedInstance().requestConfiguration.tag(forChildDirectedTreatment: false)
     GADMobileAds.sharedInstance().start(completionHandler: nil)
+  }
+}
+
+//MARK: - Setup push notification path and device token
+extension AppDelegate {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    let pushNotificationPath =
+      NetworkPath.mainPath.description + NetworkPath.deviceToken.description
+    sendPushNotificationDetails(to: pushNotificationPath, using: deviceToken)
   }
 }

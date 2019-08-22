@@ -27,6 +27,7 @@ enum NetworkPath: String {
   case messages
   case ofUser
   case chatMessages
+  case deviceToken
 
   var description: String {
     get {
@@ -65,6 +66,8 @@ enum NetworkPath: String {
         return LocalizableStrings.ofUser
       case .chatMessages:
         return LocalizableStrings.chatMessages
+      case .deviceToken:
+        return LocalizableStrings.deviceToken
       }
     }
   }

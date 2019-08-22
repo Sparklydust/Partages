@@ -45,6 +45,11 @@
 		2A72B83022F4A11A00D8A2E1 /* ResourceRequestTest+DELETE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72B82F22F4A11A00D8A2E1 /* ResourceRequestTest+DELETE.swift */; };
 		2A72B83222F4A16700D8A2E1 /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72B83122F4A16700D8A2E1 /* AuthTests.swift */; };
 		2A72B83522F4A1D000D8A2E1 /* UserDefaultsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72B83422F4A1D000D8A2E1 /* UserDefaultsServiceTest.swift */; };
+		2A7E72D0230EEBD4008AA3C1 /* ApnsUploads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7E72CF230EEBD4008AA3C1 /* ApnsUploads.swift */; };
+		2A7E72D2230F400A008AA3C1 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7E72D1230F400A008AA3C1 /* NotificationHandler.swift */; };
+		2A7E72D4230F49A2008AA3C1 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7E72D3230F49A2008AA3C1 /* PushNotification.swift */; };
+		2A7E72D6230F4A4C008AA3C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7E72D5230F4A4C008AA3C1 /* ViewController.swift */; };
+		2A7E72D8230F4AED008AA3C1 /* VCIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7E72D7230F4AED008AA3C1 /* VCIdentifier.swift */; };
 		2A87EC6322A65A6000EB969D /* SenderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6122A65A6000EB969D /* SenderTVC.swift */; };
 		2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A87EC6222A65A6000EB969D /* SenderTVC.xib */; };
 		2A87EC6622A69AE000EB969D /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A87EC6522A69AE000EB969D /* UITableView.swift */; };
@@ -199,6 +204,11 @@
 		2A72B82F22F4A11A00D8A2E1 /* ResourceRequestTest+DELETE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourceRequestTest+DELETE.swift"; sourceTree = "<group>"; };
 		2A72B83122F4A16700D8A2E1 /* AuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
 		2A72B83422F4A1D000D8A2E1 /* UserDefaultsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceTest.swift; sourceTree = "<group>"; };
+		2A7E72CF230EEBD4008AA3C1 /* ApnsUploads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApnsUploads.swift; sourceTree = "<group>"; };
+		2A7E72D1230F400A008AA3C1 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		2A7E72D3230F49A2008AA3C1 /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		2A7E72D5230F4A4C008AA3C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2A7E72D7230F4AED008AA3C1 /* VCIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCIdentifier.swift; sourceTree = "<group>"; };
 		2A87EC6122A65A6000EB969D /* SenderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTVC.swift; sourceTree = "<group>"; };
 		2A87EC6222A65A6000EB969D /* SenderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTVC.xib; sourceTree = "<group>"; };
 		2A87EC6522A69AE000EB969D /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
@@ -347,6 +357,7 @@
 				2A6DBB7022CF932200B0EC75 /* String.swift */,
 				2A72B80B22F1E8A600D8A2E1 /* Array.swift */,
 				2A6C12D822D35379001AAE31 /* Encodable.swift */,
+				2A7E72CF230EEBD4008AA3C1 /* ApnsUploads.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -762,6 +773,7 @@
 				2AF66B2822AC0AA8005BAE31 /* EventHandler.swift */,
 				2AD516AA22B13A5B0032F28F /* LocationHandler.swift */,
 				2AF11C4A230B07A60016728D /* FirebaseStorageHandler.swift */,
+				2A7E72D1230F400A008AA3C1 /* NotificationHandler.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -782,9 +794,12 @@
 			children = (
 				2AD9309122E1AB270023FE46 /* Network */,
 				2A1391BE230D7CC800DCA721 /* Fonts */,
+				2A7E72D5230F4A4C008AA3C1 /* ViewController.swift */,
+				2A7E72D7230F4AED008AA3C1 /* VCIdentifier.swift */,
 				2A901EA322AFA19200D3DD2A /* Segue.swift */,
 				2A901EAD22AFFDDB00D3DD2A /* CustomCell.swift */,
 				2A310DE622C9574B0049CB74 /* ImageName.swift */,
+				2A7E72D3230F49A2008AA3C1 /* PushNotification.swift */,
 				2AFA4EC922A9AA290039803E /* StaticLabel.swift */,
 				2AFA4ECB22A9AAF30039803E /* ButtonName.swift */,
 				2AF66B2622ABBF22005BAE31 /* StaticItemDetail.swift */,
@@ -895,6 +910,9 @@
 								enabled = 0;
 							};
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1066,6 +1084,7 @@
 				2A289FAE22A5734400EB076A /* ChatMessageVC.swift in Sources */,
 				2A310DEB22C96BDA0049CB74 /* Address.swift in Sources */,
 				2A901EAB22AFF9C000D3DD2A /* ReceiverTVC.swift in Sources */,
+				2A7E72D6230F4A4C008AA3C1 /* ViewController.swift in Sources */,
 				2AB43541229E638B007BFB93 /* ProfileVC.swift in Sources */,
 				2A29525522B683E500AE757D /* SignInVC.swift in Sources */,
 				2AE22FD122F9897000AB905A /* SettingsContainer.swift in Sources */,
@@ -1074,6 +1093,7 @@
 				2AF66B2B22AC0D5B005BAE31 /* ActionSheetLabel.swift in Sources */,
 				2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */,
 				2AD516A122B05B280032F28F /* ItemSelectedVC.swift in Sources */,
+				2A7E72D0230EEBD4008AA3C1 /* ApnsUploads.swift in Sources */,
 				2AA656B522E8752C0030813D /* RequestResult.swift in Sources */,
 				2A901EA222AFA0B100D3DD2A /* ItemImagesVC.swift in Sources */,
 				2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */,
@@ -1085,6 +1105,7 @@
 				2AD516A922B11F640032F28F /* MapViewVC.swift in Sources */,
 				2AD516AD22B2B79C0032F28F /* UILabel.swift in Sources */,
 				2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */,
+				2A7E72D4230F49A2008AA3C1 /* PushNotification.swift in Sources */,
 				2A6DBB7122CF932200B0EC75 /* String.swift in Sources */,
 				2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */,
 				2AFA4EC022A8FC9E0039803E /* HistoryTVC.swift in Sources */,
@@ -1098,9 +1119,11 @@
 				2A98DF4C22AEBD6400F6F2AE /* DonorItemType.swift in Sources */,
 				2A06727E229E907900FFAECE /* UIImageView.swift in Sources */,
 				2AC15A0122A7C4D200CE935B /* SignUpVC.swift in Sources */,
+				2A7E72D8230F4AED008AA3C1 /* VCIdentifier.swift in Sources */,
 				2AFA4ECC22A9AAF30039803E /* ButtonName.swift in Sources */,
 				2A6D697C22B904910073053F /* Key.swift in Sources */,
 				2ADDE4FC22DF023500C568BB /* Message.swift in Sources */,
+				2A7E72D2230F400A008AA3C1 /* NotificationHandler.swift in Sources */,
 				2AFA4ECA22A9AA290039803E /* StaticLabel.swift in Sources */,
 				2ADDF13422E092AB00C568BB /* NetworkPath.swift in Sources */,
 				2AF11C4B230B07A60016728D /* FirebaseStorageHandler.swift in Sources */,

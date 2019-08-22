@@ -451,7 +451,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FBb-ah-5D1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b03-gT-10I" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="historyFavorite" automaticallyAdjustsScrollViewInsets="NO" id="b03-gT-10I" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="historySaving" id="vD2-BD-npm">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-9"/>
                     </tabBarItem>

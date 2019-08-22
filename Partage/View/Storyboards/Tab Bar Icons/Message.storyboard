@@ -178,7 +178,7 @@
         <!--Navigation Controller-->
         <scene sceneID="P7J-6x-Vbx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Z0-Hz-hsG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="message" automaticallyAdjustsScrollViewInsets="NO" id="4Z0-Hz-hsG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="message" id="EMd-1P-scS">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-9"/>
                     </tabBarItem>

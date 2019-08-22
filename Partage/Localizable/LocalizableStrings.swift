@@ -16,6 +16,8 @@ extension LocalizableStrings {
     "", comment: "empty string description to be used all over the app")
   static let dateOccurence = NSLocalizedString(
     "\\.\\d+", comment: "date occurence to translate Date() to readable String date")
+  static let stringTokenFormat = NSLocalizedString(
+    "%02x", comment: "Used to switch a token to a string format")
 }
 
 //MARK: - Keys for User Defaults and picker text color - Not Localizable -
@@ -94,6 +96,8 @@ extension LocalizableStrings {
     "ofUser/", comment: "belonging of user path")
   static let chatMessages = NSLocalizedString(
     "chatMessages/", comment: "find chat messages bubbles path")
+  static let deviceToken = NSLocalizedString(
+    "deviceToken/", comment: "path to post and delete device token for push notification")
 }
 
 //MARK: - All static label or placeholder name - Localizable Strings -

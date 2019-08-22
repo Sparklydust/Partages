@@ -29,6 +29,7 @@ enum StaticLabel: String {
   case donationNotSelected
   case userLeftTheConversation
   case closedConversation
+  case stringTokenFormat
 
   var description: String {
     get {
@@ -71,6 +72,8 @@ enum StaticLabel: String {
         return LocalizableStrings.userLeftTheConversation
       case .closedConversation:
         return LocalizableStrings.closedConversation
+      case .stringTokenFormat:
+        return LocalizableStrings.stringTokenFormat
       }
     }
   }
