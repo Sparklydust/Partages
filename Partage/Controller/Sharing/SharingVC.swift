@@ -172,7 +172,7 @@ extension SharingVC {
 //MARK: - User sign in change SignInSignUp button
 extension SharingVC {
   func populateSignInSignUpButtonDesign() {
-    if UserDefaultsService.shared.token != nil {
+    if UserDefaultsService.shared.userToken != nil {
       fetchUserFromTheDatabase()
       signInSignUpButton.signInSignUpDesign(title: ButtonName.afterSignedIn.description)
       signInSignUpButton.isEnabled = false

@@ -70,7 +70,7 @@ class ItemSelectedVC: UIViewController {
 extension ItemSelectedVC {
   //MARK: Favorite button action
   @IBAction func favoriteButtonAction(_ sender: Any) {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
       showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
@@ -90,7 +90,7 @@ extension ItemSelectedVC {
 
   //MARK: Messagge to donator button action
   @IBAction func messageToDonatorButtonAction(_ sender: Any) {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
       showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
@@ -105,7 +105,7 @@ extension ItemSelectedVC {
 
   //MARK: Receive this donation button action
   @IBAction func ReceiveDonationButtonAction(_ sender: Any) {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
       showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }

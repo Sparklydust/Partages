@@ -10,6 +10,8 @@ import Foundation
 
 //MARK: - Container for UserDefaults settings
 protocol SettingsContainer {
-  var token: String? { get set }
+  var userToken: String? { get set }
+  var deviceToken: String? { get set }
   var userID: String? { get set }
+  var actionCount: Int? { get set }
 }

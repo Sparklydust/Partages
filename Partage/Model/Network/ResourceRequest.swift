@@ -40,7 +40,7 @@ extension ResourceRequest {
     urlRequest.httpMethod = "GET"
     urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
     if tokenNeeded {
-      guard let token = UserDefaultsService.shared.token else { return }
+      guard let token = UserDefaultsService.shared.userToken else { return }
       urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     }
     let dataTask = resourceSession.dataTask(with: urlRequest) { data, response, _ in
@@ -70,7 +70,7 @@ extension ResourceRequest {
     urlRequest.httpMethod = "GET"
     urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
     if tokenNeeded {
-      guard let token = UserDefaultsService.shared.token else { return }
+      guard let token = UserDefaultsService.shared.userToken else { return }
       urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     }
     let dataTask = resourceSession.dataTask(with: urlRequest) { data, response, _ in
@@ -100,7 +100,7 @@ extension ResourceRequest {
       urlRequest.httpMethod = "POST"
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
       if tokenNeeded {
-        guard let token = UserDefaultsService.shared.token else { return }
+        guard let token = UserDefaultsService.shared.userToken else { return }
         urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
       }
       urlRequest.httpBody = try JSONEncoder().encode(resourceToSave)
@@ -125,7 +125,7 @@ extension ResourceRequest {
     var urlRequest = URLRequest(url: resourceURL)
     urlRequest.httpMethod = "POST"
     if tokenNeeded {
-      guard let token = UserDefaultsService.shared.token else { return }
+      guard let token = UserDefaultsService.shared.userToken else { return }
       urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     }
     let dataTask = resourceSession.dataTask(with: urlRequest) { data , response, _ in
@@ -148,7 +148,7 @@ extension ResourceRequest {
       urlRequest.httpBody = try JSONEncoder().encode(updatedData)
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
       if tokenNeeded {
-        guard let token = UserDefaultsService.shared.token else { return }
+        guard let token = UserDefaultsService.shared.userToken else { return }
         urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
       }
       let dataTask = resourceSession.dataTask(with: urlRequest) { data, response, _ in
@@ -180,7 +180,7 @@ extension ResourceRequest {
     var urlRequest = URLRequest(url: resourceURL)
     urlRequest.httpMethod = "DELETE"
     if tokenNeeded {
-      guard let token = UserDefaultsService.shared.token else { return }
+      guard let token = UserDefaultsService.shared.userToken else { return }
       urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     }
     let dataTask = resourceSession.dataTask(with: urlRequest) { data , response, _ in

@@ -227,7 +227,7 @@ extension ProfileVC: MFMailComposeViewControllerDelegate {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension ProfileVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
       showAlert(title: .restrictedTitle, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
@@ -293,7 +293,7 @@ extension ProfileVC {
 //MARK: - Delete user inside user defaults
 extension ProfileVC {
   func deleteUserFromUserDefaults() {
-    UserDefaultsService.shared.token = nil
+    UserDefaultsService.shared.userToken = nil
     UserDefaultsService.shared.userID = nil
   }
 }

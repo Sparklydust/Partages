@@ -87,7 +87,7 @@ extension DonorVC {
   //MARK: Make a donation button action
   @IBAction func makeADonationButtonAction(_ sender: Any) {
     dismissKeyboard()
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
       showAlert(title: .restrictedTitle, message: .notConnected, buttonName: .ok) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }

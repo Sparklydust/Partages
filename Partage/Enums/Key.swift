@@ -8,21 +8,27 @@
 
 import Foundation
 
-//MARK: - Keys for User Defaults, picker text color and device token dictionary value
+//MARK: - Keys for User Defaults, picker text color
 enum Key: String {
   case pickerTextColor
-  case partageTokenKey
+  case partageUserToken
   case partageUserID
+  case partageDeviceToken
+  case partageActionCount
 
   var description: String {
     get {
       switch(self) {
       case .pickerTextColor:
         return LocalizableStrings.pickerTextColor
-      case .partageTokenKey:
-        return LocalizableStrings.partageTokenKey
+      case .partageUserToken:
+        return LocalizableStrings.partageUserToken
       case .partageUserID:
         return LocalizableStrings.partageUserID
+      case .partageDeviceToken:
+        return LocalizableStrings.partageDeviceToken
+      case .partageActionCount:
+        return LocalizableStrings.partageActionCount
       }
     }
   }

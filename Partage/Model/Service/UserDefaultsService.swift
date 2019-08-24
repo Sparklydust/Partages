@@ -17,12 +17,21 @@ class UserDefaultsService {
     self.settingsContainer = settingsContainer
   }
 
-  var token: String? {
+  var userToken: String? {
     get {
-      return settingsContainer.token
+      return settingsContainer.userToken
     }
     set {
-      settingsContainer.token = newValue
+      settingsContainer.userToken = newValue
+    }
+  }
+  
+  var deviceToken: String? {
+    get {
+      return settingsContainer.deviceToken
+    }
+    set {
+      settingsContainer.deviceToken = newValue
     }
   }
 
@@ -32,6 +41,15 @@ class UserDefaultsService {
     }
     set {
       settingsContainer.userID = newValue
+    }
+  }
+  
+  var actionCount: Int? {
+    get {
+      return settingsContainer.actionCount
+    }
+    set {
+      settingsContainer.actionCount = newValue
     }
   }
 }

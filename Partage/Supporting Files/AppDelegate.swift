@@ -49,7 +49,7 @@ extension AppDelegate {
   }
 }
 
-//MARK: - Setup push notification path and device token
+//MARK: - Register for push notificaton device token to Apple pns via PartageServerSide
 extension AppDelegate {
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     let pushNotificationPath =

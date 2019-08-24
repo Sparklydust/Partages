@@ -162,9 +162,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="162" height="93"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG7-5I-pDY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="93"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="20" id="2LJ-ak-7T0">
+                                                                    <constraint firstAttribute="width" constant="30" id="2LJ-ak-7T0">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                                                                     </constraint>
                                                                 </constraints>
@@ -173,7 +173,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="o8m-lS-3rx">
-                                                                <rect key="frame" x="25" y="0.0" width="137" height="93"/>
+                                                                <rect key="frame" x="35" y="0.0" width="127" height="93"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -185,9 +185,9 @@
                                                         <rect key="frame" x="172" y="0.0" width="162" height="93"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gb2-5f-wkh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="93"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="20" id="JlM-Bq-g0j">
+                                                                    <constraint firstAttribute="width" constant="30" id="JlM-Bq-g0j">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                                                                     </constraint>
                                                                 </constraints>
@@ -196,7 +196,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-BI-Dj7">
-                                                                <rect key="frame" x="25" y="0.0" width="137" height="93"/>
+                                                                <rect key="frame" x="35" y="0.0" width="127" height="93"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -411,7 +411,7 @@
                 <viewControllerPlaceholder storyboardName="SignInSignUp" id="26Q-4y-bdA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9H-q9-ziQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="532"/>
+            <point key="canvasLocation" x="1090" y="534"/>
         </scene>
     </scenes>
     <resources>

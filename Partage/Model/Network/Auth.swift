@@ -37,7 +37,7 @@ extension Auth {
       }
       do {
         let token = try JSONDecoder().decode(Token.self, from: jsonData)
-        UserDefaultsService.shared.token = token.token
+        UserDefaultsService.shared.userToken = token.token
         UserDefaultsService.shared.userID = token.userID.uuidString
         completion(.success)
       }

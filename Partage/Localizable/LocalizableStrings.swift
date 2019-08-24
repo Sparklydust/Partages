@@ -24,10 +24,14 @@ extension LocalizableStrings {
 extension LocalizableStrings {
   static let pickerTextColor = NSLocalizedString(
     "textColor", comment: "key for the picker view text color")
-  static let partageTokenKey = NSLocalizedString(
+  static let partageUserToken = NSLocalizedString(
     "PARTAGE-API-KEY", comment: "key for User Defaults, to store user token key from PartageServerSide")
   static let partageUserID = NSLocalizedString(
     "partage-user-id", comment: "key for User Defaults, to store user id key from PartageServerSide")
+  static let partageDeviceToken = NSLocalizedString(
+    "partage-device-token", comment: "Key for User Defaults, to store device token used for push notification")
+  static let partageActionCount = NSLocalizedString(
+    "partage-action-count", comment: "Key for User Defaults, to store user count actions before displaying Apple Store Review to user")
 }
 
 //MARK: - Apple devices name - Not Localizable -
@@ -60,10 +64,12 @@ extension LocalizableStrings {
     "iPhone SE", comment: "iPhone SE Apple Swift name")
 }
 
-//MARK: - API requests paths - Localizable Strings -
+//MARK: - API requests paths - Not Localizable -
 extension LocalizableStrings {
+  //If you are running PartageServerSide on local, use url: http://192.168.1.1:8080
+  //url 192.168.1.1 must be change with your computer IP address
   static let mainPath = NSLocalizedString(
-    "http://192.168.1.61:8080/api/", comment: "main path to API request")
+    "https://partage-backend.v2.vapor.cloud/api/", comment: "main path to API any request")
   static let login = NSLocalizedString(
     "login", comment: "login path")
   static let users = NSLocalizedString(

@@ -26,14 +26,15 @@ extension AppDelegate {
   }
 }
 
-//MARK: - Push notification path to PartageServerSide using device device token
+//MARK: - Push notification path to PartageServerSide device token registration
 extension AppDelegate {
-  func sendPushNotificationDetails(to urlString: String,
-                                   using deviceToken: Data) {
+  func sendPushNotificationDetails(to urlString: String, using deviceToken: Data) {
     guard let url = URL(string: urlString) else { return }
+    UserDefaultsService.shared.deviceToken = nil
     let token = deviceToken.reduce(StaticLabel.emptyString.description) {
       $0 + String(format: StaticLabel.stringTokenFormat.description, $1)
     }
+    UserDefaultsService.shared.deviceToken = token
     var obj: [String: Any] = [
       "token": token,
       "debug": false

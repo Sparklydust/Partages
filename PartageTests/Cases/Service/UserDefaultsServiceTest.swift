@@ -17,6 +17,8 @@ class UserDefaultsServiceTest: XCTestCase {
   
   let token = "lNYtDitHSaiFb7KeVQOcg=="
   let userID = "52078C28-0CA3-4B32-A7F2-E3E52F3A2D9A"
+  let deviceToken = "90fae728e65a5a0f4ba3e55f09ab5baac117516c697c0b536ea4feb5cd4fb83d"
+  let actionCount = 3
   
   override func setUp() {
     super.setUp()
@@ -32,20 +34,20 @@ class UserDefaultsServiceTest: XCTestCase {
   
   func testUserDefaultsWhenTokenIsStore() {
     //Given
-    sut.token = token
+    sut.userToken = token
     //When
-    let userToken = sut.token
+    let userToken = sut.userToken
     //Then
     XCTAssertEqual(userToken, token)
   }
   
   func testUserLogoutDeleteUserDefaultsToken() {
     //Given
-    sut.token = nil
+    sut.userToken = nil
     //When
     let userToken = token
     //Then
-    XCTAssertNotEqual(userToken, sut.token)
+    XCTAssertNotEqual(userToken, sut.userToken)
   }
   
   func testUserDefaultsWhenUserIdIsStore() {
@@ -64,5 +66,41 @@ class UserDefaultsServiceTest: XCTestCase {
     let user = userID
     //Then
     XCTAssertNotEqual(user, sut.userID)
+  }
+  
+  func testUserDefaultsWhenDeviceTokenIsStored() {
+    //Given
+    sut.deviceToken = deviceToken
+    //When
+    let deviceTokenSaved = sut.deviceToken
+    //Then
+    XCTAssertEqual(deviceTokenSaved, deviceToken)
+  }
+  
+  func testDeletionOfDeviceToken() {
+    //Given
+    sut.deviceToken = nil
+    //When
+    let deviceTokenUnsaved = deviceToken
+    //Then
+    XCTAssertNotEqual(deviceTokenUnsaved, sut.deviceToken)
+  }
+  
+  func testUserDefaultsWhenTrackingUserActionPerformed() {
+    //Given
+    sut.actionCount = actionCount
+    //When
+    let actionUserPerformed = sut.actionCount
+    //Then
+    XCTAssertEqual(actionUserPerformed, actionCount)
+  }
+  
+  func testCounterGoesBackToNilWhenUserReachedIt() {
+    //Given
+    sut.actionCount = nil
+    //When
+    let actionUserPerformed = actionCount
+    //Then
+    XCTAssertNotEqual(actionUserPerformed, sut.actionCount)
   }
 }

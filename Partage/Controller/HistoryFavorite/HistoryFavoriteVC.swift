@@ -41,6 +41,7 @@ class HistoryFavoriteVC: UIViewController {
     fetchItemsHitstory()
     fetchFavoritedItems()
     triggerActivityIndicator(false)
+    AppStoreReviewHandler.shared.requestReviewIfAppropriate()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -260,7 +261,8 @@ extension HistoryFavoriteVC {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension HistoryFavoriteVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
+      emptyTableViewForDisconnectedUser()
       showAlert(title: .restrictedTitle, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
@@ -586,5 +588,14 @@ extension HistoryFavoriteVC {
   func reloadFavoritedItems() {
     HistoryFavoriteTableView.reloadData(
       with: .simple(duration: 0.45, direction: .rotation3D(type: .captainMarvel), constantDelay: 0))
+  }
+}
+
+//MARK: - Reset to an empty table view if an user is disconnected
+extension HistoryFavoriteVC {
+  func emptyTableViewForDisconnectedUser() {
+    itemsHistory = [DonatedItem]()
+    itemsFavorited = [DonatedItem]()
+    HistoryFavoriteTableView.reloadData()
   }
 }

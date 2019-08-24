@@ -11,6 +11,7 @@
 		2A067280229EAE4000FFAECE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727F229EAE4000FFAECE /* UIColor.swift */; };
 		2A067282229EB94000FFAECE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067281229EB94000FFAECE /* UIViewController.swift */; };
 		2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067283229ED63E00FFAECE /* EditProfileVC.swift */; };
+		2A0796902311DA1A00B9DD23 /* AppStoreReviewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A07968F2311DA1A00B9DD23 /* AppStoreReviewHandler.swift */; };
 		2A1391AB230D2AF400DCA721 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1391AA230D2AF400DCA721 /* LocalizableStrings.swift */; };
 		2A1391BA230D31F500DCA721 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A1391BC230D31F500DCA721 /* Localizable.strings */; };
 		2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A185384230BDD180094CC32 /* GoogleService-Info.plist */; };
@@ -162,6 +163,7 @@
 		2A06727F229EAE4000FFAECE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2A067281229EB94000FFAECE /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		2A067283229ED63E00FFAECE /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		2A07968F2311DA1A00B9DD23 /* AppStoreReviewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewHandler.swift; sourceTree = "<group>"; };
 		2A1391AA230D2AF400DCA721 /* LocalizableStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		2A1391AC230D2B6600DCA721 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2A1391AD230D2B6600DCA721 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				2AD516AA22B13A5B0032F28F /* LocationHandler.swift */,
 				2AF11C4A230B07A60016728D /* FirebaseStorageHandler.swift */,
 				2A7E72D1230F400A008AA3C1 /* NotificationHandler.swift */,
+				2A07968F2311DA1A00B9DD23 /* AppStoreReviewHandler.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				2A289FA622A55B4C00EB076A /* UINavigationItem.swift in Sources */,
 				2A401B3922F9D7A300C92D41 /* ChatMessage.swift in Sources */,
 				2A3469BA22C4C546009255C0 /* ContactUs.swift in Sources */,
+				2A0796902311DA1A00B9DD23 /* AppStoreReviewHandler.swift in Sources */,
 				2A5393F622CA072100BB49F0 /* Date.swift in Sources */,
 				2AE322B322ADC5B600CF627C /* AlertTitle.swift in Sources */,
 				2AF66B2722ABBF22005BAE31 /* StaticItemDetail.swift in Sources */,

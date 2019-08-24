@@ -10,6 +10,8 @@ import Foundation
 @testable import Partage
 
 class FakeSettingsContainer: SettingsContainer {
-  var token: String?
+  var userToken: String?
   var userID: String?
+  var deviceToken: String?
+  var actionCount: Int?
 }

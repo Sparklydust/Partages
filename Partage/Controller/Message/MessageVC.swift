@@ -8,6 +8,7 @@
 
 import UIKit
 import TableViewReloadAnimation
+import UserNotifications
 
 class MessageVC: UIViewController {
 
@@ -41,6 +42,7 @@ class MessageVC: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    checkIfAnUserIsConnected()
     getAllUserMessagesBeforeTimerStarts()
     fetchLastMessagesIfAnyUsingTimeInterval()
   }
@@ -194,7 +196,8 @@ extension MessageVC {
 //MARK: - Check if an user is connected, else send him to SignInVC
 extension MessageVC {
   func checkIfAnUserIsConnected() {
-    guard UserDefaultsService.shared.token != nil else {
+    guard UserDefaultsService.shared.userToken != nil else {
+      emptyTableViewForDisconnectedUser()
       showAlert(title: .restrictedTitle, message: .notConnected) { (true) in
         self.performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
       }
@@ -568,10 +571,10 @@ extension MessageVC {
     let trimmedIsoString = isoDateString.replacingOccurrences(
       of: StaticLabel.dateOccurence.description,
       with: StaticLabel.emptyString.description, options: .regularExpression)
-    let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString)
-    date = dateAndTime!.asString(style: .short)
-    time = dateAndTime!.asString()
-    if dateAndTime!.isGreaterThanDate(dateToCompare: Date()) {
+    guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
+    date = dateAndTime.asString(style: .short)
+    time = dateAndTime.asString()
+    if Date() > dateAndTime.addingTimeInterval(86400) {
       dateToShow = "\(date)"
     }
     else {
@@ -668,5 +671,13 @@ extension MessageVC {
   func reloadDataWithAnimation() {
     messageTableView.reloadData(
       with: .simple(duration: 0.45, direction: .rotation3D(type: .ironMan), constantDelay: 0))
+  }
+}
+
+//MARK: - Reset to an empty table view if an user is disconnected
+extension MessageVC {
+  func emptyTableViewForDisconnectedUser() {
+    messages = [Message]()
+    messageTableView.reloadData()
   }
 }

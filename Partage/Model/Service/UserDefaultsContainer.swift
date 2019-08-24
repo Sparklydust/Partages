@@ -11,22 +11,36 @@ import Foundation
 //MARK: - To hold UserDefaults computed porperties and keys
 class UserDefaultsContainer {
   private struct Keys {
-    static let token = Key.partageTokenKey.description
+    static let userToken = Key.partageUserToken.description
+    static let deviceToken = Key.partageDeviceToken.description
     static let userID = Key.partageUserID.description
+    static let actionCount = Key.partageActionCount.description
   }
 }
 
 //MARK: - Conform to Protocol Settings Container to perform UserDefaults Service
 extension UserDefaultsContainer: SettingsContainer {
   //MARK: - Save or retrieve the user token
-  var token: String? {
+  var userToken: String? {
     get {
       return UserDefaults.standard.string(
-        forKey: Keys.token)
+        forKey: Keys.userToken)
     }
     set {
       UserDefaults.standard.set(
-        newValue, forKey: Keys.token)
+        newValue, forKey: Keys.userToken)
+    }
+  }
+  
+  //MARK: - Save or retrieve the device token
+  var deviceToken: String? {
+    get {
+      return UserDefaults.standard.string(
+        forKey: Keys.deviceToken)
+    }
+    set {
+      UserDefaults.standard.set(
+        newValue, forKey: Keys.deviceToken)
     }
   }
 
@@ -39,6 +53,18 @@ extension UserDefaultsContainer: SettingsContainer {
     set {
       UserDefaults.standard.set(
         newValue, forKey: Keys.userID)
+    }
+  }
+  
+  //MARK: - Save or retrieve the user count actions before displaying App Store Review
+  var actionCount: Int? {
+    get {
+      return UserDefaults.standard.integer(
+        forKey: Keys.actionCount)
+    }
+    set {
+      UserDefaults.standard.set(
+        newValue, forKey: Keys.actionCount)
     }
   }
 }

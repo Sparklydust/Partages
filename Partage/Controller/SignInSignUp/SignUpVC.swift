@@ -297,7 +297,7 @@ extension SignUpVC {
         switch result {
         case .failure:
           DispatchQueue.main.async { [weak self] in
-            self?.showAlert(title: .errorTitle, message: .signUpError)
+            self?.showAlert(title: .errorTitle, message: .networkRequestError)
           }
         case .success:
           Auth().login(email: email, password: password, completion: { (result) in

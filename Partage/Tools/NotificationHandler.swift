@@ -14,26 +14,20 @@ final class NotificationHandler: NSObject {}
 //MARK: - Enable foreground push notification
 extension NotificationHandler: UNUserNotificationCenterDelegate {
   func userNotificationCenter(
-    _ center: UNUserNotificationCenter,
-    willPresent notification: UNNotification,
-    withCompletionHandler completionHandler:
-    @escaping (UNNotificationPresentationOptions) -> Void) {
+    _ center: UNUserNotificationCenter,willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     completionHandler([.alert, .sound, .badge])
   }
 }
 
 //MARK: - To perform an action when clicked on a push notification
 extension NotificationHandler {
-  func userNotificationCenter(
-    _ center: UNUserNotificationCenter,
-    didReceive response: UNNotificationResponse,
-    withCompletionHandler completionHandler: @escaping () -> Void) {
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              didReceive response: UNNotificationResponse,
+                              withCompletionHandler completionHandler: @escaping () -> Void) {
     defer { completionHandler() }
+    guard response.actionIdentifier == UNNotificationDefaultActionIdentifier else { return }
     
-    guard response.actionIdentifier ==
-      UNNotificationDefaultActionIdentifier else {
-        return
-    }
     open(on: response, when: .newMessage, vc: .Message, identifier: .message)
     open(on: response, when: .itemPicked, vc: .HistoryFavorite, identifier: .historyFavorite)
   }
