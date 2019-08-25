@@ -37,6 +37,7 @@ class DonorVC: UIViewController {
   var longitudeToSet: Double?
 
   var buttonName: ButtonName?
+  var authToDisplayGoogleAd = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -398,6 +399,10 @@ extension DonorVC {
       let secondVC = segue.destination as! MapViewVC
       secondVC.delegate = self
     }
+    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
+      let secondVC = segue.destination as! SharingVC
+      secondVC.displayAd = authToDisplayGoogleAd
+    }
   }
 }
 
@@ -508,6 +513,7 @@ extension DonorVC {
               if let imageToSave = self?.images[0] {
                 FirebaseStorageHandler.shared.upload(imageToSave, of: donatedItem)
               }
+              self?.authToDisplayGoogleAd = true
               self?.unwindToSharingVC()
               self?.allEntriesBackToOriginStateWithoutAlert()
             }
@@ -518,49 +524,18 @@ extension DonorVC {
   }
 }
 
-//MARK: - Populate item to update when donor wants to make changes from ItemDetailsVC
-extension DonorVC {
-  func populateItemToEditFromItemDetailsVC() {
-    guard itemToEdit?.id != nil else { return }
-    populateItemTypePicker()
-    populateItemDatePicker()
-    itemNameTextField.text = itemToEdit?.name
-    mapKitButton.setTitle(ButtonName.changeMeetingPoint.description, for: .normal)
-    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
-    itemDescriptionTextView.text = itemToEdit?.description
-    FirebaseStorageHandler.shared.downloadItemImage(of: itemToEdit!, into: itemImage)
-  }
-
-  //Show the picker item type the way the item is
-  func populateItemTypePicker() {
-    for type in DonatedItem.type {
-      if type.rawValue == itemToEdit?.selectedType {
-        guard let index = DonatedItem.type.firstIndex(of: type) else { return }
-        itemTypePickerView.selectRow(index, inComponent: 0, animated: true)
-      }
-    }
-  }
-
-  //Show the date picker from the item date
-  func populateItemDatePicker() {
-    guard let isoDateString = itemToEdit?.pickUpDateTime else { return }
-    let trimmedIsoString = (isoDateString.replacingOccurrences(
-      of: StaticLabel.dateOccurence.description,
-      with: StaticLabel.emptyString.description, options: .regularExpression))
-    guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
-    itemDatePicker.setDate(dateAndTime, animated: true)
-  }
-}
-
 //MARK: - Donor update item from itemDetailsVC edit button
 extension DonorVC {
   func updateDonatedItem() {
     guard let donatedItemID = itemToEdit?.id else { return }
-
+    
+    if let image = itemImage.image {
+      images.append(image)
+    }
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(
       from: pickupDateAndTime, timeZone: .current, formatOptions: .withInternetDateTime)
-
+    
     if address?.latitude == nil {
       latitudeToSet = itemToEdit?.latitude
       longitudeToSet = itemToEdit?.longitude
@@ -569,7 +544,7 @@ extension DonorVC {
       latitudeToSet = address?.latitude
       longitudeToSet = address?.longitude
     }
-
+    
     var updatedItem = DonatedItem(
       isPicked: itemToEdit!.isPicked,
       selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].description,
@@ -582,7 +557,7 @@ extension DonorVC {
     checkAllFieldsAreFilledBeforeNetworking(updatedItem) {
       self.showAlert(title: .thankYouTitle, message: .confirmChanges, buttonName: .confirm) {
         (true) in
-
+        
         let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
         ResourceRequest<DonatedItem>(resourcePath).update(updatedItem, tokenNeeded: true, { (result) in
           switch result {
@@ -603,5 +578,41 @@ extension DonorVC {
         })
       }
     }
+  }
+}
+
+//MARK: - Populate item to update when donor wants to make changes from ItemDetailsVC
+extension DonorVC {
+  func populateItemToEditFromItemDetailsVC() {
+    guard itemToEdit?.id != nil else { return }
+    populateItemTypePicker()
+    populateItemDatePicker()
+    itemNameTextField.text = itemToEdit?.name
+    mapKitButton.setTitle(ButtonName.changeMeetingPoint.description, for: .normal)
+    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    itemDescriptionTextView.text = itemToEdit?.description
+    if let item = itemToEdit {
+      FirebaseStorageHandler.shared.downloadItemImage(of: item, into: itemImage)
+    }
+  }
+
+  //Show the picker item type the way the item is
+  func populateItemTypePicker() {
+    for type in DonatedItem.type {
+      if type.description == itemToEdit?.selectedType {
+        guard let index = DonatedItem.type.firstIndex(of: type) else { return }
+        itemTypePickerView.selectRow(index, inComponent: 0, animated: true)
+      }
+    }
+  }
+
+  //Show the date picker from the item date
+  func populateItemDatePicker() {
+    guard let isoDateString = itemToEdit?.pickUpDateTime else { return }
+    let trimmedIsoString = (isoDateString.replacingOccurrences(
+      of: StaticLabel.dateOccurence.description,
+      with: StaticLabel.emptyString.description, options: .regularExpression))
+    guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
+    itemDatePicker.setDate(dateAndTime, animated: true)
   }
 }

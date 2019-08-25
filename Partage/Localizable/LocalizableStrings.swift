@@ -10,6 +10,12 @@ import Foundation
 
 struct LocalizableStrings {}
 
+//MARK: - Google Ad id - Not Localizable
+extension LocalizableStrings {
+  static let unitID = NSLocalizedString(
+    "ca-app-pub-3940256099942544/4411468910", comment: "unit ID that give access to display Google ad")
+}
+
 //MARK: - International Strings - Not Localizable -
 extension LocalizableStrings {
   static let emptyString = NSLocalizedString(
@@ -303,7 +309,7 @@ extension LocalizableStrings {
 //MARK: - Contact us email sender from Mail app attributes - Localizable Strings -
 extension LocalizableStrings {
   static let partageEmail = NSLocalizedString(
-    "partageEmail", comment: "Partage email: partage@contact.com")
+    "partageEmail", comment: "Partage email: partage@europe.com")
   static let subject = NSLocalizedString(
     "subject", comment: "email subject")
   static let messageBody = NSLocalizedString(
@@ -333,7 +339,7 @@ extension LocalizableStrings {
   static let restricted = NSLocalizedString(
     "restricted", comment: "telling the user about restricted access. Mainly for parental control.")
   static let contactUs = NSLocalizedString(
-    "contactUs", comment: "Partage email address: partage@contact.com")
+    "contactUs", comment: "Partage email address: partage@europe.com")
   static let contactUsCanceled = NSLocalizedString(
     "contactUsCanceled", comment: "email canceled by user alert")
   static let contactUsFailed = NSLocalizedString(

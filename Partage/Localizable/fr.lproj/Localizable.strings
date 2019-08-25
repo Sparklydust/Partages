@@ -111,7 +111,7 @@
 
 
 //MARK: - Contact us email sender from Mail app attributes
-"partageEmail" = "partage@contact.com";
+"partageEmail" = "partage@europe.com";
 "subject" = "- [courier des utilisateurs] Partage -";
 "messageBody" = "Bonjour! N'hésitez pas à nous faire parvenir toutes suggestions, nous vous répondrons dans les plus brefs délais.";
 
@@ -127,9 +127,9 @@
 "getDirectionIssue" = "Il y a eu un problème pour déterminer l'itinéraire jusqu'au lieu de rendez-vous.";
 "noDirectionsCalculated" = "Nous n'avons pas pu calculer le temps de trajet.";
 "restricted" = "L'accès à ce service ne vous est pas autorisé. Veuillez-vous rapprocher de la personne succeptible de lever la restriction.";
-"contactUs" = "partage@contact.com";
+"contactUs" = "partage@europe.com";
 "contactUsCanceled" = "N'hésitez pas à nous contacter ultérieurement, nous serrons à votre écoute.";
-"contactUsFailed" = "Contactez-nous à: \n\npartage@contact.com";
+"contactUsFailed" = "Contactez-nous à: \n\npartage@europe.com";
 "contactUsSaved" = "N'hésitez pas à nous contacter, nous serrons à votre écoute.";
 "contactUsSent" = "Nous vous répondrons dans les plus brefs délais.";
 "noImageSelected" = "Vous n'avez pas ajoutez d'image.";

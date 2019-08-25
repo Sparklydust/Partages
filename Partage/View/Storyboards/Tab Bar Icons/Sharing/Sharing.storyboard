@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-eS-4A7">
-                                <rect key="frame" x="184" y="345" width="46" height="30"/>
+                                <rect key="frame" x="50" y="345" width="314" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="signInSignUpButtonAction:" destination="Mmn-lr-IfY" eventType="touchUpInside" id="8pg-vQ-Wwc"/>
@@ -53,9 +53,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="0tK-ty-FVG"/>
+                            <constraint firstItem="oFA-4z-Jn6" firstAttribute="trailing" secondItem="cHB-eS-4A7" secondAttribute="trailing" constant="50" id="5Fj-Kj-AET"/>
                             <constraint firstItem="cHB-eS-4A7" firstAttribute="centerY" secondItem="oFA-4z-Jn6" secondAttribute="centerY" constant="-2.5" id="6PY-Y0-iut"/>
                             <constraint firstItem="Anp-UV-6Uy" firstAttribute="width" secondItem="V3g-aY-XVd" secondAttribute="width" id="8Rk-cd-N7z"/>
                             <constraint firstItem="V3g-aY-XVd" firstAttribute="centerX" secondItem="wSw-8p-IM6" secondAttribute="centerX" id="9u8-pU-765"/>
+                            <constraint firstItem="cHB-eS-4A7" firstAttribute="leading" secondItem="oFA-4z-Jn6" secondAttribute="leading" constant="50" id="9vu-6R-sVL"/>
                             <constraint firstItem="Anp-UV-6Uy" firstAttribute="centerX" secondItem="V3g-aY-XVd" secondAttribute="centerX" id="Khy-U3-6hD"/>
                             <constraint firstItem="Anp-UV-6Uy" firstAttribute="height" secondItem="V3g-aY-XVd" secondAttribute="height" id="VC0-ch-h0N"/>
                             <constraint firstItem="Anp-UV-6Uy" firstAttribute="centerY" secondItem="V3g-aY-XVd" secondAttribute="centerY" id="py8-Tt-je3"/>

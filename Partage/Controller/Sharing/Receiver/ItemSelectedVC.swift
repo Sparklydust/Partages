@@ -37,6 +37,8 @@ class ItemSelectedVC: UIViewController {
 
   var firstUserID = String()
   var secondUserID = String()
+  
+  var authToDisplayGoogleAd = false
 
   var receiver: User? {
     didSet {
@@ -282,6 +284,10 @@ extension ItemSelectedVC {
       destinationVC?.isReceiver = true
       destinationVC?.donorItem = donatedItem
     }
+    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
+      let destinationVC = segue.destination as? SharingVC
+      destinationVC?.displayAd = authToDisplayGoogleAd
+    }
   }
 }
 
@@ -481,6 +487,7 @@ extension ItemSelectedVC {
           DispatchQueue.main.async { [weak self] in
             updatedDonatedItem = pickedUpItem
             self?.triggerReceiveDonationActivityIndicator(false)
+            self?.authToDisplayGoogleAd = true
             self?.showAlert(title: .successTitle, message: .donatedItemSelected, completion: { (true) in
               self?.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
             })

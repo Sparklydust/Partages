@@ -249,7 +249,7 @@ extension EditProfileVC {
       notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue  else { return }
     let keyboardFrame = keyboardSize.cgRectValue
     guard UIDevice.current.name ==
-      DeviceName.iPhoneSE.rawValue || UIDevice.current.name == DeviceName.iPhoneFiveS.rawValue else { return }
+      DeviceName.iPhoneSE.description || UIDevice.current.name == DeviceName.iPhoneFiveS.description else { return }
     guard confirmPasswordTextField.isEditing || newPasswordTextField.isEditing else { return }
     guard view.frame.origin.y == .zero else { return }
     UIView.animate(withDuration: 0.4) {

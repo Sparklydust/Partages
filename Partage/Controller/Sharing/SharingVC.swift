@@ -7,10 +7,9 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SharingVC: UIViewController {
-
-  @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) {}
 
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var signInSignUpButton: UIButton!
@@ -18,6 +17,9 @@ class SharingVC: UIViewController {
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
 
   var donatedItems = [DonatedItem]()
+  
+  var interstitial: GADInterstitial!
+  var displayAd = false
 
   var user: User? {
     didSet {
@@ -28,6 +30,7 @@ class SharingVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
+    setupGoogleInterstitialAd()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +38,23 @@ class SharingVC: UIViewController {
     navigationController?.setNavigationBarHidden(true, animated: false)
     triggerActivityIndicator(false)
     populateSignInSignUpButtonDesign()
+    displayGoogleAdIfAuthorized()
+  }
+}
+
+//MARK: - Unwind Segue retrieve data from DonorVC and ItemSelectedVC
+extension SharingVC {
+  @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) {
+    if segue.source is DonorVC {
+      if let senderVC = segue.source as? DonorVC {
+        senderVC.authToDisplayGoogleAd = displayAd
+      }
+    }
+    else if segue.source is ItemSelectedVC {
+      if let senderVC = segue.source as? ItemSelectedVC {
+        senderVC.authToDisplayGoogleAd = displayAd
+      }
+    }
   }
 }
 
@@ -190,5 +210,22 @@ extension SharingVC {
     guard let firstName = user?.firstName else { return }
     let helloUser = ButtonName.afterSignedIn.description + firstName
     signInSignUpButton.setTitle(helloUser , for: .normal)
+  }
+}
+
+//MARK: - Google ad as interstital registration and use
+extension SharingVC {
+  func setupGoogleInterstitialAd() {
+    interstitial = GADInterstitial(adUnitID: GoogleAd.unitID.description)
+    let request = GADRequest()
+    interstitial.load(request)
+  }
+  
+  func displayGoogleAdIfAuthorized() {
+    if displayAd {
+      guard interstitial.isReady else { return }
+      interstitial.present(fromRootViewController: self)
+      displayAd = false
+    }
   }
 }

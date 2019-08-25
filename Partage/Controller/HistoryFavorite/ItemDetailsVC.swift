@@ -241,7 +241,10 @@ extension ItemDetailsVC {
     }
     staticItemDetailsLabels[0].text = StaticItemDetail.giveDonation.description
   }
+}
 
+//MARK: - Prepare for segue
+extension ItemDetailsVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goToMapViewVC.rawValue {
       let destinationVC = segue.destination as! MapViewVC

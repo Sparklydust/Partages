@@ -111,7 +111,7 @@
 
 
 //MARK: - Contact us email sender from Mail app attributes
-"partageEmail" = "partage@contact.com";
+"partageEmail" = "partage@europe.com";
 "subject" = "- [users feedback] Partage -";
 "messageBody" = "Hello! Feel free to leave us any feedback, we will reply to you as soon as possible.";
 
@@ -127,9 +127,9 @@
 "getDirectionIssue" = "There was an issue to determine the route to the meeting point.";
 "noDirectionsCalculated" = "We could not calculate the route time.";
 "restricted" = "Unauthorized access. Thanks to refer to the legit person to lift the restriction.";
-"contactUs" = "partage@contact.com";
+"contactUs" = "partage@europe.com";
 "contactUsCanceled" = "Do not hesitate to contact us later if needed.";
-"contactUsFailed" = "Contact us at: \n\npartage@contact.com";
+"contactUsFailed" = "Contact us at: \n\npartage@europe.com";
 "contactUsSaved" = "Do not hesitate to contact us later if needed.";
 "contactUsSent" = "We will reply to you as soon as possible.";
 "noImageSelected" = "No image has been added.";
