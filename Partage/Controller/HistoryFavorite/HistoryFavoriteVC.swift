@@ -38,8 +38,7 @@ class HistoryFavoriteVC: UIViewController {
     super.viewWillAppear(true)
     setupLastUserHistoryOrFavoriteChoice()
     checkIfAnUserIsConnected()
-    fetchItemsHitstory()
-    fetchFavoritedItems()
+    fetchHistoryAndFavoritedItems()
     triggerActivityIndicator(false)
     AppStoreReviewHandler.shared.requestReviewIfAppropriate()
   }
@@ -597,5 +596,13 @@ extension HistoryFavoriteVC {
     itemsHistory = [DonatedItem]()
     itemsFavorited = [DonatedItem]()
     HistoryFavoriteTableView.reloadData()
+  }
+}
+
+//MARK: - Fetch history or favorite items on view will appear
+extension HistoryFavoriteVC {
+  func fetchHistoryAndFavoritedItems() {
+    fetchItemsHitstory()
+    fetchFavoritedItems()
   }
 }

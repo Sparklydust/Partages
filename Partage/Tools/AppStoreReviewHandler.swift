@@ -11,7 +11,7 @@ import StoreKit
 final class AppStoreReviewHandler {
   static let shared = AppStoreReviewHandler()
   
-  private let minimumReviewWorthyActionCount = 20
+  private let minimumReviewWorthyActionCount = 30
 }
 
 //MARK: - Requesting user for a review on Apple Store after minimum user actions performed
