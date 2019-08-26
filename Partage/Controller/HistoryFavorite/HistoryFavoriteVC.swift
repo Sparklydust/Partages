@@ -32,13 +32,12 @@ class HistoryFavoriteVC: UIViewController {
     super.viewDidLoad()
     setupMainDesign()
     setupAllDelegates()
+    fetchHistoryAndFavoritedItems()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     setupLastUserHistoryOrFavoriteChoice()
-    checkIfAnUserIsConnected()
-    fetchHistoryAndFavoritedItems()
     triggerActivityIndicator(false)
     AppStoreReviewHandler.shared.requestReviewIfAppropriate()
   }
@@ -599,9 +598,10 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Fetch history or favorite items on view will appear
+//MARK: - Fetch history and favorited items on view did load
 extension HistoryFavoriteVC {
   func fetchHistoryAndFavoritedItems() {
+    checkIfAnUserIsConnected()
     fetchItemsHitstory()
     fetchFavoritedItems()
   }

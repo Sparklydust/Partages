@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2AB43524229E55FE007BFB93"
-               BuildableName = "Partage.app"
-               BlueprintName = "Partage"
-               ReferencedContainer = "container:Partage.xcodeproj">
+               BuildableName = "Partages.app"
+               BlueprintName = "Partages"
+               ReferencedContainer = "container:Partages.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2A72B7F022F17FA100D8A2E1"
-               BuildableName = "PartageUITests.xctest"
-               BlueprintName = "PartageUITests"
-               ReferencedContainer = "container:Partage.xcodeproj">
+               BuildableName = "PartagesUITests.xctest"
+               BlueprintName = "PartagesUITests"
+               ReferencedContainer = "container:Partages.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -44,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2A72B7FE22F17FAF00D8A2E1"
-               BuildableName = "PartageTests.xctest"
-               BlueprintName = "PartageTests"
-               ReferencedContainer = "container:Partage.xcodeproj">
+               BuildableName = "PartagesTests.xctest"
+               BlueprintName = "PartagesTests"
+               ReferencedContainer = "container:Partages.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB43524229E55FE007BFB93"
-            BuildableName = "Partage.app"
-            BlueprintName = "Partage"
-            ReferencedContainer = "container:Partage.xcodeproj">
+            BuildableName = "Partages.app"
+            BlueprintName = "Partages"
+            ReferencedContainer = "container:Partages.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB43524229E55FE007BFB93"
-            BuildableName = "Partage.app"
-            BlueprintName = "Partage"
-            ReferencedContainer = "container:Partage.xcodeproj">
+            BuildableName = "Partages.app"
+            BlueprintName = "Partages"
+            ReferencedContainer = "container:Partages.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB43524229E55FE007BFB93"
-            BuildableName = "Partage.app"
-            BlueprintName = "Partage"
-            ReferencedContainer = "container:Partage.xcodeproj">
+            BuildableName = "Partages.app"
+            BlueprintName = "Partages"
+            ReferencedContainer = "container:Partages.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

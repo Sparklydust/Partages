@@ -17,7 +17,7 @@ class SharingVC: UIViewController {
   @IBOutlet weak var activityIndicatorReceive: UIActivityIndicatorView!
 
   var donatedItems = [DonatedItem]()
-  
+
   var interstitial: GADInterstitial!
   var displayAd = false
 
@@ -220,12 +220,19 @@ extension SharingVC {
     let request = GADRequest()
     interstitial.load(request)
   }
-  
+
   func displayGoogleAdIfAuthorized() {
     if displayAd {
       guard interstitial.isReady else { return }
       interstitial.present(fromRootViewController: self)
       displayAd = false
+      interstitial = createNewGoogleAd()
     }
+  }
+
+  func createNewGoogleAd() -> GADInterstitial {
+    let newInterstitial = GADInterstitial(adUnitID: GoogleAd.unitID.description)
+    newInterstitial.load(GADRequest())
+    return newInterstitial
   }
 }

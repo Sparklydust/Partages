@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Partage.xcodeproj">
+      location = "group:/Users/roland/Documents/Bundle Code/Open Classrooms/Projets/Projet 12/Partage/Partages.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

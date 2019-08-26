@@ -189,10 +189,10 @@
 		2A6D697B22B904910073053F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		2A6D697D22B97C850073053F /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		2A6DBB7022CF932200B0EC75 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		2A72B7F122F17FA100D8A2E1 /* PartageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PartageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A72B7F122F17FA100D8A2E1 /* PartagesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PartagesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A72B7F322F17FA200D8A2E1 /* PartageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartageUITests.swift; sourceTree = "<group>"; };
 		2A72B7F522F17FA200D8A2E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A72B7FF22F17FAF00D8A2E1 /* PartageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PartageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A72B7FF22F17FAF00D8A2E1 /* PartagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PartagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A72B80322F17FAF00D8A2E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A72B80B22F1E8A600D8A2E1 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		2A72B80D22F32B2100D8A2E1 /* UIRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControl.swift; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 		2AAA793C22AA47E800529F2B /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		2AAA794222AAB8E000529F2B /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 		2AB0704822F8D5C3007BED3D /* FakeSettingsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSettingsContainer.swift; sourceTree = "<group>"; };
-		2AB43525229E55FE007BFB93 /* Partage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AB43525229E55FE007BFB93 /* Partages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB43528229E55FE007BFB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AB4352D229E55FE007BFB93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB4352F229E55FF007BFB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -551,9 +551,9 @@
 		2AB43526229E55FE007BFB93 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2AB43525229E55FE007BFB93 /* Partage.app */,
-				2A72B7F122F17FA100D8A2E1 /* PartageUITests.xctest */,
-				2A72B7FF22F17FAF00D8A2E1 /* PartageTests.xctest */,
+				2AB43525229E55FE007BFB93 /* Partages.app */,
+				2A72B7F122F17FA100D8A2E1 /* PartagesUITests.xctest */,
+				2A72B7FF22F17FAF00D8A2E1 /* PartagesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -834,9 +834,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A72B7F022F17FA100D8A2E1 /* PartageUITests */ = {
+		2A72B7F022F17FA100D8A2E1 /* PartagesUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A72B7F822F17FA200D8A2E1 /* Build configuration list for PBXNativeTarget "PartageUITests" */;
+			buildConfigurationList = 2A72B7F822F17FA200D8A2E1 /* Build configuration list for PBXNativeTarget "PartagesUITests" */;
 			buildPhases = (
 				2A72B7ED22F17FA100D8A2E1 /* Sources */,
 				2A72B7EE22F17FA100D8A2E1 /* Frameworks */,
@@ -847,14 +847,14 @@
 			dependencies = (
 				2A72B7F722F17FA200D8A2E1 /* PBXTargetDependency */,
 			);
-			name = PartageUITests;
+			name = PartagesUITests;
 			productName = PartageUITests;
-			productReference = 2A72B7F122F17FA100D8A2E1 /* PartageUITests.xctest */;
+			productReference = 2A72B7F122F17FA100D8A2E1 /* PartagesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		2A72B7FE22F17FAF00D8A2E1 /* PartageTests */ = {
+		2A72B7FE22F17FAF00D8A2E1 /* PartagesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A72B80622F17FAF00D8A2E1 /* Build configuration list for PBXNativeTarget "PartageTests" */;
+			buildConfigurationList = 2A72B80622F17FAF00D8A2E1 /* Build configuration list for PBXNativeTarget "PartagesTests" */;
 			buildPhases = (
 				2A72B7FB22F17FAF00D8A2E1 /* Sources */,
 				2A72B7FC22F17FAF00D8A2E1 /* Frameworks */,
@@ -865,14 +865,14 @@
 			dependencies = (
 				2A72B80522F17FAF00D8A2E1 /* PBXTargetDependency */,
 			);
-			name = PartageTests;
+			name = PartagesTests;
 			productName = PartageTests;
-			productReference = 2A72B7FF22F17FAF00D8A2E1 /* PartageTests.xctest */;
+			productReference = 2A72B7FF22F17FAF00D8A2E1 /* PartagesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2AB43524229E55FE007BFB93 /* Partage */ = {
+		2AB43524229E55FE007BFB93 /* Partages */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2AB43537229E55FF007BFB93 /* Build configuration list for PBXNativeTarget "Partage" */;
+			buildConfigurationList = 2AB43537229E55FF007BFB93 /* Build configuration list for PBXNativeTarget "Partages" */;
 			buildPhases = (
 				30DB8327EFFB59B6E19E4533 /* [CP] Check Pods Manifest.lock */,
 				2AB43521229E55FE007BFB93 /* Sources */,
@@ -885,9 +885,9 @@
 			);
 			dependencies = (
 			);
-			name = Partage;
+			name = Partages;
 			productName = Partage;
-			productReference = 2AB43525229E55FE007BFB93 /* Partage.app */;
+			productReference = 2AB43525229E55FE007BFB93 /* Partages.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -925,7 +925,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2AB43520229E55FE007BFB93 /* Build configuration list for PBXProject "Partage" */;
+			buildConfigurationList = 2AB43520229E55FE007BFB93 /* Build configuration list for PBXProject "Partages" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -939,9 +939,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2AB43524229E55FE007BFB93 /* Partage */,
-				2A72B7F022F17FA100D8A2E1 /* PartageUITests */,
-				2A72B7FE22F17FAF00D8A2E1 /* PartageTests */,
+				2AB43524229E55FE007BFB93 /* Partages */,
+				2A72B7F022F17FA100D8A2E1 /* PartagesUITests */,
+				2A72B7FE22F17FAF00D8A2E1 /* PartagesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1158,12 +1158,12 @@
 /* Begin PBXTargetDependency section */
 		2A72B7F722F17FA200D8A2E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2AB43524229E55FE007BFB93 /* Partage */;
+			target = 2AB43524229E55FE007BFB93 /* Partages */;
 			targetProxy = 2A72B7F622F17FA200D8A2E1 /* PBXContainerItemProxy */;
 		};
 		2A72B80522F17FAF00D8A2E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2AB43524229E55FE007BFB93 /* Partage */;
+			target = 2AB43524229E55FE007BFB93 /* Partages */;
 			targetProxy = 2A72B80422F17FAF00D8A2E1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1262,7 +1262,7 @@
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Partage.app/Partage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Partages.app/Partages";
 			};
 			name = Debug;
 		};
@@ -1288,7 +1288,7 @@
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Partage.app/Partage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Partages.app/Partages";
 			};
 			name = Release;
 		};
@@ -1455,7 +1455,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A72B7F822F17FA200D8A2E1 /* Build configuration list for PBXNativeTarget "PartageUITests" */ = {
+		2A72B7F822F17FA200D8A2E1 /* Build configuration list for PBXNativeTarget "PartagesUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A72B7F922F17FA200D8A2E1 /* Debug */,
@@ -1464,7 +1464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2A72B80622F17FAF00D8A2E1 /* Build configuration list for PBXNativeTarget "PartageTests" */ = {
+		2A72B80622F17FAF00D8A2E1 /* Build configuration list for PBXNativeTarget "PartagesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A72B80722F17FAF00D8A2E1 /* Debug */,
@@ -1473,7 +1473,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2AB43520229E55FE007BFB93 /* Build configuration list for PBXProject "Partage" */ = {
+		2AB43520229E55FE007BFB93 /* Build configuration list for PBXProject "Partages" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2AB43535229E55FF007BFB93 /* Debug */,
@@ -1482,7 +1482,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2AB43537229E55FF007BFB93 /* Build configuration list for PBXNativeTarget "Partage" */ = {
+		2AB43537229E55FF007BFB93 /* Build configuration list for PBXNativeTarget "Partages" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2AB43538229E55FF007BFB93 /* Debug */,
