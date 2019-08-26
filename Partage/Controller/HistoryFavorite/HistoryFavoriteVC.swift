@@ -27,6 +27,7 @@ class HistoryFavoriteVC: UIViewController {
   var isHistoryButtonClicked = true
 
   let refreshControl = UIRefreshControl()
+  var refreshControlTriggered = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -143,52 +144,43 @@ extension HistoryFavoriteVC: UITableViewDelegate, UITableViewDataSource {
   }
 }
 
-//MARK: - Setup table view design
+//MARK: - Design setup
 extension HistoryFavoriteVC {
+  //MARK: Setup table view design
   func setupTableViewDesign() {
     HistoryFavoriteTableView.setupMainBackgroundColor()
   }
-}
 
-//MARK: - Setup edit button design
-extension HistoryFavoriteVC {
+  //MARK: Setup edit button design
   func setupEditButton() {
     editButton.editButtonDesign()
   }
-}
 
-//MARK: - Setup history button is selected design
-extension HistoryFavoriteVC {
+  //MARK: Setup history button is selected design
   func setupHistoryButtonIsSelected() {
     UIView.animate(withDuration: 0.3) {
       self.historyButton.historyFavoriteSelectedDesign(named: .history)
       self.favoriteButton.historyFavoriteUnselectedDesign(named: .favorite)
     }
   }
-}
 
-//MARK: - Setup favorite button is selected design
-extension HistoryFavoriteVC {
+  //MARK: Setup favorite button is selected design
   func setupFavoriteButtonIsSelected() {
     UIView.animate(withDuration: 0.3) {
       self.favoriteButton.historyFavoriteSelectedDesign(named: .favorite)
       self.historyButton.historyFavoriteUnselectedDesign(named: .history)
     }
   }
-}
 
-//MARK: - Setup navigation controller design
-extension HistoryFavoriteVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
     navigationController?.navigationBar.tintColor = .typoBlue
     navigationController?.navigationBar.barTintColor = .iceBackground
     navigationController?.navigationBar.isTranslucent = false
   }
-}
 
-//MARK: - Setup cell size for iPad
-extension HistoryFavoriteVC {
+  //MARK: Setup cell size for iPad
   func setupCellSizeForIPad() {
     if UIDevice.current.userInterfaceIdiom == .pad {
       HistoryFavoriteTableView.rowHeight = 150
@@ -269,19 +261,24 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Fetch all user items history
+//MARK: - Prepare for segue
 extension HistoryFavoriteVC {
-  func fetchItemsHitstory() {
-    guard UserDefaultsService.shared.userID != nil else { return }
-    fetchAllDonatedItemsHistory(fetchAllReceivedItemsHistory)
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let destinationVC = segue.destination as? ItemDetailsVC else { return }
+    destinationVC.itemDetails = oneDonatedItem
+    guard !isHistoryButtonClicked else { return }
   }
 }
 
-//MARK: - Fetch all user's donated items
+//MARK: - API calls
 extension HistoryFavoriteVC {
+  //MARK: Fetch all user's donated items
   func fetchAllDonatedItemsHistory(_ completionHandler: @escaping () -> ()) {
     guard let userID = UserDefaultsService.shared.userID else { return }
-    triggerActivityIndicator(true)
+    if !refreshControlTriggered {
+      triggerActivityIndicator(true)
+    }
+    
     let resourcePath =
       NetworkPath.users.description + userID + "/\(NetworkPath.donatedItems.description)"
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
@@ -303,15 +300,15 @@ extension HistoryFavoriteVC {
       }
     }
   }
-}
 
-//MARK: - Fetch all user's received items
-extension HistoryFavoriteVC {
+  //MARK: Fetch all user's received items
   func fetchAllReceivedItemsHistory() {
     guard let userID = UserDefaultsService.shared.userID else { return }
     let resourcePath =
       NetworkPath.donatedItems.description + NetworkPath.isReceivedBy.description + userID
-    triggerActivityIndicator(true)
+    if !refreshControlTriggered {
+      triggerActivityIndicator(true)
+    }
 
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: true) { (result) in
       switch result {
@@ -330,6 +327,118 @@ extension HistoryFavoriteVC {
         }
       }
     }
+  }
+
+  //MARK: Fetch all user favorited items
+  func fetchFavoritedItems() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let userID = UserDefaultsService.shared.userID else { return }
+    if !refreshControlTriggered {
+      triggerActivityIndicator(true)
+    }
+    let resourcePath =
+    "\(NetworkPath.users.description)\(userID)/\(NetworkPath.itemsFavorited.description)"
+    
+    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
+        }
+      case .success(let itemsFavorited):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.itemsFavorited = [DonatedItem]()
+          self.itemsFavorited.append(contentsOf: itemsFavorited)
+          self.reloadFavoritedItems()
+          self.triggerActivityIndicator(false)
+        }
+      }
+    }
+  }
+
+  //MARK: An user delete his favorited item
+  func deleteDonatedItemFrom(_ itemsFavorited: DonatedItem) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let donatedItemID = itemsFavorited.id else { return }
+    triggerActivityIndicator(true)
+    
+    let resourcePath =
+      NetworkPath.donatedItems.description + "\(donatedItemID)/" +
+        NetworkPath.favoritedByUser.description + UserDefaultsService.shared.userID!
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
+        }
+      case .success:
+        DispatchQueue.main.async { [weak self] in
+          self?.triggerActivityIndicator(false)
+          return
+        }
+      }
+    }
+  }
+
+  //MARK: Receiver remove the item from history and unselect it
+  func receiverUnselect(_ donatedItem: DonatedItem?) {
+    guard let donatedItemID = donatedItem!.id else { return }
+    guard var updatedDonatedItem = donatedItem else { return }
+    
+    updatedDonatedItem.receiverID = StaticLabel.emptyString.description
+    updatedDonatedItem.isPicked = false
+    triggerActivityIndicator(true)
+    
+    let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
+    ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
+        }
+      case .success(let pickedUpItem):
+        DispatchQueue.main.async { [weak self] in
+          updatedDonatedItem = pickedUpItem
+          self?.showAlert(title: .successTitle, message: .confirmDonatedItemRemoved)
+          self?.triggerActivityIndicator(false)
+        }
+      }
+    })
+  }
+
+  //MARK: Donor remove the item from his history and from the database
+  func donorDeleteOffTheDatabase(_ donatedItem: DonatedItem) {
+    guard let donatedItemID = donatedItem.id else { return }
+    triggerActivityIndicator(true)
+    
+    let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
+    FirebaseStorageHandler.shared.deleteItemImage(of: donatedItem)
+    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
+      switch result {
+      case .failure:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .errorTitle, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
+        }
+      case .success:
+        DispatchQueue.main.async { [weak self] in
+          self?.showAlert(title: .successTitle, message: .donatedItemDeleted)
+          self?.triggerActivityIndicator(false)
+        }
+      }
+    }
+  }
+}
+
+//MARK: - Fetch all user items history
+extension HistoryFavoriteVC {
+  func fetchItemsHitstory() {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    fetchAllDonatedItemsHistory(fetchAllReceivedItemsHistory)
   }
 }
 
@@ -354,116 +463,6 @@ extension HistoryFavoriteVC {
       return
     }
     cell.middleLabel.text = StaticLabel.donationIsSelected.description
-  }
-}
-
-//MARK: - Fetch all user favorited items
-extension HistoryFavoriteVC {
-  func fetchFavoritedItems() {
-    guard UserDefaultsService.shared.userID != nil else { return }
-    guard let userID = UserDefaultsService.shared.userID else { return }
-    triggerActivityIndicator(true)
-    let resourcePath =
-    "\(NetworkPath.users.description)\(userID)/\(NetworkPath.itemsFavorited.description)"
-
-    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .errorTitle, message: .networkRequestError)
-          self?.triggerActivityIndicator(false)
-        }
-      case .success(let itemsFavorited):
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.itemsFavorited = [DonatedItem]()
-          self.itemsFavorited.append(contentsOf: itemsFavorited)
-          self.reloadFavoritedItems()
-          self.triggerActivityIndicator(false)
-        }
-      }
-    }
-  }
-}
-
-//MARK: - An user delete his favorited item
-extension HistoryFavoriteVC {
-  func deleteDonatedItemFrom(_ itemsFavorited: DonatedItem) {
-    guard UserDefaultsService.shared.userID != nil else { return }
-    guard let donatedItemID = itemsFavorited.id else { return }
-    triggerActivityIndicator(true)
-
-    let resourcePath =
-      NetworkPath.donatedItems.description + "\(donatedItemID)/" +
-        NetworkPath.favoritedByUser.description + UserDefaultsService.shared.userID!
-    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .errorTitle, message: .networkRequestError)
-          self?.triggerActivityIndicator(false)
-        }
-      case .success:
-        DispatchQueue.main.async { [weak self] in
-          self?.triggerActivityIndicator(false)
-          return
-        }
-      }
-    }
-  }
-}
-
-//MARK: - Receiver remove the item from history and unselect it
-extension HistoryFavoriteVC {
-  func receiverUnselect(_ donatedItem: DonatedItem?) {
-    guard let donatedItemID = donatedItem!.id else { return }
-    guard var updatedDonatedItem = donatedItem else { return }
-
-    updatedDonatedItem.receiverID = StaticLabel.emptyString.description
-    updatedDonatedItem.isPicked = false
-    triggerActivityIndicator(true)
-
-    let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
-    ResourceRequest<DonatedItem>(resourcePath).update(updatedDonatedItem, tokenNeeded: true, { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .errorTitle, message: .networkRequestError)
-          self?.triggerActivityIndicator(false)
-        }
-      case .success(let pickedUpItem):
-        DispatchQueue.main.async { [weak self] in
-          updatedDonatedItem = pickedUpItem
-          self?.showAlert(title: .successTitle, message: .confirmDonatedItemRemoved)
-          self?.triggerActivityIndicator(false)
-        }
-      }
-    })
-  }
-}
-
-//MARK: - Donor remove the item from his history and from the database
-extension HistoryFavoriteVC {
-  func donorDeleteOffTheDatabase(_ donatedItem: DonatedItem) {
-    guard let donatedItemID = donatedItem.id else { return }
-    triggerActivityIndicator(true)
-
-    let resourcePath = NetworkPath.donatedItems.description + "\(donatedItemID)"
-    FirebaseStorageHandler.shared.deleteItemImage(of: donatedItem)
-    ResourceRequest<DonatedItem>(resourcePath).delete(tokenNeeded: true) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .errorTitle, message: .networkRequestError)
-          self?.triggerActivityIndicator(false)
-        }
-      case .success:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .successTitle, message: .donatedItemDeleted)
-          self?.triggerActivityIndicator(false)
-        }
-      }
-    }
   }
 }
 
@@ -523,15 +522,6 @@ extension HistoryFavoriteVC {
   }
 }
 
-//MARK: - Prepare for segue
-extension HistoryFavoriteVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let destinationVC = segue.destination as? ItemDetailsVC else { return }
-    destinationVC.itemDetails = oneDonatedItem
-    guard !isHistoryButtonClicked else { return }
-  }
-}
-
 //MARK: - Manage deletion action from donor or receveiver in history or favorite side
 extension HistoryFavoriteVC {
   func removeUserChosenItem(at indexPath: IndexPath, on tableView: UITableView) {
@@ -562,12 +552,14 @@ extension HistoryFavoriteVC {
   }
 
   @objc private func refreshDonatedItems(_ sender: Any) {
+    refreshControlTriggered = true
     if isHistoryButtonClicked {
       fetchItemsHitstory()
     }
     else {
       fetchFavoritedItems()
     }
+    refreshControlTriggered = false
     endRefreshing()
   }
 

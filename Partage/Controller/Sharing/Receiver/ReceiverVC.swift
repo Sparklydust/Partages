@@ -65,29 +65,24 @@ extension ReceiverVC {
   }
 }
 
-//MARK: - Setup navigation controller design
+//MARK: - Design setup
 extension ReceiverVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
-}
 
-//MARK: - Setup table view design
-extension ReceiverVC {
+  //MARK: Setup table view design
   func setupTableViewDesign() {
     receiverTableView.setupMainBackgroundColor()
   }
-}
 
-//MARK: - Setup all custom cells
-extension ReceiverVC {
+  //MARK: Setup all custom cells
   func setupCustomCell() {
     receiverTableView.setupCustomCell(nibName: .ReceiverTVC, identifier: .ReceiverTVC)
   }
-}
 
-//MARK: - Setup custom cell heigt for iPad
-extension ReceiverVC {
+  //MARK: Setup custom cell heigt for iPad
   func setupCellHeightForIPad() {
     if UIDevice.current.userInterfaceIdiom == .pad {
       receiverTableView.rowHeight = 360
@@ -186,8 +181,9 @@ extension ReceiverVC {
   }
 }
 
-//MARK: - Check if an user favorited the donated item
+//MARK: - API calls
 extension ReceiverVC {
+  //MARK: Check if an user favorited the donated item
   func checkIfAnUserFavoritedItem(into cell: ReceiverTVC, at indexPath: IndexPath) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = itemsNotPicked[indexPath.row].id else { return }
@@ -209,10 +205,9 @@ extension ReceiverVC {
       }
     }
   }
-}
 
-//MARK: - Fetch all donated items from database for refresh control
-extension ReceiverVC {
+
+//MARK: Fetch all donated items from database for refresh control
   func fetchDonorsItemsFromDatabase() {
     let resourcePath = NetworkPath.donatedItems.description
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in

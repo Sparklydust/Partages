@@ -60,17 +60,17 @@ extension SharingVC {
 
 //MARK: - Buttons actions
 extension SharingVC {
-  //MARK: - Share Button action
+  //MARK: Share Button action
   @IBAction func shareButtonAction(_ sender: Any) {
     performSegue(withIdentifier: Segue.goToDonatorVC.rawValue, sender: self)
   }
 
-  //MARK: - SignInSignUp button action
+  //MARK: SignInSignUp button action
   @IBAction func signInSignUpButtonAction(_ sender: Any) {
     performSegue(withIdentifier: Segue.goToSignInSignUpVC.rawValue, sender: self)
   }
 
-  //MARK: - Receiver Button Action
+  //MARK: Receiver Button Action
   @IBAction func receiverButtonAction(_ sender: Any) {
     fetchDonorsItemsFromDatabase()
   }
@@ -91,16 +91,15 @@ extension SharingVC {
   }
 }
 
-//MARK: - Setup all buttons
+//MARK: - Design setup
 extension SharingVC {
+//MARK: Setup all buttons
   func setupShareReceiveButtons() {
     shareButton.shareReceiveDesign(title: .shareMain)
     receiveButton.shareReceiveDesign(title: .receiveMain)
   }
-}
 
-//MARK: - Setup navigation controller design
-extension SharingVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
     navigationController?.navigationBar.tintColor = .typoBlue
@@ -118,7 +117,7 @@ extension SharingVC {
     }
     showActivityIndicator()
   }
-  
+
   func showActivityIndicator() {
     activityIndicatorReceive.isHidden = false
     activityIndicatorReceive.style = .whiteLarge
@@ -135,7 +134,7 @@ extension SharingVC {
   }
 }
 
-//MARK: - Prepare for segue method
+//MARK: - Prepare for segue
 extension SharingVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Segue.goToReceiverVC.rawValue {
@@ -145,8 +144,9 @@ extension SharingVC {
   }
 }
 
-//MARK: - Fetch all donors items from database and perform segue to ReceiverVC
+//MARK: - API Calls
 extension SharingVC {
+  //MARK: Fetch all donors items from database and perform segue to ReceiverVC
   func fetchDonorsItemsFromDatabase() {
     triggerActivityIndicator(true)
     let resourcePath = NetworkPath.donatedItems.description
@@ -166,10 +166,8 @@ extension SharingVC {
       }
     }
   }
-}
 
-//MARK: - Fetch user from the database
-extension SharingVC {
+  //MARK: Fetch user from the database
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
 

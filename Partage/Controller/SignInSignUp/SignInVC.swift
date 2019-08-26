@@ -71,59 +71,53 @@ extension SignInVC {
   }
 }
 
-//MARK: - Setup sign in button design
-extension SignInVC {
+//MARK: - Design setup
+extension SignInVC: UITextFieldDelegate {
+  //MARK: Setup sign in button design
   func setupSignInIsSelectedButtons() {
     signInButton.signInOrSignUpSelectedDesign(title: .lowSignIn)
     signUpButton.signInOrSignUpUnselectedDesign(title: .lowSignUp)
     signInButton.isEnabled = false
     signUpButton.isEnabled = true
   }
-}
 
-//MARK: - Setup dot label design
-extension SignInVC {
+  //MARK: Setup dot label design
   func setupDotLabel() {
     dotLabel.isSelectedDesign()
   }
-}
 
-//MARK: - Setup background text view design
-extension SignInVC {
+  //MARK: Setup background text view design
   func setupUnderlinesView() {
     for underline in underlineViews {
       underline.setupBackgroundColorIn(.mainBlue)
     }
   }
-}
 
-//MARK: - Setup all text fields design
-extension SignInVC: UITextFieldDelegate {
+  //MARK: Setup all text fields design
   func setupAllTextFields() {
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
-}
 
-///MARK: - Setup cancel button design
-extension SignInVC {
+  //MARK: Setup cancel button design
   func setupCancelButton() {
     cancelButton.commonDesign(title: .cancel)
   }
-}
 
-//MARK: - Setup sign in connection button design
-extension SignInVC {
+  //MARK: Setup sign in connection button design
   func setupConnectionButton() {
     connectionButton.commonDesign(title: .signIn)
   }
-}
 
-//MARK: - Setup all placeholders design
-extension SignInVC {
+  //MARK: Setup all placeholders design
   func setupAllPlaceholders() {
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
     passwordTextField.setupPlaceholderDesign(title: .password, color: .middleBlue)
+  }
+
+  //MARK: Setup lost password design
+  func setupLostPasswordButton() {
+    lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: .typoBlue)
   }
 }
 
@@ -131,13 +125,6 @@ extension SignInVC {
 extension SignInVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     resignAllResponder()
-  }
-}
-
-//MARK: - Setup lost password design
-extension SignInVC {
-  func setupLostPasswordButton() {
-    lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: .typoBlue)
   }
 }
 

@@ -104,13 +104,6 @@ extension ChatMessageVC {
   }
 }
 
-//MARK: - Setup table view design
-extension ChatMessageVC {
-  func setupTableViewDesign() {
-    conversationTableView.setupMainBackgroundColor()
-  }
-}
-
 //MARK: - Setup Table view cells to display messages
 extension ChatMessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,29 +131,37 @@ extension ChatMessageVC: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-//MARK: - Setup sender message view frame design
+//MARK: - Design setup
 extension ChatMessageVC {
+  //MARK: Setup table view design
+  func setupTableViewDesign() {
+    conversationTableView.setupMainBackgroundColor()
+  }
+
+  //MARK: Setup sender message view frame design
   func setupSenderMessageView() {
     senderMessageView.layer.cornerRadius = 13
     senderMessageView.layer.borderWidth = 1
     senderMessageView.layer.borderColor = UIColor.typoBlue.cgColor
     senderMessageView.setupBackgroundColorIn(.iceBackground)
   }
-}
 
-//MARK: - Setup sender message view text field design
-extension ChatMessageVC {
+  //MARK: Setup sender message view text field design
   func setupSenderMessageTextView() {
     senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
     senderMessageTextView.setupBackgroundColorIn(.iceBackground)
   }
-}
 
-//MARK: - Setup all custom cells design
-extension ChatMessageVC {
+  //MARK: Setup all custom cells design
   func setupAllCustomCells() {
     conversationTableView.setupCustomCell(nibName: .ConversationTVC, identifier: .ConversationTVC)
     conversationTableView.setupCustomCell(nibName: .SenderTVC, identifier: .SenderTVC)
+  }
+
+  //MARK: Setup cell height depending of its message size
+  func manageTableViewConversationCellSize() {
+    conversationTableView.rowHeight = UITableView.automaticDimension
+    conversationTableView.estimatedRowHeight = 120.0
   }
 }
 
@@ -188,14 +189,6 @@ extension ChatMessageVC {
 
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     view.endEditing(true)
-  }
-}
-
-//MARK: - Manage cell height depending of its message size
-extension ChatMessageVC {
-  func manageTableViewConversationCellSize() {
-    conversationTableView.rowHeight = UITableView.automaticDimension
-    conversationTableView.estimatedRowHeight = 120.0
   }
 }
 
@@ -322,8 +315,9 @@ extension ChatMessageVC {
   }
 }
 
-//MARK: - Create a chat message and update Message in the database
+//MARK: - API calls
 extension ChatMessageVC {
+  //MARK: Create a chat message and update Message in the database
   func createNewChatBubble() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let userID = UserDefaultsService.shared.userID else { return }
@@ -349,10 +343,8 @@ extension ChatMessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch the conversation message attached to chat bubbles
-extension ChatMessageVC {
+  //MARK: Fetch the conversation message attached to chat bubbles
   func fetchConversationAttachedToChatBubbles() {
     guard UserDefaultsService.shared.userID != nil else { return }
     let resourcePath = NetworkPath.messages.description + "\(conversationID)"
@@ -375,10 +367,8 @@ extension ChatMessageVC {
       }
     }
   }
-}
 
-//MARK: - Update conversation message info to the latest chatMessage
-extension ChatMessageVC {
+  //MARK: Update conversation message info to the latest chatMessage
   func updateConversationToNewMessageInfo() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let conversationToUpdate = conversation else { return }
@@ -413,10 +403,8 @@ extension ChatMessageVC {
       }
     }
   }
-}
 
-//MARK: - Update conversation messages to read by user
-extension ChatMessageVC {
+  //MARK: Update conversation messages to read by user
   func updateConversationMessagesToReadByUser() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let conversationToUpdate = conversation else { return }
@@ -449,10 +437,8 @@ extension ChatMessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch chat messages to be displayed on ChatMessageVC
-extension ChatMessageVC {
+  //MARK: Fetch chat messages to be displayed on ChatMessageVC
   func fetchAllChatBubblesForTheTimerIntervalFrom(_ messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
     let countBubbles = chatBubbles.count

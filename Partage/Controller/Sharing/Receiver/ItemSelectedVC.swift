@@ -143,66 +143,53 @@ extension ItemSelectedVC {
   }
 }
 
-//MARK: - Setup all labels design
+//MARK: - Design setup
 extension ItemSelectedVC {
+  //MARK: Setup all labels design
   func setupAllLabels() {
     setupItemTypeLabel()
     itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
     dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
     timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
   }
-}
 
-//MARK: - Setup item type label design
-extension ItemSelectedVC {
+  //MARK: Setup item type label design
   func setupItemTypeLabel() {
     itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, in: .typoBlue)
     itemTypeLabel.textAlignment = .center
   }
-}
 
-//MARK: - Setup map view design
-extension ItemSelectedVC {
+  //MARK: Setup map view design
   func setupMapView() {
     mapView.layer.cornerRadius = 10
     mapView.isUserInteractionEnabled = false
   }
-}
 
-//MARK: - Setup item description background view design
-extension ItemSelectedVC {
+  //MARK: Setup item description background view design
   func setupItemDescriptionBackgroundView() {
     itemDescriptionBackgroundView.backgroundColor = .iceBackground
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
   }
-}
 
-//MARK: - Setup item description text view design
-extension ItemSelectedVC {
+  //MARK: Setup item description text view design
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.backgroundColor = .iceBackground
     itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
   }
-}
 
-//MARK: - Setup navigation controller design
-extension ItemSelectedVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
-}
 
-//MARK: - Setup outlet collection to be in order
-extension ItemSelectedVC {
+  //MARK: Setup outlet collection to be in order
   func setupOutletsCollectionsOrder() {
     staticLabels = staticLabels.sorted(by: { $0.tag < $1.tag })
   }
-}
 
-//MARK: - Setup static labels design
-extension ItemSelectedVC {
+  //MARK: Setup static labels design
   func setupStaticLabels() {
     staticLabels[0].text = StaticItemDetail.type.description
     staticLabels[1].text = StaticItemDetail.the.description
@@ -211,32 +198,24 @@ extension ItemSelectedVC {
       label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
     }
   }
-}
 
-//MARK: - Setup cancel and save buttons design
-extension ItemSelectedVC {
+  //MARK: Setup cancel and save buttons design
   func setupMessageAndReceiveButtons() {
     messageToDonatorButton.commonDesign(title: .messageToDonor)
     receiveDonationButton.commonDesign(title: .receiveThisDonation)
   }
-}
 
-//MARK: - Setup item image design
-extension ItemSelectedVC {
+  //MARK: Setup item image design
   func setupItemImage() {
     itemImage.layer.cornerRadius = 3
   }
-}
 
-//MARK: - Setup underline view design
-extension ItemSelectedVC {
+  //MARK: Setup underline view design
   func setupUnderlineView() {
     underlineView.backgroundColor = .mainBlue
   }
-}
 
-//MARK: - Setup userID into senderID varirable
-extension ItemSelectedVC {
+  //MARK: Setup userID into senderID varirable
   func setupUserIDToSenderIDVariable() {
     if let id = UserDefaultsService.shared.userID {
       senderID = id
@@ -262,32 +241,6 @@ extension ItemSelectedVC {
     FirebaseStorageHandler.shared.downloadItemImage(of: donorItem, into: itemImage)
     LocationHandler.shared.itemAnnotationShown(on: mapView, latitude: donorItem.latitude, longitude: donorItem.longitude)
     itemDescriptionTextView.text = donorItem.description
-  }
-}
-
-//MARK: - Prepare for segue methods
-extension ItemSelectedVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToMapViewVC.rawValue {
-      let destinationVC = segue.destination as! MapViewVC
-      destinationVC.donorItemLatitude = donatedItem.latitude
-      destinationVC.donorItemLongitude = donatedItem.longitude
-      destinationVC.buttonName = .openMapApp
-    }
-    else if segue.identifier == Segue.unwindToMessageVC.rawValue {
-      let destinationVC = segue.destination as? MessageVC
-      destinationVC?.firstUserID = firstUserID
-      destinationVC?.secondUserID = secondUserID
-    }
-    else if segue.identifier == Segue.goToItemImagesVC.rawValue {
-      let destinationVC = segue.destination as? ItemImagesVC
-      destinationVC?.isReceiver = true
-      destinationVC?.donorItem = donatedItem
-    }
-    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
-      let destinationVC = segue.destination as? SharingVC
-      destinationVC?.displayAd = authToDisplayGoogleAd
-    }
   }
 }
 
@@ -382,8 +335,35 @@ extension ItemSelectedVC {
   }
 }
 
-//MARK: - Save item to user favorite
+//MARK: - Prepare for segue
 extension ItemSelectedVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goToMapViewVC.rawValue {
+      let destinationVC = segue.destination as! MapViewVC
+      destinationVC.donorItemLatitude = donatedItem.latitude
+      destinationVC.donorItemLongitude = donatedItem.longitude
+      destinationVC.buttonName = .openMapApp
+    }
+    else if segue.identifier == Segue.unwindToMessageVC.rawValue {
+      let destinationVC = segue.destination as? MessageVC
+      destinationVC?.firstUserID = firstUserID
+      destinationVC?.secondUserID = secondUserID
+    }
+    else if segue.identifier == Segue.goToItemImagesVC.rawValue {
+      let destinationVC = segue.destination as? ItemImagesVC
+      destinationVC?.isReceiver = true
+      destinationVC?.donorItem = donatedItem
+    }
+    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
+      let destinationVC = segue.destination as? SharingVC
+      destinationVC?.displayAd = authToDisplayGoogleAd
+    }
+  }
+}
+
+//MARK: - API calls
+extension ItemSelectedVC {
+  //MARK: Save item to user favorite
   func saveDonatedItemToUserFavorite() {
     guard UserDefaultsService.shared.userID != nil else {
       showAlert(title: .loginErrorTitle, message: .notConnected)
@@ -405,10 +385,8 @@ extension ItemSelectedVC {
       }
     }
   }
-}
 
-//MARK: - Check if an user favorited the donated item
-extension ItemSelectedVC {
+  //MARK: Check if an user favorited the donated item
   func checkIfAnUserFavoritedItem() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
@@ -434,10 +412,8 @@ extension ItemSelectedVC {
       }
     }
   }
-}
 
-//MARK: - An user delete his favorited item
-extension ItemSelectedVC {
+  //MARK: An user delete his favorited item
   func deleteDonatedItemFromUserFavorite() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let donatedItemID = donatedItem.id else { return }
@@ -455,12 +431,9 @@ extension ItemSelectedVC {
         return
       }
     }
-    
   }
-}
 
-//MARK: - User picks up the donated item method and save it in the database
-extension ItemSelectedVC {
+  //MARK: User picks up the donated item method and save it in the database
   func userPicksUpADonatedItem() {
     guard let donatedItemID = donatedItem.id else { return }
     guard let receiverID = UserDefaultsService.shared.userID else { return }
@@ -496,15 +469,8 @@ extension ItemSelectedVC {
       })
     })
   }
-}
 
-//MARK: - Fetch the receiver or/and donor from the database to get users info
-extension ItemSelectedVC {
-  func fetchUsersFromTheDatabase() {
-    fetchReceiverFromTheDatabase()
-    fetchDonorFromTheDatabase()
-  }
-
+  //MARK: Fetch the receiver from the database to get users info
   func fetchReceiverFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let receiverID = UserDefaultsService.shared.userID else { return }
@@ -521,7 +487,8 @@ extension ItemSelectedVC {
       }
     }
   }
-  
+
+  //MARK: Fetch the donor from the database to get users info
   func fetchDonorFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let itemID = donatedItem.id else { return }
@@ -540,10 +507,8 @@ extension ItemSelectedVC {
       }
     }
   }
-}
 
-//MARK: - User send a message to another user
-extension ItemSelectedVC {
+  //MARK: User send a message to another user
   func createMessageBetweenTwoUser() {
     guard UserDefaultsService.shared.userID != nil else { return }
     let dateAndTime = ISO8601DateFormatter.string(
@@ -572,10 +537,8 @@ extension ItemSelectedVC {
       }
     }
   }
-}
 
-//MARK: - Check if users has already communicated before creating chat or going to existing one
-extension ItemSelectedVC {
+  //MARK: Check if users has already communicated before creating chat or going to existing one
   func CheckUsersAlreadyCommunicateBeforeCreatingMessage() {
     guard UserDefaultsService.shared.userID != nil else { return }
     let userID = UserDefaultsService.shared.userID
@@ -631,5 +594,13 @@ extension ItemSelectedVC {
 extension ItemSelectedVC {
   func firstAndSecondUsersAreNotSamePerson() -> Bool {
     return firstUserID != secondUserID
+  }
+}
+
+//MARK: - Fetch donor and receiver from the database
+extension ItemSelectedVC {
+  func fetchUsersFromTheDatabase() {
+    fetchReceiverFromTheDatabase()
+    fetchDonorFromTheDatabase()
   }
 }

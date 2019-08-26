@@ -92,8 +92,9 @@ extension ItemImagesVC {
   }
 }
 
-//MARK: - Setup for receiver view design
+//MARK: - Design setup
 extension ItemImagesVC {
+  //MARK: Setup receiver view design
   func setupReceiverVCLook() {
     guard isReceiver else {
       cancelButton.isHidden = false
@@ -109,81 +110,63 @@ extension ItemImagesVC {
       button.isEnabled = false
     }
   }
-}
 
-//MARK: - Setup main square design
-extension ItemImagesVC {
+  //MARK: Setup main square design
   func setupMainSquare() {
     mainSquareView.backgroundColor = .middleBlue
     mainSquareView.layer.cornerRadius = 5
   }
-}
 
-//MARK: - Setup all little square view design
-extension ItemImagesVC {
+  //MARK: Setup all little square view design
   func setupLittleSquareViews() {
     for view in littleSquareViews {
       view.layer.cornerRadius = 5
       view.setupMainBackgroundColor()
     }
   }
-}
 
-//MARK: - Setup all little square images design
-extension ItemImagesVC {
+  //MARK: Setup all little square images design
   func setupLittleSquareImages() {
     for image in littleSquareImages {
       image.layer.cornerRadius = 5
     }
   }
-}
 
-//MARK: - Setup navigation controller design
-extension ItemImagesVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
-}
 
-//MARK: - Setup outlet collection to be in order
-extension ItemImagesVC {
+  //MARK: Setup outlet collection to be in order
   func setupOutletsCollectionsOrder() {
     stackViews = stackViews.sorted(by: { $0.tag < $1.tag })
     littleSquareViews = littleSquareViews.sorted(by: { $0.tag < $1.tag })
     littleSquareImages = littleSquareImages.sorted(by: { $0.tag < $1.tag })
     littleSquareButtons = littleSquareButtons.sorted(by: { $0.tag < $1.tag })
   }
-}
 
-//MARK: - Setup reset and save button design
-extension ItemImagesVC {
+  //MARK: Setup reset and save button design
   func setupResetAndSaveButton() {
     cancelButton.commonDesign(title: .reset)
     saveButton.commonDesign(title: .save)
   }
-}
 
-//MARK: - Setup user guide label design
-extension ItemImagesVC {
+  //MARK: Setup user guide label design
   func setupUserGuideLabel() {
     userGuideLabel.setupFont(as: .superclarendonBold, sized: .sixteen, in: .middleBlue)
     userGuideLabel.text = StaticLabel.imageLoaderGuide.description
     userGuideLabel.textAlignment = .center
   }
-}
 
-//MARK: - Setup one picture loaded receiver design
-extension ItemImagesVC {
+  //MARK: Setup one picture loaded receiver design
   func setupOnePictureLoaded() {
     stackViews[0].isHidden = false
     stackViews[1].isHidden = true
     littleSquareViews[0].isHidden = false
     littleSquareViews[1].isHidden = true
   }
-}
 
-//MARK: - Setup two pictures loaded receiver design
-extension ItemImagesVC {
+  //MARK: Setup two pictures loaded receiver design
   func setupTwoPicturesLoaded() {
     showAllSatckViews()
     littleSquareViews[0].isHidden = false
@@ -191,10 +174,8 @@ extension ItemImagesVC {
     littleSquareViews[2].isHidden = false
     littleSquareViews[3].isHidden = true
   }
-}
 
-//MARK: - Setup three pictures loaded receiver design
-extension ItemImagesVC {
+  //MARK: Setup three pictures loaded receiver design
   func setupThreePicturesLoaded() {
     showAllSatckViews()
     littleSquareViews[0].isHidden = false
@@ -202,10 +183,8 @@ extension ItemImagesVC {
     littleSquareViews[2].isHidden = false
     littleSquareViews[3].isHidden = false
   }
-}
 
-//MARK: - Setup four pictures loaded receiver design
-extension ItemImagesVC {
+  //MARK: Setup four pictures loaded receiver design
   func setupfourPicturesLoaded() {
     showAllSatckViews()
     littleSquareViews[0].isHidden = false

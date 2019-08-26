@@ -55,27 +55,25 @@ extension LostPasswordVC {
   }
 }
 
-//MARK: - Set cancel and send buttons design
+//MARK: - Design setup
 extension LostPasswordVC {
+  //MARK: Setup cancel and send buttons design
   func setupCancelAndSendButtons() {
     cancelButton.commonDesign(title: .cancel)
     saveButton.commonDesign(title: .send)
   }
-}
 
-//MARK: - Set email text design
-extension LostPasswordVC {
+  //MARK: Setup email text design
   func setupEmailTextField() {
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
 
+  //MARK: Setup underline view
   func setupUnderlineView() {
     underlineView.setupBackgroundColorIn(.mainBlue)
   }
-}
 
-//MARK: - Setup email placeholder design
-extension LostPasswordVC {
+  //MARK: Setup email placeholder design
   func setupEmailPlaceholder() {
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
   }

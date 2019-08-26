@@ -98,50 +98,41 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Setup profile image
+//MARK: - Design setup
 extension ProfileVC {
+  //MARK: Setup profile image
   func setupProfileImage() {
     profileImage.image = #imageLiteral(resourceName: "noPicture")
     profileImage.rounded()
     FirebaseStorageHandler.shared.downloadProfilePicture(into: profileImage)
   }
-}
 
-//MARK: - Setup main labels design
-extension ProfileVC {
+  //MARK: Setup main labels design
   func setupMainLabels() {
     firstNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     firstNameLabel.textAlignment = .center
     emailLabel.textAlignment = .center
   }
-}
 
-//MARK: - Setup edit button design
-extension ProfileVC {
+  //MARK: Setup edit button design
   func setupEditProfilePictureButton() {
     editProfilePictureButton.signInSignUpDesign(title: ButtonName.edit.description)
   }
-}
 
-//MARK: - Setup edit profile button
-extension ProfileVC {
+  //MARK: Setup edit profile button
   func setupEditProfileButton() {
     editProfileButton.editButtonDesign()
   }
-}
 
-//MARK: - Setup disconnect and delete accound button
-extension ProfileVC {
+  //MARK: Setup disconnect and delete accound button
   func setupDisconnectButtons() {
     contactUsButton.littleButtonDesign(title: .lowContactUs, color: .typoBlue)
     disconnectProfileButton.littleButtonDesign(title: .lowSignOut, color: .typoBlue)
     deleteProfileButton.littleButtonDesign(title: .lowEraseAccount, color: .red)
   }
-}
 
-//MARK: - Setup navigation controller design
-extension ProfileVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
     navigationController?.navigationBar.tintColor = .typoBlue
@@ -236,8 +227,19 @@ extension ProfileVC {
   }
 }
 
-//MARK: - Fetch user from the database
+//MARK: - Prepare for segue
 extension ProfileVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goToEditProfile.rawValue {
+      let destinationVC = segue.destination as! EditProfileVC
+      destinationVC.user = user
+    }
+  }
+}
+
+//MARK: - API calls
+extension ProfileVC {
+  //MARK: Fetch user from the database
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     triggerActivityIndicator(true)
@@ -258,10 +260,8 @@ extension ProfileVC {
       }
     }
   }
-}
 
-//MARK: - Delete user account method in cascade
-extension ProfileVC {
+  //MARK: Delete user account method in cascade
   func deleteUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
     showAlert(title: .userDeletedTitle, message: .userDeleted, buttonName: .confirm) { (true) in
@@ -313,16 +313,6 @@ extension ProfileVC {
       firstNameLabel.text = "\(firstName) \(lastName)"
     }
     emailLabel.text = user?.email
-  }
-}
-
-//MARK: - Prepare for segue
-extension ProfileVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToEditProfile.rawValue {
-      let destinationVC = segue.destination as! EditProfileVC
-      destinationVC.user = user
-    }
   }
 }
 

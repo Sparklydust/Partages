@@ -75,15 +75,14 @@ extension MapViewVC {
   }
 }
 
-//MARK: - Setup navigation controller design
+//MARK: - Design setup
 extension MapViewVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
-}
 
-//MARK: - Setup save place button design
-extension MapViewVC {
+  //MARK: Setup save place button design
   func setupSaveLocationButton() {
     saveLocationButton.commonDesign(title: buttonName)
   }

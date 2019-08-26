@@ -69,17 +69,16 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - Setup all underline views design
+//MARK: - Design setup
 extension EditProfileVC {
+  //MARK: Setup all underline views design
   func setupUnderlineViews() {
     for view in underlineViews {
       view.setupBackgroundColorIn(.mainBlue)
     }
   }
-}
 
-//MARK: - Setup all user entry text fields design
-extension EditProfileVC{
+  //MARK: Setup all user entry text fields design
   func setupUserTextFields() {
     firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     lastNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
@@ -87,18 +86,14 @@ extension EditProfileVC{
     newPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
-}
 
-//MARK: - Setup cancel and save buttons design
-extension EditProfileVC {
+  //MARK: Setup cancel and save buttons design
   func setupButtons() {
     cancelButton.commonDesign(title: .cancel)
     saveButton.commonDesign(title: .save)
   }
-}
 
-//MARK: - Setup placeholders design
-extension EditProfileVC {
+  //MARK: Setup placeholders design
   func setupTextFieldPlaceholders() {
     firstNameTextField.setupPlaceholderDesign(title: .firsName, color: .middleBlue)
     lastNameTextField.setupPlaceholderDesign(title: .lastName, color: .middleBlue)
@@ -106,10 +101,8 @@ extension EditProfileVC {
     newPasswordTextField.setupPlaceholderDesign(title: .newPassword, color: .middleBlue)
     confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .middleBlue)
   }
-}
 
-//MARK: - Setup to hide password modifcation text fields
-extension EditProfileVC {
+  //MARK: Setup to hide password modifcation text fields
   func hidePasswordFields() {
     newPasswordTextField.isHidden = true
     confirmPasswordTextField.isHidden = true
@@ -174,6 +167,7 @@ extension EditProfileVC {
   }
 }
 
+//MARK: - Dismiss view method
 extension EditProfileVC {
   func dismissView() {
     dismiss(animated: true, completion: nil)
@@ -284,8 +278,9 @@ extension EditProfileVC {
   }
 }
 
-//MARK: - User update his profile without password
+//MARK: - API calls
 extension EditProfileVC {
+  //MARK: User update his profile without password
   func updateUserProfileWith(_ firstName: String, _ lastName: String, _ email: String) {
     let updatedUser = FullUser(
       firstName: firstName,
@@ -313,10 +308,8 @@ extension EditProfileVC {
       }
     }
   }
-}
 
-//MARK: - User update his profile and password
-extension EditProfileVC {
+  //MARK: User update his profile and password
   func updateUserProfileAndPasswordWith(_ firstName: String, _ lastName: String, _ email: String, _ password: String) {
     let updatedUser = FullUser(
       firstName: firstName,

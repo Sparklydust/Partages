@@ -135,7 +135,7 @@ extension DonorVC {
   }
 }
 
-//MARK: - Setup item type picker view design data
+//MARK: - Picker view design data
 extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
     itemTypePickerView.backgroundColor = .iceBackground
@@ -166,79 +166,50 @@ extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   }
 }
 
-//MARK: - Setup date picker design
+//MARK: - Design setup
 extension DonorVC {
+  //MARK: Setup date picker design
   func setupDatePicker() {
     itemDatePicker.backgroundColor = .iceBackground
     itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.description)
   }
-}
 
-//MARK: - Setup item name text field design
-extension DonorVC {
+  //MARK: Setup item name text field design
   func setupItemNameTextField() {
     itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
     itemNameTextField.setupMainBackgroundColor()
   }
-}
 
-//MARK: - Setup item text field placeholder
-extension DonorVC {
+  //MARK: Setup item text field placeholder
   func setupItemNameTextFieldPlaceholder() {
     itemNameTextField.setupPlaceholderDesign(title: .enterYourDonationName, color: .middleBlue)
   }
-}
 
-//MARK: - Setup underline view design
-extension DonorVC {
+  //MARK: Setup underline view design
   func setupUnderlineView() {
     underlineView.backgroundColor = .mainBlue
   }
-}
 
-//MARK: - Setup item description background view design
-extension DonorVC {
+  //MARK: Setup item description background view design
   func setupItemDescriptionBackgroundView() {
     itemDescriptionBackgroundView.backgroundColor = .iceBackground
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
   }
-}
 
-//MARK: - Setup map kit view design
-extension DonorVC {
-  func setupMapView() {
-    mapView.layer.cornerRadius = 10
-    mapView.isHidden = true
-    mapKitButton.setupAddMeetingPointButton(named: .setupMeetingPoint)
-  }
-
-  func mapViewActionsAreDisabled() {
-    mapKitButton.setTitle(nil, for: .normal)
-    mapView.isHidden = false
-    mapView.isZoomEnabled = false
-    mapView.isScrollEnabled = false
-  }
-}
-
-//MARK: - Setup reset and make donation button design
-extension DonorVC {
+  //MARK: Setup reset and make donation button design
   func setupResetAndDonateButton() {
     resetButton.commonDesign(title: .reset)
     makeDonationButton.commonDesign(title: buttonName ?? .makeADonation)
   }
-}
 
-//MARK: - Setup item image design
-extension DonorVC {
+  //MARK: Setup item image design
   func setupItemImage() {
     itemImage.layer.cornerRadius = 3
   }
-}
 
-//MARK: - Setup navigation controller design
-extension DonorVC {
+  //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationItem.setupNavBarProfileImage()
   }
@@ -280,6 +251,22 @@ extension DonorVC: UITextViewDelegate {
   // Placeholder comes back when text view is empty
   func textViewDidEndEditing(_ textView: UITextView) {
     actionsAreEnable(true)
+  }
+}
+
+//MARK: - Setup map kit view design
+extension DonorVC {
+  func setupMapView() {
+    mapView.layer.cornerRadius = 10
+    mapView.isHidden = true
+    mapKitButton.setupAddMeetingPointButton(named: .setupMeetingPoint)
+  }
+
+  func mapViewActionsAreDisabled() {
+    mapKitButton.setTitle(nil, for: .normal)
+    mapView.isHidden = false
+    mapView.isZoomEnabled = false
+    mapView.isScrollEnabled = false
   }
 }
 
@@ -385,27 +372,6 @@ extension DonorVC {
   }
 }
 
-//MARK: - Prepare for segue methods
-extension DonorVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToItemImagesVC.rawValue {
-      let secondVC = segue.destination as! ItemImagesVC
-      secondVC.delegate = self
-      if let item = itemToEdit {
-        secondVC.donorItem = item
-      }
-    }
-    else if segue.identifier == Segue.goToMapViewVC.rawValue {
-      let secondVC = segue.destination as! MapViewVC
-      secondVC.delegate = self
-    }
-    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
-      let secondVC = segue.destination as! SharingVC
-      secondVC.displayAd = authToDisplayGoogleAd
-    }
-  }
-}
-
 //MARK: - Item address receiver from MapViewVC
 extension DonorVC: CanReceiveItemAddressDelegate {
   func addressReceived(coordinates: CLLocation,
@@ -482,8 +448,30 @@ extension DonorVC {
   }
 }
 
-//MARK: - Creation of the donator item and saving it into database if all fields are filled
+//MARK: - Prepare for segue
 extension DonorVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goToItemImagesVC.rawValue {
+      let secondVC = segue.destination as! ItemImagesVC
+      secondVC.delegate = self
+      if let item = itemToEdit {
+        secondVC.donorItem = item
+      }
+    }
+    else if segue.identifier == Segue.goToMapViewVC.rawValue {
+      let secondVC = segue.destination as! MapViewVC
+      secondVC.delegate = self
+    }
+    else if segue.identifier == Segue.unwindToSharingVC.rawValue {
+      let secondVC = segue.destination as! SharingVC
+      secondVC.displayAd = authToDisplayGoogleAd
+    }
+  }
+}
+
+//MARK: - API calls
+extension DonorVC {
+  //MARK: Creation of the donator item and saving it into database if all fields are filled
   func createDonorItemAndSaveItIntoDatabase() {
     pickupDateAndTime = itemDatePicker.date
     let dateAndTime = ISO8601DateFormatter.string(
@@ -522,10 +510,8 @@ extension DonorVC {
       }
     }
   }
-}
 
-//MARK: - Donor update item from itemDetailsVC edit button
-extension DonorVC {
+  //MARK: Donor update item from itemDetailsVC edit button
   func updateDonatedItem() {
     guard let donatedItemID = itemToEdit?.id else { return }
     
@@ -544,7 +530,7 @@ extension DonorVC {
       latitudeToSet = address?.latitude
       longitudeToSet = address?.longitude
     }
-    
+
     var updatedItem = DonatedItem(
       isPicked: itemToEdit!.isPicked,
       selectedType: DonatedItem.type[itemTypePickerView.selectedRow(inComponent: 0)].description,

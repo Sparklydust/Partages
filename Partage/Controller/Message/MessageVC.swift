@@ -122,13 +122,6 @@ extension MessageVC {
   }
 }
 
-//MARK: - Setup table view design
-extension MessageVC {
-  func setupTableViewDesign() {
-    messageTableView.setupMainBackgroundColor()
-  }
-}
-
 //MARK: - Setup Table view to display messages
 extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -151,17 +144,36 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
   }
 }
 
-//MARK: - Setup Edit button in navigation bar
+//MARK: - Design setup
 extension MessageVC {
+  //MARK: Setup table view design
+  func setupTableViewDesign() {
+    messageTableView.setupMainBackgroundColor()
+  }
+
+  //MARK: Setup Edit button in navigation bar
   func setupEditButton() {
     editButton.editButtonDesign()
   }
-}
 
-//MARK: - Setup all custom cells
-extension MessageVC {
+  //MARK: Setup all custom cells
   func setupCustomCell() {
     messageTableView.setupCustomCell(nibName: .MessageTVC, identifier: .MessageTVC)
+  }
+
+  //MARK: Setup navigation controller design
+  func setupNavigationController() {
+    navigationController?.navigationBar.barStyle = .default
+    navigationController?.navigationBar.tintColor = .typoBlue
+    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.isTranslucent = false
+  }
+
+  //MARK: Setup custom cell heigt for iPad
+  func setupCellHeightForIPad() {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      messageTableView.rowHeight = 120
+    }
   }
 }
 
@@ -171,25 +183,6 @@ extension MessageVC {
     guard let messageID = messages[indexPath.row].id else { return }
     messageIDToOpen = messageID
     fetchChatMessagesFromSelectedCells(messageID)
-  }
-}
-
-//MARK: - Setup navigation controller design
-extension MessageVC {
-  func setupNavigationController() {
-    navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.tintColor = .typoBlue
-    navigationController?.navigationBar.barTintColor = .iceBackground
-    navigationController?.navigationBar.isTranslucent = false
-  }
-}
-
-//MARK: - Setup custom cell heigt for iPad
-extension MessageVC {
-  func setupCellHeightForIPad() {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      messageTableView.rowHeight = 120
-    }
   }
 }
 
@@ -256,25 +249,6 @@ extension MessageVC {
   }
 }
 
-//MARK: - Prepare for segue
-extension MessageVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToChatMessageVC.rawValue {
-      guard let destinationVC = segue.destination as? ChatMessageVC else { return }
-      destinationVC.delegate = self
-      destinationVC.chatBubbles = chatMessages
-      guard let messageID = messageIDToOpen else { return }
-      destinationVC.conversationID = messageID
-      if firstUserID == UserDefaultsService.shared.userID {
-        destinationVC.userRecipientID = userFetch
-      }
-      else {
-        destinationVC.userRecipientID = userFetch
-      }
-    }
-  }
-}
-
 //MARK: - Show cell in bold if messages are not read
 extension MessageVC {
   func showMessageInBoldIfNotRead(in cell: MessageTVC, search message: Message) {
@@ -318,8 +292,28 @@ extension MessageVC {
   }
 }
 
-//MARK: - Fetch all user messages
+//MARK: - Prepare for segue
 extension MessageVC {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Segue.goToChatMessageVC.rawValue {
+      guard let destinationVC = segue.destination as? ChatMessageVC else { return }
+      destinationVC.delegate = self
+      destinationVC.chatBubbles = chatMessages
+      guard let messageID = messageIDToOpen else { return }
+      destinationVC.conversationID = messageID
+      if firstUserID == UserDefaultsService.shared.userID {
+        destinationVC.userRecipientID = userFetch
+      }
+      else {
+        destinationVC.userRecipientID = userFetch
+      }
+    }
+  }
+}
+
+//MARK: - API calls
+extension MessageVC {
+  //MARK: Fetch all user messages
   func getAllUserMessagesFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }
 
@@ -344,10 +338,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch all user messages
-extension MessageVC {
+  //MARK: Fetch all user messages
   func getAllUserMessagesBeforeTimerStarts() {
     guard UserDefaultsService.shared.userID != nil else { return }
 
@@ -369,10 +361,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch chat messages to be displayed on ChatMessageVC
-extension MessageVC {
+  //MARK: Fetch chat messages to be displayed on ChatMessageVC
   func fetchChatMessagesFromSelectedCells(_ messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
     chatMessages = [ChatMessage]()
@@ -393,10 +383,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Delete user message link by updating and deleting his userID
-extension MessageVC {
+  //MARK: Delete user message link by updating and deleting his userID
   func updateToDeleteUserLink(in message: Message) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let messageID = message.id else { return }
@@ -432,10 +420,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch all user messages when the timer trigger
-extension MessageVC {
+  //MARK: Fetch all user messages when the timer trigger
   func getAllUserMessagesForTheTimerInterval() {
     guard UserDefaultsService.shared.userID != nil else { return }
     let countMessages = messages.count
@@ -461,10 +447,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Fetch chat messages to tack if new message need to be reloaded
-extension MessageVC {
+  //MARK: Fetch chat messages to tack if new message need to be reloaded
   func fetchChatMessagesToTrackNewBubble(of messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
 
@@ -486,10 +470,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - Delete a message if any user left linked to it
-extension MessageVC {
+  //MARK: Delete a message if any user left linked to it
   func delete(_ message: Message) {
     guard UserDefaultsService.shared.userID != nil else { return }
     guard let messageID = message.id else { return }
@@ -506,10 +488,8 @@ extension MessageVC {
       }
     }
   }
-}
 
-//MARK: - To populate user first name linked to the message
-extension MessageVC {
+  //MARK: To populate user first name linked to the message
   func populateUser(in cell: MessageTVC, from messageInfo: Message) {
 
     if userID == messageInfo.senderID {
@@ -539,10 +519,8 @@ extension MessageVC {
       setConversationIsClosed(in: cell)
     }
   }
-}
 
-//MARK: - To populate a cell with the last chat bubble message
-extension MessageVC {
+  //MARK: To populate a cell with the last chat bubble message
   func populateConversationLabel(in cell: MessageTVC, search messageID: Int) {
     let resourcePathToLastChat =
       NetworkPath.messages.description + "\(messageID)/" + NetworkPath.chatMessages.description
@@ -556,6 +534,54 @@ extension MessageVC {
         DispatchQueue.main.async {
           cell.conversationLabel.text = chatMessages.last?.content
         }
+      }
+    }
+  }
+
+  //MARK: Fetch last read message before being update to read by user
+  func fetchOneMessageTobeUpdateAsRead(_ messageID: Int) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
+    ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let message):
+        DispatchQueue.main.async {
+          self.updateToReadByUser(this: message)
+        }
+      }
+    }
+  }
+
+  //MARK: Update conversation messages to read by user
+  func updateToReadByUser(this message: Message) {
+    guard UserDefaultsService.shared.userID != nil else { return }
+    guard let messageID = message.id else { return }
+    
+    let userID = UserDefaultsService.shared.userID
+    if userID == message.senderID {
+      message.isReadBySender = true
+    }
+    else {
+      message.isReadByRecipient = true
+    }
+    let messagesAreRead = Message(
+      senderID: message.senderID,
+      recipientID: message.recipientID,
+      date: message.date,
+      isReadBySender: message.isReadBySender,
+      isReadByRecipient: message.isReadByRecipient
+    )
+    
+    let resourcePath = NetworkPath.messages.description + "\(messageID)"
+    ResourceRequest<Message>(resourcePath).update(messagesAreRead, tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success:
+        break
       }
     }
   }
@@ -611,58 +637,6 @@ extension MessageVC {
 extension MessageVC: CanReceiveInfoMessageIsReadDelegate {
   func confirmMessageIsReadReceived(of messageID: Int) {
     fetchOneMessageTobeUpdateAsRead(messageID)
-  }
-}
-
-//MARK: - Fetch last read message before being update to read by user
-extension MessageVC {
-  func fetchOneMessageTobeUpdateAsRead(_ messageID: Int) {
-    guard UserDefaultsService.shared.userID != nil else { return }
-
-    let resourcePath = NetworkPath.messages.description + "\(messageID)"
-    ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
-      switch success {
-      case .failure:
-        break
-      case .success(let message):
-        DispatchQueue.main.async {
-          self.updateToReadByUser(this: message)
-        }
-      }
-    }
-  }
-}
-
-//MARK: - Update conversation messages to read by user
-extension MessageVC {
-  func updateToReadByUser(this message: Message) {
-    guard UserDefaultsService.shared.userID != nil else { return }
-    guard let messageID = message.id else { return }
-
-    let userID = UserDefaultsService.shared.userID
-    if userID == message.senderID {
-      message.isReadBySender = true
-    }
-    else {
-      message.isReadByRecipient = true
-    }
-    let messagesAreRead = Message(
-      senderID: message.senderID,
-      recipientID: message.recipientID,
-      date: message.date,
-      isReadBySender: message.isReadBySender,
-      isReadByRecipient: message.isReadByRecipient
-    )
-
-    let resourcePath = NetworkPath.messages.description + "\(messageID)"
-    ResourceRequest<Message>(resourcePath).update(messagesAreRead, tokenNeeded: true) { (success) in
-      switch success {
-      case .failure:
-        break
-      case .success:
-        break
-      }
-    }
   }
 }
 

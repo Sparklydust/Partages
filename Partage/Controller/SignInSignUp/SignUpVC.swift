@@ -74,58 +74,47 @@ extension SignUpVC {
   }
 }
 
-//MARK: - Setup little sign up button design
+//MARK: - Design setup
 extension SignUpVC {
+  //MARK: Setup little sign up button design
   func setupSignUpIsSelectedButtons() {
     signInButton.signInOrSignUpUnselectedDesign(title: .lowSignIn)
     signUpButton.signInOrSignUpSelectedDesign(title: .lowSignUp)
     signInButton.isEnabled = true
     signUpButton.isEnabled = false
   }
-}
 
-//MARK: - Setup dot label design
-extension SignUpVC {
+  //MARK: Setup dot label design
   func setupDotLabel() {
     dotLabel.isSelectedDesign()
   }
-}
 
-///MARK: - Setup cancel button design
-extension SignUpVC {
+  //MARK: Setup cancel button design
   func setupCancelButton() {
     cancelButton.commonDesign(title: .cancel)
   }
-}
 
-//MARK: - Setup sign up user register button design
-extension SignUpVC {
+  //MARK: Setup sign up user register button design
   func setupRegisterButton() {
     registerButton.commonDesign(title: .signUp)
   }
-}
 
-//MARK: - Setup background text view design
-extension SignUpVC {
+  //MARK: Setup background text view design
   func setupUnderlinesView() {
     for underline in underlineViews {
       underline.setupBackgroundColorIn(.mainBlue)
     }
   }
-}
 
-//MARK: - Setup all text fields design
-extension SignUpVC {
+  //MARK: Setup all text fields design
   func setupAllTextFields() {
     firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
     confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
   }
-}
 
-//MARK: - Setup all placeholders design
-extension SignUpVC {
+  //MARK: Setup all placeholders design
   func setupAllPlaceholders() {
     firstNameTextField.setupPlaceholderDesign(title: .firsName, color: .middleBlue)
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
@@ -263,8 +252,9 @@ extension SignUpVC {
   }
 }
 
-//MARK: - User create an account in Database
+//MARK: - API calls
 extension SignUpVC {
+  //MARK: User create an account in Database
   func createUserIntoDatabase() {
     guard let firstName = firstNameTextField.text,
       let email = emailTextField.text,
