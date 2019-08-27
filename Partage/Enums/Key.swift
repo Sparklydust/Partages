@@ -8,13 +8,14 @@
 
 import Foundation
 
-//MARK: - Keys for User Defaults, picker text color
+//MARK: - Keys for User Defaults, picker text color and apiResource
 enum Key: String {
   case pickerTextColor
   case partageUserToken
   case partageUserID
   case partageDeviceToken
   case partageActionCount
+  case partagesServerSidePath
 
   var description: String {
     get {
@@ -29,6 +30,8 @@ enum Key: String {
         return LocalizableStrings.partageDeviceToken
       case .partageActionCount:
         return LocalizableStrings.partageActionCount
+      case .partagesServerSidePath:
+        return LocalizableStrings.partagesServerSidePath
       }
     }
   }

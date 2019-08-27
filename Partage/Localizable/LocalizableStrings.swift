@@ -24,9 +24,13 @@ extension LocalizableStrings {
     "\\.\\d+", comment: "date occurence to translate Date() to readable String date")
   static let stringTokenFormat = NSLocalizedString(
     "%02x", comment: "Used to switch a token to a string format")
+  static let apiService = NSLocalizedString(
+    "apiService", comment: "used to get the hidden API path to PartageServerSide")
+  static let plist = NSLocalizedString(
+    "plist", comment: "name of plist file to be used in apiService.swift")
 }
 
-//MARK: - Keys for User Defaults and picker text color - Not Localizable -
+//MARK: - Keys for User Defaults, picker text color and apiResource - Not Localizable -
 extension LocalizableStrings {
   static let pickerTextColor = NSLocalizedString(
     "textColor", comment: "key for the picker view text color")
@@ -38,6 +42,8 @@ extension LocalizableStrings {
     "partage-device-token", comment: "Key for User Defaults, to store device token used for push notification")
   static let partageActionCount = NSLocalizedString(
     "partage-action-count", comment: "Key for User Defaults, to store user count actions before displaying Apple Store Review to user")
+  static let partagesServerSidePath = NSLocalizedString(
+    "partagesServerSidePath", comment: "key to get the https hidden path to PartagesServerSide, found .gitignore file")
 }
 
 //MARK: - Apple devices name - Not Localizable -
@@ -72,10 +78,13 @@ extension LocalizableStrings {
 
 //MARK: - API requests paths - Not Localizable -
 extension LocalizableStrings {
-  //If you are running PartageServerSide on local, use url: http://192.168.1.1:8080
+  //If you are running PartageServerSide on local, switch mainPath with http and mainPath with valueInAPIService
   //url 192.168.1.1 must be change with your computer IP address
+  
+  //static let mainPath = NSLocalizedString("http://192.168.1.1:8080", comment: "main path to any API request")
   static let mainPath = NSLocalizedString(
-    "https://partage-backend.v2.vapor.cloud/api/", comment: "main path to API any request")
+    valueInAPIService(
+      named: Key.partagesServerSidePath.description), comment: "main path to any API request")
   static let login = NSLocalizedString(
     "login", comment: "login path")
   static let users = NSLocalizedString(

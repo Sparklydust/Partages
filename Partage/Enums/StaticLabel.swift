@@ -30,6 +30,8 @@ enum StaticLabel: String {
   case userLeftTheConversation
   case closedConversation
   case stringTokenFormat
+  case apiService
+  case plist
 
   var description: String {
     get {
@@ -74,6 +76,10 @@ enum StaticLabel: String {
         return LocalizableStrings.closedConversation
       case .stringTokenFormat:
         return LocalizableStrings.stringTokenFormat
+      case .apiService:
+        return LocalizableStrings.apiService
+      case .plist:
+        return LocalizableStrings.plist
       }
     }
   }

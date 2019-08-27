@@ -73,6 +73,8 @@
 		2A98DF4C22AEBD6400F6F2AE /* DonorItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4B22AEBD6400F6F2AE /* DonorItemType.swift */; };
 		2A98DF4E22AECFCC00F6F2AE /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */; };
 		2A99310022BA87E100BB3DF2 /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */; };
+		2AA21EE7231567BA00A9C128 /* apiService.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AA21EE6231567BA00A9C128 /* apiService.plist */; };
+		2AA21EE92315683600A9C128 /* apiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA21EE82315683600A9C128 /* apiService.swift */; };
 		2AA656B522E8752C0030813D /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA656B422E8752C0030813D /* RequestResult.swift */; };
 		2AAA793D22AA47E800529F2B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAA793C22AA47E800529F2B /* UITextField.swift */; };
 		2AAA794322AAB8E000529F2B /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAA794222AAB8E000529F2B /* ItemDetailsVC.swift */; };
@@ -234,6 +236,8 @@
 		2A98DF4B22AEBD6400F6F2AE /* DonorItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonorItemType.swift; sourceTree = "<group>"; };
 		2A98DF4D22AECFCC00F6F2AE /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		2A9930FF22BA87E100BB3DF2 /* DeviceName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceName.swift; sourceTree = "<group>"; };
+		2AA21EE6231567BA00A9C128 /* apiService.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiService.plist; sourceTree = "<group>"; };
+		2AA21EE82315683600A9C128 /* apiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiService.swift; sourceTree = "<group>"; };
 		2AA656B422E8752C0030813D /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		2AAA793C22AA47E800529F2B /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		2AAA794222AAB8E000529F2B /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
@@ -592,6 +596,8 @@
 				2AB43531229E55FF007BFB93 /* LaunchScreen.storyboard */,
 				2AB43534229E55FF007BFB93 /* Info.plist */,
 				2A185384230BDD180094CC32 /* GoogleService-Info.plist */,
+				2AA21EE6231567BA00A9C128 /* apiService.plist */,
+				2AA21EE82315683600A9C128 /* apiService.swift */,
 				2A067279229E8B6A00FFAECE /* Fonts */,
 			);
 			path = "Supporting Files";
@@ -990,6 +996,7 @@
 				2AFA4EC522A8FCBB0039803E /* FavoriteTVC.xib in Resources */,
 				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
 				2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */,
+				2AA21EE7231567BA00A9C128 /* apiService.plist in Resources */,
 				2A901EAC22AFF9C000D3DD2A /* ReceiverTVC.xib in Resources */,
 				2AC8D0FE22A12A5000416832 /* HistoryFavorite.storyboard in Resources */,
 			);
@@ -1111,6 +1118,7 @@
 				2AD516A922B11F640032F28F /* MapViewVC.swift in Sources */,
 				2AD516AD22B2B79C0032F28F /* UILabel.swift in Sources */,
 				2A6D697E22B97C850073053F /* UINavigationController.swift in Sources */,
+				2AA21EE92315683600A9C128 /* apiService.swift in Sources */,
 				2A7E72D4230F49A2008AA3C1 /* PushNotification.swift in Sources */,
 				2A6DBB7122CF932200B0EC75 /* String.swift in Sources */,
 				2AE322B522ADC69400CF627C /* AlertMessage.swift in Sources */,
