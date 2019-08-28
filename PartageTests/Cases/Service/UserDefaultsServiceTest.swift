@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Partage
+@testable import Partages
 import Foundation
 
 class UserDefaultsServiceTest: XCTestCase {

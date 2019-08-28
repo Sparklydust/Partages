@@ -13,6 +13,7 @@
 		2A067284229ED63E00FFAECE /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067283229ED63E00FFAECE /* EditProfileVC.swift */; };
 		2A0796902311DA1A00B9DD23 /* AppStoreReviewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A07968F2311DA1A00B9DD23 /* AppStoreReviewHandler.swift */; };
 		2A0799802312ACC300B9DD23 /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A07997F2312ACC300B9DD23 /* GoogleAd.swift */; };
+		2A0A5AD823169FDC0035685C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A0A5ADA23169FDC0035685C /* InfoPlist.strings */; };
 		2A1391AB230D2AF400DCA721 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1391AA230D2AF400DCA721 /* LocalizableStrings.swift */; };
 		2A1391BA230D31F500DCA721 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A1391BC230D31F500DCA721 /* Localizable.strings */; };
 		2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A185384230BDD180094CC32 /* GoogleService-Info.plist */; };
@@ -168,6 +169,8 @@
 		2A067283229ED63E00FFAECE /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		2A07968F2311DA1A00B9DD23 /* AppStoreReviewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewHandler.swift; sourceTree = "<group>"; };
 		2A07997F2312ACC300B9DD23 /* GoogleAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
+		2A0A5AD923169FDC0035685C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2A0A5ADB23169FDE0035685C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2A1391AA230D2AF400DCA721 /* LocalizableStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		2A1391AC230D2B6600DCA721 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2A1391AD230D2B6600DCA721 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -375,6 +378,7 @@
 			children = (
 				2A1391AA230D2AF400DCA721 /* LocalizableStrings.swift */,
 				2A1391BC230D31F500DCA721 /* Localizable.strings */,
+				2A0A5ADA23169FDC0035685C /* InfoPlist.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -994,6 +998,7 @@
 				2A87EC6422A65A6000EB969D /* SenderTVC.xib in Resources */,
 				2A289FA022A53E4200EB076A /* MessageTVC.xib in Resources */,
 				2AFA4EC522A8FCBB0039803E /* FavoriteTVC.xib in Resources */,
+				2A0A5AD823169FDC0035685C /* InfoPlist.strings in Resources */,
 				2AC8D0FA22A1298A00416832 /* Message.storyboard in Resources */,
 				2A185385230BDD180094CC32 /* GoogleService-Info.plist in Resources */,
 				2AA21EE7231567BA00A9C128 /* apiService.plist in Resources */,
@@ -1177,6 +1182,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2A0A5ADA23169FDC0035685C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A0A5AD923169FDC0035685C /* en */,
+				2A0A5ADB23169FDE0035685C /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		2A1391BC230D31F500DCA721 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1221,9 +1235,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sparklydust.PartageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Partage;
+				TEST_TARGET_NAME = Partages;
 			};
 			name = Debug;
 		};
@@ -1241,9 +1256,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sparklydust.PartageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Partage;
+				TEST_TARGET_NAME = Partages;
 			};
 			name = Release;
 		};

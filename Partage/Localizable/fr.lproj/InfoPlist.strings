@@ -1,0 +1,14 @@
+/* 
+  InfoPlist.strings
+  Partages
+
+  Created by Roland Lariotte on 28/08/2019.
+  Copyright © 2019 Roland Lariotte. All rights reserved.
+*/
+
+
+//MARK: - Info.plist file strings to be localizabled
+"NSCalendarsUsageDescription" = "Partages a besoin d'accéder à votre calendrier pour enregistrer votre rendez-vous";
+"NSCameraUsageDescription" = "Partages a besoin d'accéder à votre caméra pour partager l'image d'un don ou votre photo de profil";
+"NSPhotoLibraryUsageDescription" = "Partages a besoin d'accéder à votre album pour partager l'image d'un don ou votre photo de profil";
+"NSLocationWhenInUseUsageDescription" = "Partages a besoin d'accéder à votre localisation pour partager celle d'un don";

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Partage
+@testable import Partages
 
 class AuthTest: XCTestCase {
   var loginUser: FullUser!

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Partage
+@testable import Partages
 
 class ResourceRequestTest_GET: XCTestCase {
   var resourcePath: String!

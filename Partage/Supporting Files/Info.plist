@@ -4,58 +4,36 @@
 <dict>
 	<key></key>
 	<string></string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Partages</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Partages needs to access your calendar</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleVersion</key>
+	<string>4</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Partages needs to access your camera</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>3</string>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 	</dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Partage a besoin d'accéder à votre calendrier</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Partage a besoin d'accéder à votre camera</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Partage a besoin d'accéder à votre localisation</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Partage a besoin d'accéder à votre album</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>superclarendon-lt.ttf</string>
-		<string>Arial Black.ttf</string>
-		<string>superclarendon-rg-bold.ttf</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -64,5 +42,27 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>superclarendon-lt.ttf</string>
+		<string>Arial Black.ttf</string>
+		<string>superclarendon-rg-bold.ttf</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>CFBundleDisplayName</key>
+	<string>Partages</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Partages needs to access your photo library</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Partages needs to access your localisation</string>
 </dict>
 </plist>

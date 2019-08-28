@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import Partage
+@testable import Partages
 
 class FakeSettingsContainer: SettingsContainer {
   var userToken: String?
