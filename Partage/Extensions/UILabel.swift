@@ -38,7 +38,7 @@ extension UILabel {
 //MARK: - Dot button is selected design
 extension UILabel {
   func isSelectedDesign() {
-    self.text = "●"
+    self.text = StaticLabel.dotLabel.description
     self.textColor = .mainBlue
     self.font = UIFont(customFont: .arialBold, withSize: .seventeen)
 

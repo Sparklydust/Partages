@@ -12,7 +12,7 @@
         <!--History FavoriteVC-->
         <scene sceneID="HkG-Xm-lcc">
             <objects>
-                <viewController id="FIT-Tf-2tP" customClass="HistoryFavoriteVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FIT-Tf-2tP" customClass="HistoryFavoriteVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7nd-t0-5ha">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,12 +50,22 @@
                                     <constraint firstAttribute="bottom" secondItem="r7i-ke-RLG" secondAttribute="bottom" id="yeV-g5-jGO"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFI-Lv-q4Q">
+                                <rect key="frame" x="40" y="448" width="334" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="QFI-Lv-q4Q" firstAttribute="centerX" secondItem="7nd-t0-5ha" secondAttribute="centerX" id="9wT-iT-Iqj"/>
                             <constraint firstItem="33U-0i-Fxz" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="C2A-RB-KDv"/>
                             <constraint firstItem="Iko-Xi-eoO" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="D2o-gC-FHf"/>
                             <constraint firstItem="ygz-4A-PoC" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" id="Ddh-Sk-iFu"/>
+                            <constraint firstItem="QFI-Lv-q4Q" firstAttribute="leading" secondItem="9n1-bt-e8e" secondAttribute="leading" constant="40" id="DrY-vG-vDH">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="9n1-bt-e8e" firstAttribute="trailing" secondItem="33U-0i-Fxz" secondAttribute="trailing" id="Mkj-HS-Ind"/>
                             <constraint firstItem="ygz-4A-PoC" firstAttribute="trailing" secondItem="9n1-bt-e8e" secondAttribute="trailing" id="R7l-xt-LHt"/>
                             <constraint firstItem="9n1-bt-e8e" firstAttribute="bottom" secondItem="33U-0i-Fxz" secondAttribute="bottom" id="ZSs-TS-Xgi"/>
@@ -66,6 +76,10 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                             </constraint>
                             <constraint firstItem="Iko-Xi-eoO" firstAttribute="trailing" secondItem="9n1-bt-e8e" secondAttribute="trailing" id="qqF-52-mWA"/>
+                            <constraint firstItem="9n1-bt-e8e" firstAttribute="trailing" secondItem="QFI-Lv-q4Q" secondAttribute="trailing" constant="40" id="rNz-6O-8E9">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
+                            <constraint firstItem="QFI-Lv-q4Q" firstAttribute="centerY" secondItem="7nd-t0-5ha" secondAttribute="centerY" id="xKK-IZ-Ccb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9n1-bt-e8e"/>
                     </view>
@@ -82,6 +96,7 @@
                         <outlet property="editButton" destination="xgs-pZ-j6N" id="E5u-xA-ylo"/>
                         <outlet property="favoriteButton" destination="r7i-ke-RLG" id="BFp-J4-QPE"/>
                         <outlet property="historyButton" destination="Puk-s8-dHr" id="iTm-O3-6Qj"/>
+                        <outlet property="noHistoryOrFavoriteInfo" destination="QFI-Lv-q4Q" id="e8F-OU-RkD"/>
                         <segue destination="9Jz-Qm-H6A" kind="show" identifier="goToItemDetailsVC" id="chu-9N-NEz"/>
                         <segue destination="FEs-bx-wjW" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="bUU-4F-frc"/>
                         <segue destination="SDQ-L0-F1v" kind="presentation" identifier="goToSignInSignUpVC" id="LYy-g6-7qU"/>
@@ -103,7 +118,7 @@
         <!--Item DetailsVC-->
         <scene sceneID="yhY-KR-WcN">
             <objects>
-                <viewController id="9Jz-Qm-H6A" customClass="ItemDetailsVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Jz-Qm-H6A" customClass="ItemDetailsVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cxs-99-ELN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

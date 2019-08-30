@@ -25,6 +25,9 @@
 "donationNotSelected" = "donation not selected";
 "userLeftTheConversation" = "has left the conversation";
 "closedConversation" = "conversation closed";
+"noMessageInfo" = "You have no message";
+"noHistoryInfo" = "You have no history";
+"noFavoriteInfo" = "You have no favorite";
 
 
 //MARK: - Buttons name
@@ -41,7 +44,7 @@
 "lowEraseAccount" = "delete my account";
 "lowLostPassword" = "lost password";
 "send" = "Send";
-"receiveThisDonation" = "receive this donation";
+"receiveThisDonation" = "Receive this donation";
 "messageToReceiver" = "Message to receiver";
 "messageToDonor" = "Message to donor";
 "addToCalendar" = "Add to calendar";

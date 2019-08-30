@@ -18,6 +18,7 @@ class HistoryFavoriteVC: UIViewController {
   @IBOutlet weak var historyButton: UIButton!
   @IBOutlet weak var favoriteButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var noHistoryOrFavoriteInfo: UILabel!
 
   var userDonatedItems = [DonatedItem]()
   var userReceivedItems = [DonatedItem]()
@@ -98,6 +99,7 @@ extension HistoryFavoriteVC {
     setupTableViewDesign()
     setupCellSizeForIPad()
     setupRefreshControl()
+    setupNoHistoryOrFavoriteInfo()
   }
 
   //MARK: Main view design
@@ -186,6 +188,13 @@ extension HistoryFavoriteVC {
       HistoryFavoriteTableView.rowHeight = 150
     }
   }
+
+  //MARK: - Setup label if user has no history or favorite
+  func setupNoHistoryOrFavoriteInfo() {
+    noHistoryOrFavoriteInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    noHistoryOrFavoriteInfo.textAlignment = .center
+    noHistoryOrFavoriteInfo.text = nil
+  }
 }
 
 //MARK: - Setup all custom cells design
@@ -238,11 +247,13 @@ extension HistoryFavoriteVC {
     if isHistoryButtonClicked {
       DispatchQueue.main.async {
         self.reloadHistoryItems()
+        self.noHistoryOrFavoriteInfoIfNeeded()
       }
     }
     else {
       DispatchQueue.main.async {
         self.reloadFavoritedItems()
+        self.noHistoryOrFavoriteInfoIfNeeded()
       }
     }
   }
@@ -294,6 +305,7 @@ extension HistoryFavoriteVC {
           guard let self = self else { return }
           self.itemsHistory = [DonatedItem]()
           self.itemsHistory.append(contentsOf: donatedItems)
+          self.noHistoryOrFavoriteInfoIfNeeded()
           completionHandler()
           self.triggerActivityIndicator(false)
         }
@@ -324,6 +336,7 @@ extension HistoryFavoriteVC {
           self.itemsHistory.append(contentsOf: receivedItems)
           self.reloadHistoryItems()
           self.triggerActivityIndicator(false)
+          self.noHistoryOrFavoriteInfoIfNeeded()
         }
       }
     }
@@ -353,6 +366,7 @@ extension HistoryFavoriteVC {
           self.itemsFavorited.append(contentsOf: itemsFavorited)
           self.reloadFavoritedItems()
           self.triggerActivityIndicator(false)
+          self.noHistoryOrFavoriteInfoIfNeeded()
         }
       }
     }
@@ -596,5 +610,25 @@ extension HistoryFavoriteVC {
     checkIfAnUserIsConnected()
     fetchItemsHitstory()
     fetchFavoritedItems()
+  }
+}
+
+//MARK: - Show info to a user if he has no history or no favorite
+extension HistoryFavoriteVC {
+  func noHistoryOrFavoriteInfoIfNeeded() {
+    if isHistoryButtonClicked {
+      guard itemsHistory.count == 0 else {
+        noHistoryOrFavoriteInfo.text = nil
+        return
+      }
+      noHistoryOrFavoriteInfo.text = StaticLabel.noHistoryInfo.description
+    }
+    else {
+      guard itemsFavorited.count == 0 else {
+        noHistoryOrFavoriteInfo.text = nil
+        return
+      }
+      noHistoryOrFavoriteInfo.text = StaticLabel.noFavoriteInfo.description
+    }
   }
 }

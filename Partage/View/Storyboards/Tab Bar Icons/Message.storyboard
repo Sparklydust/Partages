@@ -12,7 +12,7 @@
         <!--MessageVC-->
         <scene sceneID="kMa-zJ-5KC">
             <objects>
-                <viewController id="77G-6s-ulF" customClass="MessageVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="77G-6s-ulF" customClass="MessageVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7C-RR-wS9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,17 +25,31 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S6l-GY-XdZ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6C-9G-9PL">
+                                <rect key="frame" x="40" y="448" width="334" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="K1a-eD-nOy" firstAttribute="bottom" secondItem="WQj-iK-QoL" secondAttribute="bottom" id="6pE-v1-YGg"/>
+                            <constraint firstItem="U6C-9G-9PL" firstAttribute="leading" secondItem="K1a-eD-nOy" secondAttribute="leading" constant="40" id="784-IE-FCx">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="S6l-GY-XdZ" firstAttribute="leading" secondItem="K1a-eD-nOy" secondAttribute="leading" id="Ex7-IQ-iWG"/>
                             <constraint firstItem="WQj-iK-QoL" firstAttribute="top" secondItem="K1a-eD-nOy" secondAttribute="top" id="Mof-wZ-5wt"/>
+                            <constraint firstItem="U6C-9G-9PL" firstAttribute="centerY" secondItem="l7C-RR-wS9" secondAttribute="centerY" id="Pc0-xs-vWy"/>
                             <constraint firstItem="K1a-eD-nOy" firstAttribute="bottom" secondItem="S6l-GY-XdZ" secondAttribute="bottom" id="Q3y-1g-M5f"/>
+                            <constraint firstItem="U6C-9G-9PL" firstAttribute="centerX" secondItem="l7C-RR-wS9" secondAttribute="centerX" id="QTM-bq-YvK"/>
                             <constraint firstItem="WQj-iK-QoL" firstAttribute="leading" secondItem="K1a-eD-nOy" secondAttribute="leading" id="SJp-Ti-Gch"/>
                             <constraint firstItem="S6l-GY-XdZ" firstAttribute="top" secondItem="K1a-eD-nOy" secondAttribute="top" id="ZcT-1n-gvF"/>
                             <constraint firstItem="S6l-GY-XdZ" firstAttribute="trailing" secondItem="K1a-eD-nOy" secondAttribute="trailing" id="iM7-pv-RKf"/>
                             <constraint firstItem="K1a-eD-nOy" firstAttribute="trailing" secondItem="WQj-iK-QoL" secondAttribute="trailing" id="kbc-m1-EDm"/>
+                            <constraint firstItem="K1a-eD-nOy" firstAttribute="trailing" secondItem="U6C-9G-9PL" secondAttribute="trailing" constant="40" id="z2Q-eC-rGr">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K1a-eD-nOy"/>
                     </view>
@@ -50,6 +64,7 @@
                         <outlet property="activityIndicator" destination="S6l-GY-XdZ" id="O5x-qY-S99"/>
                         <outlet property="editButton" destination="Ih5-il-RPe" id="Ei1-Kn-4WB"/>
                         <outlet property="messageTableView" destination="WQj-iK-QoL" id="kjP-Ox-VJh"/>
+                        <outlet property="noMessageInfo" destination="U6C-9G-9PL" id="3a9-jH-TU8"/>
                         <segue destination="lLC-Dh-5o5" kind="show" identifier="goToChatMessageVC" id="STX-Vo-GlK"/>
                         <segue destination="Xhi-7D-CU6" kind="unwind" identifier="unwindToSignInVC" unwindAction="unwindToSignInVCWithSegue:" id="UNK-Ax-MF7"/>
                         <segue destination="PCr-2K-JBy" kind="presentation" identifier="goToSignInSignUpVC" id="aK5-Di-dXp"/>
@@ -58,7 +73,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Va-XH-L1S" sceneMemberID="firstResponder"/>
                 <exit id="Xhi-7D-CU6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="-239"/>
+            <point key="canvasLocation" x="2501.449275362319" y="-239.0625"/>
         </scene>
         <!--SignInSignUp-->
         <scene sceneID="Fef-SA-Dbs">
@@ -71,7 +86,7 @@
         <!--Chat MessageVC-->
         <scene sceneID="GlX-Ja-zJ8">
             <objects>
-                <viewController id="lLC-Dh-5o5" customClass="ChatMessageVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lLC-Dh-5o5" customClass="ChatMessageVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w1m-GN-OYz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -32,6 +32,10 @@ enum StaticLabel: String {
   case stringTokenFormat
   case apiService
   case plist
+  case dotLabel
+  case noMessageInfo
+  case noHistoryInfo
+  case noFavoriteInfo
 
   var description: String {
     get {
@@ -80,6 +84,14 @@ enum StaticLabel: String {
         return LocalizableStrings.apiService
       case .plist:
         return LocalizableStrings.plist
+      case .dotLabel:
+        return LocalizableStrings.dotLabel
+      case .noMessageInfo:
+        return LocalizableStrings.noMessageInfo
+      case .noHistoryInfo:
+        return LocalizableStrings.noHistoryInfo
+      case .noFavoriteInfo:
+        return LocalizableStrings.noFavoriteInfo
       }
     }
   }

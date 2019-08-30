@@ -274,7 +274,6 @@ extension ChatMessageVC {
     if let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) {
       date = dateAndTime.asString(style: .short)
       time = dateAndTime.asString()
-
       if dateAndTime.isGreaterThanDate(dateToCompare: Date()) {
         dateToShow = "\(date!)  \(time!)"
       }

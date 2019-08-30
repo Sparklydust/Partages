@@ -176,6 +176,8 @@ extension SharingVC {
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
+          self?.deleteUserFromUserDefaults()
+          self?.populateUserInfoOnSignInButton()
           self?.showAlert(title: .errorTitle, message: .networkRequestError)
         }
       case .success(let user):
@@ -232,5 +234,13 @@ extension SharingVC {
     let newInterstitial = GADInterstitial(adUnitID: GoogleAd.unitID.description)
     newInterstitial.load(GADRequest())
     return newInterstitial
+  }
+}
+
+//MARK: - Delete user inside user defaults
+extension SharingVC {
+  func deleteUserFromUserDefaults() {
+    UserDefaultsService.shared.userToken = nil
+    UserDefaultsService.shared.userID = nil
   }
 }

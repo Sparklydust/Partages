@@ -4,6 +4,7 @@
 
 #Partages.app apiService file with hidden path to PartagesServerSide
 Partage/Supporting\ Files/apiService.plist
+Partage/Supporting\ Files/GoogleService-Info.plist
 
 ## User settings
 xcuserdata/

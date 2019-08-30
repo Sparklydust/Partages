@@ -15,6 +15,7 @@ class MessageVC: UIViewController {
   @IBOutlet weak var messageTableView: UITableView!
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var noMessageInfo: UILabel!
 
   var userID = String()
   var userFetch = String()
@@ -108,6 +109,7 @@ extension MessageVC {
     setupNavigationController()
     setupTableViewDesign()
     setupCellHeightForIPad()
+    setupNoMessageInfo()
   }
 
   //MARK: Main view design
@@ -174,6 +176,13 @@ extension MessageVC {
     if UIDevice.current.userInterfaceIdiom == .pad {
       messageTableView.rowHeight = 120
     }
+  }
+
+  //MARK: - Setup label if user has no message
+  func setupNoMessageInfo() {
+    noMessageInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    noMessageInfo.textAlignment = .center
+    noMessageInfo.text = nil
   }
 }
 
@@ -334,6 +343,7 @@ extension MessageVC {
           self.triggerActivityIndicator(false)
           self.reloadDataWithAnimation()
           self.getMessageIndexPathToOpen()
+          self.showNoMessageInfoIfNeeded()
         }
       }
     }
@@ -357,6 +367,7 @@ extension MessageVC {
           self.triggerActivityIndicator(false)
           self.messageTableView.reloadData()
           self.getMessageIndexPathToOpen()
+          self.showNoMessageInfoIfNeeded()
         }
       }
     }
@@ -441,6 +452,7 @@ extension MessageVC {
             lastMessageID != incomingMessages.last?.id || self!.newChatBubbleArrived {
             self?.messages = [Message]()
             self?.messages.append(contentsOf: incomingMessages)
+            self?.showNoMessageInfoIfNeeded()
             self?.messageTableView.reloadData()
           }
         }
@@ -653,5 +665,17 @@ extension MessageVC {
   func emptyTableViewForDisconnectedUser() {
     messages = [Message]()
     messageTableView.reloadData()
+  }
+}
+
+//MARK: - Show info to a user if he has no message
+extension MessageVC {
+  func showNoMessageInfoIfNeeded() {
+    if messages.count == 0 {
+      noMessageInfo.text = StaticLabel.noMessageInfo.description
+    }
+    else {
+      noMessageInfo.text = nil
+    }
   }
 }

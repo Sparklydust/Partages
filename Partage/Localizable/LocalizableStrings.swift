@@ -28,6 +28,8 @@ extension LocalizableStrings {
     "apiService", comment: "used to get the hidden API path to PartageServerSide")
   static let plist = NSLocalizedString(
     "plist", comment: "name of plist file to be used in apiService.swift")
+  static let dotLabel = NSLocalizedString(
+    "●", comment: "dot used on sign in/sign up button to specify which one is chosen")
 }
 
 //MARK: - Keys for User Defaults, picker text color and apiResource - Not Localizable -
@@ -157,6 +159,12 @@ extension LocalizableStrings {
     "userLeftTheConversation", comment: "to tell when an user left a conversation in message")
   static let closedConversation = NSLocalizedString(
     "closedConversation", comment: "to tell users that the conversation is closed in messages table view")
+  static let noMessageInfo = NSLocalizedString(
+    "noMessageInfo", comment: "label shown if a user has no message")
+  static let noHistoryInfo = NSLocalizedString(
+    "You have no history", comment: "label shown if a user has no history")
+  static let noFavoriteInfo = NSLocalizedString(
+    "You have no favorite", comment: "label shown if a user has no favorite")
 }
 
 //MARK: - Buttons name - Localizable Strings -
