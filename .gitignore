@@ -6,6 +6,9 @@
 Partage/Supporting\ Files/apiService.plist
 Partage/Supporting\ Files/GoogleService-Info.plist
 
+*.apiService.plist
+*.GoogleService-Info.plist
+
 ## User settings
 xcuserdata/
 
