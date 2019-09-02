@@ -27,9 +27,13 @@
                         <color key="backgroundColor" red="0.31372549019607843" green="0.58823529411764708" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="EhA-AW-9TB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="BX5-hI-hoM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EhA-AW-9TB" secondAttribute="trailing" constant="125" id="HIy-Qx-5B1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EhA-AW-9TB" secondAttribute="trailing" constant="125" id="HIy-Qx-5B1">
+                                <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                            </constraint>
                             <constraint firstItem="EhA-AW-9TB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dja-x1-qgu"/>
-                            <constraint firstItem="EhA-AW-9TB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="125" id="pA9-vP-gD6"/>
+                            <constraint firstItem="EhA-AW-9TB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="125" id="pA9-vP-gD6">
+                                <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -12,7 +12,7 @@
         <!--ReceiverVC-->
         <scene sceneID="DQD-Rg-9tm">
             <objects>
-                <viewController id="nPu-gd-CDC" customClass="ReceiverVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nPu-gd-CDC" customClass="ReceiverVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kFw-uu-oOA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,13 +21,18 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B9E-u4-udk">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6it-Db-9rP" firstAttribute="top" secondItem="j1M-s0-MvK" secondAttribute="top" id="3o9-ki-R9h"/>
                             <constraint firstItem="6it-Db-9rP" firstAttribute="leading" secondItem="j1M-s0-MvK" secondAttribute="leading" id="UGN-WI-JcY"/>
+                            <constraint firstItem="B9E-u4-udk" firstAttribute="centerX" secondItem="kFw-uu-oOA" secondAttribute="centerX" id="a27-gj-20m"/>
                             <constraint firstItem="j1M-s0-MvK" firstAttribute="bottom" secondItem="6it-Db-9rP" secondAttribute="bottom" id="lxv-ci-bl7"/>
                             <constraint firstItem="j1M-s0-MvK" firstAttribute="trailing" secondItem="6it-Db-9rP" secondAttribute="trailing" id="sKa-2A-GfV"/>
+                            <constraint firstItem="B9E-u4-udk" firstAttribute="centerY" secondItem="kFw-uu-oOA" secondAttribute="centerY" id="uad-Os-aMU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j1M-s0-MvK"/>
                     </view>
@@ -36,6 +41,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="B9E-u4-udk" id="lHY-kP-Cs0"/>
                         <outlet property="receiverTableView" destination="6it-Db-9rP" id="GML-aL-IgO"/>
                         <segue destination="gMS-Mx-z07" kind="show" identifier="goToItemSelectedVC" id="3MZ-ZX-IeN"/>
                     </connections>
@@ -47,7 +53,7 @@
         <!--Item SelectedVC-->
         <scene sceneID="thA-ZM-epy">
             <objects>
-                <viewController id="gMS-Mx-z07" customClass="ItemSelectedVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gMS-Mx-z07" customClass="ItemSelectedVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="swY-pW-k6P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

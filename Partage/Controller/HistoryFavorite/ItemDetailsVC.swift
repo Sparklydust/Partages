@@ -304,8 +304,11 @@ extension ItemDetailsVC {
       calendarTitle = StaticLabel.donorCalendarTitle.description + itemDetails.name
     }
     guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
-    EventHandler.shared.addEventToCalendar(
-      vc: self, title: calendarTitle, location: address, startDate: dateAndTime, notes: itemDetails.description)
+    EventHandler.shared.addEventToCalendar(vc: self,
+                                           title: calendarTitle,
+                                           location: address,
+                                           startDate: dateAndTime,
+                                           notes: itemDetails.description)
     triggerAddToCalendarActivityIndicator(false)
   }
 }

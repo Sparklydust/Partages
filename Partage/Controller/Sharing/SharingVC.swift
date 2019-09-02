@@ -36,7 +36,6 @@ class SharingVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
-    triggerActivityIndicator(false)
     populateSignInSignUpButtonDesign()
     displayGoogleAdIfAuthorized()
   }
@@ -72,7 +71,7 @@ extension SharingVC {
 
   //MARK: Receiver Button Action
   @IBAction func receiverButtonAction(_ sender: Any) {
-    fetchDonorsItemsFromDatabase()
+    performSegue(withIdentifier: Segue.goToReceiverVC.rawValue, sender: self)
   }
 }
 
@@ -108,65 +107,8 @@ extension SharingVC {
   }
 }
 
-//MARK: - Activity Indicator action and setup
-extension SharingVC {
-  func triggerActivityIndicator(_ action: Bool) {
-    guard action else {
-      hideActivityIndicator()
-      return
-    }
-    showActivityIndicator()
-  }
-
-  func showActivityIndicator() {
-    activityIndicatorReceive.isHidden = false
-    activityIndicatorReceive.style = .whiteLarge
-    activityIndicatorReceive.color = .iceBackground
-    view.addSubview(activityIndicatorReceive)
-    activityIndicatorReceive.startAnimating()
-    receiveButton.shareReceiveDesign(title: .emptyString)
-    receiveButton.isHidden = false
-  }
-
-  func hideActivityIndicator() {
-    activityIndicatorReceive.isHidden = true
-    receiveButton.shareReceiveDesign(title: .receiveMain)
-  }
-}
-
-//MARK: - Prepare for segue
-extension SharingVC {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Segue.goToReceiverVC.rawValue {
-      let destinationVC = segue.destination as! ReceiverVC
-      destinationVC.donatedItems = donatedItems
-    }
-  }
-}
-
 //MARK: - API Calls
 extension SharingVC {
-  //MARK: Fetch all donors items from database and perform segue to ReceiverVC
-  func fetchDonorsItemsFromDatabase() {
-    triggerActivityIndicator(true)
-    let resourcePath = NetworkPath.donatedItems.description
-    ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
-      switch result {
-      case .failure:
-        DispatchQueue.main.async { [weak self] in
-          self?.showAlert(title: .errorTitle, message: .networkRequestError)
-          self?.triggerActivityIndicator(false)
-        }
-      case .success(let donatedItems):
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.donatedItems = donatedItems
-          self.performSegue(withIdentifier: Segue.goToReceiverVC.rawValue, sender: donatedItems)
-        }
-      }
-    }
-  }
-
   //MARK: Fetch user from the database
   func fetchUserFromTheDatabase() {
     guard UserDefaultsService.shared.userID != nil else { return }

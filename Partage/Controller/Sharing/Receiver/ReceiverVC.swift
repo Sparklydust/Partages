@@ -12,6 +12,7 @@ import CoreLocation
 class ReceiverVC: UIViewController {
 
   @IBOutlet weak var receiverTableView: UITableView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
   var donatedItems = [DonatedItem]()
   var itemsNotPicked = [DonatedItem]()
@@ -20,6 +21,7 @@ class ReceiverVC: UIViewController {
   var isFavorited = false
 
   let refreshControl = UIRefreshControl()
+  var refreshControlTriggered = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,6 +32,7 @@ class ReceiverVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     navigationController?.setNavigationBarHidden(false, animated: false)
+    triggerActivityIndicator(false)
     itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
     fetchDonorsItemsFromDatabase()
   }
@@ -173,6 +176,29 @@ extension ReceiverVC {
   }
 }
 
+//MARK: - Activity Indicator action and setup
+extension ReceiverVC {
+  func triggerActivityIndicator(_ action: Bool) {
+    guard action else {
+      hideActivityIndicator()
+      return
+    }
+    showActivityIndicator()
+  }
+
+  func showActivityIndicator() {
+    activityIndicator.isHidden = false
+    activityIndicator.style = .whiteLarge
+    activityIndicator.color = .mainBlue
+    view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+  }
+
+  func hideActivityIndicator() {
+    activityIndicator.isHidden = true
+  }
+}
+
 //MARK: - Prepare for segue
 extension ReceiverVC {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -206,21 +232,25 @@ extension ReceiverVC {
     }
   }
 
-
-//MARK: Fetch all donated items from database for refresh control
+//MARK: Fetch all donated items from database
   func fetchDonorsItemsFromDatabase() {
+    if !refreshControlTriggered {
+      triggerActivityIndicator(true)
+    }
     let resourcePath = NetworkPath.donatedItems.description
     ResourceRequest<DonatedItem>(resourcePath).getAll(tokenNeeded: false) { (result) in
       switch result {
       case .failure:
         DispatchQueue.main.async { [weak self] in
           self?.showAlert(title: .errorTitle, message: .networkRequestError)
+          self?.triggerActivityIndicator(false)
           self?.endRefreshing()
         }
       case .success(let donatedItems):
         DispatchQueue.main.async { [weak self] in
           guard let self = self else { return }
           self.donatedItems = [DonatedItem]()
+          self.triggerActivityIndicator(false)
           self.itemsNotPicked = donatedItems.filter({ $0.isPicked == false })
           self.receiverTableView.reloadData()
           self.endRefreshing()
@@ -239,11 +269,13 @@ extension ReceiverVC {
   }
 
   @objc private func refreshDonatedItems(_ sender: Any) {
+    refreshControlTriggered = true
     fetchDonorsItemsFromDatabase()
   }
 
   func endRefreshing() {
     refreshControl.endRefreshing()
+    refreshControlTriggered = false
   }
 }
 

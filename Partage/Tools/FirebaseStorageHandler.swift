@@ -53,8 +53,8 @@ extension FirebaseStorageHandler {
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
 
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
-      if let error = error {
-        print(error.localizedDescription)
+      if error != nil {
+        uiImageView.image = UIImage(named: ImageName.noPicture.rawValue)
         return
       }
       if let data = data {
@@ -72,8 +72,8 @@ extension FirebaseStorageHandler {
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
 
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
-      if let error = error {
-        print(error.localizedDescription)
+      if error != nil {
+        uiImageView.image = UIImage(named: ImageName.noPicture.rawValue)
         return
       }
       if let data = data {
@@ -91,8 +91,8 @@ extension FirebaseStorageHandler {
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
 
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
-      if let error = error {
-        print(error.localizedDescription)
+      if  error != nil {
+        cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
         return
       }
       if let data = data {
@@ -110,12 +110,15 @@ extension FirebaseStorageHandler {
     let storageRef = Storage.storage().reference(withPath: profilePicturePath)
 
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
-      if let error = error {
-        print(error.localizedDescription)
+      if error != nil {
+        cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
         return
       }
       if let data = data {
         cell.profileImage.image = UIImage(data: data)
+      }
+      else {
+        cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
       }
     }
   }
@@ -167,8 +170,8 @@ extension FirebaseStorageHandler {
     let storageRef = Storage.storage().reference(withPath: itemImagePath)
 
     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
-      if let error = error {
-        print(error.localizedDescription)
+      if error != nil {
+        uiImageView.image = UIImage(named: ImageName.noImage.rawValue)
         return
       }
       if let data = data {
