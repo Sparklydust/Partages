@@ -144,6 +144,12 @@ extension MessageVC: UITableViewDataSource, UITableViewDelegate {
     }
     return cell
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let messageID = messages[indexPath.row].id else { return }
+    messageIDToOpen = messageID
+    fetchChatMessagesFromSelectedCells(messageID)
+  }
 }
 
 //MARK: - Design setup
@@ -183,15 +189,6 @@ extension MessageVC {
     noMessageInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
     noMessageInfo.textAlignment = .center
     noMessageInfo.text = nil
-  }
-}
-
-//MARK: - Segue action
-extension MessageVC {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let messageID = messages[indexPath.row].id else { return }
-    messageIDToOpen = messageID
-    fetchChatMessagesFromSelectedCells(messageID)
   }
 }
 
@@ -310,12 +307,6 @@ extension MessageVC {
       destinationVC.chatBubbles = chatMessages
       guard let messageID = messageIDToOpen else { return }
       destinationVC.conversationID = messageID
-      if firstUserID == UserDefaultsService.shared.userID {
-        destinationVC.userRecipientID = userFetch
-      }
-      else {
-        destinationVC.userRecipientID = userFetch
-      }
     }
   }
 }
@@ -460,7 +451,7 @@ extension MessageVC {
     }
   }
 
-  //MARK: Fetch chat messages to tack if new message need to be reloaded
+  //MARK: Fetch chat messages to track if new message need to be reloaded
   func fetchChatMessagesToTrackNewBubble(of messageID: Int) {
     guard UserDefaultsService.shared.userID != nil else { return }
 

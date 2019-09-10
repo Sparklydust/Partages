@@ -58,7 +58,9 @@ extension FirebaseStorageHandler {
         return
       }
       if let data = data {
-        uiImageView.image = UIImage(data: data)
+        DispatchQueue.main.async {
+          uiImageView.image = UIImage(data: data)
+        }
       }
     }
   }
@@ -77,7 +79,9 @@ extension FirebaseStorageHandler {
         return
       }
       if let data = data {
-        uiImageView.image = UIImage(data: data)
+        DispatchQueue.main.async {
+          uiImageView.image = UIImage(data: data)
+        }
       }
     }
   }
@@ -96,7 +100,9 @@ extension FirebaseStorageHandler {
         return
       }
       if let data = data {
-        cell.profileImage.image = UIImage(data: data)
+        DispatchQueue.main.async {
+          cell.profileImage.image = UIImage(data: data)
+        }
       }
     }
   }
@@ -114,11 +120,13 @@ extension FirebaseStorageHandler {
         cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
         return
       }
-      if let data = data {
-        cell.profileImage.image = UIImage(data: data)
-      }
-      else {
-        cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
+      DispatchQueue.main.async {
+        if let data = data {
+          cell.profileImage.image = UIImage(data: data)
+        }
+        else {
+          cell.profileImage.image = UIImage(named: ImageName.noPicture.rawValue)
+        }
       }
     }
   }
@@ -175,7 +183,9 @@ extension FirebaseStorageHandler {
         return
       }
       if let data = data {
-        uiImageView.image = UIImage(data: data)
+        DispatchQueue.main.async {
+          uiImageView.image = UIImage(data: data)
+        }
       }
     }
   }

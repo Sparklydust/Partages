@@ -282,7 +282,7 @@ extension ChatMessageVC {
       }
     }
     cell.conversationLabel.text = bubble.content
-    FirebaseStorageHandler.shared.downloadProfilePicture(of: userRecipientID, in: cell)
+    fetchUserRecipientPicture(from: conversationID, at: indexPath)
   }
 }
 
@@ -455,6 +455,34 @@ extension ChatMessageVC {
             self?.chatBubbles.append(contentsOf: allChatMessages)
             self?.conversationTableView.reloadData()
             self?.conversationTableView.scrollToBottomRow()
+          }
+        }
+      }
+    }
+  }
+  
+  //MARK: To get user recipient ID to show recipient profile picture
+  func fetchUserRecipientPicture(from conversationID: Int, at indexPath: IndexPath) {
+    let userID = UserDefaultsService.shared.userID
+    let resourcePath = NetworkPath.messages.description + "\(conversationID)"
+    ResourceRequest<Message>(resourcePath).get(tokenNeeded: true) { (success) in
+      switch success {
+      case .failure:
+        break
+      case .success(let message):
+        DispatchQueue.global(qos: .utility).async {
+          if userID == message.senderID {
+            self.userRecipientID = message.recipientID
+            print("😎\(self.userRecipientID)")
+          }
+          else {
+            self.userRecipientID = message.senderID
+            print("😅\(self.userRecipientID)")
+          }
+          DispatchQueue.main.async {
+            if let cell = self.conversationTableView.cellForRow(at: indexPath) as? ConversationTVC {
+              FirebaseStorageHandler.shared.downloadProfilePicture(of: self.userRecipientID, in: cell)
+            }
           }
         }
       }
