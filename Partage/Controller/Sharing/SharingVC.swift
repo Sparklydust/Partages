@@ -41,7 +41,7 @@ class SharingVC: UIViewController {
   }
 }
 
-//MARK: - Unwind Segue retrieve data from DonorVC and ItemSelectedVC
+//MARK: - Unwind Segue retrieve data from DonorVC, ItemSelectedVC and SignUpVC
 extension SharingVC {
   @IBAction func unwindToSharingVC(segue: UIStoryboardSegue) {
     if segue.source is DonorVC {
@@ -53,6 +53,12 @@ extension SharingVC {
       if let senderVC = segue.source as? ItemSelectedVC {
         senderVC.authToDisplayGoogleAd = displayAd
       }
+    }
+    else if segue.source is SignUpVC {
+      populateSignInSignUpButtonDesign()
+    }
+    else if segue.source is SignInVC {
+      populateSignInSignUpButtonDesign()
     }
   }
 }
@@ -101,8 +107,8 @@ extension SharingVC {
   //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.tintColor = .typoBlue
-    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.tintColor = .typoBlueDarkMode
+    navigationController?.navigationBar.barTintColor = .iceBackgroundDarkMode
     navigationController?.navigationBar.isTranslucent = false
   }
 }

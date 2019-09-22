@@ -11,7 +11,7 @@ import UIKit
 //MARK: - Setup UIView main app background color
 extension UIView {
   func setupMainBackgroundColor() {
-    self.backgroundColor = .iceBackground
+    self.backgroundColor = .iceBackgroundDarkMode
   }
 }
 

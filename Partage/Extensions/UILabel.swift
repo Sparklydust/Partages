@@ -39,7 +39,7 @@ extension UILabel {
 extension UILabel {
   func isSelectedDesign() {
     self.text = StaticLabel.dotLabel.description
-    self.textColor = .mainBlue
+    self.textColor = .mainBlueIceWhiteDarkMode
     self.font = UIFont(customFont: .arialBold, withSize: .seventeen)
 
     // Settings for iPad

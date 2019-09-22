@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CXn-nS-Uxz">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CXn-nS-Uxz">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +10,7 @@
         <!--DonorVC-->
         <scene sceneID="ja4-qn-SMR">
             <objects>
-                <viewController id="CXn-nS-Uxz" customClass="DonorVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CXn-nS-Uxz" customClass="DonorVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wqq-rd-cUs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,10 +37,9 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="97.5"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ApW-yy-k8S">
-                                                                                <rect key="frame" x="0.0" y="34" width="267" height="30"/>
-                                                                                <nil key="textColor"/>
+                                                                                <rect key="frame" x="0.0" y="32" width="267" height="34"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="no" smartQuotesType="yes"/>
+                                                                                <textInputTraits key="textInputTraits" spellCheckingType="yes" returnKeyType="done" smartDashesType="yes" smartInsertDeleteType="no" smartQuotesType="yes"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Nu-3c-mWB">
                                                                                 <rect key="frame" x="277" y="0.0" width="97" height="97.5"/>
@@ -115,9 +112,6 @@
                                                         <subviews>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="a63-74-fYO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="98"/>
-                                                                <date key="date" timeIntervalSinceReferenceDate="581874588.77953804">
-                                                                    <!--2019-06-10 15:49:48 +0000-->
-                                                                </date>
                                                             </datePicker>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POi-pZ-sPF">
                                                                 <rect key="frame" x="0.0" y="108" width="374" height="98"/>
@@ -161,7 +155,7 @@
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vwn-M1-XU3">
                                                                 <rect key="frame" x="10" y="0.0" width="354" height="206.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardAppearance="alert" smartDashesType="yes" smartInsertDeleteType="no" smartQuotesType="yes"/>
+                                                                <textInputTraits key="textInputTraits" spellCheckingType="yes" smartDashesType="yes" smartInsertDeleteType="no" smartQuotesType="yes"/>
                                                             </textView>
                                                         </subviews>
                                                         <constraints>

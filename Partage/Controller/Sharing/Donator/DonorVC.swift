@@ -55,10 +55,7 @@ class DonorVC: UIViewController {
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(false)
-    if self.isMovingFromParent {
-      guard self.navigationController?.viewControllers.previous is SharingVC else { return }
-      navigationController?.setNavigationBarHidden(true, animated: true)
-    }
+    hideNavigationBarWhenMovingFromParent()
   }
 
   deinit {
@@ -138,7 +135,7 @@ extension DonorVC {
 //MARK: - Picker view design data
 extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func setupItemPicker() {
-    itemTypePickerView.backgroundColor = .iceBackground
+    itemTypePickerView.backgroundColor = .iceBackgroundDarkMode
   }
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -161,7 +158,7 @@ extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
     attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     let titleData = DonatedItem.type[row].description
     let myTitles = NSAttributedString(string: titleData, attributes: [
-      NSAttributedString.Key.foregroundColor: UIColor.typoBlue])
+      NSAttributedString.Key.foregroundColor: UIColor.typoBlueDarkMode as Any])
     return myTitles
   }
 }
@@ -170,13 +167,15 @@ extension DonorVC: UIPickerViewDelegate, UIPickerViewDataSource {
 extension DonorVC {
   //MARK: Setup date picker design
   func setupDatePicker() {
-    itemDatePicker.backgroundColor = .iceBackground
-    itemDatePicker.setValue(UIColor.typoBlue, forKey: Key.pickerTextColor.description)
+    itemDatePicker.backgroundColor = .iceBackgroundDarkMode
+    itemDatePicker.setValue(UIColor.typoBlueDarkMode, forKey: Key.pickerTextColor.description)
   }
 
   //MARK: Setup item name text field design
   func setupItemNameTextField() {
-    itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+    }
     itemNameTextField.setupMainBackgroundColor()
   }
 
@@ -192,7 +191,7 @@ extension DonorVC {
 
   //MARK: Setup item description background view design
   func setupItemDescriptionBackgroundView() {
-    itemDescriptionBackgroundView.backgroundColor = .iceBackground
+    itemDescriptionBackgroundView.backgroundColor = .iceBackgroundDarkMode
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
@@ -241,8 +240,10 @@ extension DonorVC: UITextViewDelegate {
   func textViewDidBeginEditing(_ textView: UITextView) {
     if itemDescriptionTextView.textColor == .middleBlue {
       itemDescriptionTextView.text = ""
-      itemDescriptionTextView.backgroundColor = .iceBackground
-      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+      itemDescriptionTextView.backgroundColor = .iceBackgroundDarkMode
+      if let darkModeColor = UIColor.typoBlueDarkMode {
+        itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: darkModeColor)
+      }
     }
     actionsAreEnable(false)
     resizeViewWhenKeyboardShows()
@@ -354,10 +355,10 @@ extension DonorVC {
 
   func resizeViewWhenKeyboardHides() {
     guard view.frame.origin.y != .zero else { return }
+    let height = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
     UIView.animate(withDuration: 0.4) {
       self.view.frame.origin.y = (
-        self.navigationController?.navigationBar.frame.size.height ?? 0.0) +
-        UIApplication.shared.statusBarFrame.size.height
+        self.navigationController?.navigationBar.frame.size.height ?? 0.0) + height
     }
   }
 }
@@ -575,7 +576,9 @@ extension DonorVC {
     populateItemDatePicker()
     itemNameTextField.text = itemToEdit?.name
     mapKitButton.setTitle(ButtonName.changeMeetingPoint.description, for: .normal)
-    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: darkModeColor)
+    }
     itemDescriptionTextView.text = itemToEdit?.description
     if let item = itemToEdit {
       FirebaseStorageHandler.shared.downloadItemImage(of: item, into: itemImage)
@@ -600,5 +603,15 @@ extension DonorVC {
       with: StaticLabel.emptyString.description, options: .regularExpression))
     guard let dateAndTime = ISO8601DateFormatter().date(from: trimmedIsoString) else { return }
     itemDatePicker.setDate(dateAndTime, animated: true)
+  }
+}
+
+//MARK: - Hide Navigation bar when view controller dismiss
+extension DonorVC {
+  func hideNavigationBarWhenMovingFromParent() {
+    if self.isMovingFromParent {
+      guard self.navigationController?.viewControllers.previous is SharingVC else { return }
+      navigationController?.setNavigationBarHidden(true, animated: true)
+    }
   }
 }

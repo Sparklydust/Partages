@@ -130,10 +130,12 @@ extension ItemDetailsVC {
 extension ItemDetailsVC {
   //MARK: Setup main labels design
   func setupMainLabels() {
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
-    donorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
-    dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
-    timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      donorReceiverNameLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: darkModeColor)
+      dateLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: darkModeColor)
+      timeLabel.setupFont(as: .superclarendonBold, sized: .seventeen, in: darkModeColor)
+    }
   }
 
   //MARK: Setup outlet collection to be in order
@@ -148,7 +150,9 @@ extension ItemDetailsVC {
     staticItemDetailsLabels[2].text = StaticItemDetail.at.description
     staticItemDetailsLabels[3].text = StaticItemDetail.address.description
     for label in staticItemDetailsLabels {
-      label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
+      if let darkModeColor = UIColor.typoBlueGrayDarkMode {
+        label.setupFont(as: .arial, sized: .seventeen, in: darkModeColor)
+      }
     }
   }
 
@@ -160,7 +164,9 @@ extension ItemDetailsVC {
   //MARK: Setup item description text view design
   func setupItemDescriptionTextView() {
     itemDescriptionTextView.isEditable = false
-    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: darkModeColor)
+    }
     setupItemDescriptionBackgroundView()
   }
 
@@ -334,7 +340,7 @@ extension ItemDetailsVC {
 
   func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton) {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .iceBackground
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()

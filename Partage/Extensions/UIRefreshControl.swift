@@ -12,7 +12,8 @@ import UIKit
 extension UIRefreshControl {
   func commonDesign(title: StaticLabel) {
     self.tintColor = .mainBlue
-    let attr = [NSAttributedString.Key.foregroundColor: UIColor.typoBlue]
-    self.attributedTitle = NSAttributedString(string: title.description, attributes: attr)
+    let attr = [NSAttributedString.Key.foregroundColor: UIColor.typoBlueDarkMode]
+    self.attributedTitle = NSAttributedString(
+      string: title.description, attributes: attr as [NSAttributedString.Key : Any])
   }
 }

@@ -21,8 +21,8 @@
 "userPosition" = "Votre position";
 "receiverCalendarTitle" = "Don à recevoir: ";
 "donorCalendarTitle" = "Don à remettre: ";
-"donationIsSelected" = "don sélectionné";
-"donationNotSelected" = "don non sélectionné";
+"donationIsSelected" = "sélectionné";
+"donationNotSelected" = "non sélectionné";
 "userLeftTheConversation" = "a quitté la conversation";
 "closedConversation" = "conversation fermée";
 "noMessageInfo" = "Vous n'avez pas de message";

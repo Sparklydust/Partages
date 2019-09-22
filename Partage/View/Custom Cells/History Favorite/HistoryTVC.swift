@@ -46,21 +46,27 @@ extension HistoryTVC {
 //MARK: Setup top label design
 extension HistoryTVC {
   func setupTopLabel() {
-    topLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      topLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: darkModeColor)
+    }
   }
 }
 
 //MARK: Setup middle label design
 extension HistoryTVC {
   func setupMiddleLabel() {
-    middleLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      middleLabel.setupFont(as: .superclarendonBold, sized: .fifteen, forIPad: .twentyTwo, in: darkModeColor)
+    }
   }
 }
 
 //MARK: Setup bottom label design
 extension HistoryTVC {
   func setupBottomLabel() {
-    bottomLabel.setupFont(as: .arialBlack, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      bottomLabel.setupFont(as: .arialBlack, sized: .fifteen, forIPad: .twentyTwo, in: darkModeColor)
+    }
   }
 }
 
@@ -90,7 +96,7 @@ extension HistoryTVC {
   
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     contentView.addSubview(activityIndicator)
     activityIndicator.startAnimating()

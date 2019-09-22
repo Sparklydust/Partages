@@ -142,14 +142,20 @@ extension ChatMessageVC {
   func setupSenderMessageView() {
     senderMessageView.layer.cornerRadius = 13
     senderMessageView.layer.borderWidth = 1
-    senderMessageView.layer.borderColor = UIColor.typoBlue.cgColor
-    senderMessageView.setupBackgroundColorIn(.iceBackground)
+    if let whiteDarkModeColor = UIColor.iceBackgroundDarkMode,
+      let blueTypoBlueDarkModeColor = UIColor.mainBlueTypoBlueDarkMode {
+      senderMessageView.setupBackgroundColorIn(whiteDarkModeColor)
+      senderMessageView.layer.borderColor = blueTypoBlueDarkModeColor.cgColor
+    }
   }
 
   //MARK: Setup sender message view text field design
   func setupSenderMessageTextView() {
-    senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: .typoBlue)
-    senderMessageTextView.setupBackgroundColorIn(.iceBackground)
+    if let whiteDarkModeColor = UIColor.iceBackgroundDarkMode,
+      let typoBlueDarkModeColor = UIColor.typoBlueDarkMode {
+      senderMessageTextView.setupBackgroundColorIn(whiteDarkModeColor)
+      senderMessageTextView.setupFont(as: .arial, sized: .fifteen, in: typoBlueDarkModeColor)
+    }
   }
 
   //MARK: Setup all custom cells design

@@ -15,7 +15,7 @@ extension UIBarButtonItem {
     self.setTitleTextAttributes(
       [NSAttributedString.Key.font: UIFont(
         customFont: .arialBold, withSize: .fifteen)!,
-       NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
+       NSAttributedString.Key.foregroundColor: UIColor.typoBlueDarkMode as Any],
       for: .normal)
 
     //Settings for iPad
@@ -23,7 +23,7 @@ extension UIBarButtonItem {
       self.setTitleTextAttributes(
         [NSAttributedString.Key.font: UIFont(
           customFont: .arialBold, withSize: .twenty)!,
-         NSAttributedString.Key.foregroundColor: UIColor.typoBlue],
+         NSAttributedString.Key.foregroundColor: UIColor.typoBlueDarkMode as Any],
         for: .normal)
     }
   }

@@ -148,14 +148,18 @@ extension ItemSelectedVC {
   //MARK: Setup all labels design
   func setupAllLabels() {
     setupItemTypeLabel()
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: .typoBlue)
-    dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
-    timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemNameLabel.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: darkModeColor)
+      timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, in: darkModeColor)
+    }
   }
 
   //MARK: Setup item type label design
   func setupItemTypeLabel() {
-    itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemTypeLabel.setupFont(as: .arialBold, sized: .twenty, in: darkModeColor)
+    }
     itemTypeLabel.textAlignment = .center
   }
 
@@ -167,7 +171,7 @@ extension ItemSelectedVC {
 
   //MARK: Setup item description background view design
   func setupItemDescriptionBackgroundView() {
-    itemDescriptionBackgroundView.backgroundColor = .iceBackground
+    itemDescriptionBackgroundView.backgroundColor = .iceBackgroundDarkMode
     itemDescriptionBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     itemDescriptionBackgroundView.layer.borderWidth = 1
     itemDescriptionBackgroundView.layer.cornerRadius = 10
@@ -175,8 +179,10 @@ extension ItemSelectedVC {
 
   //MARK: Setup item description text view design
   func setupItemDescriptionTextView() {
-    itemDescriptionTextView.backgroundColor = .iceBackground
-    itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: .typoBlue)
+    itemDescriptionTextView.backgroundColor = .iceBackgroundDarkMode
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemDescriptionTextView.setupFont(as: .arialBold, sized: .seventeen, in: darkModeColor)
+    }
   }
 
   //MARK: Setup navigation controller design
@@ -195,7 +201,9 @@ extension ItemSelectedVC {
     staticLabels[1].text = StaticItemDetail.the.description
     staticLabels[2].text = StaticItemDetail.at.description
     for label in staticLabels {
-      label.setupFont(as: .arial, sized: .seventeen, in: .typoBlue)
+      if let darkModeColor = UIColor.typoBlueGrayDarkMode {
+        label.setupFont(as: .arial, sized: .seventeen, in: darkModeColor)
+      }
     }
   }
 
@@ -313,7 +321,7 @@ extension ItemSelectedVC {
 
   func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView, _ button: UIButton) {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .iceBackground
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()

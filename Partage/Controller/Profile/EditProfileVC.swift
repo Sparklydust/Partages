@@ -214,7 +214,7 @@ extension EditProfileVC {
 
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .iceBackground
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()

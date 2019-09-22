@@ -62,10 +62,12 @@ extension LostPasswordVC {
     cancelButton.commonDesign(title: .cancel)
     saveButton.commonDesign(title: .send)
   }
-
+  
   //MARK: Setup email text design
   func setupEmailTextField() {
-    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    if let darkModeColor = UIColor.mainBlueIceWhiteDarkMode {
+      emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+    }
   }
 
   //MARK: Setup underline view
@@ -134,7 +136,7 @@ extension LostPasswordVC {
 
   func showActivityIndicator() {
     saveActivityIndicator.isHidden = false
-    saveActivityIndicator.style = .whiteLarge
+    saveActivityIndicator.style = UIActivityIndicatorView.Style.large
     saveActivityIndicator.color = .iceBackground
     view.addSubview(saveActivityIndicator)
     saveActivityIndicator.startAnimating()

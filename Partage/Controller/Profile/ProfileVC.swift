@@ -127,16 +127,18 @@ extension ProfileVC {
 
   //MARK: Setup disconnect and delete accound button
   func setupDisconnectButtons() {
-    contactUsButton.littleButtonDesign(title: .lowContactUs, color: .typoBlue)
-    disconnectProfileButton.littleButtonDesign(title: .lowSignOut, color: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      contactUsButton.littleButtonDesign(title: .lowContactUs, color: darkModeColor)
+      disconnectProfileButton.littleButtonDesign(title: .lowSignOut, color: darkModeColor)
+    }
     deleteProfileButton.littleButtonDesign(title: .lowEraseAccount, color: .red)
   }
 
   //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.tintColor = .typoBlue
-    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.tintColor = .typoBlueDarkMode
+    navigationController?.navigationBar.barTintColor = .iceBackgroundDarkMode
     navigationController?.navigationBar.isTranslucent = false
     navigationController?.hideNavigationControllerBorder()
   }
@@ -154,7 +156,7 @@ extension ProfileVC {
 
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()

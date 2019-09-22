@@ -12,6 +12,6 @@ import UIKit
 extension UINavigationController {
   func hideNavigationControllerBorder() {
     self.navigationBar.shadowImage = UIImage()
-    self.navigationBar.tintColor = .iceBackground
+    self.navigationBar.tintColor = .iceBackgroundDarkMode
   }
 }

@@ -74,7 +74,7 @@ extension ReceiverTVC {
 //MARK: - Setup square background view design
 extension ReceiverTVC {
   func setupSquareBackgroundView() {
-    squareBackgroundView.backgroundColor = .iceBackground
+    squareBackgroundView.backgroundColor = .iceBackgroundDarkMode
     squareBackgroundView.layer.cornerRadius = 10
     squareBackgroundView.layer.borderColor = UIColor.mainBlue.cgColor
     squareBackgroundView.layer.borderWidth = 1
@@ -86,35 +86,45 @@ extension ReceiverTVC {
 extension ReceiverTVC {
   func setupItemTypeLabel() {
     itemTypeLabel.textAlignment = .center
-    itemTypeLabel.setupFont(as: .arialBold, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemTypeLabel.setupFont(as: .arialBold, sized: .heighteen, forIPad: .twentyFive, in: darkModeColor)
+    }
   }
 }
 
 //MARK: - Setup item distance label design
 extension ReceiverTVC {
   func setupItemDistanceLabel() {
-    itemDistanceLabel.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemDistanceLabel.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: darkModeColor)
+    }
   }
 }
 
 //MARK: - Setup item name label design
 extension ReceiverTVC {
   func setupItemNameLabel() {
-    itemNameLabel.setupFont(as: .superclarendonBold, sized: .twentyTwo, forIPad: .twentyFive, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      itemNameLabel.setupFont(as: .superclarendonBold, sized: .twentyTwo, forIPad: .twentyFive, in: darkModeColor)
+    }
   }
 }
 
 //MARK: - Setup date label design
 extension ReceiverTVC {
   func setupDateLabel() {
-    dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      dateLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: darkModeColor)
+    }
   }
 }
 
 //MARK: - Setup time label design
 extension ReceiverTVC {
   func setupTimeLabel() {
-    timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      timeLabel.setupFont(as: .superclarendonBold, sized: .heighteen, forIPad: .twentySeven, in: darkModeColor)
+    }
   }
 }
 
@@ -147,7 +157,9 @@ extension ReceiverTVC {
     staticLabels[1].text = StaticLabel.emptyString.description
     staticLabels[2].text = StaticLabel.emptyString.description
     for label in staticLabels {
-      label.setupFont(as: .arial, sized: .seventeen, forIPad: .twentyThree, in: .typoBlue)
+      if let darkModeColor = UIColor.typoBlueDarkMode {
+        label.setupFont(as: .arial, sized: .seventeen, forIPad: .twentyThree, in: darkModeColor)
+      }
     }
   }
 }
@@ -174,7 +186,7 @@ extension ReceiverTVC {
   
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     contentView.addSubview(activityIndicator)
     activityIndicator.startAnimating()

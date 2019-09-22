@@ -39,9 +39,7 @@ class ReceiverVC: UIViewController {
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(false)
-    if self.isMovingFromParent {
-      navigationController?.setNavigationBarHidden(true, animated: true)
-    }
+    hideNavigationBarWhenMovingFromParent()
   }
 }
 
@@ -188,7 +186,7 @@ extension ReceiverVC {
 
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()
@@ -287,6 +285,16 @@ extension ReceiverVC {
     }
     else {
       cell.favoriteButton.setImage(UIImage(named: ImageName.emptyHeart.rawValue), for: .normal)
+    }
+  }
+}
+
+//MARK: - Hide Navigation bar when view controller dismiss
+extension ReceiverVC {
+  func hideNavigationBarWhenMovingFromParent() {
+    if self.isMovingFromParent {
+      guard self.navigationController?.viewControllers.previous is SharingVC else { return }
+      navigationController?.setNavigationBarHidden(true, animated: true)
     }
   }
 }

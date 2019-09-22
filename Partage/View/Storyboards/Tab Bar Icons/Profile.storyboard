@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iab-Hj-emV">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iab-Hj-emV">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,22 +18,21 @@
         <!--Edit ProfileVC-->
         <scene sceneID="lNw-Bs-kzj">
             <objects>
-                <viewController id="hxz-tZ-FBZ" customClass="EditProfileVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hxz-tZ-FBZ" customClass="EditProfileVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gQo-rw-bYk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LeX-4w-m9w">
-                                <rect key="frame" x="50" y="70" width="314" height="19"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="50" y="26" width="314" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="given-name"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="given-name"/>
                                 <connections>
                                     <outlet property="delegate" destination="hxz-tZ-FBZ" id="SWU-qF-9cI"/>
                                 </connections>
                             </textField>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2NI-pU-eH9">
-                                <rect key="frame" x="40" y="94" width="334" height="1"/>
+                                <rect key="frame" x="40" y="50" width="334" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="5d6-Qd-AuK">
                                         <variation key="heightClass=regular-widthClass=regular" constant="2"/>
@@ -43,16 +40,15 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dUY-f0-cUh">
-                                <rect key="frame" x="50" y="141" width="314" height="19"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="50" y="97" width="314" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="family-name"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="family-name"/>
                                 <connections>
                                     <outlet property="delegate" destination="hxz-tZ-FBZ" id="XjE-SX-XbU"/>
                                 </connections>
                             </textField>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvv-AM-idW">
-                                <rect key="frame" x="40" y="165" width="334" height="1"/>
+                                <rect key="frame" x="40" y="121" width="334" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="MCo-Dc-fj8">
                                         <variation key="heightClass=regular-widthClass=regular" constant="2"/>
@@ -60,16 +56,15 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="W4D-4f-DkG">
-                                <rect key="frame" x="50" y="212" width="314" height="19"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="50" y="168" width="314" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="username"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="username"/>
                                 <connections>
                                     <outlet property="delegate" destination="hxz-tZ-FBZ" id="gJN-qL-uB3"/>
                                 </connections>
                             </textField>
                             <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mu0-AV-fQ1">
-                                <rect key="frame" x="40" y="236" width="334" height="1"/>
+                                <rect key="frame" x="40" y="192" width="334" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ecc-Tq-To1">
                                         <variation key="heightClass=regular-widthClass=regular" constant="2"/>
@@ -77,16 +72,15 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="fIJ-DE-cEo">
-                                <rect key="frame" x="50" y="285" width="314" height="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="50" y="241" width="314" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartQuotesType="no" textContentType="password"/>
                                 <connections>
                                     <outlet property="delegate" destination="hxz-tZ-FBZ" id="Yrt-th-ttS"/>
                                 </connections>
                             </textField>
                             <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lHd-Qf-HgV">
-                                <rect key="frame" x="40" y="307" width="334" height="1"/>
+                                <rect key="frame" x="40" y="263" width="334" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="WOk-Nw-XCs">
                                         <variation key="heightClass=regular-widthClass=regular" constant="2"/>
@@ -94,16 +88,15 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="YK9-4H-0Ys">
-                                <rect key="frame" x="50" y="356" width="314" height="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="50" y="312" width="314" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="new-password"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartQuotesType="no" textContentType="new-password"/>
                                 <connections>
                                     <outlet property="delegate" destination="hxz-tZ-FBZ" id="HqD-j9-miB"/>
                                 </connections>
                             </textField>
                             <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4o-x6-soh">
-                                <rect key="frame" x="40" y="378" width="334" height="1"/>
+                                <rect key="frame" x="40" y="334" width="334" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TJG-98-HNs">
                                         <variation key="heightClass=regular-widthClass=regular" constant="2"/>
@@ -111,7 +104,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdh-MK-fok">
-                                <rect key="frame" x="40" y="732" width="334" height="40"/>
+                                <rect key="frame" x="40" y="678" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="e9e-2Y-FIX">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -129,7 +122,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j28-zS-M1E">
-                                <rect key="frame" x="40" y="792" width="334" height="40"/>
+                                <rect key="frame" x="40" y="738" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="T1c-9a-AZq">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -147,7 +140,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2aq-NQ-y28">
-                                <rect key="frame" x="40" y="792" width="334" height="40"/>
+                                <rect key="frame" x="40" y="738" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="e3a-ZW-eK1">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -253,7 +246,7 @@
         <!--ProfileVC-->
         <scene sceneID="fJk-Rv-Zx2">
             <objects>
-                <viewController id="VSA-tz-bYP" customClass="ProfileVC" customModule="Partage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VSA-tz-bYP" customClass="ProfileVC" customModule="Partages" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zM6-ce-0EZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -84,7 +84,7 @@ extension HistoryFavoriteVC {
   }
 
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    cell.backgroundColor = .iceBackground
+    cell.backgroundColor = .iceBackgroundDarkMode
   }
 }
 
@@ -177,8 +177,8 @@ extension HistoryFavoriteVC {
   //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.tintColor = .typoBlue
-    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.tintColor = .typoBlueDarkMode
+    navigationController?.navigationBar.barTintColor = .iceBackgroundDarkMode
     navigationController?.navigationBar.isTranslucent = false
   }
 
@@ -191,7 +191,10 @@ extension HistoryFavoriteVC {
 
   //MARK: - Setup label if user has no history or favorite
   func setupNoHistoryOrFavoriteInfo() {
-    noHistoryOrFavoriteInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      noHistoryOrFavoriteInfo.setupFont(
+        as: .arial, sized: .heighteen, forIPad: .twentyFive, in: darkModeColor)
+    }
     noHistoryOrFavoriteInfo.textAlignment = .center
     noHistoryOrFavoriteInfo.text = nil
   }
@@ -229,7 +232,7 @@ extension HistoryFavoriteVC {
 
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()

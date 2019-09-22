@@ -66,6 +66,8 @@ extension ConversationTVC {
 //MARK: - Setup date Label
 extension ConversationTVC {
   func setupDateLabel() {
-    dateLabel.setupFont(as: .superclarendonBold, sized: .ten, forIPad: .twentyTwo, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      dateLabel.setupFont(as: .superclarendonBold, sized: .ten, forIPad: .twentyTwo, in: darkModeColor)
+    }
   }
 }

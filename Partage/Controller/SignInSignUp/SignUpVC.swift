@@ -108,10 +108,12 @@ extension SignUpVC {
 
   //MARK: Setup all text fields design
   func setupAllTextFields() {
-    firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    if let darkModeColor = UIColor.mainBlueIceWhiteDarkMode {
+      firstNameTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      confirmPasswordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+    }
   }
 
   //MARK: Setup all placeholders design
@@ -232,7 +234,7 @@ extension SignUpVC {
 
   func showActivityIndicator() {
     registerActivityIndicator.isHidden = false
-    registerActivityIndicator.style = .whiteLarge
+    registerActivityIndicator.style = UIActivityIndicatorView.Style.large
     registerActivityIndicator.color = .iceBackground
     view.addSubview(registerActivityIndicator)
     registerActivityIndicator.startAnimating()

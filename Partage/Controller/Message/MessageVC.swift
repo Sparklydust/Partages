@@ -95,7 +95,7 @@ extension MessageVC {
   
   func tableView(_ tableView: UITableView,
                  willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    cell.backgroundColor = UIColor.iceBackground
+    cell.backgroundColor = UIColor.iceBackgroundDarkMode
   }
 }
 
@@ -172,8 +172,8 @@ extension MessageVC {
   //MARK: Setup navigation controller design
   func setupNavigationController() {
     navigationController?.navigationBar.barStyle = .default
-    navigationController?.navigationBar.tintColor = .typoBlue
-    navigationController?.navigationBar.barTintColor = .iceBackground
+    navigationController?.navigationBar.tintColor = .typoBlueDarkMode
+    navigationController?.navigationBar.barTintColor = .iceBackgroundDarkMode
     navigationController?.navigationBar.isTranslucent = false
   }
 
@@ -186,7 +186,9 @@ extension MessageVC {
 
   //MARK: - Setup label if user has no message
   func setupNoMessageInfo() {
-    noMessageInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      noMessageInfo.setupFont(as: .arial, sized: .heighteen, forIPad: .twentyFive, in: darkModeColor)
+    }
     noMessageInfo.textAlignment = .center
     noMessageInfo.text = nil
   }
@@ -218,7 +220,7 @@ extension MessageVC {
 
   func showActivityIndicator() {
     activityIndicator.isHidden = false
-    activityIndicator.style = .whiteLarge
+    activityIndicator.style = UIActivityIndicatorView.Style.large
     activityIndicator.color = .mainBlue
     view.addSubview(activityIndicator)
     activityIndicator.startAnimating()
@@ -260,21 +262,26 @@ extension MessageVC {
   func showMessageInBoldIfNotRead(in cell: MessageTVC, search message: Message) {
     if (userID == message.senderID && message.isReadBySender == false) ||
       (userID == message.recipientID && message.isReadByRecipient == false ) {
-      cell.nameLabel.setupFont(
-        as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      if let darkModeColor = UIColor.typoBlueDarkMode {
+        cell.nameLabel.setupFont(
+          as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: darkModeColor)
+        cell.conversationLabel.setupFont(
+          as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: darkModeColor)
+      }
       cell.dateLabel.setupFont(
         as: .superclarendonBold, sized: .twelve, forIPad: .twenty, in: .mainBlue)
-      cell.conversationLabel.setupFont(
-        as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
       cell.profileImage.roundedWithMainBlueBorder()
     }
     else {
-      cell.nameLabel.setupFont(
-        as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+      if let darkModeColor = UIColor.typoBlueDarkMode,
+      let typoBlueGrayDarkModeColor = UIColor.typoBlueGrayDarkMode {
+        cell.nameLabel.setupFont(
+          as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: darkModeColor)
+        cell.conversationLabel.setupFont(
+          as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: typoBlueGrayDarkModeColor)
+      }
       cell.dateLabel.setupFont(
         as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
-      cell.conversationLabel.setupFont(
-        as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
       cell.profileImage.roundedWithMiddleBlueBorder()
     }
   }
@@ -283,8 +290,10 @@ extension MessageVC {
 //MARK: - Set info cell if one user left the conversation to close
 extension MessageVC {
   func setConversationIsClosed(in cell: MessageTVC) {
-    cell.nameLabel.setupFont(
-      as: .superclarendonLight, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      cell.nameLabel.setupFont(
+        as: .superclarendonLight, sized: .sixteen, forIPad: .twentyThree, in: darkModeColor)
+    }
     cell.nameLabel.text = StaticLabel.closedConversation.description
   }
 }

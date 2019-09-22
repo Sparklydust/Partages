@@ -40,9 +40,11 @@ extension MessageTVC {
 //MARK: - Setup all fonts
 extension MessageTVC {
   func setupFonts() {
-    nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: .typoBlue)
+    if let typoBlueDarkModeColor = UIColor.typoBlueDarkMode {
+    nameLabel.setupFont(as: .superclarendonBold, sized: .sixteen, forIPad: .twentyThree, in: typoBlueDarkModeColor)
     dateLabel.setupFont(as: .superclarendonLight, sized: .twelve, forIPad: .twenty, in: .middleBlue)
-    conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: .typoBlue)
+    conversationLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: typoBlueDarkModeColor)
+    }
   }
 }
 

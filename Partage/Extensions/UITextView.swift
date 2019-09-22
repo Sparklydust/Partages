@@ -25,7 +25,7 @@ extension UITextView {
 //MARK: - Setup placeholder color font style
 extension UITextView {
   func setupPlaceholderDesign(placeholderText: StaticLabel) {
-    self.backgroundColor = UIColor.iceBackground
+    self.backgroundColor = UIColor.iceBackgroundDarkMode
     self.textColor = UIColor.middleBlue
     self.text = placeholderText.description
     self.font = UIFont(customFont: .arial, withSize: .fifteen)

@@ -95,8 +95,10 @@ extension SignInVC: UITextFieldDelegate {
 
   //MARK: Setup all text fields design
   func setupAllTextFields() {
-    emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
-    passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: .mainBlue)
+    if let darkModeColor = UIColor.mainBlueIceWhiteDarkMode {
+      emailTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+      passwordTextField.setupFont(as: .superclarendonBold, sized: .twenty, in: darkModeColor)
+    }
   }
 
   //MARK: Setup cancel button design
@@ -117,7 +119,9 @@ extension SignInVC: UITextFieldDelegate {
 
   //MARK: Setup lost password design
   func setupLostPasswordButton() {
-    lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: darkModeColor)
+    }
   }
 }
 
@@ -181,7 +185,7 @@ extension SignInVC {
 
   func showActivityIndicator() {
     ConnectionActivityIndicator.isHidden = false
-    ConnectionActivityIndicator.style = .whiteLarge
+    ConnectionActivityIndicator.style = UIActivityIndicatorView.Style.large
     ConnectionActivityIndicator.color = .iceBackground
     view.addSubview(ConnectionActivityIndicator)
     ConnectionActivityIndicator.startAnimating()

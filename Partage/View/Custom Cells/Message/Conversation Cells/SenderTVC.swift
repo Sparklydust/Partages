@@ -51,7 +51,8 @@ extension SenderTVC {
 //MARK: - Setup conversation Label
 extension SenderTVC {
   func setupConversationLabel() {
-    senderConversationLabel.setupFont(as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .iceBackground)
+    senderConversationLabel.setupFont(
+      as: .arialBold, sized: .fifteen, forIPad: .twentyTwo, in: .iceBackground)
   }
 }
 
@@ -66,6 +67,9 @@ extension SenderTVC {
 //MARK: - Setup date Label
 extension SenderTVC {
   func setupDateLabel() {
-    senderDateLabel.setupFont(as: .superclarendonBold, sized: .ten, forIPad: .seventeen, in: .typoBlue)
+    if let darkModeColor = UIColor.typoBlueDarkMode {
+      senderDateLabel.setupFont(
+        as: .superclarendonBold, sized: .ten, forIPad: .seventeen, in: darkModeColor)
+    }
   }
 }

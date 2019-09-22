@@ -33,9 +33,9 @@ extension AppDelegate {
 //MARK: - Setup TabBar design
 extension AppDelegate {
   func setupTabBar() {
-    UITabBar.appearance().barTintColor = .iceBackground
+    UITabBar.appearance().barTintColor = .iceBackgroundDarkMode
     UITabBar.appearance().tintColor = .mainBlue
-    UITabBar.appearance().unselectedItemTintColor = .typoBlueLight
+    UITabBar.appearance().unselectedItemTintColor = .typoBlueLightDarkMode
     UITabBar.appearance().layer.borderColor = UIColor.clear.cgColor
     UITabBar.appearance().clipsToBounds = true
   }

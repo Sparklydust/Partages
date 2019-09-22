@@ -30,7 +30,7 @@ extension UIButton {
 extension UIButton {
   func signInSignUpDesign(title: String) {
     self.setTitle(title, for: .normal)
-    self.setTitleColor(.typoBlue, for: .normal)
+    self.setTitleColor(.typoBlueDarkMode, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .fifteen)
 
     // Settings for iPad
@@ -61,7 +61,7 @@ extension UIButton {
 extension UIButton {
   func signInOrSignUpSelectedDesign(title: ButtonName) {
     self.setTitle(title.description, for: .normal)
-    self.setTitleColor(.mainBlue, for: .normal)
+    self.setTitleColor(.mainBlueIceWhiteDarkMode, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
 
     // Settings for iPad
@@ -72,7 +72,7 @@ extension UIButton {
   
   func signInOrSignUpUnselectedDesign(title: ButtonName) {
     self.setTitle(title.description, for: .normal)
-    self.setTitleColor(.typoBlue, for: .normal)
+    self.setTitleColor(.typoBlueMainBlueDarkMode, for: .normal)
     self.titleLabel?.font = UIFont(customFont: .arialBold, withSize: .seventeen)
 
     // Settings for iPad
@@ -100,8 +100,8 @@ extension UIButton {
 extension UIButton {
   func historyFavoriteSelectedDesign(named title: ButtonName) {
     self.setTitle(title.description, for: .normal)
-    self.setTitleColor(.typoBlue, for: .normal)
-    self.backgroundColor = .iceBackground
+    self.setTitleColor(.typoBlueGrayDarkMode, for: .normal)
+    self.backgroundColor = .iceBackgroundDarkMode
     self.layer.borderColor = UIColor.mainBlue.cgColor
     self.layer.borderWidth = 1
     self.titleLabel?.font = UIFont(customFont: .arialBlack, withSize: .heighteen)
