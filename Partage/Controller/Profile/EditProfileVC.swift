@@ -61,6 +61,8 @@ extension EditProfileVC {
     setupTextFieldPlaceholders()
     setupSwipeGesture()
     setupViewsSpacingForUIDevices()
+    setupPasswordAutoFill()
+    setupIfUserLoggedInWithApple()
   }
 
   //MARK: Main view design
@@ -109,6 +111,30 @@ extension EditProfileVC {
     underlineViews[3].isHidden = true
     underlineViews[4].isHidden = true
     underlineViews[5].isHidden = true
+  }
+  
+  //MARK: Setup email and password for auto fill
+  func setupPasswordAutoFill() {
+    newPasswordTextField.textContentType = .newPassword
+    confirmPasswordTextField.textContentType = .newPassword
+  }
+  
+  //MARK: Setup to hide passwords field if user logged In with Apple
+  func setupIfUserLoggedInWithApple() {
+    let userLoggedInWithApple = UserDefaultsService.shared.signedInWithApple
+    if let bool = userLoggedInWithApple {
+      guard bool else {
+        newPasswordTextField.isHidden = false
+        confirmPasswordTextField.isHidden = false
+        underlineViews[3].isHidden = false
+        underlineViews[4].isHidden = false
+        return
+      }
+      newPasswordTextField.isHidden = true
+      confirmPasswordTextField.isHidden = true
+      underlineViews[3].isHidden = true
+      underlineViews[4].isHidden = true
+    }
   }
 }
 

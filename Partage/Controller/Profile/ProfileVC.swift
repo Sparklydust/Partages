@@ -297,6 +297,8 @@ extension ProfileVC {
   func deleteUserFromUserDefaults() {
     UserDefaultsService.shared.userToken = nil
     UserDefaultsService.shared.userID = nil
+    UserDefaultsService.shared.appleID = nil
+    UserDefaultsService.shared.signedInWithApple = false
   }
 }
 

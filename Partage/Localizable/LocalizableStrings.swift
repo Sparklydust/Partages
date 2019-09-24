@@ -46,6 +46,10 @@ extension LocalizableStrings {
     "partage-action-count", comment: "Key for User Defaults, to store user count actions before displaying Apple Store Review to user")
   static let partagesServerSidePath = NSLocalizedString(
     "partagesServerSidePath", comment: "key to get the https hidden path to PartagesServerSide, found .gitignore file")
+  static let appleID = NSLocalizedString(
+    "apple-id", comment: "key to store user apple ID")
+  static let signedInWithApple = NSLocalizedString(
+    "signed-in-with-Apple", comment: "key to store a boolean to know if a user signed in with Apple")
 }
 
 //MARK: - Apple devices name - Not Localizable -
@@ -83,7 +87,7 @@ extension LocalizableStrings {
   //If you are running PartageServerSide on local, switch mainPath with http and mainPath with valueInAPIService
   //url 192.168.1.1 must be change with your computer IP address
   
-  //static let mainPath = NSLocalizedString("http://192.168.1.1:8080", comment: "main path to any API request")
+//  static let mainPath = NSLocalizedString("http://192.168.1.1:8080/api/", comment: "main path to any API request")
   static let mainPath = NSLocalizedString(
     valueInAPIService(
       named: Key.partagesServerSidePath.description), comment: "main path to any API request")
@@ -165,6 +169,8 @@ extension LocalizableStrings {
     "You have no history", comment: "label shown if a user has no history")
   static let noFavoriteInfo = NSLocalizedString(
     "You have no favorite", comment: "label shown if a user has no favorite")
+  static let or = NSLocalizedString(
+    "or", comment: "label shown between 'sign in' and 'sign in with Apple'")
 }
 
 //MARK: - Buttons name - Localizable Strings -

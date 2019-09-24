@@ -36,6 +36,7 @@ enum StaticLabel: String {
   case noMessageInfo
   case noHistoryInfo
   case noFavoriteInfo
+  case or
 
   var description: String {
     get {
@@ -92,6 +93,8 @@ enum StaticLabel: String {
         return LocalizableStrings.noHistoryInfo
       case .noFavoriteInfo:
         return LocalizableStrings.noFavoriteInfo
+      case .or:
+        return LocalizableStrings.or
       }
     }
   }

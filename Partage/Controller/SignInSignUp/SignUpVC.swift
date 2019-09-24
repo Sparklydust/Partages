@@ -58,6 +58,7 @@ extension SignUpVC {
     setupRegisterButton()
     setupDotLabel()
     setupSwipeGesture()
+    setupPasswordAutoFill()
   }
 
   //MARK: Setup main view design
@@ -122,6 +123,14 @@ extension SignUpVC {
     emailTextField.setupPlaceholderDesign(title: .email, color: .middleBlue)
     passwordTextField.setupPlaceholderDesign(title: .password, color: .middleBlue)
     confirmPasswordTextField.setupPlaceholderDesign(title: .confirmPassword, color: .middleBlue)
+  }
+  
+  //MARK: Setup email and password for auto fill
+  func setupPasswordAutoFill() {
+    emailTextField.textContentType = .username
+    emailTextField.keyboardType = .emailAddress
+    passwordTextField.textContentType = .newPassword
+    confirmPasswordTextField.textContentType = .newPassword
   }
 }
 

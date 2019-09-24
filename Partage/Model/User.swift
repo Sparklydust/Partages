@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AuthenticationServices
 
 //MARK: - Public user class
 final class User: Codable {
@@ -42,6 +43,13 @@ final class FullUser: Codable {
     self.lastName = lastName
     self.email = email
     self.password = password
+  }
+  
+  init(credentials: ASAuthorizationAppleIDCredential) {
+    let emptyString = StaticLabel.emptyString.description
+    self.firstName = credentials.fullName?.givenName ?? emptyString
+    self.lastName = credentials.fullName?.familyName ?? emptyString
+    self.email = credentials.email ?? emptyString
   }
 }
 

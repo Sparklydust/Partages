@@ -28,6 +28,7 @@
 "noMessageInfo" = "Vous n'avez pas de message";
 "noHistoryInfo" = "Vous n'avez pas d'historique";
 "noFavoriteInfo" = "Vous n'avez pas de favoris";
+"or" = "ou";
 
 
 //MARK: - Buttons name

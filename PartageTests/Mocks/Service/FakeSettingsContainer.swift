@@ -14,4 +14,6 @@ class FakeSettingsContainer: SettingsContainer {
   var userID: String?
   var deviceToken: String?
   var actionCount: Int?
+  var appleID: String?
+  var signedInWithApple: Bool?
 }

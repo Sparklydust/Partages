@@ -14,7 +14,8 @@ class AuthTest: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    loginUser = FullUser(firstName: "Abcom",
+    loginUser = FullUser(appleID: "appleID",
+                         firstName: "Abcom",
                          lastName: "",
                          email: "a@b.com",
                          password: "123456"

@@ -422,6 +422,12 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pjE-4B-Lh0">
                                 <rect key="frame" x="40" y="703" width="334" height="40"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbF-9Z-F4M">
+                                <rect key="frame" x="207" y="297" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -455,6 +461,7 @@
                             <constraint firstItem="09h-Xr-8nn" firstAttribute="top" secondItem="MgC-Lr-oEw" secondAttribute="top" id="ftt-ZP-o1A"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="centerX" secondItem="2dY-9Z-1ZQ" secondAttribute="centerX" id="fvr-Ua-IJs"/>
                             <constraint firstItem="2dY-9Z-1ZQ" firstAttribute="leading" secondItem="6LI-c7-YL0" secondAttribute="leading" id="gl8-wh-Caa"/>
+                            <constraint firstItem="pbF-9Z-F4M" firstAttribute="centerX" secondItem="cRw-Ry-bY2" secondAttribute="centerX" id="hIw-RJ-MsY"/>
                             <constraint firstItem="09h-Xr-8nn" firstAttribute="centerX" secondItem="cRw-Ry-bY2" secondAttribute="centerX" multiplier="1.4" id="ing-XO-6VQ"/>
                             <constraint firstItem="dZA-Gz-nua" firstAttribute="trailing" secondItem="h8p-iL-eTI" secondAttribute="trailing" constant="10" id="kuz-ki-9fG"/>
                             <constraint firstItem="dZA-Gz-nua" firstAttribute="trailing" secondItem="6LI-c7-YL0" secondAttribute="trailing" id="lMg-pG-L0H"/>
@@ -464,6 +471,9 @@
                             </constraint>
                             <constraint firstItem="6LI-c7-YL0" firstAttribute="top" secondItem="T6u-Fg-uyy" secondAttribute="bottom" constant="5" id="oUJ-RY-y8S"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="leading" secondItem="2dY-9Z-1ZQ" secondAttribute="leading" id="ohq-xi-nj4"/>
+                            <constraint firstItem="pbF-9Z-F4M" firstAttribute="top" secondItem="dZA-Gz-nua" secondAttribute="bottom" constant="20" id="pNQ-cl-jGh">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
                             <constraint firstItem="pjE-4B-Lh0" firstAttribute="height" secondItem="5WR-Tq-BZw" secondAttribute="height" id="qGJ-xL-gyo"/>
                             <constraint firstItem="pjE-4B-Lh0" firstAttribute="centerX" secondItem="5WR-Tq-BZw" secondAttribute="centerX" id="qvj-ZS-N4A"/>
                             <constraint firstItem="5WR-Tq-BZw" firstAttribute="trailing" secondItem="6LI-c7-YL0" secondAttribute="trailing" id="rIo-va-SkF"/>
@@ -489,6 +499,8 @@
                         <outlet property="dotLabel" destination="14N-Kx-4YT" id="Vdv-yv-H85"/>
                         <outlet property="emailTextField" destination="T6u-Fg-uyy" id="6Rv-Ye-9jE"/>
                         <outlet property="lostPasswordButton" destination="fKz-8h-dJj" id="zFY-IW-sYA"/>
+                        <outlet property="orLabel" destination="pbF-9Z-F4M" id="p5a-Or-hCK"/>
+                        <outlet property="orLabelLayoutConstraint" destination="pNQ-cl-jGh" id="rou-bd-7us"/>
                         <outlet property="passwordTextField" destination="h8p-iL-eTI" id="X87-N3-Icb"/>
                         <outlet property="signInButton" destination="MgC-Lr-oEw" id="xMj-Ha-odx"/>
                         <outlet property="signUpButton" destination="09h-Xr-8nn" id="7xA-7d-mkj"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class SignInVC: UIViewController {
 
@@ -15,6 +16,7 @@ class SignInVC: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var dotLabel: UILabel!
+  @IBOutlet weak var orLabel: UILabel!
   @IBOutlet weak var lostPasswordButton: UIButton!
   @IBOutlet weak var signInButton: UIButton!
   @IBOutlet weak var signUpButton: UIButton!
@@ -22,7 +24,8 @@ class SignInVC: UIViewController {
   @IBOutlet weak var connectionButton: UIButton!
   @IBOutlet weak var ConnectionActivityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var swipeGestureRecognizer: UISwipeGestureRecognizer!
-
+  @IBOutlet weak var orLabelLayoutConstraint: NSLayoutConstraint!
+  
   @IBOutlet var underlineViews: [UIView]!
 
   override func viewDidLoad() {
@@ -55,8 +58,10 @@ extension SignInVC {
     setupAllPlaceholders()
     setupConnectionButton()
     setupLostPasswordButton()
-    setupDotLabel()
+    setupLabels()
     setupSwipeGesture()
+    setupPasswordAutoFill()
+    //setupSignInWithApple()
   }
 
   //MARK: Main view design
@@ -82,8 +87,16 @@ extension SignInVC: UITextFieldDelegate {
   }
 
   //MARK: Setup dot label design
-  func setupDotLabel() {
+  func setupLabels() {
     dotLabel.isSelectedDesign()
+  }
+
+  //MARK: Setup of label for sign in with Apple
+  func setupOrLabel() {
+    orLabel.text = StaticLabel.or.description
+    if let whiteBlueDarkModeColor = UIColor.mainBlueIceWhiteDarkMode {
+    orLabel.setupFont(as: .arial, sized: .fifteen, forIPad: .twentyTwo, in: whiteBlueDarkModeColor)
+    }
   }
 
   //MARK: Setup background text view design
@@ -122,6 +135,41 @@ extension SignInVC: UITextFieldDelegate {
     if let darkModeColor = UIColor.typoBlueDarkMode {
       lostPasswordButton.littleButtonDesign(title: .lowLostPassword, color: darkModeColor)
     }
+  }
+
+  //MARK: Setup email and password for auto fill
+  func setupPasswordAutoFill() {
+    emailTextField.textContentType = .username
+    emailTextField.keyboardType = .emailAddress
+    passwordTextField.textContentType = .password
+  }
+
+  //MARK: Setup Sign In With Apple
+  func setupSignInWithApple() {
+    var signInWithAppleButton: ASAuthorizationAppleIDButton
+    if traitCollection.userInterfaceStyle == .dark {
+      signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
+    }
+    else {
+      signInWithAppleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+    }
+    setupDesign(of: signInWithAppleButton)
+    signInWithAppleButton.addTarget(
+      self, action: #selector(handleSignInWithAppleButtonPress), for: .touchDown)
+  }
+
+  //MARK: Setup Sign in with Apple button position
+  func setupDesign(of button: ASAuthorizationAppleIDButton) {
+    setupOrLabel()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(button)
+    NSLayoutConstraint.activate([
+      button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      button.widthAnchor.constraint(equalTo: connectionButton.widthAnchor),
+      button.heightAnchor.constraint(equalTo: connectionButton.heightAnchor),
+      button.topAnchor.constraint(equalTo: orLabel.bottomAnchor,
+                                  constant: orLabelLayoutConstraint.constant)
+    ])
   }
 }
 
@@ -203,8 +251,9 @@ extension SignInVC {
   }
 }
 
-//MARK: - Method for the user to log in
+//MARK: - API Calls
 extension SignInVC {
+  //MARK: Method for the user to log in
   func userLogin() {
     guard let email = emailTextField.text, !email.isEmpty else {
       showAlert(title: .emailErrorTitle, message: .addEmail)
@@ -218,17 +267,71 @@ extension SignInVC {
     triggerActivityIndicator(true)
     Auth().login(email: email, password: password) { (result) in
       switch result {
-      case .success:
-        DispatchQueue.main.async {
-          self.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
-          self.triggerActivityIndicator(false)
-        }
       case .failure:
         DispatchQueue.main.async {
           self.showAlert(title: .loginErrorTitle, message: .loginError)
           self.triggerActivityIndicator(false)
         }
+      case .success:
+        DispatchQueue.main.async {
+          self.performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
+          self.triggerActivityIndicator(false)
+        }
       }
     }
+  }
+}
+
+//MARK: - Sign in with Apple button pressed actions
+extension SignInVC: ASAuthorizationControllerDelegate {
+  @objc func handleSignInWithAppleButtonPress() {
+    DispatchQueue.main.async {
+      let appleIDProvider = ASAuthorizationAppleIDProvider()
+      let request = appleIDProvider.createRequest()
+      request.requestedScopes = [.fullName, .email]
+
+      let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+      authorizationController.delegate = self
+      authorizationController.presentationContextProvider = self
+      authorizationController.performRequests()
+    }
+  }
+}
+
+//MARK: - Sign in with Apple Authorization handler
+extension SignInVC: ASAuthorizationControllerPresentationContextProviding {
+  //MARK: Succesfull authorization returns user info
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    switch authorization.credential {
+    case let credentials as ASAuthorizationAppleIDCredential:
+      let user = FullUser(credentials: credentials)
+      print("appleID: \(credentials.user) user: \(user.email) name: \(user.firstName) \(user.lastName)")
+      
+      //TODO: Call a method to save a user when he is athorized by Apple to 'Sign in with Apple'
+      
+      UserDefaultsService.shared.signedInWithApple = true
+      performSegue(withIdentifier: Segue.unwindToSharingVC.rawValue, sender: self)
+      break
+    case let credentials as ASPasswordCredential:
+      let userName = credentials.user
+      let password = credentials.password
+      
+      //TODO: Call a method to save a user when ha used password credentials
+      
+      print("user name is: \(userName) password: \(password)")
+      break
+    default: break
+    }
+  }
+
+  //MARK: Error handler
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    showAlert(title: .errorTitle, message: .networkRequestError)
+    print(error.localizedDescription)
+  }
+
+  //MARK: show on screen Apple sign view with info to user
+  func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+    return view.window!
   }
 }

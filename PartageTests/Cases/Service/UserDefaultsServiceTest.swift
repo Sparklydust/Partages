@@ -19,6 +19,8 @@ class UserDefaultsServiceTest: XCTestCase {
   let userID = "52078C28-0CA3-4B32-A7F2-E3E52F3A2D9A"
   let deviceToken = "90fae728e65a5a0f4ba3e55f09ab5baac117516c697c0b536ea4feb5cd4fb83d"
   let actionCount = 3
+  let appleID = "004038.9624ac0d840e455d9b97df0b235fy587.1740"
+  var signedInWithApple = true
   
   override func setUp() {
     super.setUp()
@@ -102,5 +104,41 @@ class UserDefaultsServiceTest: XCTestCase {
     let actionUserPerformed = actionCount
     //Then
     XCTAssertNotEqual(actionUserPerformed, sut.actionCount)
+  }
+  
+  func testUserDefaultsWhenAppleIDIsStored() {
+    //Given
+    sut.appleID = appleID
+    //When
+    let appleIDSaved = sut.appleID
+    //Then
+    XCTAssertEqual(appleIDSaved, appleID)
+  }
+  
+  func testDeletionOfAppleID() {
+    //Given
+    sut.appleID = nil
+    //When
+    let appleIDUnsaved = appleID
+    //Then
+    XCTAssertNotEqual(appleIDUnsaved, sut.appleID)
+  }
+  
+  func testSignedInWithAppleIsSetToTrue() {
+    //Given
+    sut.signedInWithApple = signedInWithApple
+    //When
+    let signedInWithAppleBool = sut.signedInWithApple
+    //Then
+    XCTAssertEqual(signedInWithAppleBool, signedInWithApple)
+  }
+  
+  func testSignedInWithAppleIsSetToFalse() {
+    //Given
+    sut.signedInWithApple = false
+    //When
+    let signedInWithAppleBool = signedInWithApple
+    //Then
+    XCTAssertNotEqual(signedInWithAppleBool, sut.signedInWithApple)
   }
 }

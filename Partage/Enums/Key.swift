@@ -16,6 +16,8 @@ enum Key: String {
   case partageDeviceToken
   case partageActionCount
   case partagesServerSidePath
+  case appleID
+  case signedInWithApple
 
   var description: String {
     get {
@@ -32,6 +34,10 @@ enum Key: String {
         return LocalizableStrings.partageActionCount
       case .partagesServerSidePath:
         return LocalizableStrings.partagesServerSidePath
+      case .appleID:
+        return LocalizableStrings.appleID
+      case .signedInWithApple:
+        return LocalizableStrings.signedInWithApple
       }
     }
   }

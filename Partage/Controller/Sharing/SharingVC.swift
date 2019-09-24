@@ -30,13 +30,13 @@ class SharingVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainDesign()
+    populateSignInSignUpButtonDesign()
     setupGoogleInterstitialAd()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
-    populateSignInSignUpButtonDesign()
     displayGoogleAdIfAuthorized()
   }
 }
@@ -54,10 +54,9 @@ extension SharingVC {
         senderVC.authToDisplayGoogleAd = displayAd
       }
     }
-    else if segue.source is SignUpVC {
-      populateSignInSignUpButtonDesign()
-    }
-    else if segue.source is SignInVC {
+    else if segue.source is SignUpVC ||
+      segue.source is SignInVC ||
+      segue.source is ProfileVC {
       populateSignInSignUpButtonDesign()
     }
   }

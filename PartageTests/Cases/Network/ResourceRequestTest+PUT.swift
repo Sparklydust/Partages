@@ -17,7 +17,8 @@ class ResourceRequestTest_PUT: XCTestCase {
   override func setUp() {
     super.setUp()
     resourcePath = "xctest/fake/networkPath/"
-    userToUpdate = FullUser(firstName: "Abcom",
+    userToUpdate = FullUser(appleID: "appleID",
+                            firstName: "Abcom",
                             lastName: "",
                             email: "a@b.com",
                             password: "123456"

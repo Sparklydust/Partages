@@ -14,4 +14,6 @@ protocol SettingsContainer {
   var deviceToken: String? { get set }
   var userID: String? { get set }
   var actionCount: Int? { get set }
+  var appleID: String? { get set }
+  var signedInWithApple: Bool? { get set }
 }

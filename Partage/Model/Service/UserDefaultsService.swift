@@ -16,7 +16,10 @@ class UserDefaultsService {
   init(settingsContainer: SettingsContainer = UserDefaultsContainer()) {
     self.settingsContainer = settingsContainer
   }
+}
 
+//MARK: - All variables to be used to access User Defaults
+extension UserDefaultsService {
   var userToken: String? {
     get {
       return settingsContainer.userToken
@@ -50,6 +53,24 @@ class UserDefaultsService {
     }
     set {
       settingsContainer.actionCount = newValue
+    }
+  }
+  
+  var appleID: String? {
+    get {
+      return settingsContainer.appleID
+    }
+    set {
+      settingsContainer.appleID = newValue
+    }
+  }
+  
+  var signedInWithApple: Bool? {
+    get {
+      return settingsContainer.signedInWithApple
+    }
+    set {
+      settingsContainer.signedInWithApple = newValue
     }
   }
 }
