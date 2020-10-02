@@ -7,7 +7,7 @@ public extension UITableView {
     typealias HeaderFooterTuple = (header: UIView?, footer: UIView?)
     typealias VisibleHeaderFooter = [Int: HeaderFooterTuple]
     
-    enum AnimationType {
+    public enum AnimationType {
         case simple(duration: TimeInterval, direction: Direction, constantDelay: TimeInterval)
         case spring(duration: TimeInterval, damping: CGFloat, velocity: CGFloat, direction: Direction, constantDelay: TimeInterval)
         
@@ -41,7 +41,7 @@ public extension UITableView {
             var visibleViews = [UIView]()
             
             for items in grouped! {
-              var currentViews: [UIView] = items.value.compactMap { tableView.cellForRow(at: $0) }
+                var currentViews: [UIView] = items.value.flatMap { tableView.cellForRow(at: $0) }
                 if let header = visibleHeaderFooter[items.key]?.header {
                     currentViews.insert(header, at: 0)
                 }
@@ -79,7 +79,7 @@ public extension UITableView {
         }
     }
     
-  enum Direction {
+    public enum Direction {
         case left(useCellsFrame: Bool)
         case top(useCellsFrame: Bool)
         case right(useCellsFrame: Bool)
@@ -198,7 +198,7 @@ public extension UITableView {
         }
     }
     
-  func reloadData(with animation: AnimationType, reversed: Bool = false, completion: Complition? = nil) {
+    public func reloadData(with animation: AnimationType, reversed: Bool = false, completion: Complition? = nil) {
         reloadData()
         animation.animate(tableView: self, reversed: reversed, completion: completion)
     }

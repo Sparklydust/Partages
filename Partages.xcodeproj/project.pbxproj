@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23E9EA9F3437C5B68CB2118B /* Pods_Partages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545C710017D91B4301C25F4F /* Pods_Partages.framework */; };
 		2A06727E229E907900FFAECE /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727D229E907900FFAECE /* UIImageView.swift */; };
 		2A067280229EAE4000FFAECE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A06727F229EAE4000FFAECE /* UIColor.swift */; };
 		2A067282229EB94000FFAECE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A067281229EB94000FFAECE /* UIViewController.swift */; };
@@ -298,6 +299,9 @@
 		2AFA4ECB22A9AAF30039803E /* ButtonName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonName.swift; sourceTree = "<group>"; };
 		2AFA4ECD22A9AB320039803E /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		2AFA4ECF22A9AB540039803E /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
+		3EAAC52161A4DE4F8CE0D33A /* Pods-Partages.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partages.release.xcconfig"; path = "Target Support Files/Pods-Partages/Pods-Partages.release.xcconfig"; sourceTree = "<group>"; };
+		50831821BBBB67044BE4F766 /* Pods-Partages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partages.debug.xcconfig"; path = "Target Support Files/Pods-Partages/Pods-Partages.debug.xcconfig"; sourceTree = "<group>"; };
+		545C710017D91B4301C25F4F /* Pods_Partages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Partages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E330AF74BD6966F9972034B /* Pods-Partage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partage.release.xcconfig"; path = "Target Support Files/Pods-Partage/Pods-Partage.release.xcconfig"; sourceTree = "<group>"; };
 		824A09244BC85BDD9158DC34 /* Pods-Partages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partages.debug.xcconfig"; path = "Target Support Files/Pods-Partages/Pods-Partages.debug.xcconfig"; sourceTree = "<group>"; };
 		A94B7269840D924C6011B833 /* Pods-Partages.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partages.release.xcconfig"; path = "Target Support Files/Pods-Partages/Pods-Partages.release.xcconfig"; sourceTree = "<group>"; };
