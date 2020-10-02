@@ -130,8 +130,7 @@ extension CameraHandler {
       DispatchQueue.main.async {
         self.showActionSheetWithCameraAndLibrary(vc: vc)
       }
-    @unknown default:
-      fatalError()
+    default: ()
     }
   }
 }

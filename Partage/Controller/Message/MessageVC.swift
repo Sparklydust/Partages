@@ -625,7 +625,7 @@ extension MessageVC {
 //MARK: - Timer interval to fetch new user messages
 extension MessageVC {
   func fetchLastMessagesIfAnyUsingTimeInterval() {
-    timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (_) in
+    timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (_) in
       DispatchQueue.main.async {
         self.getAllUserMessagesForTheTimerInterval()
       }
